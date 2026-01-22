@@ -131,13 +131,11 @@ with tab1:
             st.error("Start date must be before end date")
         else:
             with st.spinner("Searching SEC filings..."):
-                progress_container = st.container()
-                progress_messages = []
+                # Single status container that updates
+                status_placeholder = st.empty()
 
                 def progress_callback(message):
-                    progress_messages.append(message)
-                    with progress_container:
-                        st.info(message)
+                    status_placeholder.info(message)
 
                 try:
                     result_df = search_company_for_lawyers(
@@ -150,6 +148,7 @@ with tab1:
                         company_name=selected_company['name']
                     )
 
+                    status_placeholder.empty()
                     st.success(f"Found {len(result_df)} results")
 
                     st.dataframe(result_df, use_container_width=True, hide_index=True)
@@ -163,6 +162,7 @@ with tab1:
                     )
 
                 except Exception as e:
+                    status_placeholder.empty()
                     st.error(f"Error: {str(e)}")
 
 with tab2:
@@ -201,13 +201,11 @@ with tab2:
             st.error("Start date must be before end date")
         else:
             with st.spinner("Searching SEC filings..."):
-                progress_container = st.container()
-                progress_messages = []
+                # Single status container that updates
+                status_placeholder = st.empty()
 
                 def progress_callback(message):
-                    progress_messages.append(message)
-                    with progress_container:
-                        st.info(message)
+                    status_placeholder.info(message)
 
                 try:
                     result_df = search_lawyer_for_companies(
@@ -217,6 +215,7 @@ with tab2:
                         progress_callback
                     )
 
+                    status_placeholder.empty()
                     st.success(f"Found {len(result_df)} results")
 
                     st.dataframe(result_df, use_container_width=True, hide_index=True)
@@ -230,6 +229,7 @@ with tab2:
                     )
 
                 except Exception as e:
+                    status_placeholder.empty()
                     st.error(f"Error: {str(e)}")
 
 with tab3:
@@ -268,13 +268,11 @@ with tab3:
             st.error("Start date must be before end date")
         else:
             with st.spinner("Searching SEC filings..."):
-                progress_container = st.container()
-                progress_messages = []
+                # Single status container that updates
+                status_placeholder = st.empty()
 
                 def progress_callback(message):
-                    progress_messages.append(message)
-                    with progress_container:
-                        st.info(message)
+                    status_placeholder.info(message)
 
                 try:
                     result_df = search_law_firm_for_companies(
@@ -284,6 +282,7 @@ with tab3:
                         progress_callback
                     )
 
+                    status_placeholder.empty()
                     st.success(f"Found {len(result_df)} results")
 
                     st.dataframe(result_df, use_container_width=True, hide_index=True)
@@ -297,6 +296,7 @@ with tab3:
                     )
 
                 except Exception as e:
+                    status_placeholder.empty()
                     st.error(f"Error: {str(e)}")
 
 st.markdown("---")
