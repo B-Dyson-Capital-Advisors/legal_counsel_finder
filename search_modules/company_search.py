@@ -1,0 +1,450 @@
+import requests
+import pandas as pd
+import re
+import json
+from bs4 import BeautifulSoup
+from datetime import datetime, timedelta
+from collections import defaultdict
+
+LEGAL_COUNSEL_FILINGS = [
+    "S-1", "S-3", "S-4", "S-8",
+    "S-1/A", "S-3/A", "S-4/A", "S-8/A",
+    "S-3ASR", "S-1MEF", "S-4MEF",
+    "POS AM", "POSASR",
+    "424B1", "424B2", "424B3", "424B4", "424B5", "424B7", "424B8",
+    "D", "D/A",
+    "SC TO-I", "SC TO-I/A",
+    "SC 13E3", "SC 13E4",
+    "DEF 14A", "DEFA14A", "DEFM14A",
+    "F-1", "F-3", "F-1/A", "F-3/A",
+    "CORRESP", "UPLOAD", "EX-24"
+]
+
+
+def normalize_firm_name(firm):
+    firm = firm.strip()
+    firm = re.sub(r'\s+and\s+', ' & ', firm, flags=re.IGNORECASE)
+    firm = re.sub(r'\s+', ' ', firm)
+    if not any(firm.endswith(suffix) for suffix in ['LLP', 'LLC', 'P.C.', 'P.A.']):
+        firm = firm + " LLP"
+    return firm
+
+
+def normalize_lawyer_name(name):
+    name = name.strip()
+    name = re.sub(r',?\s*Esq\.?', '', name, flags=re.IGNORECASE)
+    name = re.sub(r'\s+', ' ', name)
+    return name.strip()
+
+
+def is_valid_person_name(name, company_name=None):
+    """Validate that this is actually a person's name, not a title or company name"""
+    name_lower = name.lower()
+
+    if company_name:
+        company_lower = company_name.lower()
+        company_words = set(company_lower.split())
+        name_words = set(name_lower.split())
+
+        if any(word in company_words and len(word) > 4 for word in name_words):
+            return False
+
+    invalid_phrases = [
+        'legal officer', 'chief legal', 'general counsel', 'corporate counsel',
+        'secretary', 'president', 'vice president', 'chief executive',
+        'ceo', 'cfo', 'clo', 'officer', 'director', 'manager',
+        'associate', 'partner', 'attorney', 'lawyer', 'counsel',
+        'corporation', 'company', 'inc', 'llc', 'llp', 'limited',
+        'the registrant', 'the company', 'issuer'
+    ]
+
+    if any(phrase in name_lower for phrase in invalid_phrases):
+        return False
+
+    words = name.split()
+    if len(words) < 2 or len(words) > 4:
+        return False
+
+    for word in words:
+        if len(word) > 1 and not word[0].isupper():
+            return False
+
+    if not any(len(word) > 3 for word in words):
+        return False
+
+    if name_lower.startswith('by ') or name_lower.startswith('for '):
+        return False
+
+    return True
+
+
+def is_internal_employee(name, text_near_name):
+    """Check if lawyer name appears with company title"""
+    internal_titles = [
+        'general counsel', 'chief legal officer', 'clo',
+        'corporate counsel', 'secretary', 'corporate secretary',
+        'in-house counsel', 'legal counsel', 'vice president',
+        'senior counsel', 'associate general counsel', 'president',
+        'chief executive', 'ceo', 'cfo'
+    ]
+
+    name_idx = text_near_name.find(name)
+    if name_idx == -1:
+        return False
+
+    text_after_name = text_near_name[name_idx:name_idx + 100].lower()
+    return any(title in text_after_name for title in internal_titles)
+
+
+def is_not_law_firm(firm_name, company_name=None):
+    """Filter out non-law-firms"""
+    firm_lower = firm_name.lower()
+
+    garbage_names = ['law_firms', 'lawyers', 'law firm', 'example', 'firm name', 'another']
+    if any(garbage in firm_lower for garbage in garbage_names):
+        return True
+
+    if company_name and company_name.lower() in firm_lower:
+        return True
+
+    accounting_patterns = [
+        r'\bdeloitte\b', r'\bpwc\b', r'\bpricewaterhousecoopers\b',
+        r'\bernst\s*&\s*young\b', r'\bkpmg\b', r'\bey\b'
+    ]
+    for pattern in accounting_patterns:
+        if re.search(pattern, firm_lower):
+            return True
+
+    investment_banks = [
+        'goldman sachs', 'morgan stanley', 'jp morgan', 'jpmorgan',
+        'credit suisse', 'ubs', 'deutsche bank', 'barclays',
+        'cantor fitzgerald', 'oppenheimer', 'jefferies', 'cowen',
+        'stifel', 'piper sandler', 'raymond james', 'roth capital',
+        'needham', 'wedbush', 'craig-hallum', 'btig', "maxim group"
+    ]
+    if any(bank in firm_lower for bank in investment_banks):
+        return True
+
+    if '& co' in firm_lower and 'llp' not in firm_lower:
+        return True
+
+    fund_keywords = ['fund', 'capital', 'ventures', 'holdings', 'trust company']
+    if any(keyword in firm_lower for keyword in fund_keywords) and 'llc' in firm_lower and 'llp' not in firm_lower:
+        return True
+
+    return False
+
+
+def extract_lawyers_by_regex(text, company_name):
+    """Extract lawyer names using regex patterns"""
+    results = defaultdict(set)
+
+    pattern1 = r'([A-Z][a-z]+(?:\s+[A-Z]\.?)?\s+[A-Z][a-z]+(?:\s+(?:and|,)\s+[A-Z][a-z]+(?:\s+[A-Z]\.?)?\s+[A-Z][a-z]+)*)\s+of\s+([A-Z][^\n]{5,60}?(?:LLP|LLC|P\.C\.|P\.A\.))'
+
+    matches = re.finditer(pattern1, text, re.MULTILINE)
+
+    for match in matches:
+        names_part = match.group(1)
+        firm = match.group(2).strip()
+        context = text[max(0, match.start()-100):match.end()+100]
+
+        if is_not_law_firm(firm, company_name):
+            continue
+
+        names = re.split(r'\s+and\s+|,\s*', names_part)
+        names = [n.strip() for n in names if n.strip()]
+
+        valid_names = []
+        for name in names:
+            name = re.sub(r'^(Mr\.|Ms\.|Mrs\.|Dr\.)\s+', '', name)
+            name = re.sub(r',?\s*Esq\.?$', '', name, flags=re.IGNORECASE)
+            name = name.strip()
+
+            if not is_valid_person_name(name, company_name):
+                continue
+
+            if not is_internal_employee(name, context):
+                valid_names.append(name)
+
+        if valid_names:
+            normalized_firm = normalize_firm_name(firm)
+            for name in valid_names:
+                results[normalized_firm].add(normalize_lawyer_name(name))
+
+    pattern2 = r'([A-Z][a-z]+(?:\s+[A-Z]\.?)?\s+[A-Z][a-z]+)\s*\n\s*([A-Z][^\n]{5,60}?(?:LLP|LLC|P\.C\.|P\.A\.))'
+
+    matches2 = re.finditer(pattern2, text, re.MULTILINE)
+
+    for match in matches2:
+        name = match.group(1).strip()
+        firm = match.group(2).strip()
+        context = text[match.start():match.end() + 100]
+
+        if is_not_law_firm(firm, company_name):
+            continue
+
+        if not is_valid_person_name(name, company_name):
+            continue
+
+        if not is_internal_employee(name, context):
+            normalized_firm = normalize_firm_name(firm)
+            results[normalized_firm].add(normalize_lawyer_name(name))
+
+    pattern3 = r'By:\s*([A-Z][a-z]+(?:\s+[A-Z]\.?)?\s+[A-Z][a-z]+)\s*\n\s*([A-Z][^\n]{5,60}?(?:LLP|LLC|P\.C\.|P\.A\.))'
+
+    matches3 = re.finditer(pattern3, text, re.MULTILINE)
+
+    for match in matches3:
+        name = match.group(1).strip()
+        firm = match.group(2).strip()
+        context = text[match.start():match.end() + 100]
+
+        if is_not_law_firm(firm, company_name):
+            continue
+
+        if not is_valid_person_name(name, company_name):
+            continue
+
+        if not is_internal_employee(name, context):
+            normalized_firm = normalize_firm_name(firm)
+            results[normalized_firm].add(normalize_lawyer_name(name))
+
+    return results
+
+
+def get_cik_from_ticker(ticker):
+    ticker = ticker.replace(" US Equity", "").strip()
+    try:
+        url = "https://www.sec.gov/files/company_tickers.json"
+        headers = {"User-Agent": "Company contact@email.com"}
+        response = requests.get(url, headers=headers)
+        data = response.json()
+        ticker_upper = ticker.upper()
+
+        for key, company_info in data.items():
+            if company_info.get('ticker', '').upper() == ticker_upper:
+                cik = str(company_info['cik_str'])
+                company_name = company_info['title']
+                return cik, company_name
+    except Exception:
+        pass
+    return None, None
+
+
+def get_company_filings(cik, years_back):
+    url = f"https://data.sec.gov/submissions/CIK{cik.zfill(10)}.json"
+    headers = {"User-Agent": "Company contact@email.com"}
+
+    try:
+        response = requests.get(url, headers=headers)
+        data = response.json()
+        filings = []
+        recent = data.get('filings', {}).get('recent', {})
+        cutoff_date = (datetime.now() - timedelta(days=years_back*365)).strftime('%Y-%m-%d')
+
+        for i in range(len(recent.get('form', []))):
+            filing_type = recent['form'][i]
+            filing_date = recent['filingDate'][i]
+
+            if filing_type in LEGAL_COUNSEL_FILINGS and filing_date >= cutoff_date:
+                filings.append({
+                    'type': filing_type,
+                    'date': filing_date,
+                    'accession': recent['accessionNumber'][i],
+                    'primary_doc': recent.get('primaryDocument', [None])[i] if i < len(recent.get('primaryDocument', [])) else None
+                })
+
+        filings.sort(key=lambda x: x['date'], reverse=True)
+        return filings
+    except Exception:
+        return []
+
+
+def extract_counsel_sections(doc_url):
+    headers = {"User-Agent": "Company contact@email.com"}
+
+    try:
+        response = requests.get(doc_url, headers=headers, timeout=20)
+        if response.status_code != 200:
+            return None
+
+        soup = BeautifulSoup(response.text, 'html.parser')
+        text = soup.get_text(separator='\n')
+
+        if len(text) < 5000:
+            return None
+
+        return text[:25000]
+    except Exception:
+        return None
+
+
+def parse_with_openai(text_sections, company_name, api_key, retries=2):
+    """AI extraction with strict validation"""
+    if len(text_sections) > 15000:
+        text_sections = text_sections[:15000]
+
+    prompt = f"""Extract ONLY EXTERNAL law firm names and EXTERNAL lawyers from this SEC filing for {company_name}.
+
+CRITICAL RULES:
+1. ONLY extract PEOPLE'S NAMES - first and last names like "John Smith" or "Jane K. Doe"
+2. DO NOT extract:
+   - Titles like "Legal Officer", "General Counsel", "Chief Legal Officer"
+   - Company names like "{company_name}" or "Corporation"
+   - Generic terms like "Attorney", "Counsel", "Lawyer"
+   - Phrases like "The Company", "The Registrant"
+3. Find law firms ending in LLP, LLC, or P.C.
+4. EXCLUDE: Accounting firms (Deloitte, PwC, KPMG, EY)
+5. EXCLUDE: Investment banks (Goldman Sachs, Cantor Fitzgerald, etc.)
+6. ONLY include lawyers who work AT the law firm, NOT company employees
+
+WHAT A VALID NAME LOOKS LIKE:
+✓ "John Smith" - first + last name
+✓ "Jane K. Doe" - first + middle initial + last name
+✓ "Robert Johnson III" - first + last + suffix
+
+WHAT IS NOT A VALID NAME:
+✗ "Legal Officer" - this is a TITLE
+✗ "{company_name}" - this is a COMPANY NAME
+✗ "Chief Legal Officer" - this is a TITLE
+✗ "General Counsel" - this is a TITLE
+✗ "Corporate Secretary" - this is a TITLE
+
+PATTERNS TO LOOK FOR:
+"Carlos Ramirez and Nicholaus Johnson of Cooley LLP"
+-> {{"Cooley LLP": ["Carlos Ramirez", "Nicholaus Johnson"]}}
+
+"First Name Last Name
+Law Firm Name LLP"
+-> {{"Law Firm Name LLP": ["First Name Last Name"]}}
+
+Text:
+{text_sections}
+
+Return JSON with law firms and ONLY PERSON NAMES (not titles, not company names):
+{{"Cooley LLP": ["John Smith", "Jane Doe"]}}"""
+
+    for attempt in range(retries + 1):
+        try:
+            response = requests.post(
+                "https://api.openai.com/v1/chat/completions",
+                headers={
+                    "Content-Type": "application/json",
+                    "Authorization": f"Bearer {api_key}"
+                },
+                json={
+                    "model": "gpt-4o-mini",
+                    "messages": [{"role": "user", "content": prompt}],
+                    "temperature": 0
+                },
+                timeout=30
+            )
+
+            result = response.json()
+
+            if 'choices' in result and len(result['choices']) > 0:
+                response_text = result['choices'][0]['message']['content']
+                response_text = re.sub(r'```json\s*|\s*```', '', response_text).strip()
+                data = json.loads(response_text)
+
+                filtered_data = {}
+                for firm, lawyers in data.items():
+                    if firm.lower() in ['firm a', 'firm b', 'example firm']:
+                        continue
+
+                    if not is_not_law_firm(firm, company_name):
+                        normalized_firm = normalize_firm_name(firm)
+
+                        normalized_lawyers = []
+                        for l in lawyers:
+                            if not l or not l.strip():
+                                continue
+
+                            if not is_valid_person_name(l, company_name):
+                                continue
+
+                            if l in text_sections:
+                                idx = text_sections.find(l)
+                                context = text_sections[idx:idx+200]
+                                if is_internal_employee(l, context):
+                                    continue
+
+                            normalized_lawyers.append(normalize_lawyer_name(l))
+
+                        if normalized_lawyers:
+                            filtered_data[normalized_firm] = normalized_lawyers
+
+                return filtered_data
+        except Exception:
+            if attempt < retries:
+                continue
+
+    return {}
+
+
+def search_company_for_lawyers(company_ticker, years_back, api_key, progress_callback=None):
+    """Search for lawyers representing a company"""
+    if progress_callback:
+        progress_callback(f"Finding lawyers for {company_ticker}")
+        progress_callback(f"Searching last {years_back} year(s)")
+
+    cik, company_name = get_cik_from_ticker(company_ticker)
+    if not cik:
+        raise ValueError(f"Company '{company_ticker}' not found")
+
+    if progress_callback:
+        progress_callback(f"Getting filings from last {years_back} year(s)...")
+
+    filings = get_company_filings(cik, years_back)
+
+    if not filings:
+        raise ValueError(f"No relevant filings found for {company_ticker}")
+
+    if progress_callback:
+        progress_callback(f"Found {len(filings)} total filings")
+        if filings:
+            oldest_date = min(f['date'] for f in filings)
+            newest_date = max(f['date'] for f in filings)
+            progress_callback(f"Date range: {oldest_date} to {newest_date}")
+
+    if progress_callback:
+        progress_callback(f"Extracting and parsing {len(filings)} filings...")
+
+    firm_to_lawyers = defaultdict(set)
+
+    for idx, filing in enumerate(filings, 1):
+        if idx % 10 == 0 and progress_callback:
+            progress_callback(f"Progress: {idx}/{len(filings)} filings...")
+
+        accession_no_dashes = filing['accession'].replace('-', '')
+
+        if filing['primary_doc']:
+            doc_url = f"https://www.sec.gov/Archives/edgar/data/{cik}/{accession_no_dashes}/{filing['primary_doc']}"
+        else:
+            doc_url = f"https://www.sec.gov/Archives/edgar/data/{cik}/{accession_no_dashes}/{filing['accession']}.htm"
+
+        extracted_text = extract_counsel_sections(doc_url)
+
+        if extracted_text:
+            regex_results = extract_lawyers_by_regex(extracted_text, company_name)
+            for firm, lawyers in regex_results.items():
+                firm_to_lawyers[firm].update(lawyers)
+
+            firm_lawyers_dict = parse_with_openai(extracted_text, company_name, api_key)
+
+            for firm, lawyers in firm_lawyers_dict.items():
+                firm_to_lawyers[firm].update(lawyers)
+
+    if not firm_to_lawyers:
+        raise ValueError(f"No law firms found for {company_ticker}")
+
+    results = []
+    for firm, lawyers in firm_to_lawyers.items():
+        if lawyers:
+            for lawyer in lawyers:
+                results.append({'Law Firm': firm, 'Lawyer': lawyer})
+        else:
+            results.append({'Law Firm': firm, 'Lawyer': ''})
+
+    df = pd.DataFrame(results)
+    return df
