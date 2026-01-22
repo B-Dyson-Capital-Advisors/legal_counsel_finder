@@ -12,37 +12,74 @@ import streamlit as st
 @st.cache_data(ttl=3600, show_spinner=False)
 def load_all_companies():
     """Load all companies from SEC (cached for 1 hour)"""
-    try:
-        url = "https://www.sec.gov/files/company_tickers.json"
-        headers = {"User-Agent": "B. Dyson Capital Advisors contact@bdysoncapital.com"}
-        response = requests.get(url, headers=headers, timeout=10)
-        data = response.json()
+    import time
 
-        companies = []
-        for key, company_info in data.items():
-            ticker = company_info.get('ticker', '').upper()
-            cik = str(company_info['cik_str']).zfill(10)
-            name = company_info['title']
+    max_retries = 3
+    for attempt in range(max_retries):
+        try:
+            url = "https://www.sec.gov/files/company_tickers.json"
+            headers = {
+                "User-Agent": "B. Dyson Capital Advisors contact@bdysoncapital.com",
+                "Accept": "application/json"
+            }
+            response = requests.get(url, headers=headers, timeout=15)
+            response.raise_for_status()
 
-            # Create display string
-            if ticker:
-                display = f"{name} ({ticker}) - CIK {cik}"
+            # Check if response is not empty
+            if not response.text or len(response.text) == 0:
+                raise ValueError("Empty response from SEC API")
+
+            data = response.json()
+
+            companies = []
+            for key, company_info in data.items():
+                ticker = company_info.get('ticker', '').upper()
+                cik = str(company_info['cik_str']).zfill(10)
+                name = company_info['title']
+
+                # Create display string
+                if ticker:
+                    display = f"{name} ({ticker}) - CIK {cik}"
+                else:
+                    display = f"{name} - CIK {cik}"
+
+                companies.append({
+                    'display': display,
+                    'name': name,
+                    'ticker': ticker,
+                    'cik': cik
+                })
+
+            # Sort by name for better UX
+            companies.sort(key=lambda x: x['name'])
+            return companies
+
+        except requests.exceptions.Timeout:
+            if attempt < max_retries - 1:
+                time.sleep(2 ** attempt)
+                continue
             else:
-                display = f"{name} - CIK {cik}"
+                st.error("SEC API timeout. Please refresh the page to try again.")
+                return []
+        except requests.exceptions.RequestException as e:
+            if attempt < max_retries - 1:
+                time.sleep(2 ** attempt)
+                continue
+            else:
+                st.error(f"Network error loading company list: {str(e)}. Please refresh the page.")
+                return []
+        except ValueError as e:
+            if attempt < max_retries - 1:
+                time.sleep(2 ** attempt)
+                continue
+            else:
+                st.error(f"Invalid response from SEC API: {str(e)}. Please try again later.")
+                return []
+        except Exception as e:
+            st.error(f"Error loading company list: {str(e)}. Please refresh the page or try again later.")
+            return []
 
-            companies.append({
-                'display': display,
-                'name': name,
-                'ticker': ticker,
-                'cik': cik
-            })
-
-        # Sort by name for better UX
-        companies.sort(key=lambda x: x['name'])
-        return companies
-    except Exception as e:
-        st.error(f"Error loading company list: {e}")
-        return []
+    return []
 
 
 def search_company_by_name_or_ticker(search_term):
