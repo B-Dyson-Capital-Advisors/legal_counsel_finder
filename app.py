@@ -10,7 +10,7 @@ from search_modules.company_search import load_all_companies
 st.set_page_config(
     page_title="Legal Counsel Finder",
     page_icon="⚖️",
-    layout="wide"
+    layout="centered"
 )
 
 st.markdown("""
