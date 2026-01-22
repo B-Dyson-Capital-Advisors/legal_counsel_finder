@@ -3,6 +3,7 @@ import time
 import requests
 import pandas as pd
 from datetime import datetime, timedelta
+from concurrent.futures import ThreadPoolExecutor
 
 SEC_SEARCH_URL = "https://efts.sec.gov/LATEST/search-index"
 
@@ -120,43 +121,46 @@ def count_unique_companies(search_term, from_date, to_date):
 
 
 def determine_optimal_date_range(search_term, progress_callback=None):
-    """Adaptive date range to keep results under 100 companies"""
+    """Adaptive date range to keep results under 100 companies (parallelized)"""
     end_date = datetime.now()
 
     if progress_callback:
         progress_callback(f"Testing volume for '{search_term}'...")
 
+    # Run both 2-year and 4-year tests in parallel
     test_2yr = end_date - timedelta(days=730)
-    count_2yr = count_unique_companies(search_term, test_2yr, end_date)
+    test_4yr = end_date - timedelta(days=1460)
+
+    with ThreadPoolExecutor(max_workers=2) as executor:
+        future_2yr = executor.submit(count_unique_companies, search_term, test_2yr, end_date)
+        future_4yr = executor.submit(count_unique_companies, search_term, test_4yr, end_date)
+
+        count_2yr = future_2yr.result()
+        count_4yr = future_4yr.result()
 
     if progress_callback:
         progress_callback(f"2 years: {count_2yr} unique companies")
+        progress_callback(f"4 years: {count_4yr} unique companies")
 
+    # Decide based on results
     if count_2yr >= TARGET_COMPANIES:
         days = 730
         final_range = "2 years"
     elif count_2yr >= 40:
         days = 730
         final_range = "2 years"
+    elif count_4yr >= TARGET_COMPANIES:
+        days = 1095
+        final_range = "3 years"
+    elif count_4yr >= 30:
+        days = 1460
+        final_range = "4 years"
+    elif count_4yr >= 15:
+        days = 1825
+        final_range = "5 years"
     else:
-        test_4yr = end_date - timedelta(days=1460)
-        count_4yr = count_unique_companies(search_term, test_4yr, end_date)
-
-        if progress_callback:
-            progress_callback(f"4 years: {count_4yr} unique companies")
-
-        if count_4yr >= TARGET_COMPANIES:
-            days = 1095
-            final_range = "3 years"
-        elif count_4yr >= 30:
-            days = 1460
-            final_range = "4 years"
-        elif count_4yr >= 15:
-            days = 1825
-            final_range = "5 years"
-        else:
-            days = 2555
-            final_range = "7 years"
+        days = 2555
+        final_range = "7 years"
 
     start_date = end_date - timedelta(days=days)
     return start_date, end_date, final_range

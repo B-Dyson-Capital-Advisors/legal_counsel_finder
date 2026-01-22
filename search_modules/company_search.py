@@ -5,6 +5,8 @@ import json
 from bs4 import BeautifulSoup
 from datetime import datetime, timedelta
 from collections import defaultdict
+from concurrent.futures import ThreadPoolExecutor, as_completed
+import streamlit as st
 
 LEGAL_COUNSEL_FILINGS = [
     "S-1", "S-3", "S-4", "S-8",
@@ -382,8 +384,37 @@ Return JSON with law firms and ONLY PERSON NAMES (not titles, not company names)
     return {}
 
 
-def search_company_for_lawyers(company_ticker, years_back, api_key, progress_callback=None):
-    """Search for lawyers representing a company"""
+def process_single_filing(filing, cik, company_name, api_key):
+    """Process a single filing and extract lawyers (for parallel execution)"""
+    accession_no_dashes = filing['accession'].replace('-', '')
+
+    if filing['primary_doc']:
+        doc_url = f"https://www.sec.gov/Archives/edgar/data/{cik}/{accession_no_dashes}/{filing['primary_doc']}"
+    else:
+        doc_url = f"https://www.sec.gov/Archives/edgar/data/{cik}/{accession_no_dashes}/{filing['accession']}.htm"
+
+    extracted_text = extract_counsel_sections(doc_url)
+
+    firm_to_lawyers = defaultdict(set)
+
+    if extracted_text:
+        regex_results = extract_lawyers_by_regex(extracted_text, company_name)
+        for firm, lawyers in regex_results.items():
+            firm_to_lawyers[firm].update(lawyers)
+
+        firm_lawyers_dict = parse_with_openai(extracted_text, company_name, api_key)
+
+        for firm, lawyers in firm_lawyers_dict.items():
+            firm_to_lawyers[firm].update(lawyers)
+
+    return firm_to_lawyers
+
+
+@st.cache_data(ttl=86400, show_spinner=False)
+def search_company_for_lawyers(company_ticker, years_back, api_key, _progress_callback=None):
+    """Search for lawyers representing a company (cached for 24 hours)"""
+    progress_callback = _progress_callback
+
     if progress_callback:
         progress_callback(f"Finding lawyers for {company_ticker}")
         progress_callback(f"Searching last {years_back} year(s)")
@@ -408,32 +439,29 @@ def search_company_for_lawyers(company_ticker, years_back, api_key, progress_cal
             progress_callback(f"Date range: {oldest_date} to {newest_date}")
 
     if progress_callback:
-        progress_callback(f"Extracting and parsing {len(filings)} filings...")
+        progress_callback(f"Processing {len(filings)} filings in parallel...")
 
     firm_to_lawyers = defaultdict(set)
 
-    for idx, filing in enumerate(filings, 1):
-        if idx % 10 == 0 and progress_callback:
-            progress_callback(f"Progress: {idx}/{len(filings)} filings...")
+    # Process filings in parallel (5 at a time to respect rate limits)
+    with ThreadPoolExecutor(max_workers=5) as executor:
+        future_to_filing = {
+            executor.submit(process_single_filing, filing, cik, company_name, api_key): filing
+            for filing in filings
+        }
 
-        accession_no_dashes = filing['accession'].replace('-', '')
+        completed = 0
+        for future in as_completed(future_to_filing):
+            completed += 1
+            if progress_callback and completed % 5 == 0:
+                progress_callback(f"Progress: {completed}/{len(filings)} filings processed...")
 
-        if filing['primary_doc']:
-            doc_url = f"https://www.sec.gov/Archives/edgar/data/{cik}/{accession_no_dashes}/{filing['primary_doc']}"
-        else:
-            doc_url = f"https://www.sec.gov/Archives/edgar/data/{cik}/{accession_no_dashes}/{filing['accession']}.htm"
-
-        extracted_text = extract_counsel_sections(doc_url)
-
-        if extracted_text:
-            regex_results = extract_lawyers_by_regex(extracted_text, company_name)
-            for firm, lawyers in regex_results.items():
-                firm_to_lawyers[firm].update(lawyers)
-
-            firm_lawyers_dict = parse_with_openai(extracted_text, company_name, api_key)
-
-            for firm, lawyers in firm_lawyers_dict.items():
-                firm_to_lawyers[firm].update(lawyers)
+            try:
+                filing_results = future.result()
+                for firm, lawyers in filing_results.items():
+                    firm_to_lawyers[firm].update(lawyers)
+            except Exception:
+                pass
 
     if not firm_to_lawyers:
         raise ValueError(f"No law firms found for {company_ticker}")

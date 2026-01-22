@@ -1,4 +1,5 @@
 import pandas as pd
+import streamlit as st
 from .utils import (
     search_paginated,
     determine_optimal_date_range,
@@ -8,8 +9,10 @@ from .utils import (
 )
 
 
-def search_law_firm_for_companies(firm_name, progress_callback=None):
-    """Search for companies represented by a law firm"""
+@st.cache_data(ttl=86400, show_spinner=False)
+def search_law_firm_for_companies(firm_name, _progress_callback=None):
+    """Search for companies represented by a law firm (cached for 24 hours)"""
+    progress_callback = _progress_callback
 
     if progress_callback:
         progress_callback(f"Searching law firm: {firm_name}")

@@ -63,6 +63,13 @@ with st.sidebar:
     - Companies represented by a specific law firm
     """)
 
+    st.markdown("---")
+    st.markdown("### Cache")
+    st.markdown("Results are cached for 24 hours for faster repeat searches.")
+    if st.button("Clear Cache"):
+        st.cache_data.clear()
+        st.success("Cache cleared!")
+
 tab1, tab2, tab3 = st.tabs(["Search Company", "Search Lawyer", "Search Law Firm"])
 
 with tab1:
