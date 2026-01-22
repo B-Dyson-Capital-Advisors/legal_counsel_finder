@@ -40,7 +40,7 @@ For team use, deploy to Streamlit Cloud where you configure the API key once and
 
 Your team members will access the app directly without needing to configure any API keys.
 
-## Local Installation
+## Local Development
 
 For local development or testing:
 
@@ -55,7 +55,7 @@ cd legal_counsel_finder
 pip install -r requirements.txt
 ```
 
-3. (Optional) Configure API key for local use:
+3. Configure API key:
 ```bash
 cp .streamlit/secrets.toml.example .streamlit/secrets.toml
 # Edit .streamlit/secrets.toml with your API key
@@ -68,15 +68,9 @@ streamlit run app.py
 
 ## Usage
 
-### For Deployed Apps
-If your admin has deployed the app to Streamlit Cloud, simply use the provided URL. All API keys are pre-configured.
+Simply use the deployed app URL provided by your administrator. All API keys are pre-configured in the deployment.
 
-### For Local Development
-The app will check for an API key in this order:
-1. Streamlit secrets (`.streamlit/secrets.toml`)
-2. Sidebar input (session-based)
-
-Get your OpenAI API key from https://platform.openai.com/api-keys
+**Note:** Company Search requires an OpenAI API key, which is configured in the deployment settings by the administrator.
 
 ### Search Examples
 
