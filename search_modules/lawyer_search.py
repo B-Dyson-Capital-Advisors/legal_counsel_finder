@@ -2,7 +2,6 @@ import pandas as pd
 import streamlit as st
 from .utils import (
     search_paginated,
-    determine_optimal_date_range,
     filter_important_filings,
     deduplicate_companies,
     extract_ticker_and_clean_name
@@ -10,17 +9,21 @@ from .utils import (
 
 
 @st.cache_data(ttl=86400, show_spinner=False)
-def search_lawyer_for_companies(lawyer_name, _progress_callback=None):
+def search_lawyer_for_companies(lawyer_name, start_date, end_date, _progress_callback=None):
     """Search for companies represented by a lawyer (cached for 24 hours)"""
     progress_callback = _progress_callback
 
     if progress_callback:
         progress_callback(f"Searching lawyer: {lawyer_name}")
-
-    start_date, end_date, date_range_desc = determine_optimal_date_range(lawyer_name, progress_callback)
-
-    if progress_callback:
-        progress_callback(f"Final search: {start_date.strftime('%Y-%m-%d')} to {end_date.strftime('%Y-%m-%d')} ({date_range_desc})")
+        if hasattr(start_date, 'strftime'):
+            start_str = start_date.strftime('%Y-%m-%d')
+        else:
+            start_str = str(start_date)
+        if hasattr(end_date, 'strftime'):
+            end_str = end_date.strftime('%Y-%m-%d')
+        else:
+            end_str = str(end_date)
+        progress_callback(f"Date range: {start_str} to {end_str}")
 
     results, total = search_paginated(lawyer_name, start_date, end_date, max_total=500)
 
