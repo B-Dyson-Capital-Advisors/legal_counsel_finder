@@ -168,15 +168,37 @@ with tab1:
 with tab2:
     st.header("Find Companies for a Lawyer")
 
-    lawyer_name = st.text_input(
-        "Lawyer Name",
-        placeholder="e.g., John Smith",
-        key="lawyer_name"
-    )
+    # Single row layout: Lawyer name, From date, To date
+    col1, col2, col3 = st.columns([3, 1, 1])
+
+    with col1:
+        lawyer_name = st.text_input(
+            "Lawyer Name",
+            placeholder="e.g., John Smith",
+            key="lawyer_name"
+        )
+
+    with col2:
+        lawyer_start_date = st.date_input(
+            "From",
+            value=pd.Timestamp.now() - pd.DateOffset(years=5),
+            max_value=pd.Timestamp.now(),
+            key="lawyer_start_date"
+        )
+
+    with col3:
+        lawyer_end_date = st.date_input(
+            "To",
+            value=pd.Timestamp.now(),
+            max_value=pd.Timestamp.now(),
+            key="lawyer_end_date"
+        )
 
     if st.button("Search Lawyer", type="primary"):
         if not lawyer_name:
             st.error("Please enter a lawyer name")
+        elif lawyer_start_date >= lawyer_end_date:
+            st.error("Start date must be before end date")
         else:
             with st.spinner("Searching SEC filings..."):
                 progress_container = st.container()
@@ -190,6 +212,8 @@ with tab2:
                 try:
                     result_df = search_lawyer_for_companies(
                         lawyer_name.strip(),
+                        lawyer_start_date,
+                        lawyer_end_date,
                         progress_callback
                     )
 
@@ -211,15 +235,37 @@ with tab2:
 with tab3:
     st.header("Find Companies for a Law Firm")
 
-    firm_name = st.text_input(
-        "Law Firm Name",
-        placeholder="e.g., Cooley LLP, Latham & Watkins",
-        key="firm_name"
-    )
+    # Single row layout: Firm name, From date, To date
+    col1, col2, col3 = st.columns([3, 1, 1])
+
+    with col1:
+        firm_name = st.text_input(
+            "Law Firm Name",
+            placeholder="e.g., Cooley LLP, Latham & Watkins",
+            key="firm_name"
+        )
+
+    with col2:
+        firm_start_date = st.date_input(
+            "From",
+            value=pd.Timestamp.now() - pd.DateOffset(years=5),
+            max_value=pd.Timestamp.now(),
+            key="firm_start_date"
+        )
+
+    with col3:
+        firm_end_date = st.date_input(
+            "To",
+            value=pd.Timestamp.now(),
+            max_value=pd.Timestamp.now(),
+            key="firm_end_date"
+        )
 
     if st.button("Search Law Firm", type="primary"):
         if not firm_name:
             st.error("Please enter a law firm name")
+        elif firm_start_date >= firm_end_date:
+            st.error("Start date must be before end date")
         else:
             with st.spinner("Searching SEC filings..."):
                 progress_container = st.container()
@@ -233,6 +279,8 @@ with tab3:
                 try:
                     result_df = search_law_firm_for_companies(
                         firm_name.strip(),
+                        firm_start_date,
+                        firm_end_date,
                         progress_callback
                     )
 

@@ -13,13 +13,13 @@ Find law firms and lawyers that represent a specific company by searching throug
 
 ### Search Lawyer
 Find companies represented by a specific lawyer.
-- Input: Lawyer name
+- Input: Lawyer name and date range (from/to)
 - Output: List of companies with tickers and filing dates
 - No API key required
 
 ### Search Law Firm
 Find companies represented by a specific law firm.
-- Input: Law firm name
+- Input: Law firm name and date range (from/to)
 - Output: List of companies with tickers and filing dates
 - No API key required
 
@@ -83,11 +83,13 @@ Simply use the deployed app URL provided by your administrator. All API keys are
 
 **Lawyer Search:**
 - Name: John Smith
-- Result: Companies this lawyer has represented
+- Date range: From 2020-01-01 to 2024-12-31
+- Result: Companies this lawyer has represented during that period
 
 **Law Firm Search:**
 - Name: Cooley LLP
-- Result: Companies this firm has represented
+- Date range: From 2020-01-01 to 2024-12-31
+- Result: Companies this firm has represented during that period
 
 ## Export Results
 All search results can be downloaded as CSV files using the download button.
@@ -113,7 +115,7 @@ legal_counsel_finder/
 ```
 
 ## Notes
-- The application uses adaptive date ranges to optimize search results
+- All search types use custom date ranges for precise control over search periods
 - Company searches use OpenAI GPT-4o-mini for extraction accuracy
 - Lawyer and law firm searches use pattern matching and SEC EDGAR search API
 - Company autocomplete searches all SEC-registered companies (active and historical)
