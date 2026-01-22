@@ -5,6 +5,7 @@ from search_modules import (
     search_lawyer_for_companies,
     search_law_firm_for_companies
 )
+from search_modules.company_search import load_all_companies
 
 st.set_page_config(
     page_title="Legal Counsel Finder",
@@ -75,14 +76,51 @@ tab1, tab2, tab3 = st.tabs(["Search Company", "Search Lawyer", "Search Law Firm"
 with tab1:
     st.header("Find Lawyers for a Company")
 
+    # Load companies for autocomplete
+    companies = load_all_companies()
+
+    # Search mode selection
+    search_mode = st.radio(
+        "Search by:",
+        ["Company Search (Type to search)", "Direct Ticker/CIK Entry"],
+        horizontal=True,
+        key="search_mode"
+    )
+
     col1, col2 = st.columns([2, 1])
 
     with col1:
-        company_ticker = st.text_input(
-            "Company Ticker",
-            placeholder="e.g., AAPL, TSLA, NVDA",
-            key="company_ticker"
-        )
+        if search_mode == "Company Search (Type to search)":
+            if companies:
+                # Create a mapping for selectbox
+                company_options = [""] + [c['display'] for c in companies]
+
+                selected_display = st.selectbox(
+                    "Select Company",
+                    options=company_options,
+                    index=0,
+                    help="Start typing to search by company name, ticker, or CIK",
+                    key="company_select"
+                )
+
+                # Find selected company data
+                selected_company = None
+                if selected_display:
+                    for c in companies:
+                        if c['display'] == selected_display:
+                            selected_company = c
+                            break
+            else:
+                st.error("Unable to load company list. Please use Direct Entry mode.")
+                selected_company = None
+        else:
+            # Manual entry mode
+            manual_entry = st.text_input(
+                "Company Ticker or CIK",
+                placeholder="e.g., AAPL, TSLA, 0001318605",
+                key="manual_ticker"
+            )
+            selected_company = None
 
     with col2:
         years_back = st.number_input(
@@ -94,42 +132,84 @@ with tab1:
         )
 
     if st.button("Search Company", type="primary"):
-        if not company_ticker:
-            st.error("Please enter a company ticker")
-        elif not get_api_key():
-            st.error("API key not configured. Please contact your administrator.")
+        # Validate input based on mode
+        if search_mode == "Company Search (Type to search)":
+            if not selected_company:
+                st.error("Please select a company from the dropdown")
+            elif not get_api_key():
+                st.error("API key not configured. Please contact your administrator.")
+            else:
+                with st.spinner("Searching SEC filings..."):
+                    progress_container = st.container()
+                    progress_messages = []
+
+                    def progress_callback(message):
+                        progress_messages.append(message)
+                        with progress_container:
+                            st.info(message)
+
+                    try:
+                        result_df = search_company_for_lawyers(
+                            selected_company['display'],
+                            years_back,
+                            get_api_key(),
+                            progress_callback,
+                            cik=selected_company['cik'],
+                            company_name=selected_company['name']
+                        )
+
+                        st.success(f"Found {len(result_df)} results")
+
+                        st.dataframe(result_df, use_container_width=True, hide_index=True)
+
+                        csv = result_df.to_csv(index=False)
+                        st.download_button(
+                            label="Download CSV",
+                            data=csv,
+                            file_name=f"{selected_company['ticker'] or selected_company['cik']}_lawyers.csv",
+                            mime="text/csv"
+                        )
+
+                    except Exception as e:
+                        st.error(f"Error: {str(e)}")
         else:
-            with st.spinner("Searching SEC filings..."):
-                progress_container = st.container()
-                progress_messages = []
+            # Manual entry mode
+            if not manual_entry:
+                st.error("Please enter a company ticker or CIK")
+            elif not get_api_key():
+                st.error("API key not configured. Please contact your administrator.")
+            else:
+                with st.spinner("Searching SEC filings..."):
+                    progress_container = st.container()
+                    progress_messages = []
 
-                def progress_callback(message):
-                    progress_messages.append(message)
-                    with progress_container:
-                        st.info(message)
+                    def progress_callback(message):
+                        progress_messages.append(message)
+                        with progress_container:
+                            st.info(message)
 
-                try:
-                    result_df = search_company_for_lawyers(
-                        company_ticker.strip().upper(),
-                        years_back,
-                        get_api_key(),
-                        progress_callback
-                    )
+                    try:
+                        result_df = search_company_for_lawyers(
+                            manual_entry.strip().upper(),
+                            years_back,
+                            get_api_key(),
+                            progress_callback
+                        )
 
-                    st.success(f"Found {len(result_df)} results")
+                        st.success(f"Found {len(result_df)} results")
 
-                    st.dataframe(result_df, use_container_width=True, hide_index=True)
+                        st.dataframe(result_df, use_container_width=True, hide_index=True)
 
-                    csv = result_df.to_csv(index=False)
-                    st.download_button(
-                        label="Download CSV",
-                        data=csv,
-                        file_name=f"{company_ticker.lower()}_lawyers.csv",
-                        mime="text/csv"
-                    )
+                        csv = result_df.to_csv(index=False)
+                        st.download_button(
+                            label="Download CSV",
+                            data=csv,
+                            file_name=f"{manual_entry.lower().replace(' ', '_')}_lawyers.csv",
+                            mime="text/csv"
+                        )
 
-                except Exception as e:
-                    st.error(f"Error: {str(e)}")
+                    except Exception as e:
+                        st.error(f"Error: {str(e)}")
 
 with tab2:
     st.header("Find Companies for a Lawyer")

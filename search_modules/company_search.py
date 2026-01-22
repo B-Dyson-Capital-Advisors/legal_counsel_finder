@@ -8,6 +8,57 @@ from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import streamlit as st
 
+
+@st.cache_data(ttl=3600, show_spinner=False)
+def load_all_companies():
+    """Load all companies from SEC (cached for 1 hour)"""
+    try:
+        url = "https://www.sec.gov/files/company_tickers.json"
+        headers = {"User-Agent": "B. Dyson Capital Advisors contact@bdysoncapital.com"}
+        response = requests.get(url, headers=headers, timeout=10)
+        data = response.json()
+
+        companies = []
+        for key, company_info in data.items():
+            ticker = company_info.get('ticker', '').upper()
+            cik = str(company_info['cik_str']).zfill(10)
+            name = company_info['title']
+
+            # Create display string
+            if ticker:
+                display = f"{name} ({ticker}) - CIK {cik}"
+            else:
+                display = f"{name} - CIK {cik}"
+
+            companies.append({
+                'display': display,
+                'name': name,
+                'ticker': ticker,
+                'cik': cik
+            })
+
+        # Sort by name for better UX
+        companies.sort(key=lambda x: x['name'])
+        return companies
+    except Exception as e:
+        st.error(f"Error loading company list: {e}")
+        return []
+
+
+def search_company_by_name_or_ticker(search_term):
+    """Search for companies by name or ticker"""
+    companies = load_all_companies()
+    search_term = search_term.lower().strip()
+
+    matches = []
+    for company in companies:
+        if (search_term in company['name'].lower() or
+            search_term in company['ticker'].lower() or
+            search_term in company['cik']):
+            matches.append(company)
+
+    return matches
+
 LEGAL_COUNSEL_FILINGS = [
     "S-1", "S-3", "S-4", "S-8",
     "S-1/A", "S-3/A", "S-4/A", "S-8/A",
@@ -411,17 +462,28 @@ def process_single_filing(filing, cik, company_name, api_key):
 
 
 @st.cache_data(ttl=86400, show_spinner=False)
-def search_company_for_lawyers(company_ticker, years_back, api_key, _progress_callback=None):
-    """Search for lawyers representing a company (cached for 24 hours)"""
+def search_company_for_lawyers(company_identifier, years_back, api_key, _progress_callback=None, cik=None, company_name=None):
+    """Search for lawyers representing a company (cached for 24 hours)
+
+    Args:
+        company_identifier: Ticker, name, or CIK (for display/cache key)
+        years_back: Years to search back
+        api_key: OpenAI API key
+        _progress_callback: Progress callback function
+        cik: Pre-resolved CIK (optional, for autocomplete)
+        company_name: Pre-resolved company name (optional, for autocomplete)
+    """
     progress_callback = _progress_callback
 
     if progress_callback:
-        progress_callback(f"Finding lawyers for {company_ticker}")
+        progress_callback(f"Finding lawyers for {company_identifier}")
         progress_callback(f"Searching last {years_back} year(s)")
 
-    cik, company_name = get_cik_from_ticker(company_ticker)
-    if not cik:
-        raise ValueError(f"Company '{company_ticker}' not found")
+    # Use provided CIK/name or lookup by identifier
+    if not cik or not company_name:
+        cik, company_name = get_cik_from_ticker(company_identifier)
+        if not cik:
+            raise ValueError(f"Company '{company_identifier}' not found")
 
     if progress_callback:
         progress_callback(f"Getting filings from last {years_back} year(s)...")

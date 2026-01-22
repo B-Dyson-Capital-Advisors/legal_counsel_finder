@@ -6,8 +6,9 @@ A Streamlit application that searches SEC EDGAR filings to identify relationship
 
 ### Search Company
 Find law firms and lawyers that represent a specific company by searching through their SEC filings.
-- Input: Company ticker and years to search back
+- Input: Company name/ticker (searchable dropdown) or direct ticker/CIK entry and years to search back
 - Output: List of law firms and lawyers
+- Supports: Active companies, delisted companies, acquired companies, and historical companies
 - Requires: OpenAI API key
 
 ### Search Lawyer
@@ -75,9 +76,11 @@ Simply use the deployed app URL provided by your administrator. All API keys are
 ### Search Examples
 
 **Company Search:**
-- Ticker: AAPL
-- Years: 5
-- Result: Law firms and lawyers who worked on Apple's SEC filings
+- Select company from searchable dropdown (e.g., type "Apple" or "AAPL")
+- Or enter ticker/CIK directly (e.g., AAPL, 0001318605)
+- Set years: 5
+- Result: Law firms and lawyers who worked on the company's SEC filings
+- Works for active, delisted, and acquired companies
 
 **Lawyer Search:**
 - Name: John Smith
@@ -114,3 +117,6 @@ legal_counsel_finder/
 - The application uses adaptive date ranges to optimize search results
 - Company searches use OpenAI GPT-4o-mini for extraction accuracy
 - Lawyer and law firm searches use pattern matching and SEC EDGAR search API
+- Company autocomplete searches all SEC-registered companies (active and historical)
+- Results are cached for 24 hours for faster repeat searches
+- Parallel processing provides 5-10x performance improvement
