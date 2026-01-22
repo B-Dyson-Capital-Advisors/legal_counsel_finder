@@ -79,7 +79,8 @@ with tab1:
     # Load companies for autocomplete
     companies = load_all_companies()
 
-    col1, col2 = st.columns([2, 1])
+    # Single row layout: Company dropdown, From date, To date
+    col1, col2, col3 = st.columns([3, 1, 1])
 
     with col1:
         if companies:
@@ -106,25 +107,20 @@ with tab1:
             selected_company = None
 
     with col2:
-        # Date range selection
-        st.markdown("**Date Range**")
-        col_start, col_end = st.columns(2)
+        start_date = st.date_input(
+            "From",
+            value=pd.Timestamp.now() - pd.DateOffset(years=5),
+            max_value=pd.Timestamp.now(),
+            key="start_date"
+        )
 
-        with col_start:
-            start_date = st.date_input(
-                "From",
-                value=pd.Timestamp.now() - pd.DateOffset(years=5),
-                max_value=pd.Timestamp.now(),
-                key="start_date"
-            )
-
-        with col_end:
-            end_date = st.date_input(
-                "To",
-                value=pd.Timestamp.now(),
-                max_value=pd.Timestamp.now(),
-                key="end_date"
-            )
+    with col3:
+        end_date = st.date_input(
+            "To",
+            value=pd.Timestamp.now(),
+            max_value=pd.Timestamp.now(),
+            key="end_date"
+        )
 
     if st.button("Search Company", type="primary"):
         if not selected_company:
