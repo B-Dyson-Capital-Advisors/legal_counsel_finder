@@ -47,36 +47,14 @@ st.markdown("""
 st.title("Legal Counsel Finder")
 st.markdown("Search SEC EDGAR filings to find relationships between companies, law firms, and lawyers")
 
-if 'api_key' not in st.session_state:
-    st.session_state.api_key = ""
-
 def get_api_key():
-    """Get API key from secrets (deployed) or session state (local)"""
+    """Get API key from Streamlit secrets"""
     try:
         return st.secrets["OPENAI_API_KEY"]
     except (KeyError, FileNotFoundError):
-        return st.session_state.api_key
+        return None
 
 with st.sidebar:
-    try:
-        if "OPENAI_API_KEY" in st.secrets:
-            st.success("API key configured (from deployment secrets)")
-        else:
-            raise KeyError
-    except (KeyError, FileNotFoundError):
-        st.header("API Configuration")
-        api_key = st.text_input(
-            "OpenAI API Key",
-            type="password",
-            value=st.session_state.api_key,
-            help="Required for Company Search only. Your key is stored only in your browser session."
-        )
-
-        if api_key:
-            st.session_state.api_key = api_key
-            st.success("API key configured")
-
-    st.markdown("---")
     st.markdown("### About")
     st.markdown("""
     This tool searches SEC EDGAR filings to identify:
@@ -112,7 +90,7 @@ with tab1:
         if not company_ticker:
             st.error("Please enter a company ticker")
         elif not get_api_key():
-            st.error("Please enter your OpenAI API key in the sidebar")
+            st.error("API key not configured. Please contact your administrator.")
         else:
             with st.spinner("Searching SEC filings..."):
                 progress_container = st.container()
