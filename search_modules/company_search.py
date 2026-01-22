@@ -111,6 +111,58 @@ LEGAL_COUNSEL_FILINGS = [
 ]
 
 
+def normalize_lawyer_name_for_matching(name):
+    """Normalize lawyer name for matching - extract first and last name only"""
+    name = name.strip()
+    # Remove Esq., titles
+    name = re.sub(r',?\s*Esq\.?', '', name, flags=re.IGNORECASE)
+    name = re.sub(r'^(Mr\.|Ms\.|Mrs\.|Dr\.)\s+', '', name)
+
+    # Split into words
+    parts = name.split()
+
+    if len(parts) == 0:
+        return ""
+    elif len(parts) == 1:
+        return parts[0].lower()
+    elif len(parts) == 2:
+        # First Last
+        return f"{parts[0].lower()} {parts[1].lower()}"
+    else:
+        # First Middle Last or First M. Last - use first and last only
+        return f"{parts[0].lower()} {parts[-1].lower()}"
+
+
+def deduplicate_firm_lawyers(firm_to_lawyers):
+    """
+    Deduplicate lawyers within each firm using smart name matching.
+    Michelle A. Wong and Michelle Wong are considered the same person.
+    """
+    deduplicated = defaultdict(set)
+
+    for firm, lawyers in firm_to_lawyers.items():
+        seen_normalized = {}  # normalized_name -> original_name
+
+        for lawyer in lawyers:
+            normalized = normalize_lawyer_name_for_matching(lawyer)
+
+            if normalized not in seen_normalized:
+                # First time seeing this name combination
+                seen_normalized[normalized] = lawyer
+                deduplicated[firm].add(lawyer)
+            else:
+                # Already seen this first+last combo
+                # Keep the longer version (with middle name if available)
+                existing = seen_normalized[normalized]
+                if len(lawyer) > len(existing):
+                    # Replace with longer version
+                    deduplicated[firm].discard(existing)
+                    deduplicated[firm].add(lawyer)
+                    seen_normalized[normalized] = lawyer
+
+    return deduplicated
+
+
 def normalize_firm_name(firm):
     firm = firm.strip()
     firm = re.sub(r'\s+and\s+', ' & ', firm, flags=re.IGNORECASE)
@@ -584,13 +636,20 @@ def search_company_for_lawyers(company_identifier, start_date, end_date, api_key
     if not firm_to_lawyers:
         raise ValueError(f"No law firms found for {company_identifier}")
 
+    # Deduplicate lawyers within each firm (handles name variations)
+    firm_to_lawyers = deduplicate_firm_lawyers(firm_to_lawyers)
+
     results = []
     for firm, lawyers in firm_to_lawyers.items():
         if lawyers:
-            for lawyer in lawyers:
+            for lawyer in sorted(lawyers):  # Sort for consistent output
                 results.append({'Law Firm': firm, 'Lawyer': lawyer})
         else:
             results.append({'Law Firm': firm, 'Lawyer': ''})
 
     df = pd.DataFrame(results)
+
+    # Remove exact duplicates (same firm + same lawyer)
+    df = df.drop_duplicates(subset=['Law Firm', 'Lawyer'], keep='first')
+
     return df
