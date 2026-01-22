@@ -50,18 +50,31 @@ st.markdown("Search SEC EDGAR filings to find relationships between companies, l
 if 'api_key' not in st.session_state:
     st.session_state.api_key = ""
 
-with st.sidebar:
-    st.header("API Configuration")
-    api_key = st.text_input(
-        "OpenAI API Key",
-        type="password",
-        value=st.session_state.api_key,
-        help="Required for Company Search only. Your key is stored only in your browser session."
-    )
+def get_api_key():
+    """Get API key from secrets (deployed) or session state (local)"""
+    try:
+        return st.secrets["OPENAI_API_KEY"]
+    except (KeyError, FileNotFoundError):
+        return st.session_state.api_key
 
-    if api_key:
-        st.session_state.api_key = api_key
-        st.success("API key configured")
+with st.sidebar:
+    try:
+        if "OPENAI_API_KEY" in st.secrets:
+            st.success("API key configured (from deployment secrets)")
+        else:
+            raise KeyError
+    except (KeyError, FileNotFoundError):
+        st.header("API Configuration")
+        api_key = st.text_input(
+            "OpenAI API Key",
+            type="password",
+            value=st.session_state.api_key,
+            help="Required for Company Search only. Your key is stored only in your browser session."
+        )
+
+        if api_key:
+            st.session_state.api_key = api_key
+            st.success("API key configured")
 
     st.markdown("---")
     st.markdown("### About")
@@ -98,7 +111,7 @@ with tab1:
     if st.button("Search Company", type="primary"):
         if not company_ticker:
             st.error("Please enter a company ticker")
-        elif not st.session_state.api_key:
+        elif not get_api_key():
             st.error("Please enter your OpenAI API key in the sidebar")
         else:
             with st.spinner("Searching SEC filings..."):
@@ -114,7 +127,7 @@ with tab1:
                     result_df = search_company_for_lawyers(
                         company_ticker.strip().upper(),
                         years_back,
-                        st.session_state.api_key,
+                        get_api_key(),
                         progress_callback
                     )
 
