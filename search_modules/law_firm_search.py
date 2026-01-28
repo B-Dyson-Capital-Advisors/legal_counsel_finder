@@ -8,10 +8,8 @@ from .utils import (
 )
 
 
-@st.cache_data(ttl=86400, show_spinner=False)
-def search_law_firm_for_companies(firm_name, start_date, end_date, _progress_callback=None):
-    """Search for companies represented by a law firm (cached for 24 hours)"""
-    progress_callback = _progress_callback
+def search_law_firm_for_companies(firm_name, start_date, end_date, progress_callback=None):
+    """Search for companies represented by a law firm"""
 
     if progress_callback:
         progress_callback(f"Searching law firm: {firm_name}")
