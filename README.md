@@ -119,5 +119,4 @@ legal_counsel_finder/
 - Company searches use OpenAI GPT-4o-mini for extraction accuracy
 - Lawyer and law firm searches use pattern matching and SEC EDGAR search API
 - Company autocomplete searches all SEC-registered companies (active and historical)
-- Results are cached for 24 hours for faster repeat searches
 - Parallel processing provides 5-10x performance improvement

@@ -560,20 +560,18 @@ def process_single_filing(filing, cik, company_name, api_key):
     return firm_to_lawyers
 
 
-@st.cache_data(ttl=86400, show_spinner=False)
-def search_company_for_lawyers(company_identifier, start_date, end_date, api_key, _progress_callback=None, cik=None, company_name=None):
-    """Search for lawyers representing a company (cached for 24 hours)
+def search_company_for_lawyers(company_identifier, start_date, end_date, api_key, progress_callback=None, cik=None, company_name=None):
+    """Search for lawyers representing a company
 
     Args:
         company_identifier: Ticker, name, or CIK (for display/cache key)
         start_date: Start date for search range
         end_date: End date for search range
         api_key: OpenAI API key
-        _progress_callback: Progress callback function
+        progress_callback: Progress callback function
         cik: Pre-resolved CIK (optional, for autocomplete)
         company_name: Pre-resolved company name (optional, for autocomplete)
     """
-    progress_callback = _progress_callback
 
     if progress_callback:
         progress_callback(f"Finding lawyers for {company_identifier}")
