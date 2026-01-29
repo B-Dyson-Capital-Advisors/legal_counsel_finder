@@ -55,6 +55,14 @@ def get_api_key():
     except (KeyError, FileNotFoundError):
         return None
 
+# Initialize session state for results persistence
+if 'company_results' not in st.session_state:
+    st.session_state.company_results = None
+if 'lawyer_results' not in st.session_state:
+    st.session_state.lawyer_results = None
+if 'firm_results' not in st.session_state:
+    st.session_state.firm_results = None
+
 tab1, tab2, tab3 = st.tabs(["Search Company", "Search Lawyer", "Search Law Firm"])
 
 with tab1:
@@ -133,21 +141,32 @@ with tab1:
                     )
 
                     status_placeholder.empty()
-                    st.success(f"Found {len(result_df)} results")
 
-                    st.dataframe(result_df, use_container_width=True, hide_index=True)
-
-                    csv = result_df.to_csv(index=False)
-                    st.download_button(
-                        label="Download CSV",
-                        data=csv,
-                        file_name=f"{selected_company['ticker'] or selected_company['cik']}_lawyers.csv",
-                        mime="text/csv"
-                    )
+                    # Store results in session state
+                    st.session_state.company_results = {
+                        'df': result_df,
+                        'filename': f"{selected_company['ticker'] or selected_company['cik']}_lawyers.csv"
+                    }
 
                 except Exception as e:
                     status_placeholder.empty()
                     st.error(f"Error: {str(e)}")
+                    st.session_state.company_results = None
+
+    # Display stored results if they exist
+    if st.session_state.company_results is not None:
+        result_df = st.session_state.company_results['df']
+        st.success(f"Found {len(result_df)} results")
+        st.dataframe(result_df, use_container_width=True, hide_index=True)
+
+        csv = result_df.to_csv(index=False)
+        st.download_button(
+            label="Download CSV",
+            data=csv,
+            file_name=st.session_state.company_results['filename'],
+            mime="text/csv",
+            key="company_csv_download"
+        )
 
 with tab2:
     st.header("Find Companies for a Lawyer")
@@ -200,21 +219,32 @@ with tab2:
                     )
 
                     status_placeholder.empty()
-                    st.success(f"Found {len(result_df)} results")
 
-                    st.dataframe(result_df, use_container_width=True, hide_index=True)
-
-                    csv = result_df.to_csv(index=False)
-                    st.download_button(
-                        label="Download CSV",
-                        data=csv,
-                        file_name=f"{lawyer_name.lower().replace(' ', '_')}_companies.csv",
-                        mime="text/csv"
-                    )
+                    # Store results in session state
+                    st.session_state.lawyer_results = {
+                        'df': result_df,
+                        'filename': f"{lawyer_name.lower().replace(' ', '_')}_companies.csv"
+                    }
 
                 except Exception as e:
                     status_placeholder.empty()
                     st.error(f"Error: {str(e)}")
+                    st.session_state.lawyer_results = None
+
+    # Display stored results if they exist
+    if st.session_state.lawyer_results is not None:
+        result_df = st.session_state.lawyer_results['df']
+        st.success(f"Found {len(result_df)} results")
+        st.dataframe(result_df, use_container_width=True, hide_index=True)
+
+        csv = result_df.to_csv(index=False)
+        st.download_button(
+            label="Download CSV",
+            data=csv,
+            file_name=st.session_state.lawyer_results['filename'],
+            mime="text/csv",
+            key="lawyer_csv_download"
+        )
 
 with tab3:
     st.header("Find Companies for a Law Firm")
@@ -267,21 +297,32 @@ with tab3:
                     )
 
                     status_placeholder.empty()
-                    st.success(f"Found {len(result_df)} results")
 
-                    st.dataframe(result_df, use_container_width=True, hide_index=True)
-
-                    csv = result_df.to_csv(index=False)
-                    st.download_button(
-                        label="Download CSV",
-                        data=csv,
-                        file_name=f"{firm_name.lower().replace(' ', '_').replace('&', 'and')}_companies.csv",
-                        mime="text/csv"
-                    )
+                    # Store results in session state
+                    st.session_state.firm_results = {
+                        'df': result_df,
+                        'filename': f"{firm_name.lower().replace(' ', '_').replace('&', 'and')}_companies.csv"
+                    }
 
                 except Exception as e:
                     status_placeholder.empty()
                     st.error(f"Error: {str(e)}")
+                    st.session_state.firm_results = None
+
+    # Display stored results if they exist
+    if st.session_state.firm_results is not None:
+        result_df = st.session_state.firm_results['df']
+        st.success(f"Found {len(result_df)} results")
+        st.dataframe(result_df, use_container_width=True, hide_index=True)
+
+        csv = result_df.to_csv(index=False)
+        st.download_button(
+            label="Download CSV",
+            data=csv,
+            file_name=st.session_state.firm_results['filename'],
+            mime="text/csv",
+            key="firm_csv_download"
+        )
 
 st.markdown("---")
 st.markdown("""
