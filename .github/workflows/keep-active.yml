@@ -2,8 +2,12 @@ name: Keep App Active
 
 on:
   schedule:
-    - cron: '0 */10 * * *'  # Runs every 10 hours
-  workflow_dispatch:  # Allows manual triggering
+    - cron: '0 */10 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: keep-app-active-main
+  cancel-in-progress: false
 
 jobs:
   empty-commit:
@@ -17,8 +21,24 @@ jobs:
 
       - name: Pull and push empty commit
         run: |
+          set -euo pipefail
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git pull --rebase origin main
-          git commit --allow-empty -m "Keep app active"
-          git push
+
+          for i in 1 2 3 4 5; do
+            git fetch origin main
+            git rebase origin/main || (git rebase --abort && exit 1)
+
+            git commit --allow-empty -m "Keep app active"
+
+            if git push origin HEAD:main; then
+              echo "Push succeeded"
+              exit 0
+            fi
+
+            echo "Push failed (likely non-fast-forward). Retrying in $((i*2))s..."
+            sleep $((i*2))
+          done
+
+          echo "Push failed after retries"
+          exit 1
