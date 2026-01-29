@@ -85,19 +85,46 @@ def search_edgar(search_term, from_date, to_date, start_index=0, max_results=100
 
 
 def search_paginated(search_term, from_date, to_date, max_total=500):
-    """Search with pagination"""
+    """Search with pagination, stopping when no new companies are found"""
     all_results = []
     start_index = 0
     page_size = 100
+    seen_companies = set()
+    pages_without_new_companies = 0
+    max_stale_pages = 3  # Stop after 3 consecutive pages with no new companies
 
     while len(all_results) < max_total:
         results, total = search_edgar(search_term, from_date, to_date, start_index, page_size)
         if not results:
             break
+
+        # Track new companies in this page
+        new_companies_this_page = 0
+        for result in results:
+            company_name = result.get('company_name', '')
+            # Extract clean company name for tracking
+            clean_name = re.sub(r'\s*\(CIK\s+\d+\)', '', company_name)
+            clean_name = re.split(r'\s*\(', clean_name)[0].strip()
+
+            if clean_name and clean_name not in seen_companies:
+                seen_companies.add(clean_name)
+                new_companies_this_page += 1
+
         all_results.extend(results)
         start_index += page_size
+
+        # Stop if we've reached the total available
         if len(all_results) >= total:
             break
+
+        # Check if we're still finding new companies
+        if new_companies_this_page == 0:
+            pages_without_new_companies += 1
+            if pages_without_new_companies >= max_stale_pages:
+                # Stop early - we're not finding new companies anymore
+                break
+        else:
+            pages_without_new_companies = 0
 
     return all_results, total
 
