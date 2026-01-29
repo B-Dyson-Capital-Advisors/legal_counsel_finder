@@ -13,39 +13,16 @@ permissions:
   contents: write
 
 jobs:
-  empty-commit:
+  keep-alive:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          ref: main
-          fetch-depth: 0
-
-      - name: Create empty commit and push (race-safe)
+      - name: Ping Streamlit app to keep it active
         run: |
-          set -euo pipefail
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-
-          for i in 1 2 3 4 5 6 7 8 9 10; do
-            # Always restart from the latest remote main
-            git fetch origin main
-            git checkout main
-            git reset --hard origin/main
-
-            # Create the empty commit on top of current remote tip
-            git commit --allow-empty -m "Keep app active"
-
-            # Safe force push: will fail if remote moved since fetch
-            if git push --force-with-lease origin HEAD:main; then
-              echo "Push succeeded"
-              exit 0
-            fi
-
-            echo "Remote moved during push. Retry $i..."
-            sleep 2
-          done
-
-          echo "Push failed after retries (main is changing too frequently)."
-          exit 1
+          echo "Pinging Streamlit app at https://legalfinder.streamlit.app/"
+          response=$(curl -s -o /dev/null -w "%{http_code}" https://legalfinder.streamlit.app/)
+          echo "Response code: $response"
+          if [ $response -eq 200 ] || [ $response -eq 301 ] || [ $response -eq 302 ]; then
+            echo "App is alive!"
+          else
+            echo "Warning: Received response code $response"
+          fi
