@@ -72,7 +72,7 @@ with tab1:
             company_options = [""] + [c['display'] for c in companies]
 
             selected_display = st.selectbox(
-                "Select Company",
+                "Select Company (enter ticker or company name)",
                 options=company_options,
                 index=0,
                 help="Start typing to search by company name, ticker, or CIK",
