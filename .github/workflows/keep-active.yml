@@ -2,8 +2,15 @@ name: Keep App Active
 
 on:
   schedule:
-    - cron: '0 */10 * * *'  # Runs every 10 hours
-  workflow_dispatch:  # Allows manual triggering
+    - cron: "0 */10 * * *" # every 10 hours
+  workflow_dispatch:
+
+concurrency:
+  group: keep-app-active-main
+  cancel-in-progress: false
+
+permissions:
+  contents: write
 
 jobs:
   keep-alive:
