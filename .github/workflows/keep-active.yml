@@ -2,12 +2,15 @@ name: Keep App Active
 
 on:
   schedule:
-    - cron: '0 */10 * * *'
+    - cron: "0 */10 * * *" # every 10 hours
   workflow_dispatch:
 
 concurrency:
   group: keep-app-active-main
   cancel-in-progress: false
+
+permissions:
+  contents: write
 
 jobs:
   empty-commit:
@@ -16,29 +19,33 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.PAT_TOKEN }}
+          ref: main
           fetch-depth: 0
 
-      - name: Pull and push empty commit
+      - name: Create empty commit and push (race-safe)
         run: |
           set -euo pipefail
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
 
-          for i in 1 2 3 4 5; do
+          for i in 1 2 3 4 5 6 7 8 9 10; do
+            # Always restart from the latest remote main
             git fetch origin main
-            git rebase origin/main || (git rebase --abort && exit 1)
+            git checkout main
+            git reset --hard origin/main
 
+            # Create the empty commit on top of current remote tip
             git commit --allow-empty -m "Keep app active"
 
-            if git push origin HEAD:main; then
+            # Safe force push: will fail if remote moved since fetch
+            if git push --force-with-lease origin HEAD:main; then
               echo "Push succeeded"
               exit 0
             fi
 
-            echo "Push failed (likely non-fast-forward). Retrying in $((i*2))s..."
-            sleep $((i*2))
+            echo "Remote moved during push. Retry $i..."
+            sleep 2
           done
 
-          echo "Push failed after retries"
+          echo "Push failed after retries (main is changing too frequently)."
           exit 1
