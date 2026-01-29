@@ -52,8 +52,7 @@ def fetch_shortstock_data():
         df['Fee Rate (%)'] = df['Fee Rate (%)'].round(2)
         
         # Format Available with comma separators (keep as numeric for sorting/filtering)
-        # Note: This keeps it numeric but displays with commas when printed
-        df['Available'] = df['Available'].astype('Int64')  # Use Int64 to handle NaN
+        df['Available'] = df['Available'].apply(lambda x: f"{int(x):,}" if pd.notna(x) else "")
         
         # Add Date and Time columns at the end
         df['Date'] = date
