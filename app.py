@@ -9,7 +9,6 @@ from search_modules.company_search import load_all_companies
 from search_modules.stock_loan import fetch_shortstock_data
 
 st.set_page_config(
-    page_title="Legal Counsel Finder",
     page_icon="⚖️",
     layout="wide"
 )
@@ -112,6 +111,7 @@ if st.sidebar.button("Stock Loan Availability", use_container_width=True,
 page = st.session_state.current_page
 
 if page == "Legal Counsel Finder":
+    st.title("Legal Counsel Finder")
     st.markdown("Search SEC EDGAR filings to find relationships between companies, law firms, and lawyers")
 
     tab1, tab2, tab3 = st.tabs(["Search Company", "Search Lawyer", "Search Law Firm"])
