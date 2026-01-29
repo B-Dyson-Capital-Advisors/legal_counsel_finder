@@ -11,7 +11,7 @@ from search_modules.stock_loan import fetch_shortstock_data
 st.set_page_config(
     page_title="Legal Counsel Finder",
     page_icon="⚖️",
-    layout="centered"
+    layout="wide"
 )
 
 st.markdown("""
