@@ -66,6 +66,8 @@ if 'lawyer_results' not in st.session_state:
     st.session_state.lawyer_results = None
 if 'firm_results' not in st.session_state:
     st.session_state.firm_results = None
+if 'stock_loan_results' not in st.session_state:
+    st.session_state.stock_loan_results = None
 
 if page == "Legal Counsel Finder":
     st.markdown("Search SEC EDGAR filings to find relationships between companies, law firms, and lawyers")
@@ -338,24 +340,39 @@ elif page == "Stock Loan Availability":
         with st.spinner("Fetching data from Interactive Brokers FTP..."):
             try:
                 df = fetch_shortstock_data()
-                st.success(f"Successfully loaded {len(df):,} records")
-                st.info(f"Data as of: {df['Date'].iloc[0]} {df['Time'].iloc[0]}")
-
-                # Display the dataframe
-                st.dataframe(df, use_container_width=True, hide_index=True)
-
-                # Download button
-                csv = df.to_csv(index=False)
-                st.download_button(
-                    label="Download CSV",
-                    data=csv,
-                    file_name=f"stock_loan_availability_{df['Date'].iloc[0].replace('/', '_')}.csv",
-                    mime="text/csv",
-                    key="stock_loan_csv_download"
-                )
-
+                
+                # Store results in session state
+                st.session_state.stock_loan_results = {
+                    'df': df,
+                    'date': df['Date'].iloc[0],
+                    'time': df['Time'].iloc[0],
+                    'filename': f"stock_loan_availability_{df['Date'].iloc[0].replace('.', '_')}.csv"
+                }
+                
             except Exception as e:
                 st.error(f"Error: {str(e)}")
+                st.session_state.stock_loan_results = None
+
+    # Display stored results if they exist
+    if st.session_state.stock_loan_results is not None:
+        result_data = st.session_state.stock_loan_results
+        df = result_data['df']
+        
+        st.success(f"Successfully loaded {len(df):,} records")
+        st.info(f"Data as of: {result_data['date']} {result_data['time']}")
+
+        # Display the dataframe
+        st.dataframe(df, use_container_width=True, hide_index=True)
+
+        # Download button
+        csv = df.to_csv(index=False)
+        st.download_button(
+            label="Download CSV",
+            data=csv,
+            file_name=result_data['filename'],
+            mime="text/csv",
+            key="stock_loan_csv_download"
+        )
 
 st.markdown("---")
 st.markdown("""
