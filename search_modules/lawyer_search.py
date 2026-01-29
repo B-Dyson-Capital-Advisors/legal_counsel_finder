@@ -23,7 +23,7 @@ def search_lawyer_for_companies(lawyer_name, start_date, end_date, progress_call
             end_str = str(end_date)
         progress_callback(f"Date range: {start_str} to {end_str}")
 
-    results, total = search_paginated(lawyer_name, start_date, end_date, max_total=500)
+    results, total = search_paginated(lawyer_name, start_date, end_date, max_total=10000)
 
     if not results:
         raise ValueError(f"No results found for lawyer: {lawyer_name}")
