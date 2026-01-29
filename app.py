@@ -232,7 +232,7 @@ with tab3:
     with col2:
         firm_start_date = st.date_input(
             "From",
-            value=pd.Timestamp.now() - pd.DateOffset(years=5),
+            value=pd.Timestamp.now() - pd.DateOffset(years=1),
             max_value=pd.Timestamp.now(),
             key="firm_start_date"
         )
