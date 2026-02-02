@@ -125,34 +125,34 @@ if page == "Legal Counsel Finder":
         # Load companies for autocomplete
         companies = load_all_companies()
 
-        # Company selection (full width)
-        if companies:
-            # Create a mapping for selectbox
-            company_options = [""] + [c['display'] for c in companies]
-
-            selected_display = st.selectbox(
-                "Select Company (enter ticker or company name)",
-                options=company_options,
-                index=0,
-                help="Start typing to search by company name, ticker, or CIK",
-                key="company_select"
-            )
-
-            # Find selected company data
-            selected_company = None
-            if selected_display:
-                for c in companies:
-                    if c['display'] == selected_display:
-                        selected_company = c
-                        break
-        else:
-            st.error("Unable to load company list. Please refresh the page.")
-            selected_company = None
-
-        # Date range row: Date preset, From date, To date, Search button
-        col1, col2, col3, col4 = st.columns([2, 1, 1, 1])
+        # Single row layout: Company selector, Date Range dropdown, From date, To date
+        col1, col2, col3, col4 = st.columns([3, 2, 1, 1])
 
         with col1:
+            if companies:
+                # Create a mapping for selectbox
+                company_options = [""] + [c['display'] for c in companies]
+
+                selected_display = st.selectbox(
+                    "Select Company (enter ticker or company name)",
+                    options=company_options,
+                    index=0,
+                    help="Start typing to search by company name, ticker, or CIK",
+                    key="company_select"
+                )
+
+                # Find selected company data
+                selected_company = None
+                if selected_display:
+                    for c in companies:
+                        if c['display'] == selected_display:
+                            selected_company = c
+                            break
+            else:
+                st.error("Unable to load company list. Please refresh the page.")
+                selected_company = None
+
+        with col2:
             date_preset = st.selectbox(
                 "Date Range",
                 options=["Last 30 days", "Last year", "Last 3 years", "Last 5 years", "Last 10 years", "All (since 2001)", "Custom"],
@@ -167,7 +167,7 @@ if page == "Legal Counsel Finder":
             preset_start = (pd.Timestamp.now() - pd.DateOffset(years=5)).date()
             preset_end = pd.Timestamp.now().date()
 
-        with col2:
+        with col3:
             start_date = st.date_input(
                 "From",
                 value=preset_start,
@@ -175,7 +175,7 @@ if page == "Legal Counsel Finder":
                 key="start_date"
             )
 
-        with col3:
+        with col4:
             end_date = st.date_input(
                 "To",
                 value=preset_end,
@@ -183,10 +183,7 @@ if page == "Legal Counsel Finder":
                 key="end_date"
             )
 
-        with col4:
-            # Add spacing to align button with inputs
-            st.markdown("<div style='margin-top: 24px;'></div>", unsafe_allow_html=True)
-            search_clicked = st.button("Search", type="primary", key="company_search_btn")
+        search_clicked = st.button("Search Company", type="primary", key="company_search_btn", use_container_width=True)
 
         if search_clicked:
             if not selected_company:
