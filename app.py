@@ -93,12 +93,6 @@ if 'firm_results' not in st.session_state:
     st.session_state.firm_results = None
 if 'stock_loan_results' not in st.session_state:
     st.session_state.stock_loan_results = None
-if 'company_date_preset' not in st.session_state:
-    st.session_state.company_date_preset = "Last 5 years"
-if 'lawyer_date_preset' not in st.session_state:
-    st.session_state.lawyer_date_preset = "Last 5 years"
-if 'firm_date_preset' not in st.session_state:
-    st.session_state.firm_date_preset = "Last year"
 
 # Date range presets
 def get_date_range(preset):
@@ -119,6 +113,8 @@ def get_date_range(preset):
     else:  # Custom
         return None, None
     return start_date.date(), end_date.date()
+
+preset_options = ["Last 30 days", "Last year", "Last 3 years", "Last 5 years", "Last 10 years", "All (since 2001)", "Custom"]
 
 if page == "Legal Counsel Finder":
     st.title("Legal Counsel Finder")
@@ -159,59 +155,55 @@ if page == "Legal Counsel Finder":
                 st.error("Unable to load company list. Please refresh the page.")
                 selected_company = None
 
-        # Date Range controls
-        preset_options = ["Last 30 days", "Last year", "Last 3 years", "Last 5 years", "Last 10 years", "All (since 2001)", "Custom"]
+        # Initialize defaults
+        if 'company_preset' not in st.session_state:
+            st.session_state.company_preset = "Last 5 years"
+            start, end = get_date_range("Last 5 years")
+            st.session_state.company_start = start
+            st.session_state.company_end = end
 
         with col2:
-            preset_index = preset_options.index(st.session_state.company_date_preset)
-            date_preset = st.selectbox(
+            company_preset = st.selectbox(
                 "Date Range",
                 options=preset_options,
-                index=preset_index
+                index=preset_options.index(st.session_state.company_preset),
+                key="company_preset_sel"
             )
 
-            # Update dates when preset changes
-            if date_preset != st.session_state.company_date_preset:
-                st.session_state.company_date_preset = date_preset
-                if date_preset != "Custom":
-                    expected_start, expected_end = get_date_range(date_preset)
-                    st.session_state.company_from_date = expected_start
-                    st.session_state.company_to_date = expected_end
-
-        # Set default values if not in session state
-        if 'company_from_date' not in st.session_state:
-            if st.session_state.company_date_preset != "Custom":
-                start, end = get_date_range(st.session_state.company_date_preset)
-                st.session_state.company_from_date = start
-                st.session_state.company_to_date = end
-            else:
-                st.session_state.company_from_date = (pd.Timestamp.now() - pd.DateOffset(years=5)).date()
-                st.session_state.company_to_date = pd.Timestamp.now().date()
+        # Update dates when preset changes
+        if company_preset != st.session_state.company_preset:
+            st.session_state.company_preset = company_preset
+            if company_preset != "Custom":
+                start, end = get_date_range(company_preset)
+                st.session_state.company_start = start
+                st.session_state.company_end = end
 
         with col3:
-            start_date = st.date_input(
+            company_start = st.date_input(
                 "From",
-                value=st.session_state.company_from_date,
-                max_value=pd.Timestamp.now(),
-                key="company_from_date"
+                value=st.session_state.company_start,
+                max_value=pd.Timestamp.now()
             )
 
         with col4:
-            end_date = st.date_input(
+            company_end = st.date_input(
                 "To",
-                value=st.session_state.company_to_date,
-                max_value=pd.Timestamp.now(),
-                key="company_to_date"
+                value=st.session_state.company_end,
+                max_value=pd.Timestamp.now()
             )
 
-        # Detect manual date changes and switch to Custom
-        if st.session_state.company_date_preset != "Custom":
-            expected_start, expected_end = get_date_range(st.session_state.company_date_preset)
-            if start_date != expected_start or end_date != expected_end:
-                st.session_state.company_date_preset = "Custom"
+        # Check if user manually changed dates
+        if company_preset != "Custom":
+            expected_start, expected_end = get_date_range(company_preset)
+            if company_start != expected_start or company_end != expected_end:
+                st.session_state.company_preset = "Custom"
                 st.rerun()
 
-        # Search button with fixed width matching "Search Lawyer"
+        # Update session state with current dates
+        st.session_state.company_start = company_start
+        st.session_state.company_end = company_end
+
+        # Search button with fixed width
         col_btn1, col_btn2 = st.columns([1, 6])
         with col_btn1:
             search_clicked = st.button("Search Company", type="primary", use_container_width=True)
@@ -221,46 +213,44 @@ if page == "Legal Counsel Finder":
                 st.error("Please select a company from the dropdown")
             elif not get_api_key():
                 st.error("API key not configured. Please contact your administrator.")
-            elif start_date >= end_date:
+            elif company_start >= company_end:
                 st.error("Start date must be before end date")
             else:
                 with st.spinner("Searching SEC filings..."):
-                    # Single status container that updates
                     status_placeholder = st.empty()
-    
+
                     def progress_callback(message):
                         status_placeholder.info(message)
-    
+
                     try:
                         result_df = search_company_for_lawyers(
                             selected_company['display'],
-                            start_date,
-                            end_date,
+                            company_start,
+                            company_end,
                             get_api_key(),
                             progress_callback,
                             cik=selected_company['cik'],
                             company_name=selected_company['name']
                         )
-    
+
                         status_placeholder.empty()
-    
-                        # Store results in session state
+
                         st.session_state.company_results = {
                             'df': result_df,
                             'filename': f"{selected_company['ticker'] or selected_company['cik']}_lawyers.csv"
                         }
-    
+
                     except Exception as e:
                         status_placeholder.empty()
                         st.error(f"Error: {str(e)}")
                         st.session_state.company_results = None
-    
+
         # Display stored results if they exist
         if st.session_state.company_results is not None:
             result_df = st.session_state.company_results['df']
             st.success(f"Found {len(result_df)} results")
             st.dataframe(result_df, use_container_width=True, hide_index=True)
-    
+
             csv = result_df.to_csv(index=False)
             st.download_button(
                 label="Download CSV",
@@ -269,7 +259,7 @@ if page == "Legal Counsel Finder":
                 mime="text/csv",
                 key="company_csv_download"
             )
-    
+
     with tab2:
         st.header("Find Companies for a Lawyer")
 
@@ -283,56 +273,53 @@ if page == "Legal Counsel Finder":
                 key="lawyer_name"
             )
 
-        # Date Range controls
+        # Initialize defaults
+        if 'lawyer_preset' not in st.session_state:
+            st.session_state.lawyer_preset = "Last 5 years"
+            start, end = get_date_range("Last 5 years")
+            st.session_state.lawyer_start = start
+            st.session_state.lawyer_end = end
+
         with col2:
-            preset_index = preset_options.index(st.session_state.lawyer_date_preset)
-            lawyer_date_preset = st.selectbox(
+            lawyer_preset = st.selectbox(
                 "Date Range",
                 options=preset_options,
-                index=preset_index,
-                key="lawyer_date_preset_select"
+                index=preset_options.index(st.session_state.lawyer_preset),
+                key="lawyer_preset_sel"
             )
 
-            # Update dates when preset changes
-            if lawyer_date_preset != st.session_state.lawyer_date_preset:
-                st.session_state.lawyer_date_preset = lawyer_date_preset
-                if lawyer_date_preset != "Custom":
-                    expected_start, expected_end = get_date_range(lawyer_date_preset)
-                    st.session_state.lawyer_from_date = expected_start
-                    st.session_state.lawyer_to_date = expected_end
-
-        # Set default values if not in session state
-        if 'lawyer_from_date' not in st.session_state:
-            if st.session_state.lawyer_date_preset != "Custom":
-                start, end = get_date_range(st.session_state.lawyer_date_preset)
-                st.session_state.lawyer_from_date = start
-                st.session_state.lawyer_to_date = end
-            else:
-                st.session_state.lawyer_from_date = (pd.Timestamp.now() - pd.DateOffset(years=5)).date()
-                st.session_state.lawyer_to_date = pd.Timestamp.now().date()
+        # Update dates when preset changes
+        if lawyer_preset != st.session_state.lawyer_preset:
+            st.session_state.lawyer_preset = lawyer_preset
+            if lawyer_preset != "Custom":
+                start, end = get_date_range(lawyer_preset)
+                st.session_state.lawyer_start = start
+                st.session_state.lawyer_end = end
 
         with col3:
-            lawyer_start_date = st.date_input(
+            lawyer_start = st.date_input(
                 "From",
-                value=st.session_state.lawyer_from_date,
-                max_value=pd.Timestamp.now(),
-                key="lawyer_from_date"
+                value=st.session_state.lawyer_start,
+                max_value=pd.Timestamp.now()
             )
 
         with col4:
-            lawyer_end_date = st.date_input(
+            lawyer_end = st.date_input(
                 "To",
-                value=st.session_state.lawyer_to_date,
-                max_value=pd.Timestamp.now(),
-                key="lawyer_to_date"
+                value=st.session_state.lawyer_end,
+                max_value=pd.Timestamp.now()
             )
 
-        # Detect manual date changes and switch to Custom
-        if st.session_state.lawyer_date_preset != "Custom":
-            expected_start, expected_end = get_date_range(st.session_state.lawyer_date_preset)
-            if lawyer_start_date != expected_start or lawyer_end_date != expected_end:
-                st.session_state.lawyer_date_preset = "Custom"
+        # Check if user manually changed dates
+        if lawyer_preset != "Custom":
+            expected_start, expected_end = get_date_range(lawyer_preset)
+            if lawyer_start != expected_start or lawyer_end != expected_end:
+                st.session_state.lawyer_preset = "Custom"
                 st.rerun()
+
+        # Update session state with current dates
+        st.session_state.lawyer_start = lawyer_start
+        st.session_state.lawyer_end = lawyer_end
 
         # Search button with fixed width
         col_btn1, col_btn2 = st.columns([1, 6])
@@ -342,43 +329,41 @@ if page == "Legal Counsel Finder":
         if lawyer_search_clicked:
             if not lawyer_name:
                 st.error("Please enter a lawyer name")
-            elif lawyer_start_date >= lawyer_end_date:
+            elif lawyer_start >= lawyer_end:
                 st.error("Start date must be before end date")
             else:
                 with st.spinner("Searching SEC filings..."):
-                    # Single status container that updates
                     status_placeholder = st.empty()
-    
+
                     def progress_callback(message):
                         status_placeholder.info(message)
-    
+
                     try:
                         result_df = search_lawyer_for_companies(
                             lawyer_name.strip(),
-                            lawyer_start_date,
-                            lawyer_end_date,
+                            lawyer_start,
+                            lawyer_end,
                             progress_callback
                         )
-    
+
                         status_placeholder.empty()
-    
-                        # Store results in session state
+
                         st.session_state.lawyer_results = {
                             'df': result_df,
                             'filename': f"{lawyer_name.lower().replace(' ', '_')}_companies.csv"
                         }
-    
+
                     except Exception as e:
                         status_placeholder.empty()
                         st.error(f"Error: {str(e)}")
                         st.session_state.lawyer_results = None
-    
+
         # Display stored results if they exist
         if st.session_state.lawyer_results is not None:
             result_df = st.session_state.lawyer_results['df']
             st.success(f"Found {len(result_df)} results")
             st.dataframe(result_df, use_container_width=True, hide_index=True)
-    
+
             csv = result_df.to_csv(index=False)
             st.download_button(
                 label="Download CSV",
@@ -387,7 +372,7 @@ if page == "Legal Counsel Finder":
                 mime="text/csv",
                 key="lawyer_csv_download"
             )
-    
+
     with tab3:
         st.header("Find Companies for a Law Firm")
 
@@ -401,56 +386,53 @@ if page == "Legal Counsel Finder":
                 key="firm_name"
             )
 
-        # Date Range controls
+        # Initialize defaults
+        if 'firm_preset' not in st.session_state:
+            st.session_state.firm_preset = "Last year"
+            start, end = get_date_range("Last year")
+            st.session_state.firm_start = start
+            st.session_state.firm_end = end
+
         with col2:
-            preset_index = preset_options.index(st.session_state.firm_date_preset)
-            firm_date_preset = st.selectbox(
+            firm_preset = st.selectbox(
                 "Date Range",
                 options=preset_options,
-                index=preset_index,
-                key="firm_date_preset_select"
+                index=preset_options.index(st.session_state.firm_preset),
+                key="firm_preset_sel"
             )
 
-            # Update dates when preset changes
-            if firm_date_preset != st.session_state.firm_date_preset:
-                st.session_state.firm_date_preset = firm_date_preset
-                if firm_date_preset != "Custom":
-                    expected_start, expected_end = get_date_range(firm_date_preset)
-                    st.session_state.firm_from_date = expected_start
-                    st.session_state.firm_to_date = expected_end
-
-        # Set default values if not in session state
-        if 'firm_from_date' not in st.session_state:
-            if st.session_state.firm_date_preset != "Custom":
-                start, end = get_date_range(st.session_state.firm_date_preset)
-                st.session_state.firm_from_date = start
-                st.session_state.firm_to_date = end
-            else:
-                st.session_state.firm_from_date = (pd.Timestamp.now() - pd.DateOffset(years=1)).date()
-                st.session_state.firm_to_date = pd.Timestamp.now().date()
+        # Update dates when preset changes
+        if firm_preset != st.session_state.firm_preset:
+            st.session_state.firm_preset = firm_preset
+            if firm_preset != "Custom":
+                start, end = get_date_range(firm_preset)
+                st.session_state.firm_start = start
+                st.session_state.firm_end = end
 
         with col3:
-            firm_start_date = st.date_input(
+            firm_start = st.date_input(
                 "From",
-                value=st.session_state.firm_from_date,
-                max_value=pd.Timestamp.now(),
-                key="firm_from_date"
+                value=st.session_state.firm_start,
+                max_value=pd.Timestamp.now()
             )
 
         with col4:
-            firm_end_date = st.date_input(
+            firm_end = st.date_input(
                 "To",
-                value=st.session_state.firm_to_date,
-                max_value=pd.Timestamp.now(),
-                key="firm_to_date"
+                value=st.session_state.firm_end,
+                max_value=pd.Timestamp.now()
             )
 
-        # Detect manual date changes and switch to Custom
-        if st.session_state.firm_date_preset != "Custom":
-            expected_start, expected_end = get_date_range(st.session_state.firm_date_preset)
-            if firm_start_date != expected_start or firm_end_date != expected_end:
-                st.session_state.firm_date_preset = "Custom"
+        # Check if user manually changed dates
+        if firm_preset != "Custom":
+            expected_start, expected_end = get_date_range(firm_preset)
+            if firm_start != expected_start or firm_end != expected_end:
+                st.session_state.firm_preset = "Custom"
                 st.rerun()
+
+        # Update session state with current dates
+        st.session_state.firm_start = firm_start
+        st.session_state.firm_end = firm_end
 
         # Search button with fixed width
         col_btn1, col_btn2 = st.columns([1, 6])
@@ -460,43 +442,41 @@ if page == "Legal Counsel Finder":
         if firm_search_clicked:
             if not firm_name:
                 st.error("Please enter a law firm name")
-            elif firm_start_date >= firm_end_date:
+            elif firm_start >= firm_end:
                 st.error("Start date must be before end date")
             else:
                 with st.spinner("Searching SEC filings..."):
-                    # Single status container that updates
                     status_placeholder = st.empty()
-    
+
                     def progress_callback(message):
                         status_placeholder.info(message)
-    
+
                     try:
                         result_df = search_law_firm_for_companies(
                             firm_name.strip(),
-                            firm_start_date,
-                            firm_end_date,
+                            firm_start,
+                            firm_end,
                             progress_callback
                         )
-    
+
                         status_placeholder.empty()
-    
-                        # Store results in session state
+
                         st.session_state.firm_results = {
                             'df': result_df,
                             'filename': f"{firm_name.lower().replace(' ', '_').replace('&', 'and')}_companies.csv"
                         }
-    
+
                     except Exception as e:
                         status_placeholder.empty()
                         st.error(f"Error: {str(e)}")
                         st.session_state.firm_results = None
-    
+
         # Display stored results if they exist
         if st.session_state.firm_results is not None:
             result_df = st.session_state.firm_results['df']
             st.success(f"Found {len(result_df)} results")
             st.dataframe(result_df, use_container_width=True, hide_index=True)
-    
+
             csv = result_df.to_csv(index=False)
             st.download_button(
                 label="Download CSV",
@@ -523,7 +503,6 @@ elif page == "Stock Loan Availability":
             try:
                 df = fetch_shortstock_data()
 
-                # Store results in session state
                 st.session_state.stock_loan_results = {
                     'df': df,
                     'date': df['Date'].iloc[0],
@@ -543,10 +522,8 @@ elif page == "Stock Loan Availability":
         st.success(f"Successfully loaded {len(result_df):,} records")
         st.info(f"Data as of: {data_date} {data_time}")
 
-        # Display the dataframe
         st.dataframe(result_df, use_container_width=True, hide_index=True)
 
-        # Download button
         csv = result_df.to_csv(index=False)
         st.download_button(
             label="Download CSV",
