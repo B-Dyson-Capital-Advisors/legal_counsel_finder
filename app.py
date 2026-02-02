@@ -149,8 +149,8 @@ if page == "Legal Counsel Finder":
             st.error("Unable to load company list. Please refresh the page.")
             selected_company = None
 
-        # Date range row: Date preset, From date, To date
-        col1, col2, col3 = st.columns([2, 1, 1])
+        # Date range row: Date preset, From date, To date, Search button
+        col1, col2, col3, col4 = st.columns([2, 1, 1, 1])
 
         with col1:
             date_preset = st.selectbox(
@@ -172,8 +172,7 @@ if page == "Legal Counsel Finder":
                 "From",
                 value=preset_start,
                 max_value=pd.Timestamp.now(),
-                key="start_date",
-                disabled=(date_preset != "Custom")
+                key="start_date"
             )
 
         with col3:
@@ -181,11 +180,15 @@ if page == "Legal Counsel Finder":
                 "To",
                 value=preset_end,
                 max_value=pd.Timestamp.now(),
-                key="end_date",
-                disabled=(date_preset != "Custom")
+                key="end_date"
             )
-    
-        if st.button("Search Company", type="primary"):
+
+        with col4:
+            # Add spacing to align button with inputs
+            st.markdown("<div style='margin-top: 24px;'></div>", unsafe_allow_html=True)
+            search_clicked = st.button("Search", type="primary", key="company_search_btn")
+
+        if search_clicked:
             if not selected_company:
                 st.error("Please select a company from the dropdown")
             elif not get_api_key():
