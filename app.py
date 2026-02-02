@@ -155,52 +155,36 @@ if page == "Legal Counsel Finder":
                 st.error("Unable to load company list. Please refresh the page.")
                 selected_company = None
 
-        # Initialize defaults
-        if 'company_preset' not in st.session_state:
-            st.session_state.company_preset = "Last 5 years"
-            start, end = get_date_range("Last 5 years")
-            st.session_state.company_from = start
-            st.session_state.company_to = end
-
         with col2:
             company_preset = st.selectbox(
                 "Date Range",
                 options=preset_options,
-                index=preset_options.index(st.session_state.company_preset),
+                index=3,  # Default to "Last 5 years"
                 key="company_preset_sel"
             )
 
-        # Update dates when preset changes
-        if company_preset != st.session_state.company_preset:
-            st.session_state.company_preset = company_preset
-            if company_preset != "Custom":
-                start, end = get_date_range(company_preset)
-                st.session_state.company_from = start
-                st.session_state.company_to = end
-                st.rerun()
+        # Calculate dates based on preset
+        if company_preset != "Custom":
+            company_start_date, company_end_date = get_date_range(company_preset)
+        else:
+            company_start_date = (pd.Timestamp.now() - pd.DateOffset(years=5)).date()
+            company_end_date = pd.Timestamp.now().date()
 
         with col3:
             company_start = st.date_input(
                 "From",
-                value=st.session_state.company_from,
+                value=company_start_date,
                 max_value=pd.Timestamp.now(),
-                key="company_from"
+                disabled=(company_preset != "Custom")
             )
 
         with col4:
             company_end = st.date_input(
                 "To",
-                value=st.session_state.company_to,
+                value=company_end_date,
                 max_value=pd.Timestamp.now(),
-                key="company_to"
+                disabled=(company_preset != "Custom")
             )
-
-        # Check if user manually changed dates
-        if company_preset != "Custom":
-            expected_start, expected_end = get_date_range(company_preset)
-            if company_start != expected_start or company_end != expected_end:
-                st.session_state.company_preset = "Custom"
-                st.rerun()
 
         # Search button with fixed width
         col_btn1, col_btn2 = st.columns([1, 6])
@@ -272,52 +256,36 @@ if page == "Legal Counsel Finder":
                 key="lawyer_name"
             )
 
-        # Initialize defaults
-        if 'lawyer_preset' not in st.session_state:
-            st.session_state.lawyer_preset = "Last 5 years"
-            start, end = get_date_range("Last 5 years")
-            st.session_state.lawyer_from = start
-            st.session_state.lawyer_to = end
-
         with col2:
             lawyer_preset = st.selectbox(
                 "Date Range",
                 options=preset_options,
-                index=preset_options.index(st.session_state.lawyer_preset),
+                index=3,  # Default to "Last 5 years"
                 key="lawyer_preset_sel"
             )
 
-        # Update dates when preset changes
-        if lawyer_preset != st.session_state.lawyer_preset:
-            st.session_state.lawyer_preset = lawyer_preset
-            if lawyer_preset != "Custom":
-                start, end = get_date_range(lawyer_preset)
-                st.session_state.lawyer_from = start
-                st.session_state.lawyer_to = end
-                st.rerun()
+        # Calculate dates based on preset
+        if lawyer_preset != "Custom":
+            lawyer_start_date, lawyer_end_date = get_date_range(lawyer_preset)
+        else:
+            lawyer_start_date = (pd.Timestamp.now() - pd.DateOffset(years=5)).date()
+            lawyer_end_date = pd.Timestamp.now().date()
 
         with col3:
             lawyer_start = st.date_input(
                 "From",
-                value=st.session_state.lawyer_from,
+                value=lawyer_start_date,
                 max_value=pd.Timestamp.now(),
-                key="lawyer_from"
+                disabled=(lawyer_preset != "Custom")
             )
 
         with col4:
             lawyer_end = st.date_input(
                 "To",
-                value=st.session_state.lawyer_to,
+                value=lawyer_end_date,
                 max_value=pd.Timestamp.now(),
-                key="lawyer_to"
+                disabled=(lawyer_preset != "Custom")
             )
-
-        # Check if user manually changed dates
-        if lawyer_preset != "Custom":
-            expected_start, expected_end = get_date_range(lawyer_preset)
-            if lawyer_start != expected_start or lawyer_end != expected_end:
-                st.session_state.lawyer_preset = "Custom"
-                st.rerun()
 
         # Search button with fixed width
         col_btn1, col_btn2 = st.columns([1, 6])
@@ -384,52 +352,36 @@ if page == "Legal Counsel Finder":
                 key="firm_name"
             )
 
-        # Initialize defaults
-        if 'firm_preset' not in st.session_state:
-            st.session_state.firm_preset = "Last year"
-            start, end = get_date_range("Last year")
-            st.session_state.firm_from = start
-            st.session_state.firm_to = end
-
         with col2:
             firm_preset = st.selectbox(
                 "Date Range",
                 options=preset_options,
-                index=preset_options.index(st.session_state.firm_preset),
+                index=1,  # Default to "Last year"
                 key="firm_preset_sel"
             )
 
-        # Update dates when preset changes
-        if firm_preset != st.session_state.firm_preset:
-            st.session_state.firm_preset = firm_preset
-            if firm_preset != "Custom":
-                start, end = get_date_range(firm_preset)
-                st.session_state.firm_from = start
-                st.session_state.firm_to = end
-                st.rerun()
+        # Calculate dates based on preset
+        if firm_preset != "Custom":
+            firm_start_date, firm_end_date = get_date_range(firm_preset)
+        else:
+            firm_start_date = (pd.Timestamp.now() - pd.DateOffset(years=1)).date()
+            firm_end_date = pd.Timestamp.now().date()
 
         with col3:
             firm_start = st.date_input(
                 "From",
-                value=st.session_state.firm_from,
+                value=firm_start_date,
                 max_value=pd.Timestamp.now(),
-                key="firm_from"
+                disabled=(firm_preset != "Custom")
             )
 
         with col4:
             firm_end = st.date_input(
                 "To",
-                value=st.session_state.firm_to,
+                value=firm_end_date,
                 max_value=pd.Timestamp.now(),
-                key="firm_to"
+                disabled=(firm_preset != "Custom")
             )
-
-        # Check if user manually changed dates
-        if firm_preset != "Custom":
-            expected_start, expected_end = get_date_range(firm_preset)
-            if firm_start != expected_start or firm_end != expected_end:
-                st.session_state.firm_preset = "Custom"
-                st.rerun()
 
         # Search button with fixed width
         col_btn1, col_btn2 = st.columns([1, 6])
