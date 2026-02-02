@@ -43,6 +43,31 @@ st.markdown("""
         padding: 1rem;
         margin: 1rem 0;
     }
+
+    /* Hide default radio button styling */
+    .stRadio > div {
+        gap: 0.5rem;
+    }
+    .stRadio > div > label {
+        background-color: transparent;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+        border: 1px solid transparent;
+    }
+    .stRadio > div > label:hover {
+        background-color: #f6f8fa;
+        border-color: #d0d7de;
+    }
+    .stRadio > div > label[data-checked="true"] {
+        background-color: #0969da;
+        color: white;
+        border-color: #0969da;
+    }
+    .stRadio > div > label[data-checked="true"]:hover {
+        background-color: #0860ca;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -66,6 +91,28 @@ if 'lawyer_results' not in st.session_state:
     st.session_state.lawyer_results = None
 if 'firm_results' not in st.session_state:
     st.session_state.firm_results = None
+if 'stock_loan_results' not in st.session_state:
+    st.session_state.stock_loan_results = None
+
+# Date range presets
+def get_date_range(preset):
+    """Calculate date range based on preset selection"""
+    end_date = pd.Timestamp.now()
+    if preset == "Last 30 days":
+        start_date = end_date - pd.DateOffset(days=30)
+    elif preset == "Last year":
+        start_date = end_date - pd.DateOffset(years=1)
+    elif preset == "Last 3 years":
+        start_date = end_date - pd.DateOffset(years=3)
+    elif preset == "Last 5 years":
+        start_date = end_date - pd.DateOffset(years=5)
+    elif preset == "Last 10 years":
+        start_date = end_date - pd.DateOffset(years=10)
+    elif preset == "All (since 2001)":
+        start_date = pd.Timestamp("2001-01-01")
+    else:  # Custom
+        return None, None
+    return start_date.date(), end_date.date()
 
 if page == "Legal Counsel Finder":
     st.markdown("Search SEC EDGAR filings to find relationships between companies, law firms, and lawyers")
@@ -74,51 +121,68 @@ if page == "Legal Counsel Finder":
 
     with tab1:
         st.header("Find Lawyers for a Company")
-    
+
         # Load companies for autocomplete
         companies = load_all_companies()
-    
-        # Single row layout: Company dropdown, From date, To date
-        col1, col2, col3 = st.columns([3, 1, 1])
-    
+
+        # Company selection (full width)
+        if companies:
+            # Create a mapping for selectbox
+            company_options = [""] + [c['display'] for c in companies]
+
+            selected_display = st.selectbox(
+                "Select Company (enter ticker or company name)",
+                options=company_options,
+                index=0,
+                help="Start typing to search by company name, ticker, or CIK",
+                key="company_select"
+            )
+
+            # Find selected company data
+            selected_company = None
+            if selected_display:
+                for c in companies:
+                    if c['display'] == selected_display:
+                        selected_company = c
+                        break
+        else:
+            st.error("Unable to load company list. Please refresh the page.")
+            selected_company = None
+
+        # Date range row: Date preset, From date, To date
+        col1, col2, col3 = st.columns([2, 1, 1])
+
         with col1:
-            if companies:
-                # Create a mapping for selectbox
-                company_options = [""] + [c['display'] for c in companies]
-    
-                selected_display = st.selectbox(
-                    "Select Company (enter ticker or company name)",
-                    options=company_options,
-                    index=0,
-                    help="Start typing to search by company name, ticker, or CIK",
-                    key="company_select"
-                )
-    
-                # Find selected company data
-                selected_company = None
-                if selected_display:
-                    for c in companies:
-                        if c['display'] == selected_display:
-                            selected_company = c
-                            break
-            else:
-                st.error("Unable to load company list. Please refresh the page.")
-                selected_company = None
-    
+            date_preset = st.selectbox(
+                "Date Range",
+                options=["Last 30 days", "Last year", "Last 3 years", "Last 5 years", "Last 10 years", "All (since 2001)", "Custom"],
+                index=3,  # Default to "Last 5 years"
+                key="company_date_preset"
+            )
+
+        # Calculate dates based on preset
+        if date_preset != "Custom":
+            preset_start, preset_end = get_date_range(date_preset)
+        else:
+            preset_start = (pd.Timestamp.now() - pd.DateOffset(years=5)).date()
+            preset_end = pd.Timestamp.now().date()
+
         with col2:
             start_date = st.date_input(
                 "From",
-                value=pd.Timestamp.now() - pd.DateOffset(years=5),
+                value=preset_start,
                 max_value=pd.Timestamp.now(),
-                key="start_date"
+                key="start_date",
+                disabled=(date_preset != "Custom")
             )
-    
+
         with col3:
             end_date = st.date_input(
                 "To",
-                value=pd.Timestamp.now(),
+                value=preset_end,
                 max_value=pd.Timestamp.now(),
-                key="end_date"
+                key="end_date",
+                disabled=(date_preset != "Custom")
             )
     
         if st.button("Search Company", type="primary"):
@@ -338,24 +402,39 @@ elif page == "Stock Loan Availability":
         with st.spinner("Fetching data from Interactive Brokers FTP..."):
             try:
                 df = fetch_shortstock_data()
-                st.success(f"Successfully loaded {len(df):,} records")
-                st.info(f"Data as of: {df['Date'].iloc[0]} {df['Time'].iloc[0]}")
 
-                # Display the dataframe
-                st.dataframe(df, use_container_width=True, hide_index=True)
-
-                # Download button
-                csv = df.to_csv(index=False)
-                st.download_button(
-                    label="Download CSV",
-                    data=csv,
-                    file_name=f"stock_loan_availability_{df['Date'].iloc[0].replace('/', '_')}.csv",
-                    mime="text/csv",
-                    key="stock_loan_csv_download"
-                )
+                # Store results in session state
+                st.session_state.stock_loan_results = {
+                    'df': df,
+                    'date': df['Date'].iloc[0],
+                    'time': df['Time'].iloc[0]
+                }
 
             except Exception as e:
                 st.error(f"Error: {str(e)}")
+                st.session_state.stock_loan_results = None
+
+    # Display stored results if they exist
+    if st.session_state.stock_loan_results is not None:
+        result_df = st.session_state.stock_loan_results['df']
+        data_date = st.session_state.stock_loan_results['date']
+        data_time = st.session_state.stock_loan_results['time']
+
+        st.success(f"Successfully loaded {len(result_df):,} records")
+        st.info(f"Data as of: {data_date} {data_time}")
+
+        # Display the dataframe
+        st.dataframe(result_df, use_container_width=True, hide_index=True)
+
+        # Download button
+        csv = result_df.to_csv(index=False)
+        st.download_button(
+            label="Download CSV",
+            data=csv,
+            file_name=f"stock_loan_availability_{data_date.replace('/', '_')}.csv",
+            mime="text/csv",
+            key="stock_loan_csv_download"
+        )
 
 st.markdown("---")
 st.markdown("""
