@@ -9,6 +9,7 @@ from search_modules.company_search import load_all_companies
 from search_modules.stock_loan import fetch_shortstock_data
 
 st.set_page_config(
+    page_title="BDCA Screening Tool",
     page_icon="⚖️",
     layout="wide"
 )
