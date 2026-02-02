@@ -274,7 +274,7 @@ if page == "Legal Counsel Finder":
         st.header("Find Companies for a Lawyer")
 
         # Single row layout: Lawyer name, Date Range dropdown, From date, To date
-        col1, col2, col3, col4 = st.columns([3, 2, 1, 1])
+        col1, col2, col3, col4 = st.columns([3, 1, 1, 1])
 
         with col1:
             lawyer_name = st.text_input(
@@ -392,7 +392,7 @@ if page == "Legal Counsel Finder":
         st.header("Find Companies for a Law Firm")
 
         # Single row layout: Firm name, Date Range dropdown, From date, To date
-        col1, col2, col3, col4 = st.columns([3, 2, 1, 1])
+        col1, col2, col3, col4 = st.columns([3, 1, 1, 1])
 
         with col1:
             firm_name = st.text_input(
