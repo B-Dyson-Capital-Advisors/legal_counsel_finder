@@ -175,7 +175,8 @@ if page == "Legal Counsel Finder":
                 "From",
                 value=company_start_date,
                 max_value=pd.Timestamp.now(),
-                disabled=(company_preset != "Custom")
+                disabled=(company_preset != "Custom"),
+                key="company_from"
             )
 
         with col4:
@@ -183,7 +184,8 @@ if page == "Legal Counsel Finder":
                 "To",
                 value=company_end_date,
                 max_value=pd.Timestamp.now(),
-                disabled=(company_preset != "Custom")
+                disabled=(company_preset != "Custom"),
+                key="company_to"
             )
 
         # Search button with fixed width
@@ -276,7 +278,8 @@ if page == "Legal Counsel Finder":
                 "From",
                 value=lawyer_start_date,
                 max_value=pd.Timestamp.now(),
-                disabled=(lawyer_preset != "Custom")
+                disabled=(lawyer_preset != "Custom"),
+                key="lawyer_from"
             )
 
         with col4:
@@ -284,7 +287,8 @@ if page == "Legal Counsel Finder":
                 "To",
                 value=lawyer_end_date,
                 max_value=pd.Timestamp.now(),
-                disabled=(lawyer_preset != "Custom")
+                disabled=(lawyer_preset != "Custom"),
+                key="lawyer_to"
             )
 
         # Search button with fixed width
@@ -372,7 +376,8 @@ if page == "Legal Counsel Finder":
                 "From",
                 value=firm_start_date,
                 max_value=pd.Timestamp.now(),
-                disabled=(firm_preset != "Custom")
+                disabled=(firm_preset != "Custom"),
+                key="firm_from"
             )
 
         with col4:
@@ -380,7 +385,8 @@ if page == "Legal Counsel Finder":
                 "To",
                 value=firm_end_date,
                 max_value=pd.Timestamp.now(),
-                disabled=(firm_preset != "Custom")
+                disabled=(firm_preset != "Custom"),
+                key="firm_to"
             )
 
         # Search button with fixed width
