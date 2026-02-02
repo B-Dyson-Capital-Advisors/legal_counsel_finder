@@ -95,10 +95,10 @@ if 'stock_loan_results' not in st.session_state:
     st.session_state.stock_loan_results = None
 if 'company_date_preset' not in st.session_state:
     st.session_state.company_date_preset = "Last 5 years"
-if 'company_start_date' not in st.session_state:
-    st.session_state.company_start_date = (pd.Timestamp.now() - pd.DateOffset(years=5)).date()
-if 'company_end_date' not in st.session_state:
-    st.session_state.company_end_date = pd.Timestamp.now().date()
+if 'lawyer_date_preset' not in st.session_state:
+    st.session_state.lawyer_date_preset = "Last 5 years"
+if 'firm_date_preset' not in st.session_state:
+    st.session_state.firm_date_preset = "Last year"
 
 # Date range presets
 def get_date_range(preset):
@@ -158,13 +158,8 @@ if page == "Legal Counsel Finder":
                 st.error("Unable to load company list. Please refresh the page.")
                 selected_company = None
 
-        # Calculate expected dates based on current preset
+        # Date Range controls
         preset_options = ["Last 30 days", "Last year", "Last 3 years", "Last 5 years", "Last 10 years", "All (since 2001)", "Custom"]
-
-        if st.session_state.company_date_preset != "Custom":
-            expected_start, expected_end = get_date_range(st.session_state.company_date_preset)
-            st.session_state.company_start_date = expected_start
-            st.session_state.company_end_date = expected_end
 
         with col2:
             preset_index = preset_options.index(st.session_state.company_date_preset)
@@ -174,15 +169,28 @@ if page == "Legal Counsel Finder":
                 index=preset_index
             )
 
-            # Update session state if user changed preset
+            # Update dates when preset changes
             if date_preset != st.session_state.company_date_preset:
                 st.session_state.company_date_preset = date_preset
-                st.rerun()
+                if date_preset != "Custom":
+                    expected_start, expected_end = get_date_range(date_preset)
+                    st.session_state.company_from_date = expected_start
+                    st.session_state.company_to_date = expected_end
+
+        # Set default values if not in session state
+        if 'company_from_date' not in st.session_state:
+            if st.session_state.company_date_preset != "Custom":
+                start, end = get_date_range(st.session_state.company_date_preset)
+                st.session_state.company_from_date = start
+                st.session_state.company_to_date = end
+            else:
+                st.session_state.company_from_date = (pd.Timestamp.now() - pd.DateOffset(years=5)).date()
+                st.session_state.company_to_date = pd.Timestamp.now().date()
 
         with col3:
             start_date = st.date_input(
                 "From",
-                value=st.session_state.company_start_date,
+                value=st.session_state.company_from_date,
                 max_value=pd.Timestamp.now(),
                 key="company_from_date"
             )
@@ -190,7 +198,7 @@ if page == "Legal Counsel Finder":
         with col4:
             end_date = st.date_input(
                 "To",
-                value=st.session_state.company_end_date,
+                value=st.session_state.company_to_date,
                 max_value=pd.Timestamp.now(),
                 key="company_to_date"
             )
@@ -200,8 +208,6 @@ if page == "Legal Counsel Finder":
             expected_start, expected_end = get_date_range(st.session_state.company_date_preset)
             if start_date != expected_start or end_date != expected_end:
                 st.session_state.company_date_preset = "Custom"
-                st.session_state.company_start_date = start_date
-                st.session_state.company_end_date = end_date
                 st.rerun()
 
         # Search button with fixed width matching "Search Lawyer"
@@ -265,32 +271,67 @@ if page == "Legal Counsel Finder":
     
     with tab2:
         st.header("Find Companies for a Lawyer")
-    
-        # Single row layout: Lawyer name, From date, To date
-        col1, col2, col3 = st.columns([3, 1, 1])
-    
+
+        # Single row layout: Lawyer name, Date Range dropdown, From date, To date
+        col1, col2, col3, col4 = st.columns([3, 2, 1, 1])
+
         with col1:
             lawyer_name = st.text_input(
                 "Lawyer Name",
                 placeholder="e.g., John Smith",
                 key="lawyer_name"
             )
-    
+
+        # Date Range controls
         with col2:
+            preset_index = preset_options.index(st.session_state.lawyer_date_preset)
+            lawyer_date_preset = st.selectbox(
+                "Date Range",
+                options=preset_options,
+                index=preset_index,
+                key="lawyer_date_preset_select"
+            )
+
+            # Update dates when preset changes
+            if lawyer_date_preset != st.session_state.lawyer_date_preset:
+                st.session_state.lawyer_date_preset = lawyer_date_preset
+                if lawyer_date_preset != "Custom":
+                    expected_start, expected_end = get_date_range(lawyer_date_preset)
+                    st.session_state.lawyer_from_date = expected_start
+                    st.session_state.lawyer_to_date = expected_end
+
+        # Set default values if not in session state
+        if 'lawyer_from_date' not in st.session_state:
+            if st.session_state.lawyer_date_preset != "Custom":
+                start, end = get_date_range(st.session_state.lawyer_date_preset)
+                st.session_state.lawyer_from_date = start
+                st.session_state.lawyer_to_date = end
+            else:
+                st.session_state.lawyer_from_date = (pd.Timestamp.now() - pd.DateOffset(years=5)).date()
+                st.session_state.lawyer_to_date = pd.Timestamp.now().date()
+
+        with col3:
             lawyer_start_date = st.date_input(
                 "From",
-                value=pd.Timestamp.now() - pd.DateOffset(years=5),
+                value=st.session_state.lawyer_from_date,
                 max_value=pd.Timestamp.now(),
-                key="lawyer_start_date"
+                key="lawyer_from_date"
             )
-    
-        with col3:
+
+        with col4:
             lawyer_end_date = st.date_input(
                 "To",
-                value=pd.Timestamp.now(),
+                value=st.session_state.lawyer_to_date,
                 max_value=pd.Timestamp.now(),
-                key="lawyer_end_date"
+                key="lawyer_to_date"
             )
+
+        # Detect manual date changes and switch to Custom
+        if st.session_state.lawyer_date_preset != "Custom":
+            expected_start, expected_end = get_date_range(st.session_state.lawyer_date_preset)
+            if lawyer_start_date != expected_start or lawyer_end_date != expected_end:
+                st.session_state.lawyer_date_preset = "Custom"
+                st.rerun()
 
         # Search button with fixed width
         col_btn1, col_btn2 = st.columns([1, 6])
@@ -348,32 +389,67 @@ if page == "Legal Counsel Finder":
     
     with tab3:
         st.header("Find Companies for a Law Firm")
-    
-        # Single row layout: Firm name, From date, To date
-        col1, col2, col3 = st.columns([3, 1, 1])
-    
+
+        # Single row layout: Firm name, Date Range dropdown, From date, To date
+        col1, col2, col3, col4 = st.columns([3, 2, 1, 1])
+
         with col1:
             firm_name = st.text_input(
                 "Law Firm Name",
                 placeholder="e.g., Cooley LLP, Latham & Watkins",
                 key="firm_name"
             )
-    
+
+        # Date Range controls
         with col2:
+            preset_index = preset_options.index(st.session_state.firm_date_preset)
+            firm_date_preset = st.selectbox(
+                "Date Range",
+                options=preset_options,
+                index=preset_index,
+                key="firm_date_preset_select"
+            )
+
+            # Update dates when preset changes
+            if firm_date_preset != st.session_state.firm_date_preset:
+                st.session_state.firm_date_preset = firm_date_preset
+                if firm_date_preset != "Custom":
+                    expected_start, expected_end = get_date_range(firm_date_preset)
+                    st.session_state.firm_from_date = expected_start
+                    st.session_state.firm_to_date = expected_end
+
+        # Set default values if not in session state
+        if 'firm_from_date' not in st.session_state:
+            if st.session_state.firm_date_preset != "Custom":
+                start, end = get_date_range(st.session_state.firm_date_preset)
+                st.session_state.firm_from_date = start
+                st.session_state.firm_to_date = end
+            else:
+                st.session_state.firm_from_date = (pd.Timestamp.now() - pd.DateOffset(years=1)).date()
+                st.session_state.firm_to_date = pd.Timestamp.now().date()
+
+        with col3:
             firm_start_date = st.date_input(
                 "From",
-                value=pd.Timestamp.now() - pd.DateOffset(years=1),
+                value=st.session_state.firm_from_date,
                 max_value=pd.Timestamp.now(),
-                key="firm_start_date"
+                key="firm_from_date"
             )
-    
-        with col3:
+
+        with col4:
             firm_end_date = st.date_input(
                 "To",
-                value=pd.Timestamp.now(),
+                value=st.session_state.firm_to_date,
                 max_value=pd.Timestamp.now(),
-                key="firm_end_date"
+                key="firm_to_date"
             )
+
+        # Detect manual date changes and switch to Custom
+        if st.session_state.firm_date_preset != "Custom":
+            expected_start, expected_end = get_date_range(st.session_state.firm_date_preset)
+            if firm_start_date != expected_start or firm_end_date != expected_end:
+                st.session_state.firm_date_preset = "Custom"
+                st.rerun()
 
         # Search button with fixed width
         col_btn1, col_btn2 = st.columns([1, 6])
