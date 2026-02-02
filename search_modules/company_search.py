@@ -641,11 +641,7 @@ def search_company_for_lawyers(company_identifier, start_date, end_date, api_key
     for firm, lawyers in firm_to_lawyers.items():
         if lawyers:
             for lawyer in sorted(lawyers):  # Sort for consistent output
-                # Normalize to first+last name only for display (easier to search in Tab 2)
-                display_name = normalize_lawyer_name_for_matching(lawyer)
-                # Capitalize properly: "john smith" -> "John Smith"
-                display_name = ' '.join(word.capitalize() for word in display_name.split())
-                results.append({'Law Firm': firm, 'Lawyer': display_name})
+                results.append({'Law Firm': firm, 'Lawyer': lawyer})
         else:
             results.append({'Law Firm': firm, 'Lawyer': ''})
 
