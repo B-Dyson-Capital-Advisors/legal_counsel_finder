@@ -46,18 +46,10 @@ def fetch_shortstock_data():
         df['Rebate Rate (%)'] = pd.to_numeric(df['Rebate Rate (%)'], errors='coerce')
         df['Fee Rate (%)'] = pd.to_numeric(df['Fee Rate (%)'], errors='coerce')
         df['Available'] = pd.to_numeric(df['Available'], errors='coerce')
-        
-        # Format rates to 2 decimal places
-        df['Rebate Rate (%)'] = df['Rebate Rate (%)'].round(2)
-        df['Fee Rate (%)'] = df['Fee Rate (%)'].round(2)
-        
-        # Format Available with comma separators (keep as numeric for sorting/filtering)
-        df['Available'] = df['Available'].apply(lambda x: f"{int(x):,}" if pd.notna(x) else "")
-        
-        # Add Date and Time columns at the end
-        df['Date'] = date
-        df['Time'] = time
-        
+
+        # Drop unnecessary columns
+        df = df.drop(columns=['CON', 'ISIN', 'FIGI'])
+
         return df
         
     except Exception as e:
