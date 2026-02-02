@@ -632,7 +632,7 @@ def search_company_for_lawyers(company_identifier, start_date, end_date, api_key
                 pass
 
     if not firm_to_lawyers:
-        raise ValueError(f"No law firms found for {company_identifier}")
+        raise ValueError(f"No lawyers found for {company_identifier}")
 
     # Deduplicate lawyers within each firm (handles name variations)
     firm_to_lawyers = deduplicate_firm_lawyers(firm_to_lawyers)

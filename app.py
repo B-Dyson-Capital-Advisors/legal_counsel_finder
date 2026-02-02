@@ -198,37 +198,46 @@ if page == "Legal Counsel Finder":
                 st.error("Please select a company from the dropdown")
             elif not get_api_key():
                 st.error("API key not configured. Please contact your administrator.")
-            elif company_start >= company_end:
-                st.error("Start date must be before end date")
             else:
-                with st.spinner("Searching SEC filings..."):
-                    status_placeholder = st.empty()
+                # Use calculated dates when preset is not Custom, otherwise use widget values
+                if company_preset != "Custom":
+                    search_start = company_start_date
+                    search_end = company_end_date
+                else:
+                    search_start = company_start
+                    search_end = company_end
 
-                    def progress_callback(message):
-                        status_placeholder.info(message)
+                if search_start >= search_end:
+                    st.error("Start date must be before end date")
+                else:
+                    with st.spinner("Searching SEC filings..."):
+                        status_placeholder = st.empty()
 
-                    try:
-                        result_df = search_company_for_lawyers(
-                            selected_company['display'],
-                            company_start,
-                            company_end,
-                            get_api_key(),
-                            progress_callback,
-                            cik=selected_company['cik'],
-                            company_name=selected_company['name']
-                        )
+                        def progress_callback(message):
+                            status_placeholder.info(message)
 
-                        status_placeholder.empty()
+                        try:
+                            result_df = search_company_for_lawyers(
+                                selected_company['display'],
+                                search_start,
+                                search_end,
+                                get_api_key(),
+                                progress_callback,
+                                cik=selected_company['cik'],
+                                company_name=selected_company['name']
+                            )
 
-                        st.session_state.company_results = {
-                            'df': result_df,
-                            'filename': f"{selected_company['ticker'] or selected_company['cik']}_lawyers.csv"
-                        }
+                            status_placeholder.empty()
 
-                    except Exception as e:
-                        status_placeholder.empty()
-                        st.error(f"Error: {str(e)}")
-                        st.session_state.company_results = None
+                            st.session_state.company_results = {
+                                'df': result_df,
+                                'filename': f"{selected_company['ticker'] or selected_company['cik']}_lawyers.csv"
+                            }
+
+                        except Exception as e:
+                            status_placeholder.empty()
+                            st.error(f"Error: {str(e)}")
+                            st.session_state.company_results = None
 
         # Display stored results if they exist
         if st.session_state.company_results is not None:
@@ -299,34 +308,43 @@ if page == "Legal Counsel Finder":
         if lawyer_search_clicked:
             if not lawyer_name:
                 st.error("Please enter a lawyer name")
-            elif lawyer_start >= lawyer_end:
-                st.error("Start date must be before end date")
             else:
-                with st.spinner("Searching SEC filings..."):
-                    status_placeholder = st.empty()
+                # Use calculated dates when preset is not Custom, otherwise use widget values
+                if lawyer_preset != "Custom":
+                    search_start = lawyer_start_date
+                    search_end = lawyer_end_date
+                else:
+                    search_start = lawyer_start
+                    search_end = lawyer_end
 
-                    def progress_callback(message):
-                        status_placeholder.info(message)
+                if search_start >= search_end:
+                    st.error("Start date must be before end date")
+                else:
+                    with st.spinner("Searching SEC filings..."):
+                        status_placeholder = st.empty()
 
-                    try:
-                        result_df = search_lawyer_for_companies(
-                            lawyer_name.strip(),
-                            lawyer_start,
-                            lawyer_end,
-                            progress_callback
-                        )
+                        def progress_callback(message):
+                            status_placeholder.info(message)
 
-                        status_placeholder.empty()
+                        try:
+                            result_df = search_lawyer_for_companies(
+                                lawyer_name.strip(),
+                                search_start,
+                                search_end,
+                                progress_callback
+                            )
 
-                        st.session_state.lawyer_results = {
-                            'df': result_df,
-                            'filename': f"{lawyer_name.lower().replace(' ', '_')}_companies.csv"
-                        }
+                            status_placeholder.empty()
 
-                    except Exception as e:
-                        status_placeholder.empty()
-                        st.error(f"Error: {str(e)}")
-                        st.session_state.lawyer_results = None
+                            st.session_state.lawyer_results = {
+                                'df': result_df,
+                                'filename': f"{lawyer_name.lower().replace(' ', '_')}_companies.csv"
+                            }
+
+                        except Exception as e:
+                            status_placeholder.empty()
+                            st.error(f"Error: {str(e)}")
+                            st.session_state.lawyer_results = None
 
         # Display stored results if they exist
         if st.session_state.lawyer_results is not None:
@@ -397,34 +415,43 @@ if page == "Legal Counsel Finder":
         if firm_search_clicked:
             if not firm_name:
                 st.error("Please enter a law firm name")
-            elif firm_start >= firm_end:
-                st.error("Start date must be before end date")
             else:
-                with st.spinner("Searching SEC filings..."):
-                    status_placeholder = st.empty()
+                # Use calculated dates when preset is not Custom, otherwise use widget values
+                if firm_preset != "Custom":
+                    search_start = firm_start_date
+                    search_end = firm_end_date
+                else:
+                    search_start = firm_start
+                    search_end = firm_end
 
-                    def progress_callback(message):
-                        status_placeholder.info(message)
+                if search_start >= search_end:
+                    st.error("Start date must be before end date")
+                else:
+                    with st.spinner("Searching SEC filings..."):
+                        status_placeholder = st.empty()
 
-                    try:
-                        result_df = search_law_firm_for_companies(
-                            firm_name.strip(),
-                            firm_start,
-                            firm_end,
-                            progress_callback
-                        )
+                        def progress_callback(message):
+                            status_placeholder.info(message)
 
-                        status_placeholder.empty()
+                        try:
+                            result_df = search_law_firm_for_companies(
+                                firm_name.strip(),
+                                search_start,
+                                search_end,
+                                progress_callback
+                            )
 
-                        st.session_state.firm_results = {
-                            'df': result_df,
-                            'filename': f"{firm_name.lower().replace(' ', '_').replace('&', 'and')}_companies.csv"
-                        }
+                            status_placeholder.empty()
 
-                    except Exception as e:
-                        status_placeholder.empty()
-                        st.error(f"Error: {str(e)}")
-                        st.session_state.firm_results = None
+                            st.session_state.firm_results = {
+                                'df': result_df,
+                                'filename': f"{firm_name.lower().replace(' ', '_').replace('&', 'and')}_companies.csv"
+                            }
+
+                        except Exception as e:
+                            status_placeholder.empty()
+                            st.error(f"Error: {str(e)}")
+                            st.session_state.firm_results = None
 
         # Display stored results if they exist
         if st.session_state.firm_results is not None:
