@@ -223,13 +223,14 @@ def is_valid_person_name(name, company_name=None):
         if any(word in company_words and len(word) > 4 for word in name_words):
             return False
 
-    # Expanded list of invalid phrases including document-related terms
-    invalid_phrases = [
+    # Invalid phrases that indicate this is not a person's name
+    # Use word boundaries for short terms to avoid false positives (e.g., "Vincent" contains "inc")
+    invalid_phrases_exact = [
         'legal officer', 'chief legal', 'general counsel', 'corporate counsel',
         'secretary', 'president', 'vice president', 'chief executive',
         'ceo', 'cfo', 'clo', 'officer', 'director', 'manager',
         'associate', 'partner', 'attorney', 'lawyer', 'counsel',
-        'corporation', 'company', 'inc', 'llc', 'llp', 'limited',
+        'corporation', 'company', 'limited',
         'the registrant', 'the company', 'issuer',
         # Document-related terms
         'date filed', 'filing date', 'second amended', 'first amended',
@@ -241,7 +242,12 @@ def is_valid_person_name(name, company_name=None):
         'santa clara', 'silicon valley'
     ]
 
-    if any(phrase in name_lower for phrase in invalid_phrases):
+    # Check for invalid phrases
+    if any(phrase in name_lower for phrase in invalid_phrases_exact):
+        return False
+
+    # Check for word-boundary matches for short terms (prevents "Vincent" from matching "inc")
+    if re.search(r'\b(inc|llc|llp)\b', name_lower):
         return False
 
     if re.search(r'\d', name):
@@ -648,7 +654,7 @@ Return JSON with law firms and ONLY PERSON NAMES (not titles, not company names)
                     "Authorization": f"Bearer {api_key}"
                 },
                 json={
-                    "model": "gpt-5-nano",
+                    "model": "gpt-4o",
                     "messages": [{"role": "user", "content": prompt}],
                     "temperature": 0
                 },
