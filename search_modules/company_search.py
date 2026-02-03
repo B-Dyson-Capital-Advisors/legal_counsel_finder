@@ -284,11 +284,12 @@ def extract_lawyers_by_regex(text, company_name):
     """Extract lawyer names using regex patterns"""
     results = defaultdict(set)
 
-    # Improved middle initial pattern: allows one or more middle initials with optional periods
-    # Pattern: FirstName (MiddleInitial(s))? LastName
-    middle_initial_pattern = r'(?:\s+[A-Z]\.?\s*)+'
+    # Name pattern: FirstName (MiddleInitials)? LastName
+    # Middle initials REQUIRE periods to avoid matching first letter of last name
+    # Pattern handles both "Joshua N. Korff" and "Zoey Hitzert"
+    name_with_optional_middle = r'[A-Z][a-z]+(?:(?:\s+[A-Z]\.)+\s+|\s+)[A-Z][a-z]+'
 
-    pattern1 = r'([A-Z][a-z]+(?:' + middle_initial_pattern + r')?[A-Z][a-z]+(?:\s+(?:and|,)\s+[A-Z][a-z]+(?:' + middle_initial_pattern + r')?[A-Z][a-z]+)*)\s+of\s+([A-Z][^\n]{5,60}?(?:LLP|LLC|P\.C\.|P\.A\.))'
+    pattern1 = r'(' + name_with_optional_middle + r'(?:\s+(?:and|,)\s+' + name_with_optional_middle + r')*)\s+of\s+([A-Z][^\n]{5,60}?(?:LLP|LLC|P\.C\.|P\.A\.))'
 
     matches = re.finditer(pattern1, text, re.MULTILINE)
 
@@ -323,8 +324,7 @@ def extract_lawyers_by_regex(text, company_name):
                 results[normalized_firm].add(normalize_lawyer_name(name))
 
     # Pattern 2: Name (with optional Esq./P.C./titles) on one line, firm on next line
-    # Improved to handle middle initials better
-    pattern2 = r'([A-Z][a-z]+(?:' + middle_initial_pattern + r')?[A-Z][a-z]+)(?:,?\s*(?:Esq\.|P\.C\.))?\s*\n\s*([A-Z][^\n]{5,60}?(?:LLP|LLC|P\.C\.|P\.A\.))'
+    pattern2 = r'(' + name_with_optional_middle + r')(?:,?\s*(?:Esq\.|P\.C\.))?\s*\n\s*([A-Z][^\n]{5,60}?(?:LLP|LLC|P\.C\.|P\.A\.))'
 
     matches2 = re.finditer(pattern2, text, re.MULTILINE)
 
@@ -370,9 +370,8 @@ def extract_lawyers_by_regex(text, company_name):
             if re.search(r'(?<!,\s)(?:LLP|LLC|P\.A\.)(?:\s|$)', line):
                 continue
 
-            # Extract name - improved pattern for middle initials
-            # Pattern: "FirstName (MiddleInitial(s))? LastName, (Esq.|P.C.)?"
-            name_match = re.match(r'([A-Z][a-z]+(?:' + middle_initial_pattern + r')?[A-Z][a-z]+)(?:,?\s*(?:Esq\.|P\.C\.))?', line)
+            # Extract name with optional middle initials
+            name_match = re.match(r'(' + name_with_optional_middle + r')(?:,?\s*(?:Esq\.|P\.C\.))?', line)
 
             if not name_match:
                 continue
@@ -388,8 +387,7 @@ def extract_lawyers_by_regex(text, company_name):
                 results[normalized_firm].add(normalize_lawyer_name(name))
 
     # Pattern 4: By: signature pattern
-    # Handle both ", Esq." and ", P.C." credentials - improved middle initials
-    pattern4 = r'By:\s*([A-Z][a-z]+(?:' + middle_initial_pattern + r')?[A-Z][a-z]+)(?:,?\s*(?:Esq\.|P\.C\.))?\s*\n\s*([A-Z][^\n]{5,60}?(?:LLP|LLC|P\.C\.|P\.A\.))'
+    pattern4 = r'By:\s*(' + name_with_optional_middle + r')(?:,?\s*(?:Esq\.|P\.C\.))?\s*\n\s*([A-Z][^\n]{5,60}?(?:LLP|LLC|P\.C\.|P\.A\.))'
 
     matches4 = re.finditer(pattern4, text, re.MULTILINE)
 
@@ -409,9 +407,7 @@ def extract_lawyers_by_regex(text, company_name):
             results[normalized_firm].add(normalize_lawyer_name(name))
 
     # Pattern 5: More flexible - any name followed by credentials near a law firm
-    # This catches patterns like "John Smith, Esq." appearing near "Wilson Sonsini LLP"
-    # Improved to handle middle initials better
-    pattern5 = r'([A-Z][a-z]+(?:' + middle_initial_pattern + r')?[A-Z][a-z]+)(?:,?\s*(?:Esq\.|Attorney))?(?:[^\n]{0,200}?)((?:[A-Z][a-z]+\s*)+(?:&\s*)?(?:[A-Z][a-z]+\s*)*(?:LLP|LLC|P\.C\.|P\.A\.))'
+    pattern5 = r'(' + name_with_optional_middle + r')(?:,?\s*(?:Esq\.|Attorney))?(?:[^\n]{0,200}?)((?:[A-Z][a-z]+\s*)+(?:&\s*)?(?:[A-Z][a-z]+\s*)*(?:LLP|LLC|P\.C\.|P\.A\.))'
 
     matches5 = re.finditer(pattern5, text, re.MULTILINE)
 
