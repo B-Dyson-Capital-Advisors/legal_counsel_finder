@@ -485,7 +485,7 @@ Return JSON with law firms and ONLY PERSON NAMES (not titles, not company names)
                     "Authorization": f"Bearer {api_key}"
                 },
                 json={
-                    "model": "gpt-4o-mini",
+                    "model": "gpt-5-nano",
                     "messages": [{"role": "user", "content": prompt}],
                     "temperature": 0
                 },
@@ -543,7 +543,6 @@ Return JSON with law firms and ONLY PERSON NAMES (not titles, not company names)
                 continue
 
     return {}
-
 
 def process_single_filing(filing, cik, company_name, api_key):
     """Process a single filing and extract lawyers (for parallel execution)"""
