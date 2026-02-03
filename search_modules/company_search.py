@@ -7,6 +7,7 @@ from datetime import datetime, timedelta
 from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import streamlit as st
+from .filing_types import HIGH_PRIORITY_LEGAL_FILINGS
 
 
 @st.cache_data(ttl=3600, show_spinner=False)
@@ -95,20 +96,6 @@ def search_company_by_name_or_ticker(search_term):
             matches.append(company)
 
     return matches
-
-LEGAL_COUNSEL_FILINGS = [
-    "S-1", "S-3", "S-4", "S-8",
-    "S-1/A", "S-3/A", "S-4/A", "S-8/A",
-    "S-3ASR", "S-1MEF", "S-4MEF",
-    "POS AM", "POSASR",
-    "424B1", "424B2", "424B3", "424B4", "424B5", "424B7", "424B8",
-    "D", "D/A",
-    "SC TO-I", "SC TO-I/A",
-    "SC 13E3", "SC 13E4",
-    "DEF 14A", "DEFA14A", "DEFM14A",
-    "F-1", "F-3", "F-1/A", "F-3/A",
-    "CORRESP", "UPLOAD", "EX-24"
-]
 
 
 def normalize_lawyer_name_for_matching(name):
@@ -429,7 +416,7 @@ def get_company_filings(cik, start_date, end_date):
             filing_type = recent['form'][i]
             filing_date = recent['filingDate'][i]
 
-            if filing_type in LEGAL_COUNSEL_FILINGS and start_date_str <= filing_date <= end_date_str:
+            if filing_type in HIGH_PRIORITY_LEGAL_FILINGS and start_date_str <= filing_date <= end_date_str:
                 filings.append({
                     'type': filing_type,
                     'date': filing_date,

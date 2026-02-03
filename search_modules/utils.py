@@ -4,6 +4,7 @@ import requests
 import pandas as pd
 from datetime import datetime, timedelta
 from concurrent.futures import ThreadPoolExecutor
+from .filing_types import RELEVANT_FILINGS
 
 SEC_SEARCH_URL = "https://efts.sec.gov/LATEST/search-index"
 
@@ -12,23 +13,6 @@ HEADERS = {
     "Accept-Encoding": "gzip, deflate",
     "Host": "efts.sec.gov"
 }
-
-COMPREHENSIVE_FILINGS = [
-    "S-1", "S-3", "S-4", "S-8",
-    "S-1/A", "S-3/A", "S-4/A", "S-8/A",
-    "S-3ASR", "S-1MEF", "S-4MEF",
-    "POS AM", "POSASR",
-    "424B1", "424B3", "424B5",
-    "D", "D/A",
-    "SC TO-I", "SC TO-I/A",
-    "SC 13E3", "SC 13E4",
-    "DEF 14A", "DEFA14A",
-    "DEFM14A",
-    "8-K", "8-K/A",
-    "10-K", "10-Q", "10-K/A", "10-Q/A",
-    "SC 13D", "SC 13G", "SC 13D/A", "SC 13G/A",
-    "EFFECT",
-]
 
 TARGET_COMPANIES = 100
 
@@ -137,7 +121,7 @@ def count_unique_companies(search_term, from_date, to_date):
         return 0
 
     df = pd.DataFrame(results)
-    df_filtered = df[df["filing_type"].isin(COMPREHENSIVE_FILINGS)].copy()
+    df_filtered = df[df["filing_type"].isin(RELEVANT_FILINGS)].copy()
 
     df_filtered[['clean_company_name', 'ticker']] = df_filtered['company_name'].apply(
         lambda x: pd.Series(extract_ticker_and_clean_name(x))
@@ -197,7 +181,7 @@ def filter_important_filings(df):
     """Filter for comprehensive filing types"""
     if df.empty:
         return df
-    return df[df["filing_type"].isin(COMPREHENSIVE_FILINGS)].copy()
+    return df[df["filing_type"].isin(RELEVANT_FILINGS)].copy()
 
 
 def deduplicate_companies(df):
