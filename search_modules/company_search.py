@@ -558,15 +558,24 @@ def process_single_filing(filing, cik, company_name, api_key):
 
     firm_to_lawyers = defaultdict(set)
 
-    if extracted_text:
-        regex_results = extract_lawyers_by_regex(extracted_text, company_name)
-        for firm, lawyers in regex_results.items():
-            firm_to_lawyers[firm].update(lawyers)
+    if not extracted_text:
+        # Document failed to extract or was too short
+        raise Exception(f"No text extracted from {filing['type']} ({filing['date']})")
 
-        firm_lawyers_dict = parse_with_openai(extracted_text, company_name, api_key)
+    # Try regex extraction
+    regex_results = extract_lawyers_by_regex(extracted_text, company_name)
+    for firm, lawyers in regex_results.items():
+        firm_to_lawyers[firm].update(lawyers)
 
-        for firm, lawyers in firm_lawyers_dict.items():
-            firm_to_lawyers[firm].update(lawyers)
+    # Try OpenAI extraction
+    firm_lawyers_dict = parse_with_openai(extracted_text, company_name, api_key)
+
+    for firm, lawyers in firm_lawyers_dict.items():
+        firm_to_lawyers[firm].update(lawyers)
+
+    if not firm_to_lawyers:
+        # Successfully extracted text but found no lawyers
+        raise Exception(f"No lawyers found in {filing['type']} ({filing['date']})")
 
     return firm_to_lawyers
 
@@ -622,6 +631,9 @@ def search_company_for_lawyers(company_identifier, start_date, end_date, api_key
 
     firm_to_lawyers = defaultdict(set)
     failed_count = 0
+    success_count = 0
+    no_text_count = 0
+    no_lawyers_count = 0
 
     # Process filings in parallel (5 at a time to respect rate limits)
     with ThreadPoolExecutor(max_workers=5) as executor:
@@ -638,16 +650,26 @@ def search_company_for_lawyers(company_identifier, start_date, end_date, api_key
 
             try:
                 filing_results = future.result()
-                for firm, lawyers in filing_results.items():
-                    firm_to_lawyers[firm].update(lawyers)
+                if filing_results:
+                    success_count += 1
+                    for firm, lawyers in filing_results.items():
+                        firm_to_lawyers[firm].update(lawyers)
             except Exception as e:
                 failed_count += 1
+                error_str = str(e)
+
+                # Track failure reasons
+                if "No text extracted" in error_str:
+                    no_text_count += 1
+                elif "No lawyers found" in error_str:
+                    no_lawyers_count += 1
+
                 # Log first few errors to help debug
-                if failed_count <= 3 and progress_callback:
-                    progress_callback(f"Warning: Failed to process filing ({str(e)[:100]})")
+                if failed_count <= 5 and progress_callback:
+                    progress_callback(f"Warning: {error_str[:150]}")
 
     if progress_callback:
-        progress_callback(f"Completed: {completed} filings processed, {failed_count} failed")
+        progress_callback(f"Results: {success_count} filings with lawyers, {no_text_count} failed to extract, {no_lawyers_count} had no lawyers")
 
     if not firm_to_lawyers:
         raise ValueError(f"No lawyers found for {company_identifier}")
