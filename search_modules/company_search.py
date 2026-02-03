@@ -227,29 +227,54 @@ def is_internal_employee(name, text_near_name):
 
 
 def is_not_law_firm(firm_name, company_name=None):
-    """Filter out non-law-firms (keep minimal - only obvious non-law firms)"""
+    """Filter out non-law-firms - comprehensive filtering"""
     firm_lower = firm_name.lower()
 
     # Filter document prefixes
-    document_prefixes = ['opinion of', 'exhibit', 'registration of', 'registration statement']
+    document_prefixes = [
+        'opinion of', 'exhibit', 'exhibit to', 'registration of',
+        'registration statement', 'amendment to', 'form ', 'filing of',
+        'supplement to', 'prospectus', 'preliminary prospectus'
+    ]
     if any(firm_lower.startswith(prefix) for prefix in document_prefixes):
         return True
 
-    # Filter obvious garbage
-    if any(garbage in firm_lower for garbage in ['example', 'firm name', 'law firm']):
+    # Filter garbage names
+    garbage_names = ['law_firms', 'lawyers', 'law firm', 'example', 'firm name', 'another']
+    if any(garbage in firm_lower for garbage in garbage_names):
         return True
 
     # Filter company name itself
     if company_name and company_name.lower() in firm_lower:
         return True
 
-    # Filter accounting firms (Big 4 only)
-    if re.search(r'\b(deloitte|pwc|pricewaterhousecoopers|kpmg|ernst\s*&\s*young)\b', firm_lower):
+    # Filter accounting firms (Big 4)
+    accounting_patterns = [
+        r'\bdeloitte\b', r'\bpwc\b', r'\bpricewaterhousecoopers\b',
+        r'\bernst\s*&\s*young\b', r'\bkpmg\b', r'\bey\b'
+    ]
+    for pattern in accounting_patterns:
+        if re.search(pattern, firm_lower):
+            return True
+
+    # Filter investment banks - comprehensive list
+    investment_banks = [
+        'goldman sachs', 'morgan stanley', 'jp morgan', 'jpmorgan',
+        'credit suisse', 'ubs', 'deutsche bank', 'barclays',
+        'cantor fitzgerald', 'oppenheimer', 'jefferies', 'cowen',
+        'stifel', 'piper sandler', 'raymond james', 'roth capital',
+        'needham', 'wedbush', 'craig-hallum', 'btig', 'maxim group'
+    ]
+    if any(bank in firm_lower for bank in investment_banks):
         return True
 
-    # Filter major investment banks only
-    major_banks = ['goldman sachs', 'morgan stanley', 'jp morgan', 'jpmorgan', 'cantor fitzgerald']
-    if any(bank in firm_lower for bank in major_banks):
+    # Filter "& Co" patterns that are likely not law firms
+    if '& co' in firm_lower and 'llp' not in firm_lower:
+        return True
+
+    # Filter fund-related entities
+    fund_keywords = ['fund', 'capital', 'ventures', 'holdings', 'trust company']
+    if any(keyword in firm_lower for keyword in fund_keywords) and 'llc' in firm_lower and 'llp' not in firm_lower:
         return True
 
     return False
