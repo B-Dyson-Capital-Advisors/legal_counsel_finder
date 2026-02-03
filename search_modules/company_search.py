@@ -230,7 +230,8 @@ def is_valid_person_name(name, company_name=None):
         'chief executive', 'chief financial', 'chief legal', 'chief operating',
         'general counsel', 'corporate secretary', 'vice president',
         'the registrant', 'the company',
-        'date filed', 'second amended', 'this registration'
+        'date filed', 'second amended', 'this registration',
+        'annual meeting', 'our board', 'board of directors', 'special meeting'
     ]
 
     if any(phrase in name_lower for phrase in obvious_non_persons):
@@ -453,30 +454,12 @@ def extract_lawyers_by_regex(text, company_name):
             normalized_firm = normalize_firm_name(firm)
             results[normalized_firm].add(normalize_lawyer_name(name))
 
-    # Pattern 5: More flexible - any name followed by credentials near a law firm
-    pattern5 = r'(' + name_with_optional_middle + r')(?:,?\s*(?:Esq\.|Attorney))?(?:[^\n]{0,200}?)(' + firm_pattern + r')'
-
-    matches5 = re.finditer(pattern5, text, re.MULTILINE)
-
-    for match in matches5:
-        name = match.group(1).strip()
-        firm = match.group(2).strip()
-
-        # Skip if firm captured too much text
-        if len(firm) > 80:
-            continue
-
-        context = text[max(0, match.start()-100):match.end()+100]
-
-        if is_not_law_firm(firm, company_name):
-            continue
-
-        if not is_valid_person_name(name, company_name):
-            continue
-
-        if not is_internal_employee(name, context):
-            normalized_firm = normalize_firm_name(firm)
-            results[normalized_firm].add(normalize_lawyer_name(name))
+    # Pattern 5: DISABLED - Too greedy and creates garbage matches
+    # Problem: firm_pattern can match person names + firm names together
+    # Example: "Zoey Hitzert\nKirkland & Ellis LLP" matches as firm="Zoey Hitzert Kirkland & Ellis LLP"
+    # The pattern can't distinguish where person names end and firm names begin
+    # Result: Creates junk like "Annual Meeting", "Our Board" as lawyer names
+    # Patterns 1-4 are sufficient and more accurate
 
     return results
 
