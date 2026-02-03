@@ -492,6 +492,17 @@ Return JSON with law firms and ONLY PERSON NAMES (not titles, not company names)
                 timeout=30
             )
 
+            # Check for HTTP errors
+            if response.status_code != 200:
+                error_msg = f"OpenAI API error {response.status_code}"
+                try:
+                    error_detail = response.json().get('error', {}).get('message', '')
+                    if error_detail:
+                        error_msg += f": {error_detail}"
+                except:
+                    pass
+                raise Exception(error_msg)
+
             result = response.json()
 
             if 'choices' in result and len(result['choices']) > 0:
@@ -610,6 +621,7 @@ def search_company_for_lawyers(company_identifier, start_date, end_date, api_key
         progress_callback(f"Processing {len(filings)} filings in parallel...")
 
     firm_to_lawyers = defaultdict(set)
+    failed_count = 0
 
     # Process filings in parallel (5 at a time to respect rate limits)
     with ThreadPoolExecutor(max_workers=5) as executor:
@@ -628,8 +640,14 @@ def search_company_for_lawyers(company_identifier, start_date, end_date, api_key
                 filing_results = future.result()
                 for firm, lawyers in filing_results.items():
                     firm_to_lawyers[firm].update(lawyers)
-            except Exception:
-                pass
+            except Exception as e:
+                failed_count += 1
+                # Log first few errors to help debug
+                if failed_count <= 3 and progress_callback:
+                    progress_callback(f"Warning: Failed to process filing ({str(e)[:100]})")
+
+    if progress_callback:
+        progress_callback(f"Completed: {completed} filings processed, {failed_count} failed")
 
     if not firm_to_lawyers:
         raise ValueError(f"No lawyers found for {company_identifier}")
