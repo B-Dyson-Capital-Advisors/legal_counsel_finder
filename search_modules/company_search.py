@@ -392,9 +392,10 @@ def extract_lawyers_by_regex(text, company_name):
             results[normalized_firm].add(normalize_lawyer_name(name))
 
     # Pattern 3: "Copies to:" section with multiple names before firm
-    # Need to handle ", P.C." as a credential (like ", Esq.") not a firm suffix
-    # Key: "Name, P.C." = credential | "Firm Name P.C." (no comma) = firm
-    pattern3 = r'(?:Copies to:|Copy to:)\s*\n((?:.*\n)+?)(' + firm_pattern + r'$)'
+    # CRITICAL: firm must be on its own line, not span multiple lines with names
+    # Use [^\S\n]+ (whitespace but NOT newlines) to prevent "Zoey Hitzert\nKirkland & Ellis LLP" matching as one firm
+    firm_pattern_single_line = r'[A-Z][a-z]+(?:[^\S\n]+(?:&[^\S\n]+)?[A-Z][a-z]+)*[^\S\n]+(?:LLP|LLC|P\.C\.|P\.A\.)'
+    pattern3 = r'(?:Copies to:|Copy to:)\s*\n((?:.*\n)+?)(' + firm_pattern_single_line + r')\s*$'
 
     matches3 = re.finditer(pattern3, text, re.MULTILINE)
 
