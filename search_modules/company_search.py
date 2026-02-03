@@ -7,6 +7,7 @@ from datetime import datetime, timedelta
 from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import streamlit as st
+from .filing_types import HIGH_PRIORITY_LEGAL_FILINGS
 
 
 @st.cache_data(ttl=3600, show_spinner=False)
@@ -95,20 +96,6 @@ def search_company_by_name_or_ticker(search_term):
             matches.append(company)
 
     return matches
-
-LEGAL_COUNSEL_FILINGS = [
-    "S-1", "S-3", "S-4", "S-8",
-    "S-1/A", "S-3/A", "S-4/A", "S-8/A",
-    "S-3ASR", "S-1MEF", "S-4MEF",
-    "POS AM", "POSASR",
-    "424B1", "424B2", "424B3", "424B4", "424B5", "424B7", "424B8",
-    "D", "D/A",
-    "SC TO-I", "SC TO-I/A",
-    "SC 13E3", "SC 13E4",
-    "DEF 14A", "DEFA14A", "DEFM14A",
-    "F-1", "F-3", "F-1/A", "F-3/A",
-    "CORRESP", "UPLOAD", "EX-24"
-]
 
 
 def normalize_lawyer_name_for_matching(name):
@@ -313,7 +300,9 @@ def extract_lawyers_by_regex(text, company_name):
             for name in valid_names:
                 results[normalized_firm].add(normalize_lawyer_name(name))
 
-    pattern2 = r'([A-Z][a-z]+(?:\s+[A-Z]\.?)?\s+[A-Z][a-z]+)\s*\n\s*([A-Z][^\n]{5,60}?(?:LLP|LLC|P\.C\.|P\.A\.))'
+    # Pattern 2: Name (with optional Esq./titles) on one line, firm on next line
+    # Updated to handle ", Esq." between name and newline
+    pattern2 = r'([A-Z][a-z]+(?:\s+[A-Z]\.?)?\s+[A-Z][a-z]+)(?:,?\s*Esq\.?)?\s*\n\s*([A-Z][^\n]{5,60}?(?:LLP|LLC|P\.C\.|P\.A\.))'
 
     matches2 = re.finditer(pattern2, text, re.MULTILINE)
 
@@ -332,11 +321,40 @@ def extract_lawyers_by_regex(text, company_name):
             normalized_firm = normalize_firm_name(firm)
             results[normalized_firm].add(normalize_lawyer_name(name))
 
-    pattern3 = r'By:\s*([A-Z][a-z]+(?:\s+[A-Z]\.?)?\s+[A-Z][a-z]+)\s*\n\s*([A-Z][^\n]{5,60}?(?:LLP|LLC|P\.C\.|P\.A\.))'
+    # Pattern 3: "Copies to:" section with multiple names before firm
+    # Matches multiple consecutive lines of names followed by firm
+    pattern3 = r'(?:Copies to:|Copy to:)\s*\n\s*((?:[A-Z][a-z]+(?:\s+[A-Z]\.?)?\s+[A-Z][a-z]+(?:,?\s*Esq\.?)?\s*\n\s*)+)([A-Z][^\n]{5,60}?(?:LLP|LLC|P\.C\.|P\.A\.))'
 
     matches3 = re.finditer(pattern3, text, re.MULTILINE)
 
     for match in matches3:
+        names_section = match.group(1)
+        firm = match.group(2).strip()
+
+        if is_not_law_firm(firm, company_name):
+            continue
+
+        # Extract all names from the names section
+        name_pattern = r'([A-Z][a-z]+(?:\s+[A-Z]\.?)?\s+[A-Z][a-z]+)(?:,?\s*Esq\.?)?'
+        name_matches = re.finditer(name_pattern, names_section)
+
+        for name_match in name_matches:
+            name = name_match.group(1).strip()
+
+            if not is_valid_person_name(name, company_name):
+                continue
+
+            context = text[match.start():match.end() + 200]
+            if not is_internal_employee(name, context):
+                normalized_firm = normalize_firm_name(firm)
+                results[normalized_firm].add(normalize_lawyer_name(name))
+
+    # Pattern 4: By: signature pattern
+    pattern4 = r'By:\s*([A-Z][a-z]+(?:\s+[A-Z]\.?)?\s+[A-Z][a-z]+)(?:,?\s*Esq\.?)?\s*\n\s*([A-Z][^\n]{5,60}?(?:LLP|LLC|P\.C\.|P\.A\.))'
+
+    matches4 = re.finditer(pattern4, text, re.MULTILINE)
+
+    for match in matches4:
         name = match.group(1).strip()
         firm = match.group(2).strip()
         context = text[match.start():match.end() + 100]
@@ -398,7 +416,7 @@ def get_company_filings(cik, start_date, end_date):
             filing_type = recent['form'][i]
             filing_date = recent['filingDate'][i]
 
-            if filing_type in LEGAL_COUNSEL_FILINGS and start_date_str <= filing_date <= end_date_str:
+            if filing_type in HIGH_PRIORITY_LEGAL_FILINGS and start_date_str <= filing_date <= end_date_str:
                 filings.append({
                     'type': filing_type,
                     'date': filing_date,
@@ -572,8 +590,22 @@ def process_single_filing(filing, cik, company_name, api_key):
     for firm, lawyers in firm_lawyers_dict.items():
         firm_to_lawyers[firm].update(lawyers)
 
+    # Even if no lawyers found, try to extract just the law firm name
     if not firm_to_lawyers:
-        # Successfully extracted text but found no lawyers
+        # Look for "Legal Matters" section with just firm name
+        firm_only_pattern = r'(?:LEGAL MATTERS|Legal Matters)\s+(?:.|\n){0,500}?\b([A-Z][A-Za-z\s&,]+(?:LLP|LLC|P\.C\.|P\.A\.))'
+        firm_matches = re.finditer(firm_only_pattern, extracted_text, re.MULTILINE | re.IGNORECASE)
+
+        for match in firm_matches:
+            potential_firm = match.group(1).strip()
+            # Basic validation
+            if not is_not_law_firm(potential_firm, company_name) and len(potential_firm) > 10:
+                normalized_firm = normalize_firm_name(potential_firm)
+                firm_to_lawyers[normalized_firm] = set()  # Empty set of lawyers
+                break  # Only take first match
+
+    if not firm_to_lawyers:
+        # Successfully extracted text but found no lawyers or firms
         raise Exception(f"No lawyers found in {filing['type']} ({filing['date']})")
 
     return firm_to_lawyers
