@@ -260,12 +260,12 @@ if page == "Legal Counsel Finder":
             if 'Market Cap' in result_df.columns:
                 column_config['Market Cap'] = st.column_config.NumberColumn(
                     'Market Cap',
-                    format='%,.2f'
+                    format=',.2f'
                 )
             if 'Available' in result_df.columns:
                 column_config['Available'] = st.column_config.NumberColumn(
                     'Available',
-                    format='%,.0f'
+                    format=',.0f'
                 )
 
             st.dataframe(result_df, use_container_width=True, hide_index=True, column_config=column_config)
@@ -392,12 +392,12 @@ if page == "Legal Counsel Finder":
             if 'Market Cap' in result_df.columns:
                 column_config['Market Cap'] = st.column_config.NumberColumn(
                     'Market Cap',
-                    format='%,.2f'
+                    format=',.2f'
                 )
             if 'Available' in result_df.columns:
                 column_config['Available'] = st.column_config.NumberColumn(
                     'Available',
-                    format='%,.0f'
+                    format=',.0f'
                 )
 
             st.dataframe(result_df, use_container_width=True, hide_index=True, column_config=column_config)
@@ -524,12 +524,12 @@ if page == "Legal Counsel Finder":
             if 'Market Cap' in result_df.columns:
                 column_config['Market Cap'] = st.column_config.NumberColumn(
                     'Market Cap',
-                    format='%,.2f'
+                    format=',.2f'
                 )
             if 'Available' in result_df.columns:
                 column_config['Available'] = st.column_config.NumberColumn(
                     'Available',
-                    format='%,.0f'
+                    format=',.0f'
                 )
 
             st.dataframe(result_df, use_container_width=True, hide_index=True, column_config=column_config)
