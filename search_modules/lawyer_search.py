@@ -6,6 +6,8 @@ from .utils import (
     deduplicate_companies,
     extract_ticker_and_clean_name
 )
+from .stock_reference import filter_and_enrich_tickers
+from .stock_loan import fetch_shortstock_data
 
 
 def search_lawyer_for_companies(lawyer_name, start_date, end_date, progress_callback=None):
@@ -59,11 +61,59 @@ def search_lawyer_for_companies(lawyer_name, start_date, end_date, progress_call
 
     result_df = result_df[result_df['Ticker'] != ""].copy()
 
-    result_df['Ticker'] = result_df['Ticker'].apply(lambda x: f"{x} US Equity")
-
-    result_df['Filing Date'] = result_df['Filing Date'].dt.strftime('%Y-%m-%d')
+    # Clean ticker (remove " US Equity" suffix if present for filtering)
+    result_df['Ticker_Clean'] = result_df['Ticker'].str.replace(' US Equity', '', regex=False).str.strip().str.upper()
 
     if progress_callback:
-        progress_callback(f"Search complete: {len(result_df)} companies with tickers")
+        progress_callback(f"Filtering to reference tickers and adding market cap...")
+
+    # Filter by reference tickers and add market cap
+    result_df = filter_and_enrich_tickers(result_df, ticker_column='Ticker_Clean')
+
+    if result_df.empty:
+        raise ValueError(f"No companies found with tickers in stock reference file")
+
+    if progress_callback:
+        progress_callback(f"Adding stock loan availability data...")
+
+    # Fetch stock loan data
+    try:
+        stock_loan_df = fetch_shortstock_data()
+        # Clean symbols for matching
+        stock_loan_df['Symbol_Clean'] = stock_loan_df['Symbol'].str.strip().str.upper()
+
+        # Merge stock loan data
+        result_df = result_df.merge(
+            stock_loan_df[['Symbol_Clean', 'Rebate Rate (%)', 'Fee Rate (%)', 'Available']],
+            left_on='Ticker_Clean',
+            right_on='Symbol_Clean',
+            how='left'
+        )
+        # Drop extra column
+        result_df = result_df.drop('Symbol_Clean', axis=1)
+
+    except Exception as e:
+        if progress_callback:
+            progress_callback(f"Note: Could not fetch stock loan data ({str(e)})")
+
+    # Add back " US Equity" suffix for Bloomberg format
+    result_df['Ticker'] = result_df['Ticker_Clean'] + ' US Equity'
+
+    # Drop temporary column
+    result_df = result_df.drop('Ticker_Clean', axis=1)
+
+    # Format Filing Date
+    result_df['Filing Date'] = pd.to_datetime(result_df['Filing Date']).dt.strftime('%Y-%m-%d')
+
+    # Reorder columns: Company, Ticker, Market Cap, Stock Loan columns, Filing Date
+    final_columns = ['Company', 'Ticker', 'Market Cap']
+    if 'Rebate Rate (%)' in result_df.columns:
+        final_columns.extend(['Rebate Rate (%)', 'Fee Rate (%)', 'Available'])
+    final_columns.append('Filing Date')
+
+    result_df = result_df[final_columns]
+
+    if progress_callback:
+        progress_callback(f"Search complete: {len(result_df)} companies")
 
     return result_df

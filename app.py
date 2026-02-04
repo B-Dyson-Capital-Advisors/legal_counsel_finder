@@ -6,7 +6,7 @@ from search_modules import (
     search_law_firm_for_companies
 )
 from search_modules.company_search import load_all_companies
-from search_modules.stock_loan import fetch_shortstock_data
+from search_modules.stock_loan import fetch_shortstock_data, fetch_shortstock_with_market_cap
 
 st.set_page_config(
     page_title="BDCA Screening Tool",
@@ -514,12 +514,13 @@ if page == "Legal Counsel Finder":
 
 elif page == "Stock Loan Availability":
     st.title("Stock Loan Availability")
-    st.markdown("Real-time stock loan availability data from Interactive Brokers")
+    st.markdown("Real-time stock loan availability data from Interactive Brokers - Filtered by legitimate stocks in reference file")
 
     if st.button("Fetch Latest Data", type="primary"):
-        with st.spinner("Fetching data from Interactive Brokers FTP..."):
+        with st.spinner("Fetching data from Interactive Brokers FTP and merging with market cap data..."):
             try:
-                df = fetch_shortstock_data()
+                # Use new function that filters by reference file and adds market cap
+                df = fetch_shortstock_with_market_cap()
 
                 st.session_state.stock_loan_results = {
                     'df': df,
@@ -537,7 +538,7 @@ elif page == "Stock Loan Availability":
         data_date = st.session_state.stock_loan_results['date']
         data_time = st.session_state.stock_loan_results['time']
 
-        st.success(f"Successfully loaded {len(result_df):,} records")
+        st.success(f"Successfully loaded {len(result_df):,} records (filtered by reference stocks)")
         st.info(f"Data as of: {data_date} {data_time}")
 
         st.dataframe(result_df, use_container_width=True, hide_index=True)
@@ -555,6 +556,6 @@ elif page == "Stock Loan Availability":
     st.markdown("---")
     st.markdown("""
     <div style='text-align: center; color: #666; font-size: 0.9rem; padding: 1rem;'>
-    B. Dyson Capital Advisors | Data sourced from Interactive Brokers
+    B. Dyson Capital Advisors | Data sourced from Interactive Brokers & Stock Reference File
     </div>
     """, unsafe_allow_html=True)
