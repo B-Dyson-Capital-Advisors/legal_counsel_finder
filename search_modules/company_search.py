@@ -544,7 +544,20 @@ def extract_counsel_sections(doc_url):
         if len(text) < 5000:
             return None
 
-        return text[:25000]
+        # Look for LEGAL MATTERS section (typically near end of document)
+        legal_matters_idx = text.upper().find('LEGAL MATTERS')
+
+        if legal_matters_idx != -1:
+            # Extract from 1000 chars before to 5000 chars after LEGAL MATTERS
+            start = max(0, legal_matters_idx - 1000)
+            end = min(len(text), legal_matters_idx + 5000)
+            legal_section = text[start:end]
+
+            # Also include first 25k for other patterns (signature blocks, etc.)
+            return text[:25000] + "\n\n" + legal_section
+        else:
+            # No LEGAL MATTERS section, return first 25k
+            return text[:25000]
     except Exception:
         return None
 
