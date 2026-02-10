@@ -245,9 +245,30 @@ def is_not_law_firm(firm_name, company_name=None):
     if any(garbage in firm_lower for garbage in garbage_names):
         return True
 
-    # Filter company name itself
-    if company_name and company_name.lower() in firm_lower:
-        return True
+    # Filter company name itself and subsidiaries
+    if company_name:
+        company_lower = company_name.lower()
+        # Check full company name
+        if company_lower in firm_lower:
+            return True
+        # Check if this is a subsidiary (extract company ticker/abbreviation)
+        # e.g., "LyondellBasell" -> check for "lyondell" or "lyb"
+        company_words = company_lower.split()
+        if company_words:
+            main_word = company_words[0]
+            if len(main_word) > 3 and main_word in firm_lower:
+                return True
+
+    # Filter operating companies ending in LLC (not law firms)
+    # Law firms are almost always LLP, P.C., or P.A. - rarely LLC
+    if 'llc' in firm_lower and 'llp' not in firm_lower:
+        operating_company_keywords = [
+            'international', 'finance', 'financial', 'capital', 'holdings',
+            'ventures', 'trust', 'services', 'corporation', 'inc.',
+            'group', 'management', 'investment', 'fund', 'partners llc'
+        ]
+        if any(keyword in firm_lower for keyword in operating_company_keywords):
+            return True
 
     # Filter accounting firms (Big 4)
     accounting_patterns = [
@@ -271,11 +292,6 @@ def is_not_law_firm(firm_name, company_name=None):
 
     # Filter "& Co" patterns that are likely not law firms
     if '& co' in firm_lower and 'llp' not in firm_lower:
-        return True
-
-    # Filter fund-related entities
-    fund_keywords = ['fund', 'capital', 'ventures', 'holdings', 'trust company']
-    if any(keyword in firm_lower for keyword in fund_keywords) and 'llc' in firm_lower and 'llp' not in firm_lower:
         return True
 
     return False
