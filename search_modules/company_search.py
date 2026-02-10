@@ -8,6 +8,7 @@ from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import streamlit as st
 from .filing_types import HIGH_PRIORITY_LEGAL_FILINGS
+from .law_firm_reference import find_firms_by_reference
 
 
 @st.cache_data(ttl=3600, show_spinner=False)
@@ -511,6 +512,16 @@ def extract_lawyers_by_regex(text, company_name):
     # The pattern can't distinguish where person names end and firm names begin
     # Result: Creates junk like "Annual Meeting", "Our Board" as lawyer names
     # Patterns 1-4 are sufficient and more accurate
+
+    # FALLBACK: Use reference list of major law firms
+    # If we haven't found any results yet, check against known firm list
+    if len(results) == 0:
+        reference_firms = find_firms_by_reference(text)
+        for firm in reference_firms:
+            # Still apply the non-law-firm filter
+            if not is_not_law_firm(firm, company_name):
+                normalized_firm = normalize_firm_name(firm)
+                results[normalized_firm].add('(Firm only - no lawyer name listed)')
 
     return results
 
