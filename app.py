@@ -258,7 +258,7 @@ if page == "Legal Counsel Finder":
             # Format display while keeping numeric data for proper sorting
             format_dict = {}
             if 'Market Cap' in result_df.columns:
-                format_dict['Market Cap'] = '{:,.2f}'
+                format_dict['Market Cap'] = '{:,.1f}'
             if 'Available' in result_df.columns:
                 format_dict['Available'] = '{:,.0f}'
             if 'Rebate Rate (%)' in result_df.columns:
@@ -392,7 +392,7 @@ if page == "Legal Counsel Finder":
             # Format display while keeping numeric data for proper sorting
             format_dict = {}
             if 'Market Cap' in result_df.columns:
-                format_dict['Market Cap'] = '{:,.2f}'
+                format_dict['Market Cap'] = '{:,.1f}'
             if 'Available' in result_df.columns:
                 format_dict['Available'] = '{:,.0f}'
             if 'Rebate Rate (%)' in result_df.columns:
@@ -526,7 +526,7 @@ if page == "Legal Counsel Finder":
             # Format display while keeping numeric data for proper sorting
             format_dict = {}
             if 'Market Cap' in result_df.columns:
-                format_dict['Market Cap'] = '{:,.2f}'
+                format_dict['Market Cap'] = '{:,.1f}'
             if 'Available' in result_df.columns:
                 format_dict['Available'] = '{:,.0f}'
             if 'Rebate Rate (%)' in result_df.columns:
