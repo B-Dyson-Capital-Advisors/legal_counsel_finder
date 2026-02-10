@@ -79,13 +79,3 @@ def filter_and_enrich_tickers(df, ticker_column='Ticker'):
         enriched_df = enriched_df.drop('Symbol', axis=1)
 
     return enriched_df
-
-
-def get_reference_tickers():
-    """Get set of valid tickers from reference file"""
-    reference_df = load_stock_reference()
-
-    if reference_df is None:
-        return set()
-
-    return set(reference_df['Symbol'].tolist())

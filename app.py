@@ -255,22 +255,18 @@ if page == "Legal Counsel Finder":
             else:
                 st.success(f"Found {len(result_df)} results")
 
-            # Format display while keeping numeric data for proper sorting
-            format_dict = {}
-            if 'Market Cap' in result_df.columns:
-                format_dict['Market Cap'] = '{:,.0f}'
-            if 'Available' in result_df.columns:
-                format_dict['Available'] = '{:,.0f}'
-            if 'Rebate Rate (%)' in result_df.columns:
-                format_dict['Rebate Rate (%)'] = '{:.2f}'
-            if 'Fee Rate (%)' in result_df.columns:
-                format_dict['Fee Rate (%)'] = '{:.2f}'
+            # Format dataframe columns as strings for easier copying
+            display_df = result_df.copy()
+            if 'Market Cap' in display_df.columns:
+                display_df['Market Cap'] = display_df['Market Cap'].apply(lambda x: f'{x:,.0f}' if pd.notna(x) else '')
+            if 'Available' in display_df.columns:
+                display_df['Available'] = display_df['Available'].apply(lambda x: f'{x:,.0f}' if pd.notna(x) else '')
+            if 'Rebate Rate (%)' in display_df.columns:
+                display_df['Rebate Rate (%)'] = display_df['Rebate Rate (%)'].apply(lambda x: f'{x:.2f}' if pd.notna(x) else '')
+            if 'Fee Rate (%)' in display_df.columns:
+                display_df['Fee Rate (%)'] = display_df['Fee Rate (%)'].apply(lambda x: f'{x:.2f}' if pd.notna(x) else '')
 
-            if format_dict:
-                styled_df = result_df.style.format(format_dict, na_rep='')
-                st.dataframe(styled_df, use_container_width=True, hide_index=True)
-            else:
-                st.dataframe(result_df, use_container_width=True, hide_index=True)
+            st.dataframe(display_df, use_container_width=True, hide_index=True)
 
             csv = result_df.to_csv(index=False)
             st.download_button(
@@ -389,22 +385,18 @@ if page == "Legal Counsel Finder":
             else:
                 st.success(f"Found {len(result_df)} results")
 
-            # Format display while keeping numeric data for proper sorting
-            format_dict = {}
-            if 'Market Cap' in result_df.columns:
-                format_dict['Market Cap'] = '{:,.0f}'
-            if 'Available' in result_df.columns:
-                format_dict['Available'] = '{:,.0f}'
-            if 'Rebate Rate (%)' in result_df.columns:
-                format_dict['Rebate Rate (%)'] = '{:.2f}'
-            if 'Fee Rate (%)' in result_df.columns:
-                format_dict['Fee Rate (%)'] = '{:.2f}'
+            # Format dataframe columns as strings for easier copying
+            display_df = result_df.copy()
+            if 'Market Cap' in display_df.columns:
+                display_df['Market Cap'] = display_df['Market Cap'].apply(lambda x: f'{x:,.0f}' if pd.notna(x) else '')
+            if 'Available' in display_df.columns:
+                display_df['Available'] = display_df['Available'].apply(lambda x: f'{x:,.0f}' if pd.notna(x) else '')
+            if 'Rebate Rate (%)' in display_df.columns:
+                display_df['Rebate Rate (%)'] = display_df['Rebate Rate (%)'].apply(lambda x: f'{x:.2f}' if pd.notna(x) else '')
+            if 'Fee Rate (%)' in display_df.columns:
+                display_df['Fee Rate (%)'] = display_df['Fee Rate (%)'].apply(lambda x: f'{x:.2f}' if pd.notna(x) else '')
 
-            if format_dict:
-                styled_df = result_df.style.format(format_dict, na_rep='')
-                st.dataframe(styled_df, use_container_width=True, hide_index=True)
-            else:
-                st.dataframe(result_df, use_container_width=True, hide_index=True)
+            st.dataframe(display_df, use_container_width=True, hide_index=True)
 
             csv = result_df.to_csv(index=False)
             st.download_button(
@@ -523,22 +515,18 @@ if page == "Legal Counsel Finder":
             else:
                 st.success(f"Found {len(result_df)} results")
 
-            # Format display while keeping numeric data for proper sorting
-            format_dict = {}
-            if 'Market Cap' in result_df.columns:
-                format_dict['Market Cap'] = '{:,.0f}'
-            if 'Available' in result_df.columns:
-                format_dict['Available'] = '{:,.0f}'
-            if 'Rebate Rate (%)' in result_df.columns:
-                format_dict['Rebate Rate (%)'] = '{:.2f}'
-            if 'Fee Rate (%)' in result_df.columns:
-                format_dict['Fee Rate (%)'] = '{:.2f}'
+            # Format dataframe columns as strings for easier copying
+            display_df = result_df.copy()
+            if 'Market Cap' in display_df.columns:
+                display_df['Market Cap'] = display_df['Market Cap'].apply(lambda x: f'{x:,.0f}' if pd.notna(x) else '')
+            if 'Available' in display_df.columns:
+                display_df['Available'] = display_df['Available'].apply(lambda x: f'{x:,.0f}' if pd.notna(x) else '')
+            if 'Rebate Rate (%)' in display_df.columns:
+                display_df['Rebate Rate (%)'] = display_df['Rebate Rate (%)'].apply(lambda x: f'{x:.2f}' if pd.notna(x) else '')
+            if 'Fee Rate (%)' in display_df.columns:
+                display_df['Fee Rate (%)'] = display_df['Fee Rate (%)'].apply(lambda x: f'{x:.2f}' if pd.notna(x) else '')
 
-            if format_dict:
-                styled_df = result_df.style.format(format_dict, na_rep='')
-                st.dataframe(styled_df, use_container_width=True, hide_index=True)
-            else:
-                st.dataframe(result_df, use_container_width=True, hide_index=True)
+            st.dataframe(display_df, use_container_width=True, hide_index=True)
 
             csv = result_df.to_csv(index=False)
             st.download_button(
@@ -586,22 +574,18 @@ elif page == "Stock Loan Availability":
         st.success(f"Successfully loaded {len(result_df):,} records (filtered by reference stocks)")
         st.info(f"Data as of: {data_date} {data_time}")
 
-        # Format display while keeping numeric data for proper sorting
-        format_dict = {}
-        if 'Market Cap' in result_df.columns:
-            format_dict['Market Cap'] = '{:,.0f}'
-        if 'Available' in result_df.columns:
-            format_dict['Available'] = '{:,.0f}'
-        if 'Rebate Rate (%)' in result_df.columns:
-            format_dict['Rebate Rate (%)'] = '{:.2f}'
-        if 'Fee Rate (%)' in result_df.columns:
-            format_dict['Fee Rate (%)'] = '{:.2f}'
+        # Format dataframe columns as strings for easier copying
+        display_df = result_df.copy()
+        if 'Market Cap' in display_df.columns:
+            display_df['Market Cap'] = display_df['Market Cap'].apply(lambda x: f'{x:,.0f}' if pd.notna(x) else '')
+        if 'Available' in display_df.columns:
+            display_df['Available'] = display_df['Available'].apply(lambda x: f'{x:,.0f}' if pd.notna(x) else '')
+        if 'Rebate Rate (%)' in display_df.columns:
+            display_df['Rebate Rate (%)'] = display_df['Rebate Rate (%)'].apply(lambda x: f'{x:.2f}' if pd.notna(x) else '')
+        if 'Fee Rate (%)' in display_df.columns:
+            display_df['Fee Rate (%)'] = display_df['Fee Rate (%)'].apply(lambda x: f'{x:.2f}' if pd.notna(x) else '')
 
-        if format_dict:
-            styled_df = result_df.style.format(format_dict, na_rep='')
-            st.dataframe(styled_df, use_container_width=True, hide_index=True)
-        else:
-            st.dataframe(result_df, use_container_width=True, hide_index=True)
+        st.dataframe(display_df, use_container_width=True, hide_index=True)
 
         csv = result_df.to_csv(index=False)
         st.download_button(
