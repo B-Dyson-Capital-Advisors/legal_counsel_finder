@@ -16,7 +16,7 @@ MAJOR_LAW_FIRMS = [
     "Andrews Myers, P.C.",
     "Arendt & Medernach",
     "ArentFox Schiff",
-    "Arnold & Porter Kaye Scholer LLP",
+    "Arnold & Porter",
     "Asbury Gardner",
     "Ashurst LLP",
     "ASKramer Law LLC",
