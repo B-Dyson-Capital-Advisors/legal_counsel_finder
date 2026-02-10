@@ -410,13 +410,21 @@ if page == "Legal Counsel Finder":
     with tab3:
         st.header("Find Companies for a Law Firm")
 
+        # Import law firms list
+        from search_modules.law_firm_reference import MAJOR_LAW_FIRMS
+
         # Single row layout: Firm name, Date Range dropdown, From date, To date
         col1, col2, col3, col4 = st.columns([3, 1, 1, 1])
 
         with col1:
-            firm_name = st.text_input(
+            # Create dropdown with law firms
+            firm_options = [""] + sorted(MAJOR_LAW_FIRMS)
+
+            firm_name = st.selectbox(
                 "Law Firm Name",
-                placeholder="E.g. Cooley LLP, Latham & Watkins",
+                options=firm_options,
+                index=0,
+                help="Select a law firm from the list or start typing to search",
                 key="firm_name"
             )
 
