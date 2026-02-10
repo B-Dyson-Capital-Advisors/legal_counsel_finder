@@ -9,8 +9,8 @@ from search_modules.company_search import load_all_companies
 from search_modules.stock_loan import fetch_shortstock_data, fetch_shortstock_with_market_cap
 
 st.set_page_config(
-    page_title="BDCA Screening Tool",
-    page_icon="⚖️",
+    page_title="EquityIntel",
+    page_icon="📊",
     layout="wide"
 )
 
@@ -553,7 +553,7 @@ if page == "Legal Counsel Finder":
     st.markdown("---")
     st.markdown("""
     <div style='text-align: center; color: #666; font-size: 0.9rem; padding: 1rem;'>
-    B. Dyson Capital Advisors | Data sourced from SEC EDGAR
+    EquityIntel | Data sourced from SEC EDGAR
     </div>
     """, unsafe_allow_html=True)
 
@@ -616,6 +616,6 @@ elif page == "Stock Loan Availability":
     st.markdown("---")
     st.markdown("""
     <div style='text-align: center; color: #666; font-size: 0.9rem; padding: 1rem;'>
-    B. Dyson Capital Advisors | Data sourced from Interactive Brokers & Stock Reference File
+    EquityIntel | Data sourced from Interactive Brokers & Stock Reference File
     </div>
     """, unsafe_allow_html=True)
