@@ -141,8 +141,16 @@ def search_law_firm_for_companies(firm_name, start_date, end_date, progress_call
     from .stock_loan import fetch_shortstock_data
 
     # Keep CIK and accession data for lawyer extraction
+    if progress_callback:
+        progress_callback(f"DEBUG: df_unique columns: {list(df_unique.columns)}")
+        progress_callback(f"DEBUG: Sample CIK from df_unique: {df_unique['cik'].iloc[0] if 'cik' in df_unique.columns and len(df_unique) > 0 else 'NO CIK COLUMN'}")
+        progress_callback(f"DEBUG: Sample adsh from df_unique: {df_unique['adsh'].iloc[0] if 'adsh' in df_unique.columns and len(df_unique) > 0 else 'NO ADSH COLUMN'}")
+
     result_df = df_unique[['clean_company_name', 'ticker', 'filing_date', 'cik', 'adsh']].copy()
     result_df.columns = ['Company', 'Ticker', 'Filing Date', 'cik', 'adsh']
+
+    if progress_callback:
+        progress_callback(f"DEBUG: result_df columns after rename: {list(result_df.columns)}")
 
     result_df = result_df[result_df['Ticker'] != ""].copy()
 
@@ -152,8 +160,14 @@ def search_law_firm_for_companies(firm_name, start_date, end_date, progress_call
     if progress_callback:
         progress_callback(f"Filtering to reference tickers and adding market cap...")
 
+    # Store CIK and adsh before merge (they might get dropped)
+    cik_adsh_data = result_df[['Company', 'cik', 'adsh']].copy()
+
     # Filter by reference tickers and add market cap
     result_df = filter_and_enrich_tickers(result_df, ticker_column='Ticker_Clean')
+
+    # Restore CIK and adsh after merge
+    result_df = result_df.merge(cik_adsh_data, on='Company', how='left')
 
     if result_df.empty:
         raise ValueError(f"No companies found with tickers in stock reference file")
