@@ -226,6 +226,10 @@ def is_valid_person_name(name, company_name=None):
         if len(word) > 1 and not word[0].isupper():
             return False
 
+    # Reject if matches company name
+    if company_name and name_lower in company_name.lower():
+        return False
+
     # Only reject obvious non-person terms (keep this minimal!)
     obvious_non_persons = [
         'chief executive', 'chief financial', 'chief legal', 'chief operating',
@@ -238,13 +242,35 @@ def is_valid_person_name(name, company_name=None):
     if any(phrase in name_lower for phrase in obvious_non_persons):
         return False
 
-    # Reject obvious city names only
-    obvious_cities = ['menlo park', 'redwood city', 'san francisco', 'new york', 'palo alto']
+    # Reject city names
+    obvious_cities = [
+        'menlo park', 'redwood city', 'san francisco', 'new york', 'palo alto',
+        'santa clara', 'san jose', 'los angeles', 'boston', 'chicago',
+        'washington dc', 'seattle', 'austin', 'san diego', 'denver'
+    ]
     if any(city in name_lower for city in obvious_cities):
         return False
 
-    # Last name should be at least 2 characters (was 3, too strict)
-    if len(words[-1].rstrip('.')) < 2:
+    # Reject business/company terms
+    business_terms = [
+        'technologies', 'corporation', 'incorporated', 'company',
+        'capital', 'markets', 'capital markets', 'ventures', 'partners',
+        'group', 'holdings', 'enterprises', 'industries', 'systems',
+        'solutions', 'services', 'international', 'global', 'worldwide'
+    ]
+    if any(term in name_lower for term in business_terms):
+        return False
+
+    # Reject department/division names
+    department_terms = [
+        'legal department', 'finance department', 'marketing',
+        'investor relations', 'corporate affairs', 'human resources'
+    ]
+    if any(dept in name_lower for dept in department_terms):
+        return False
+
+    # Last name should be at least 3 characters (reject "Bret Di" type names)
+    if len(words[-1].rstrip('.')) < 3:
         return False
 
     return True
