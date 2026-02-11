@@ -149,15 +149,15 @@ def search_law_firm_for_companies(firm_name, start_date, end_date, progress_call
     if result_df.empty:
         raise ValueError(f"No companies found with tickers in stock reference file")
 
-    # Filter for companies with market cap > $500,000
+    # Filter for companies with market cap > $500M
     if 'Market Cap' in result_df.columns:
         initial_count = len(result_df)
-        result_df = result_df[result_df['Market Cap'] > 500000].copy()
+        result_df = result_df[result_df['Market Cap'] > 500000000].copy()
         if progress_callback:
-            progress_callback(f"Filtered to {len(result_df)} companies with market cap > $500K (from {initial_count})")
+            progress_callback(f"Filtered to {len(result_df)} companies with market cap > $500M (from {initial_count})")
 
     if result_df.empty:
-        raise ValueError(f"No companies found with market cap above $500,000")
+        raise ValueError(f"No companies found with market cap above $500M")
 
     if progress_callback:
         progress_callback(f"Adding stock loan availability data...")
