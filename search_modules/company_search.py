@@ -242,11 +242,41 @@ def is_valid_person_name(name, company_name=None):
     if any(phrase in name_lower for phrase in obvious_non_persons):
         return False
 
-    # Reject city names
+    # Reject city names - comprehensive US cities list
     obvious_cities = [
-        'menlo park', 'redwood city', 'san francisco', 'new york', 'palo alto',
-        'santa clara', 'san jose', 'los angeles', 'boston', 'chicago',
-        'washington dc', 'seattle', 'austin', 'san diego', 'denver'
+        # Major metros (top 50)
+        'new york', 'los angeles', 'chicago', 'houston', 'phoenix',
+        'philadelphia', 'san antonio', 'san diego', 'dallas', 'san jose',
+        'austin', 'jacksonville', 'fort worth', 'columbus', 'charlotte',
+        'san francisco', 'indianapolis', 'seattle', 'denver', 'washington',
+        'boston', 'el paso', 'nashville', 'detroit', 'oklahoma city',
+        'portland', 'las vegas', 'memphis', 'louisville', 'baltimore',
+        'milwaukee', 'albuquerque', 'tucson', 'fresno', 'mesa',
+        'sacramento', 'atlanta', 'kansas city', 'colorado springs', 'raleigh',
+        'omaha', 'miami', 'long beach', 'virginia beach', 'oakland',
+        'minneapolis', 'tampa', 'tulsa', 'arlington', 'new orleans',
+
+        # Silicon Valley / Bay Area
+        'menlo park', 'palo alto', 'mountain view', 'sunnyvale', 'cupertino',
+        'santa clara', 'redwood city', 'san mateo', 'foster city', 'burlingame',
+        'fremont', 'berkeley', 'richmond', 'hayward', 'pleasanton',
+
+        # Other major tech/business hubs
+        'cambridge', 'pasadena', 'irvine', 'santa monica', 'bellevue',
+        'alexandria', 'ann arbor', 'boulder', 'provo', 'madison',
+
+        # State capitals (not already listed)
+        'albany', 'sacramento', 'springfield', 'trenton', 'harrisburg',
+        'richmond', 'tallahassee', 'baton rouge', 'little rock', 'des moines',
+        'topeka', 'lincoln', 'helena', 'pierre', 'bismarck', 'cheyenne',
+        'salt lake city', 'santa fe', 'phoenix', 'olympia', 'salem',
+        'carson city', 'boise', 'jackson', 'montgomery', 'juneau',
+
+        # Common in legal/business docs
+        'washington dc', 'wilmington', 'dover', 'newark', 'jersey city',
+        'stamford', 'greenwich', 'pittsburgh', 'cleveland', 'cincinnati',
+        'st louis', 'providence', 'hartford', 'bridgeport', 'rochester',
+        'buffalo', 'syracuse', 'norfolk', 'newport beach', 'beverly hills'
     ]
     if any(city in name_lower for city in obvious_cities):
         return False
