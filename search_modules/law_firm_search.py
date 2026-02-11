@@ -5,80 +5,74 @@ from .company_search import get_company_filings, process_single_filing, clean_fi
 import re
 
 
-def get_most_recent_lawyer_for_company(cik, company_name, firm_name, start_date, end_date):
+def get_most_recent_lawyer_from_filing(cik, company_name, firm_name, adsh):
     """
-    For a given company, find the most recent lawyer from the specified firm.
-    Uses the same approach as Tab 1 (company search).
+    Extract lawyer from a specific filing (much faster - only 1 filing fetch).
 
     Args:
         cik: Company CIK
         company_name: Company name
         firm_name: Law firm to search for
-        start_date: Start date for filings
-        end_date: End date for filings
+        adsh: Accession number of the filing (from search results)
 
     Returns:
-        Most recent lawyer name from that firm, or None
+        Lawyer name from that firm, or None
     """
     try:
-        # Get company filings (same as Tab 1)
-        filings = get_company_filings(cik, start_date, end_date)
+        # Construct filing URL from adsh
+        if len(adsh) == 18:
+            accession_with_dashes = f"{adsh[:10]}-{adsh[10:12]}-{adsh[12:]}"
+        else:
+            accession_with_dashes = adsh
 
-        if not filings:
-            return None
+        cik_stripped = str(cik).lstrip('0')
+        adsh_clean = adsh.replace('-', '')
 
-        # Limit to most recent 10 filings (for performance)
-        filings = filings[:10]
+        # Try different URL formats
+        doc_urls = [
+            f"https://www.sec.gov/Archives/edgar/data/{cik_stripped}/{adsh_clean}/{accession_with_dashes}.htm",
+            f"https://www.sec.gov/Archives/edgar/data/{cik_stripped}/{adsh_clean}/{accession_with_dashes}-index.htm",
+        ]
 
-        # Extract lawyers from filings
-        firm_to_lawyers_all = {}
+        # Extract text from filing
+        from .company_search import extract_counsel_sections, extract_lawyers_by_regex
 
-        for filing in filings:
-            # Process filing (same as Tab 1) - but we don't have API key here
-            # So we'll need to extract without GPT assistance
+        text = None
+        for doc_url in doc_urls:
             try:
-                accession_no_dashes = filing['accession'].replace('-', '')
-
-                if filing['primary_doc']:
-                    doc_url = f"https://www.sec.gov/Archives/edgar/data/{cik}/{accession_no_dashes}/{filing['primary_doc']}"
-                else:
-                    doc_url = f"https://www.sec.gov/Archives/edgar/data/{cik}/{accession_no_dashes}/{filing['accession']}.htm"
-
-                # Extract text
-                from .company_search import extract_counsel_sections, extract_lawyers_by_regex
                 text = extract_counsel_sections(doc_url)
-
-                if text:
-                    # Extract lawyers using regex (same as Tab 1)
-                    firm_to_lawyers = extract_lawyers_by_regex(text, company_name)
-
-                    # Merge with overall results
-                    for firm, lawyers in firm_to_lawyers.items():
-                        if firm not in firm_to_lawyers_all:
-                            firm_to_lawyers_all[firm] = set()
-                        firm_to_lawyers_all[firm].update(lawyers)
+                if text and len(text) > 500:
+                    break
             except:
                 continue
 
-        # Now find lawyers from the specific firm we're searching for
+        if not text:
+            return None
+
+        # Extract lawyers using regex
+        firm_to_lawyers = extract_lawyers_by_regex(text, company_name)
+
+        if not firm_to_lawyers:
+            return None
+
+        # Find lawyers from the specific firm
         firm_normalized = clean_firm_name(firm_name).lower()
         firm_base = re.sub(r'\s+(llp|llc|p\.c\.|p\.a\.)$', '', firm_normalized, flags=re.IGNORECASE).strip()
 
-        for firm, lawyers in firm_to_lawyers_all.items():
+        for firm, lawyers in firm_to_lawyers.items():
             firm_clean = clean_firm_name(firm).lower()
             firm_clean_base = re.sub(r'\s+(llp|llc|p\.c\.|p\.a\.)$', '', firm_clean, flags=re.IGNORECASE).strip()
 
-            # Check if this is the same firm (fuzzy match)
+            # Fuzzy match
             if (firm_base in firm_clean_base or
                 firm_clean_base in firm_base or
                 firm_normalized == firm_clean):
                 if lawyers:
-                    # Return the first lawyer (alphabetically sorted)
                     return sorted(lawyers)[0]
 
         return None
 
-    except Exception as e:
+    except Exception:
         return None
 
 
@@ -155,6 +149,16 @@ def search_law_firm_for_companies(firm_name, start_date, end_date, progress_call
     if result_df.empty:
         raise ValueError(f"No companies found with tickers in stock reference file")
 
+    # Filter for companies with market cap > $500M
+    if 'Market Cap' in result_df.columns:
+        initial_count = len(result_df)
+        result_df = result_df[result_df['Market Cap'] > 500000000].copy()
+        if progress_callback:
+            progress_callback(f"Filtered to {len(result_df)} companies with market cap > $500M (from {initial_count})")
+
+    if result_df.empty:
+        raise ValueError(f"No companies found with market cap above $500M")
+
     if progress_callback:
         progress_callback(f"Adding stock loan availability data...")
 
@@ -177,38 +181,45 @@ def search_law_firm_for_companies(firm_name, start_date, end_date, progress_call
     # Add back " US Equity" suffix for Bloomberg format
     result_df['Ticker'] = result_df['Ticker_Clean'] + ' US Equity'
 
-    # Extract most recent lawyer for each company (using Tab 1's approach)
+    # Extract most recent lawyer for ALL companies
     if progress_callback:
-        progress_callback(f"Extracting most recent lawyer for each company...")
+        progress_callback(f"Extracting lawyers for all companies...")
 
-    # Build company CIK mapping from df_unique
-    company_cik_map = {}
+    # Build company filing data mapping from df_unique (includes CIK and adsh)
+    company_filing_map = {}
     for _, row in df_unique.iterrows():
         company = row['clean_company_name']
         cik = row.get('cik', '')
-        if company and cik:
-            company_cik_map[company] = str(cik).zfill(10)
+        adsh = row.get('adsh', '')
+        if company and cik and adsh:
+            company_filing_map[company] = {
+                'cik': str(cik).zfill(10),
+                'adsh': adsh
+            }
 
     # Add Most Recent Lawyer column
     result_df['Most Recent Lawyer'] = None
 
-    # Extract lawyers in parallel (limit to 5 concurrent to respect SEC)
+    # Extract lawyers in parallel (15 workers for speed)
     def extract_lawyer_for_row(row):
-        """Extract most recent lawyer for a company"""
+        """Extract lawyer from the filing we already found"""
         company = row['Company']
-        cik = company_cik_map.get(company)
+        filing_data = company_filing_map.get(company)
 
-        if not cik:
+        if not filing_data:
             return None
 
-        # Use Tab 1's approach: fetch company filings and extract lawyers
-        lawyer = get_most_recent_lawyer_for_company(
-            cik, company, firm_name, start_date, end_date
+        # Use the filing we already found from the search (much faster!)
+        lawyer = get_most_recent_lawyer_from_filing(
+            filing_data['cik'],
+            company,
+            firm_name,
+            filing_data['adsh']
         )
         return lawyer
 
-    # Process in parallel
-    with ThreadPoolExecutor(max_workers=5) as executor:
+    # Process ALL companies in parallel
+    with ThreadPoolExecutor(max_workers=15) as executor:
         futures = {executor.submit(extract_lawyer_for_row, row): idx
                    for idx, row in result_df.iterrows()}
 
@@ -226,7 +237,7 @@ def search_law_firm_for_companies(firm_name, start_date, end_date, progress_call
             except:
                 pass
 
-    # Fill None with "Not Found"
+    # Fill None with "Not Found" for all companies
     result_df['Most Recent Lawyer'] = result_df['Most Recent Lawyer'].fillna('Not Found')
 
     # Format Filing Date
