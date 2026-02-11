@@ -171,13 +171,9 @@ def search_law_firm_for_companies(firm_name, start_date, end_date, progress_call
     # Add back " US Equity" suffix for Bloomberg format
     result_df['Ticker'] = result_df['Ticker_Clean'] + ' US Equity'
 
-    # OPTIMIZATION: Only extract lawyers for top companies by market cap
-    # This dramatically speeds up the search (30+ companies instead of 100)
-    TOP_N_COMPANIES = 30  # Adjust this number as needed
-
-    # Extract most recent lawyer for top companies
+    # Extract most recent lawyer for ALL companies
     if progress_callback:
-        progress_callback(f"Extracting lawyers for top {TOP_N_COMPANIES} companies by market cap...")
+        progress_callback(f"Extracting lawyers for all companies...")
 
     # Build company filing data mapping from df_unique (includes CIK and adsh)
     company_filing_map = {}
@@ -193,13 +189,6 @@ def search_law_firm_for_companies(firm_name, start_date, end_date, progress_call
 
     # Add Most Recent Lawyer column
     result_df['Most Recent Lawyer'] = None
-
-    # Sort by market cap and only process top N
-    if 'Market Cap' in result_df.columns:
-        top_companies_idx = result_df.nlargest(TOP_N_COMPANIES, 'Market Cap').index
-    else:
-        # If no market cap, just take first N
-        top_companies_idx = result_df.head(TOP_N_COMPANIES).index
 
     # Extract lawyers in parallel (15 workers for speed)
     def extract_lawyer_for_row(row):
@@ -219,16 +208,16 @@ def search_law_firm_for_companies(firm_name, start_date, end_date, progress_call
         )
         return lawyer
 
-    # Process top companies in parallel
+    # Process ALL companies in parallel
     with ThreadPoolExecutor(max_workers=15) as executor:
-        futures = {executor.submit(extract_lawyer_for_row, result_df.loc[idx]): idx
-                   for idx in top_companies_idx}
+        futures = {executor.submit(extract_lawyer_for_row, row): idx
+                   for idx, row in result_df.iterrows()}
 
         completed = 0
         for future in as_completed(futures):
             completed += 1
-            if progress_callback and completed % 5 == 0:
-                progress_callback(f"Lawyer extraction: {completed}/{len(top_companies_idx)} companies...")
+            if progress_callback and completed % 10 == 0:
+                progress_callback(f"Lawyer extraction: {completed}/{len(result_df)} companies...")
 
             try:
                 idx = futures[future]
@@ -238,10 +227,8 @@ def search_law_firm_for_companies(firm_name, start_date, end_date, progress_call
             except:
                 pass
 
-    # Fill None with "Not Found" only for companies we tried to process
-    result_df.loc[top_companies_idx, 'Most Recent Lawyer'] = result_df.loc[top_companies_idx, 'Most Recent Lawyer'].fillna('Not Found')
-    # For companies we didn't process, use empty string
-    result_df['Most Recent Lawyer'] = result_df['Most Recent Lawyer'].fillna('')
+    # Fill None with "Not Found" for all companies
+    result_df['Most Recent Lawyer'] = result_df['Most Recent Lawyer'].fillna('Not Found')
 
     # Format Filing Date
     result_df['Filing Date'] = pd.to_datetime(result_df['Filing Date']).dt.strftime('%Y-%m-%d')
