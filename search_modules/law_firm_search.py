@@ -49,21 +49,38 @@ def extract_most_recent_lawyer(company_name, filing_date, text, firm_name):
     try:
         firm_to_lawyers = extract_lawyers_by_regex(text, company_name)
 
-        # Find lawyers associated with this specific firm
+        if not firm_to_lawyers:
+            return None
+
+        # First, try to find lawyers associated with this specific firm
         # Normalize firm name for comparison
         firm_normalized = clean_firm_name(firm_name).lower()
 
+        # Remove common suffixes for better matching
+        firm_base = re.sub(r'\s+(llp|llc|p\.c\.|p\.a\.)$', '', firm_normalized, flags=re.IGNORECASE).strip()
+
         for firm, lawyers in firm_to_lawyers.items():
             firm_clean = clean_firm_name(firm).lower()
-            # Check if this is the same firm (fuzzy match on key words)
-            if firm_normalized in firm_clean or firm_clean in firm_normalized:
+            firm_clean_base = re.sub(r'\s+(llp|llc|p\.c\.|p\.a\.)$', '', firm_clean, flags=re.IGNORECASE).strip()
+
+            # Check if this is the same firm (fuzzy match)
+            if (firm_base in firm_clean_base or
+                firm_clean_base in firm_base or
+                firm_normalized == firm_clean):
                 if lawyers:
                     # Return the first lawyer (alphabetically sorted)
-                    return sorted(lawyers)[0]
+                    sorted_lawyers = sorted(lawyers)
+                    return sorted_lawyers[0]
 
-        # If no exact firm match, return None
+        # If no exact firm match, just return ANY lawyer found
+        # (Since we searched for this firm, any lawyer found is likely from this firm)
+        for firm, lawyers in firm_to_lawyers.items():
+            if lawyers:
+                sorted_lawyers = sorted(lawyers)
+                return sorted_lawyers[0]
+
         return None
-    except Exception:
+    except Exception as e:
         return None
 
 
@@ -167,59 +184,64 @@ def search_law_firm_for_companies(firm_name, start_date, end_date, progress_call
     if progress_callback:
         progress_callback(f"Extracting most recent lawyer for each company...")
 
-    # Build a mapping of company -> (cik, accession, adsh) for the most recent filing
-    filing_data_map = {}
-    for _, row in df_unique.iterrows():
-        clean_name = row['clean_company_name']
-        cik = row.get('cik', '')
-        accession = row.get('accession_number', '')
-        adsh = row.get('adsh', '')
-
-        if clean_name and (cik or adsh):
-            filing_data_map[clean_name] = {
-                'cik': str(cik).zfill(10) if cik else '',
-                'accession': accession,
-                'adsh': adsh
-            }
-
     # Add Most Recent Lawyer column
     result_df['Most Recent Lawyer'] = None
 
-    # Extract lawyers in parallel (limit to 10 concurrent requests to avoid overwhelming SEC)
+    # Extract lawyers in parallel (limit to 5 concurrent requests to avoid overwhelming SEC)
     def extract_lawyer_for_company(row):
         """Extract lawyer for a single company"""
         company = row['Company']
-        filing_data = filing_data_map.get(company)
-
-        if not filing_data or not filing_data.get('cik'):
-            return None
 
         try:
-            cik = filing_data['cik']
-            adsh = filing_data['adsh']
+            cik = row.get('cik', '')
+            adsh = row.get('adsh', '')
 
-            # Construct filing URL (try primary document first)
-            if adsh:
-                # Use adsh (accession without dashes) to construct URL
-                doc_url = f"https://www.sec.gov/cgi-bin/viewer?action=view&cik={cik}&accession_number={adsh}&xbrl_type=v"
-            else:
+            # Skip if no valid data
+            if not cik or not adsh:
                 return None
 
-            # Fetch filing text with retries
+            # Format CIK (remove leading zeros for URL)
+            cik_stripped = str(cik).lstrip('0') if cik else ''
+
+            # adsh is already the accession number without dashes
+            # Construct accession with dashes: NNNNNNNNNN-NN-NNNNNN
+            if len(adsh) == 18:
+                accession_with_dashes = f"{adsh[:10]}-{adsh[10:12]}-{adsh[12:]}"
+            else:
+                accession_with_dashes = adsh
+
+            # Try multiple URL formats
+            doc_urls = [
+                # Format 1: Standard filing document
+                f"https://www.sec.gov/Archives/edgar/data/{cik_stripped}/{adsh}/{accession_with_dashes}.htm",
+                # Format 2: Index page
+                f"https://www.sec.gov/Archives/edgar/data/{cik_stripped}/{adsh}/{accession_with_dashes}-index.htm",
+                # Format 3: Alternative format
+                f"https://www.sec.gov/cgi-bin/viewer?action=view&cik={cik}&accession_number={accession_with_dashes}&xbrl_type=v",
+            ]
+
+            # Try each URL
             from .company_search import extract_counsel_sections
-            text = extract_counsel_sections(doc_url)
+            text = None
+            for doc_url in doc_urls:
+                try:
+                    text = extract_counsel_sections(doc_url)
+                    if text and len(text) > 500:  # Valid text
+                        break
+                except:
+                    continue
 
             if text:
                 # Extract lawyer from this filing
                 lawyer = extract_most_recent_lawyer(company, row['Filing Date'], text, firm_name)
                 return lawyer
-        except Exception:
+        except Exception as e:
             pass
 
         return None
 
-    # Process companies in parallel
-    with ThreadPoolExecutor(max_workers=10) as executor:
+    # Process companies in parallel (5 workers to respect SEC rate limits)
+    with ThreadPoolExecutor(max_workers=5) as executor:
         futures = {executor.submit(extract_lawyer_for_company, row): idx for idx, row in result_df.iterrows()}
 
         completed = 0
