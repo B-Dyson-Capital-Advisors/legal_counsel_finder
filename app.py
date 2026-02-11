@@ -255,40 +255,8 @@ if page == "Legal Counsel Finder":
             else:
                 st.success(f"Found {len(result_df)} results")
 
-            # Configure column formatting (keeps numeric types for proper sorting)
-            column_config = {}
-            if 'Market Cap' in result_df.columns:
-                column_config['Market Cap'] = st.column_config.NumberColumn(
-                    'Market Cap',
-                    format='%,.0f'
-                )
-            if '52wk High' in result_df.columns:
-                column_config['52wk High'] = st.column_config.NumberColumn(
-                    '52wk High',
-                    format='%.2f'
-                )
-            if '52wk Low' in result_df.columns:
-                column_config['52wk Low'] = st.column_config.NumberColumn(
-                    '52wk Low',
-                    format='%.2f'
-                )
-            if 'Available' in result_df.columns:
-                column_config['Available'] = st.column_config.NumberColumn(
-                    'Available',
-                    format='%,.0f'
-                )
-            if 'Rebate Rate (%)' in result_df.columns:
-                column_config['Rebate Rate (%)'] = st.column_config.NumberColumn(
-                    'Rebate Rate (%)',
-                    format='%.2f'
-                )
-            if 'Fee Rate (%)' in result_df.columns:
-                column_config['Fee Rate (%)'] = st.column_config.NumberColumn(
-                    'Fee Rate (%)',
-                    format='%.2f'
-                )
-
-            st.dataframe(result_df, use_container_width=True, hide_index=True, column_config=column_config)
+            # Keep numeric types for proper sorting (no format config to avoid errors)
+            st.dataframe(result_df, use_container_width=True, hide_index=True)
 
             csv = result_df.to_csv(index=False)
             st.download_button(
@@ -407,40 +375,8 @@ if page == "Legal Counsel Finder":
             else:
                 st.success(f"Found {len(result_df)} results")
 
-            # Configure column formatting (keeps numeric types for proper sorting)
-            column_config = {}
-            if 'Market Cap' in result_df.columns:
-                column_config['Market Cap'] = st.column_config.NumberColumn(
-                    'Market Cap',
-                    format='%,.0f'
-                )
-            if '52wk High' in result_df.columns:
-                column_config['52wk High'] = st.column_config.NumberColumn(
-                    '52wk High',
-                    format='%.2f'
-                )
-            if '52wk Low' in result_df.columns:
-                column_config['52wk Low'] = st.column_config.NumberColumn(
-                    '52wk Low',
-                    format='%.2f'
-                )
-            if 'Available' in result_df.columns:
-                column_config['Available'] = st.column_config.NumberColumn(
-                    'Available',
-                    format='%,.0f'
-                )
-            if 'Rebate Rate (%)' in result_df.columns:
-                column_config['Rebate Rate (%)'] = st.column_config.NumberColumn(
-                    'Rebate Rate (%)',
-                    format='%.2f'
-                )
-            if 'Fee Rate (%)' in result_df.columns:
-                column_config['Fee Rate (%)'] = st.column_config.NumberColumn(
-                    'Fee Rate (%)',
-                    format='%.2f'
-                )
-
-            st.dataframe(result_df, use_container_width=True, hide_index=True, column_config=column_config)
+            # Keep numeric types for proper sorting (no format config to avoid errors)
+            st.dataframe(result_df, use_container_width=True, hide_index=True)
 
             csv = result_df.to_csv(index=False)
             st.download_button(
@@ -577,40 +513,8 @@ if page == "Legal Counsel Finder":
             else:
                 st.success(f"Found {len(result_df)} results")
 
-            # Configure column formatting (keeps numeric types for proper sorting)
-            column_config = {}
-            if 'Market Cap' in result_df.columns:
-                column_config['Market Cap'] = st.column_config.NumberColumn(
-                    'Market Cap',
-                    format='%,.0f'
-                )
-            if '52wk High' in result_df.columns:
-                column_config['52wk High'] = st.column_config.NumberColumn(
-                    '52wk High',
-                    format='%.2f'
-                )
-            if '52wk Low' in result_df.columns:
-                column_config['52wk Low'] = st.column_config.NumberColumn(
-                    '52wk Low',
-                    format='%.2f'
-                )
-            if 'Available' in result_df.columns:
-                column_config['Available'] = st.column_config.NumberColumn(
-                    'Available',
-                    format='%,.0f'
-                )
-            if 'Rebate Rate (%)' in result_df.columns:
-                column_config['Rebate Rate (%)'] = st.column_config.NumberColumn(
-                    'Rebate Rate (%)',
-                    format='%.2f'
-                )
-            if 'Fee Rate (%)' in result_df.columns:
-                column_config['Fee Rate (%)'] = st.column_config.NumberColumn(
-                    'Fee Rate (%)',
-                    format='%.2f'
-                )
-
-            st.dataframe(result_df, use_container_width=True, hide_index=True, column_config=column_config)
+            # Keep numeric types for proper sorting (no format config to avoid errors)
+            st.dataframe(result_df, use_container_width=True, hide_index=True)
 
             csv = result_df.to_csv(index=False)
             st.download_button(

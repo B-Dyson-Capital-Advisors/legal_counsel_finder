@@ -150,6 +150,15 @@ def search_law_firm_for_companies(firm_name, start_date, end_date, progress_call
     if result_df.empty:
         raise ValueError(f"No companies found with tickers in stock reference file")
 
+    # Debug: Check if cik and adsh are still present
+    if progress_callback:
+        has_cik = 'cik' in result_df.columns
+        has_adsh = 'adsh' in result_df.columns
+        progress_callback(f"Debug: cik column present: {has_cik}, adsh column present: {has_adsh}")
+        if has_cik:
+            non_null_cik = result_df['cik'].notna().sum()
+            progress_callback(f"Debug: Non-null CIK values: {non_null_cik}/{len(result_df)}")
+
     # IMPORTANT: Extract lawyers BEFORE filtering by market cap
     # This preserves lawyer info even if their most recent client is < $500M
     if progress_callback:
@@ -176,6 +185,7 @@ def search_law_firm_for_companies(firm_name, start_date, end_date, progress_call
 
     # Process ALL companies in parallel BEFORE filtering
     company_to_lawyer = {}
+    failed_extractions = 0
     with ThreadPoolExecutor(max_workers=15) as executor:
         futures = [executor.submit(extract_lawyer_for_row, row) for _, row in result_df.iterrows()]
 
@@ -189,8 +199,14 @@ def search_law_firm_for_companies(firm_name, start_date, end_date, progress_call
                 company, lawyer = future.result()
                 if lawyer:
                     company_to_lawyer[company] = lawyer
-            except:
+                else:
+                    failed_extractions += 1
+            except Exception as e:
+                failed_extractions += 1
                 pass
+
+    if progress_callback:
+        progress_callback(f"Lawyer extraction complete: {len(company_to_lawyer)} found, {failed_extractions} failed")
 
     # NOW filter for companies with market cap > $500M
     if 'Market Cap' in result_df.columns:
