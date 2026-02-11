@@ -153,7 +153,7 @@ def search_law_firm_for_companies(firm_name, start_date, end_date, progress_call
     # FAILSAFE: If cik/adsh columns missing after merge, rebuild mapping from df_unique
     if 'cik' not in result_df.columns or 'adsh' not in result_df.columns:
         if progress_callback:
-            progress_callback(f"WARNING: cik/adsh lost during merge - rebuilding from original data...")
+            progress_callback(f"⚠️ WARNING: cik/adsh lost during merge - rebuilding from original data...")
 
         # Build company filing data mapping from df_unique (includes CIK and adsh)
         company_filing_map = {}
@@ -168,12 +168,24 @@ def search_law_firm_for_companies(firm_name, start_date, end_date, progress_call
                 }
 
         if progress_callback:
-            progress_callback(f"Rebuilt filing map for {len(company_filing_map)} companies")
+            progress_callback(f"✓ Rebuilt filing map for {len(company_filing_map)} companies")
+            # Show sample of what we have
+            sample_companies = list(company_filing_map.keys())[:3]
+            for comp in sample_companies:
+                data = company_filing_map[comp]
+                progress_callback(f"  Sample: {comp} → CIK={data['cik']}, adsh={data['adsh'][:20]}...")
     else:
         company_filing_map = None
         if progress_callback:
             non_null_cik = result_df['cik'].notna().sum()
-            progress_callback(f"CIK/adsh columns OK: {non_null_cik}/{len(result_df)} companies have CIK")
+            non_null_adsh = result_df['adsh'].notna().sum()
+            progress_callback(f"✓ CIK/adsh columns present: {non_null_cik}/{len(result_df)} CIKs, {non_null_adsh}/{len(result_df)} adshs")
+
+            # Show sample of first 3 rows
+            for i, row in result_df.head(3).iterrows():
+                cik_val = row.get('cik', 'MISSING')
+                adsh_val = row.get('adsh', 'MISSING')
+                progress_callback(f"  Sample row {i}: {row['Company']} → CIK={cik_val}, adsh={str(adsh_val)[:20] if pd.notna(adsh_val) else 'NULL'}...")
 
     # IMPORTANT: Extract lawyers BEFORE filtering by market cap
     # This preserves lawyer info even if their most recent client is < $500M
@@ -211,6 +223,7 @@ def search_law_firm_for_companies(firm_name, start_date, end_date, progress_call
     # Process ALL companies in parallel BEFORE filtering
     company_to_lawyer = {}
     failed_extractions = 0
+    error_samples = []  # Store first 3 errors for debugging
     with ThreadPoolExecutor(max_workers=15) as executor:
         futures = [executor.submit(extract_lawyer_for_row, row) for _, row in result_df.iterrows()]
 
@@ -228,10 +241,15 @@ def search_law_firm_for_companies(firm_name, start_date, end_date, progress_call
                     failed_extractions += 1
             except Exception as e:
                 failed_extractions += 1
-                pass
+                if len(error_samples) < 3:
+                    error_samples.append(str(e))
 
     if progress_callback:
-        progress_callback(f"Lawyer extraction complete: {len(company_to_lawyer)} found, {failed_extractions} failed")
+        progress_callback(f"✓ Lawyer extraction complete: {len(company_to_lawyer)} found, {failed_extractions} failed")
+        if error_samples:
+            progress_callback(f"⚠️ Sample errors (first 3):")
+            for i, err in enumerate(error_samples, 1):
+                progress_callback(f"  Error {i}: {err[:100]}")
 
     # NOW filter for companies with market cap > $500M
     if 'Market Cap' in result_df.columns:
