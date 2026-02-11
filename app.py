@@ -363,7 +363,7 @@ if page == "Legal Counsel Finder":
 
         # Display stored results if they exist
         if st.session_state.lawyer_results is not None:
-            result_df = st.session_state.lawyer_results['df']
+            result_df = st.session_state.lawyer_results['df'].copy()
             search_start = st.session_state.lawyer_results.get('search_start')
             search_end = st.session_state.lawyer_results.get('search_end')
 
@@ -375,7 +375,12 @@ if page == "Legal Counsel Finder":
             else:
                 st.success(f"Found {len(result_df)} results")
 
-            # Keep numeric types for proper sorting (no format config to avoid errors)
+            # Format Market Cap with thousand separators for readability
+            if 'Market Cap' in result_df.columns:
+                result_df['Market Cap'] = result_df['Market Cap'].apply(
+                    lambda x: f"${x:,.2f}" if pd.notna(x) else "N/A"
+                )
+
             st.dataframe(result_df, use_container_width=True, hide_index=True)
 
             csv = result_df.to_csv(index=False)
