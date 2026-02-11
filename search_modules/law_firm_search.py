@@ -149,7 +149,60 @@ def search_law_firm_for_companies(firm_name, start_date, end_date, progress_call
     if result_df.empty:
         raise ValueError(f"No companies found with tickers in stock reference file")
 
-    # Filter for companies with market cap > $500M
+    # IMPORTANT: Extract lawyers BEFORE filtering by market cap
+    # This preserves lawyer info even if their most recent client is < $500M
+    if progress_callback:
+        progress_callback(f"Extracting lawyers from all companies (before market cap filter)...")
+
+    # Build company filing data mapping from df_unique (includes CIK and adsh)
+    company_filing_map = {}
+    for _, row in df_unique.iterrows():
+        company = row['clean_company_name']
+        cik = row.get('cik', '')
+        adsh = row.get('adsh', '')
+        if company and cik and adsh:
+            company_filing_map[company] = {
+                'cik': str(cik).zfill(10),
+                'adsh': adsh
+            }
+
+    # Extract lawyers in parallel (15 workers for speed) - BEFORE market cap filter
+    def extract_lawyer_for_row(row):
+        """Extract lawyer from the filing we already found"""
+        company = row['Company']
+        filing_data = company_filing_map.get(company)
+
+        if not filing_data:
+            return (company, None)
+
+        # Use the filing we already found from the search (much faster!)
+        lawyer = get_most_recent_lawyer_from_filing(
+            filing_data['cik'],
+            company,
+            firm_name,
+            filing_data['adsh']
+        )
+        return (company, lawyer)
+
+    # Process ALL companies in parallel BEFORE filtering
+    company_to_lawyer = {}
+    with ThreadPoolExecutor(max_workers=15) as executor:
+        futures = [executor.submit(extract_lawyer_for_row, row) for _, row in result_df.iterrows()]
+
+        completed = 0
+        for future in as_completed(futures):
+            completed += 1
+            if progress_callback and completed % 10 == 0:
+                progress_callback(f"Lawyer extraction: {completed}/{len(result_df)} companies...")
+
+            try:
+                company, lawyer = future.result()
+                if lawyer:
+                    company_to_lawyer[company] = lawyer
+            except:
+                pass
+
+    # NOW filter for companies with market cap > $500M
     if 'Market Cap' in result_df.columns:
         initial_count = len(result_df)
         result_df = result_df[result_df['Market Cap'] > 500000000].copy()
@@ -181,64 +234,8 @@ def search_law_firm_for_companies(firm_name, start_date, end_date, progress_call
     # Add back " US Equity" suffix for Bloomberg format
     result_df['Ticker'] = result_df['Ticker_Clean'] + ' US Equity'
 
-    # Extract most recent lawyer for ALL companies
-    if progress_callback:
-        progress_callback(f"Extracting lawyers for all companies...")
-
-    # Build company filing data mapping from df_unique (includes CIK and adsh)
-    company_filing_map = {}
-    for _, row in df_unique.iterrows():
-        company = row['clean_company_name']
-        cik = row.get('cik', '')
-        adsh = row.get('adsh', '')
-        if company and cik and adsh:
-            company_filing_map[company] = {
-                'cik': str(cik).zfill(10),
-                'adsh': adsh
-            }
-
-    # Add Most Recent Lawyer column
-    result_df['Most Recent Lawyer'] = None
-
-    # Extract lawyers in parallel (15 workers for speed)
-    def extract_lawyer_for_row(row):
-        """Extract lawyer from the filing we already found"""
-        company = row['Company']
-        filing_data = company_filing_map.get(company)
-
-        if not filing_data:
-            return None
-
-        # Use the filing we already found from the search (much faster!)
-        lawyer = get_most_recent_lawyer_from_filing(
-            filing_data['cik'],
-            company,
-            firm_name,
-            filing_data['adsh']
-        )
-        return lawyer
-
-    # Process ALL companies in parallel
-    with ThreadPoolExecutor(max_workers=15) as executor:
-        futures = {executor.submit(extract_lawyer_for_row, row): idx
-                   for idx, row in result_df.iterrows()}
-
-        completed = 0
-        for future in as_completed(futures):
-            completed += 1
-            if progress_callback and completed % 10 == 0:
-                progress_callback(f"Lawyer extraction: {completed}/{len(result_df)} companies...")
-
-            try:
-                idx = futures[future]
-                lawyer = future.result()
-                if lawyer:
-                    result_df.at[idx, 'Most Recent Lawyer'] = lawyer
-            except:
-                pass
-
-    # Fill None with "Not Found" for all companies
-    result_df['Most Recent Lawyer'] = result_df['Most Recent Lawyer'].fillna('Not Found')
+    # Map lawyers back to filtered companies (lawyers were extracted before market cap filter)
+    result_df['Most Recent Lawyer'] = result_df['Company'].map(company_to_lawyer).fillna('Not Found')
 
     # Format Filing Date
     result_df['Filing Date'] = pd.to_datetime(result_df['Filing Date']).dt.strftime('%Y-%m-%d')
