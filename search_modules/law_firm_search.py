@@ -150,14 +150,30 @@ def search_law_firm_for_companies(firm_name, start_date, end_date, progress_call
     if result_df.empty:
         raise ValueError(f"No companies found with tickers in stock reference file")
 
-    # Debug: Check if cik and adsh are still present
-    if progress_callback:
-        has_cik = 'cik' in result_df.columns
-        has_adsh = 'adsh' in result_df.columns
-        progress_callback(f"Debug: cik column present: {has_cik}, adsh column present: {has_adsh}")
-        if has_cik:
+    # FAILSAFE: If cik/adsh columns missing after merge, rebuild mapping from df_unique
+    if 'cik' not in result_df.columns or 'adsh' not in result_df.columns:
+        if progress_callback:
+            progress_callback(f"WARNING: cik/adsh lost during merge - rebuilding from original data...")
+
+        # Build company filing data mapping from df_unique (includes CIK and adsh)
+        company_filing_map = {}
+        for _, row in df_unique.iterrows():
+            company = row['clean_company_name']
+            cik = row.get('cik', '')
+            adsh = row.get('adsh', '')
+            if company and cik and adsh:
+                company_filing_map[company] = {
+                    'cik': str(cik).zfill(10),
+                    'adsh': adsh
+                }
+
+        if progress_callback:
+            progress_callback(f"Rebuilt filing map for {len(company_filing_map)} companies")
+    else:
+        company_filing_map = None
+        if progress_callback:
             non_null_cik = result_df['cik'].notna().sum()
-            progress_callback(f"Debug: Non-null CIK values: {non_null_cik}/{len(result_df)}")
+            progress_callback(f"CIK/adsh columns OK: {non_null_cik}/{len(result_df)} companies have CIK")
 
     # IMPORTANT: Extract lawyers BEFORE filtering by market cap
     # This preserves lawyer info even if their most recent client is < $500M
@@ -168,8 +184,17 @@ def search_law_firm_for_companies(firm_name, start_date, end_date, progress_call
     def extract_lawyer_for_row(row):
         """Extract lawyer from the filing we already found"""
         company = row['Company']
-        cik = str(row.get('cik', '')).zfill(10) if row.get('cik') else None
-        adsh = row.get('adsh')
+
+        # Try to get CIK/adsh from row first, fallback to map if not available
+        if company_filing_map:
+            filing_data = company_filing_map.get(company)
+            if not filing_data:
+                return (company, None)
+            cik = filing_data['cik']
+            adsh = filing_data['adsh']
+        else:
+            cik = str(row.get('cik', '')).zfill(10) if pd.notna(row.get('cik')) else None
+            adsh = row.get('adsh') if pd.notna(row.get('adsh')) else None
 
         if not cik or not adsh:
             return (company, None)
