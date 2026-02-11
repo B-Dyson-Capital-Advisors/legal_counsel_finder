@@ -283,8 +283,8 @@ def is_not_law_firm(firm_name, company_name=None):
     if any(firm_lower.startswith(prefix) for prefix in document_prefixes):
         return True
 
-    # Filter garbage names
-    garbage_names = ['law_firms', 'lawyers', 'law firm', 'example', 'firm name', 'another']
+    # Filter garbage names and placeholders
+    garbage_names = ['law_firms', 'lawyers', 'law firm', 'example', 'firm name', 'another', 'company,']
     if any(garbage in firm_lower for garbage in garbage_names):
         return True
 
