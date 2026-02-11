@@ -132,8 +132,9 @@ def search_law_firm_for_companies(firm_name, start_date, end_date, progress_call
     from .stock_reference import filter_and_enrich_tickers
     from .stock_loan import fetch_shortstock_data
 
-    result_df = df_unique[['clean_company_name', 'ticker', 'filing_date']].copy()
-    result_df.columns = ['Company', 'Ticker', 'Filing Date']
+    # Include CIK and adsh for lawyer extraction
+    result_df = df_unique[['clean_company_name', 'ticker', 'filing_date', 'cik', 'adsh']].copy()
+    result_df.columns = ['Company', 'Ticker', 'Filing Date', 'cik', 'adsh']
 
     result_df = result_df[result_df['Ticker'] != ""].copy()
 
@@ -154,33 +155,22 @@ def search_law_firm_for_companies(firm_name, start_date, end_date, progress_call
     if progress_callback:
         progress_callback(f"Extracting lawyers from all companies (before market cap filter)...")
 
-    # Build company filing data mapping from df_unique (includes CIK and adsh)
-    company_filing_map = {}
-    for _, row in df_unique.iterrows():
-        company = row['clean_company_name']
-        cik = row.get('cik', '')
-        adsh = row.get('adsh', '')
-        if company and cik and adsh:
-            company_filing_map[company] = {
-                'cik': str(cik).zfill(10),
-                'adsh': adsh
-            }
-
     # Extract lawyers in parallel (15 workers for speed) - BEFORE market cap filter
     def extract_lawyer_for_row(row):
         """Extract lawyer from the filing we already found"""
         company = row['Company']
-        filing_data = company_filing_map.get(company)
+        cik = str(row.get('cik', '')).zfill(10) if row.get('cik') else None
+        adsh = row.get('adsh')
 
-        if not filing_data:
+        if not cik or not adsh:
             return (company, None)
 
         # Use the filing we already found from the search (much faster!)
         lawyer = get_most_recent_lawyer_from_filing(
-            filing_data['cik'],
+            cik,
             company,
             firm_name,
-            filing_data['adsh']
+            adsh
         )
         return (company, lawyer)
 
