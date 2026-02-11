@@ -57,7 +57,7 @@ def fetch_shortstock_data():
 
 def fetch_shortstock_with_market_cap():
     """
-    Fetch stock loan data and merge with reference file to add market cap
+    Fetch stock loan data and merge with reference file to add market cap, 52wk high/low
     Only returns stocks that appear in the reference file
     """
     try:
@@ -74,9 +74,16 @@ def fetch_shortstock_with_market_cap():
         # Clean symbols for matching
         stock_loan_df['Symbol_Clean'] = stock_loan_df['Symbol'].str.strip().str.upper()
 
-        # Filter to only include stocks in reference file and add market cap
+        # Determine which columns to merge (adapt to available columns in reference)
+        merge_columns = ['Symbol', 'Market Cap']
+        if '52wk High' in reference_df.columns:
+            merge_columns.append('52wk High')
+        if '52wk Low' in reference_df.columns:
+            merge_columns.append('52wk Low')
+
+        # Filter to only include stocks in reference file and add market cap + 52wk data
         enriched_df = stock_loan_df.merge(
-            reference_df[['Symbol', 'Market Cap']],
+            reference_df[merge_columns],
             left_on='Symbol_Clean',
             right_on='Symbol',
             how='inner',  # Only keep stocks in reference file
@@ -86,9 +93,14 @@ def fetch_shortstock_with_market_cap():
         # Drop temporary/duplicate columns
         enriched_df = enriched_df.drop(['Symbol_Clean', 'Symbol_ref'], axis=1, errors='ignore')
 
-        # Reorder columns: Date, Time, Symbol, Currency, Name, Market Cap, Stock Loan Data
-        column_order = ['Date', 'Time', 'Symbol', 'Currency', 'Name', 'Market Cap',
-                       'Rebate Rate (%)', 'Fee Rate (%)', 'Available']
+        # Reorder columns: Date, Time, Symbol, Currency, Name, Market Cap, 52wk High/Low, Stock Loan Data
+        column_order = ['Date', 'Time', 'Symbol', 'Currency', 'Name', 'Market Cap']
+        if '52wk High' in enriched_df.columns:
+            column_order.append('52wk High')
+        if '52wk Low' in enriched_df.columns:
+            column_order.append('52wk Low')
+        column_order.extend(['Rebate Rate (%)', 'Fee Rate (%)', 'Available'])
+
         enriched_df = enriched_df[column_order]
 
         return enriched_df

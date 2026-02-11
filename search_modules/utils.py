@@ -302,10 +302,19 @@ def search_entity_for_companies(entity_name, entity_type, start_date, end_date, 
     # Format Filing Date
     result_df['Filing Date'] = pd.to_datetime(result_df['Filing Date']).dt.strftime('%Y-%m-%d')
 
-    # Reorder columns: Company, Ticker, Market Cap, Stock Loan columns, Filing Date
+    # Reorder columns: Company, Ticker, Market Cap, 52wk High/Low, Stock Loan columns, Filing Date
     final_columns = ['Company', 'Ticker', 'Market Cap']
+
+    # Add 52wk High/Low if available
+    if '52wk High' in result_df.columns:
+        final_columns.append('52wk High')
+    if '52wk Low' in result_df.columns:
+        final_columns.append('52wk Low')
+
+    # Add stock loan columns if available
     if 'Rebate Rate (%)' in result_df.columns:
         final_columns.extend(['Rebate Rate (%)', 'Fee Rate (%)', 'Available'])
+
     final_columns.append('Filing Date')
 
     result_df = result_df[final_columns]

@@ -259,6 +259,10 @@ if page == "Legal Counsel Finder":
             display_df = result_df.copy()
             if 'Market Cap' in display_df.columns:
                 display_df['Market Cap'] = display_df['Market Cap'].apply(lambda x: f'{x:,.0f}' if pd.notna(x) else '')
+            if '52wk High' in display_df.columns:
+                display_df['52wk High'] = display_df['52wk High'].apply(lambda x: f'{x:.2f}' if pd.notna(x) else '')
+            if '52wk Low' in display_df.columns:
+                display_df['52wk Low'] = display_df['52wk Low'].apply(lambda x: f'{x:.2f}' if pd.notna(x) else '')
             if 'Available' in display_df.columns:
                 display_df['Available'] = display_df['Available'].apply(lambda x: f'{x:,.0f}' if pd.notna(x) else '')
             if 'Rebate Rate (%)' in display_df.columns:
@@ -389,6 +393,10 @@ if page == "Legal Counsel Finder":
             display_df = result_df.copy()
             if 'Market Cap' in display_df.columns:
                 display_df['Market Cap'] = display_df['Market Cap'].apply(lambda x: f'{x:,.0f}' if pd.notna(x) else '')
+            if '52wk High' in display_df.columns:
+                display_df['52wk High'] = display_df['52wk High'].apply(lambda x: f'{x:.2f}' if pd.notna(x) else '')
+            if '52wk Low' in display_df.columns:
+                display_df['52wk Low'] = display_df['52wk Low'].apply(lambda x: f'{x:.2f}' if pd.notna(x) else '')
             if 'Available' in display_df.columns:
                 display_df['Available'] = display_df['Available'].apply(lambda x: f'{x:,.0f}' if pd.notna(x) else '')
             if 'Rebate Rate (%)' in display_df.columns:
@@ -537,6 +545,10 @@ if page == "Legal Counsel Finder":
             display_df = result_df.copy()
             if 'Market Cap' in display_df.columns:
                 display_df['Market Cap'] = display_df['Market Cap'].apply(lambda x: f'{x:,.0f}' if pd.notna(x) else '')
+            if '52wk High' in display_df.columns:
+                display_df['52wk High'] = display_df['52wk High'].apply(lambda x: f'{x:.2f}' if pd.notna(x) else '')
+            if '52wk Low' in display_df.columns:
+                display_df['52wk Low'] = display_df['52wk Low'].apply(lambda x: f'{x:.2f}' if pd.notna(x) else '')
             if 'Available' in display_df.columns:
                 display_df['Available'] = display_df['Available'].apply(lambda x: f'{x:,.0f}' if pd.notna(x) else '')
             if 'Rebate Rate (%)' in display_df.columns:
@@ -596,6 +608,10 @@ elif page == "Stock Loan Availability":
         display_df = result_df.copy()
         if 'Market Cap' in display_df.columns:
             display_df['Market Cap'] = display_df['Market Cap'].apply(lambda x: f'{x:,.0f}' if pd.notna(x) else '')
+        if '52wk High' in display_df.columns:
+            display_df['52wk High'] = display_df['52wk High'].apply(lambda x: f'{x:.2f}' if pd.notna(x) else '')
+        if '52wk Low' in display_df.columns:
+            display_df['52wk Low'] = display_df['52wk Low'].apply(lambda x: f'{x:.2f}' if pd.notna(x) else '')
         if 'Available' in display_df.columns:
             display_df['Available'] = display_df['Available'].apply(lambda x: f'{x:,.0f}' if pd.notna(x) else '')
         if 'Rebate Rate (%)' in display_df.columns:
