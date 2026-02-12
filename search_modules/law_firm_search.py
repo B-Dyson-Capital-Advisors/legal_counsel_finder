@@ -46,20 +46,34 @@ def get_most_recent_lawyer_from_filing(cik, company_name, firm_name, adsh, debug
 
         text = None
         successful_url = None
-        for doc_url in doc_urls:
+        url_diagnostics = []
+
+        # Try each URL and collect diagnostics
+        for i, doc_url in enumerate(doc_urls, 1):
             try:
-                text = extract_counsel_sections(doc_url)
-                if text and len(text) > 500:
-                    successful_url = doc_url
-                    break
+                # First check if URL is accessible
+                import requests
+                headers = {"User-Agent": "Company contact@email.com"}
+                response = requests.get(doc_url, headers=headers, timeout=20)
+                status = response.status_code
+                text_len = len(response.text) if response.text else 0
+
+                url_diagnostics.append(f"URL{i}: HTTP {status}, {text_len} chars")
+
+                if status == 200 and text_len >= 5000:
+                    text = extract_counsel_sections(doc_url)
+                    if text and len(text) > 500:
+                        successful_url = doc_url
+                        break
+
             except Exception as e:
-                if debug and len(_debug_failures) < _debug_limit:
-                    _debug_failures.append(f"{company_name}: URL failed - {doc_url[:80]}... Error: {str(e)[:50]}")
+                url_diagnostics.append(f"URL{i}: {type(e).__name__}: {str(e)[:50]}")
                 continue
 
         if not text:
             if debug and len(_debug_failures) < _debug_limit:
-                _debug_failures.append(f"{company_name}: No text extracted from any URL (tried {len(doc_urls)} URLs)")
+                diagnostic_str = " | ".join(url_diagnostics[:2])  # Show first 2 URL results
+                _debug_failures.append(f"{company_name}: {diagnostic_str}")
             return None
 
         # Extract lawyers using regex
