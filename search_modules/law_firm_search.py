@@ -81,7 +81,9 @@ def get_most_recent_lawyer_from_filing(cik, company_name, firm_name, adsh, debug
 
         if not firm_to_lawyers:
             if debug and len(_debug_failures) < _debug_limit:
-                _debug_failures.append(f"{company_name}: No lawyers found in text (text length: {len(text)})")
+                # Show a sample of the text to understand why regex isn't matching
+                text_sample = text[:400].replace('\n', ' ')[:250]
+                _debug_failures.append(f"{company_name}: No lawyers in text (len={len(text)}). Sample: {text_sample}...")
             return None
 
         # Find lawyers from the specific firm
