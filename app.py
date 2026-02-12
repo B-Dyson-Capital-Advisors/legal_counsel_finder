@@ -384,7 +384,7 @@ if page == "Legal Counsel Finder":
             if 'Market Cap' in result_df.columns:
                 column_config['Market Cap'] = st.column_config.NumberColumn(
                     'Market Cap',
-                    format="$%,.2f"
+                    format="dollar"
                 )
 
             st.dataframe(result_df, use_container_width=True, hide_index=True, column_config=column_config)
@@ -529,7 +529,7 @@ if page == "Legal Counsel Finder":
             if 'Market Cap' in result_df.columns:
                 column_config['Market Cap'] = st.column_config.NumberColumn(
                     'Market Cap',
-                    format="$%,.2f"
+                    format="dollar"
                 )
 
             st.dataframe(result_df, use_container_width=True, hide_index=True, column_config=column_config)
@@ -584,17 +584,17 @@ elif page == "Stock Loan Availability":
         display_df = result_df.copy()
         column_config = {}
         if 'Market Cap' in display_df.columns:
-            column_config['Market Cap'] = st.column_config.NumberColumn('Market Cap', format="$%,.0f")
+            column_config['Market Cap'] = st.column_config.NumberColumn('Market Cap', format="dollar")
         if '52wk High' in display_df.columns:
-            column_config['52wk High'] = st.column_config.NumberColumn('52wk High', format="%.2f")
+            column_config['52wk High'] = st.column_config.NumberColumn('52wk High', format="localized")
         if '52wk Low' in display_df.columns:
-            column_config['52wk Low'] = st.column_config.NumberColumn('52wk Low', format="%.2f")
+            column_config['52wk Low'] = st.column_config.NumberColumn('52wk Low', format="localized")
         if 'Available' in display_df.columns:
-            column_config['Available'] = st.column_config.NumberColumn('Available', format="%,.0f")
+            column_config['Available'] = st.column_config.NumberColumn('Available', format="localized")
         if 'Rebate Rate (%)' in display_df.columns:
-            column_config['Rebate Rate (%)'] = st.column_config.NumberColumn('Rebate Rate (%)', format="%.2f")
+            column_config['Rebate Rate (%)'] = st.column_config.NumberColumn('Rebate Rate (%)', format="localized")
         if 'Fee Rate (%)' in display_df.columns:
-            column_config['Fee Rate (%)'] = st.column_config.NumberColumn('Fee Rate (%)', format="%.2f")
+            column_config['Fee Rate (%)'] = st.column_config.NumberColumn('Fee Rate (%)', format="localized")
 
         st.dataframe(display_df, use_container_width=True, hide_index=True, column_config=column_config)
 
