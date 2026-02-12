@@ -18,8 +18,8 @@ jobs:
     steps:
       - name: Ping Streamlit app to keep it active
         run: |
-          echo "Pinging Streamlit app at https://equityintel.streamlit.app/"
-          response=$(curl -s -o /dev/null -w "%{http_code}" https://equityintel.streamlit.app/)
+          echo "Pinging Streamlit app at https://equityintel.streamlit.app"
+          response=$(curl -s -o /dev/null -w "%{http_code}" https://equityintel.streamlit.app)
           echo "Response code: $response"
           if [ $response -eq 200 ] || [ $response -eq 301 ] || [ $response -eq 302 ] || [ $response -eq 303 ]; then
             echo "App is alive!"
