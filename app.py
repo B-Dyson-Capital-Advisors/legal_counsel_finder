@@ -239,7 +239,7 @@ if page == "Legal Counsel Finder":
                             }
 
                         except Exception as e:
-                            status_placeholder.empty()
+                            progress_box.empty()
                             st.error(f"Error: {str(e)}")
                             st.session_state.company_results = None
 
@@ -361,7 +361,7 @@ if page == "Legal Counsel Finder":
                             }
 
                         except Exception as e:
-                            status_placeholder.empty()
+                            progress_box.empty()
                             st.error(f"Error: {str(e)}")
                             st.session_state.lawyer_results = None
 
