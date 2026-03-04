@@ -480,8 +480,8 @@ def extract_lawyers_by_regex(text, company_name):
             normalized_firm = normalize_firm_name(firm)
             results[normalized_firm].add(normalize_lawyer_name(name))
 
-    # Pattern 3: "Copies to:" section with multiple names before firm
-    pattern3 = r'(?:Copies to:|Copy to:)\s*\n((?:.*\n)+?)(' + firm_pattern_with_commas_single_line + r')\s*$'
+    # Pattern 3: "Copies to:" or "Cc:" section with multiple names before firm
+    pattern3 = r'(?:Copies to:|Copy to:|Cc:)\s*\n((?:.*\n)+?)(' + firm_pattern_with_commas_single_line + r')\s*$'
 
     matches3 = re.finditer(pattern3, text, re.MULTILINE)
 
@@ -532,6 +532,29 @@ def extract_lawyers_by_regex(text, company_name):
         context = text[match.start():match.end() + 100]
 
         if not firm or not is_valid_firm_name(firm, company_name):
+            continue
+
+        if not is_valid_person_name(name, company_name):
+            continue
+
+        if not is_internal_employee(name, context):
+            normalized_firm = normalize_firm_name(firm)
+            results[normalized_firm].add(normalize_lawyer_name(name))
+
+    # Pattern 9: "Name, Firm" format (comma-separated, same line)
+    # Common in Cc: lists and contact information
+    # Matches: "Stewart McDowell, Gibson, Dunn & Crutcher LLP"
+    # Uses ^ to match start of line (with MULTILINE flag)
+    pattern9 = r'^(' + name_with_optional_middle + r'),\s*(' + firm_pattern_with_commas + r')'
+
+    matches9 = re.finditer(pattern9, text, re.MULTILINE)
+
+    for match in matches9:
+        name = match.group(1).strip()
+        firm = match.group(2).strip()
+        context = text[max(0, match.start()-100):match.end()+100]
+
+        if is_not_law_firm(firm, company_name):
             continue
 
         if not is_valid_person_name(name, company_name):
