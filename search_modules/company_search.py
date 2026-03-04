@@ -416,7 +416,17 @@ def extract_lawyers_by_regex(text, company_name):
     # This prevents "Name\nFirm LLP" from being captured as one firm
     firm_pattern_single_line = r'[A-Z][a-z]+(?:[^\S\n]+(?:&[^\S\n]+)?[A-Z][a-z]+)*[^\S\n]+(?:LLP|LLC|P\.C\.|P\.A\.)'
 
-    pattern1 = r'(' + name_with_optional_middle + r'(?:\s+(?:and|,)\s+' + name_with_optional_middle + r')*)\s+of\s+(' + firm_pattern + r')'
+    # Single-line firm pattern WITH comma support
+    # Allows commas in firm names but prevents matching across newlines
+    # Matches: "Gibson, Dunn & Crutcher LLP", "Cravath, Swaine & Moore LLP"
+    # Uses ,?[^\S\n]+ to match optional comma + non-newline whitespace
+    firm_pattern_with_commas_single_line = r'[A-Z][a-z]+(?:,?[^\S\n]+(?:&,?[^\S\n]+)?[A-Z][a-z]+)*,?[^\S\n]+(?:LLP|LLC|P\.C\.|P\.A\.)'
+
+    # Firm pattern with comma support (for multi-line patterns)
+    # Matches: "Gibson, Dunn & Crutcher LLP" or "Davis Polk & Wardwell LLP"
+    firm_pattern_with_commas = r'[A-Z][a-z]+(?:[,\s]+(?:&[,\s]+)?[A-Z][a-z]+)*[,\s]+(?:LLP|LLC|P\.C\.|P\.A\.)'
+
+    pattern1 = r'(' + name_with_optional_middle + r'(?:\s+(?:and|,)\s+' + name_with_optional_middle + r')*)\s+of\s+(' + firm_pattern_with_commas + r')'
 
     matches = re.finditer(pattern1, text, re.MULTILINE)
 
@@ -451,7 +461,7 @@ def extract_lawyers_by_regex(text, company_name):
                 results[normalized_firm].add(normalize_lawyer_name(name))
 
     # Pattern 2: Name (with optional Esq./P.C./titles) on one line, firm on next line
-    pattern2 = r'(' + name_with_optional_middle + r')(?:,?\s*(?:Esq\.|P\.C\.))?\s*\n\s*(' + firm_pattern_single_line + r')'
+    pattern2 = r'(' + name_with_optional_middle + r')(?:,?\s*(?:Esq\.|P\.C\.))?\s*\n\s*(' + firm_pattern_with_commas_single_line + r')'
 
     matches2 = re.finditer(pattern2, text, re.MULTILINE)
 
@@ -471,7 +481,7 @@ def extract_lawyers_by_regex(text, company_name):
             results[normalized_firm].add(normalize_lawyer_name(name))
 
     # Pattern 3: "Copies to:" section with multiple names before firm
-    pattern3 = r'(?:Copies to:|Copy to:)\s*\n((?:.*\n)+?)(' + firm_pattern_single_line + r')\s*$'
+    pattern3 = r'(?:Copies to:|Copy to:)\s*\n((?:.*\n)+?)(' + firm_pattern_with_commas_single_line + r')\s*$'
 
     matches3 = re.finditer(pattern3, text, re.MULTILINE)
 
@@ -512,7 +522,7 @@ def extract_lawyers_by_regex(text, company_name):
                 results[normalized_firm].add(normalize_lawyer_name(name))
 
     # Pattern 4: By: signature pattern
-    pattern4 = r'By:\s*(' + name_with_optional_middle + r')(?:,?\s*(?:Esq\.|P\.C\.))?\s*\n\s*(' + firm_pattern_single_line + r')'
+    pattern4 = r'By:\s*(' + name_with_optional_middle + r')(?:,?\s*(?:Esq\.|P\.C\.))?\s*\n\s*(' + firm_pattern_with_commas_single_line + r')'
 
     matches4 = re.finditer(pattern4, text, re.MULTILINE)
 
@@ -530,11 +540,6 @@ def extract_lawyers_by_regex(text, company_name):
         if not is_internal_employee(name, context):
             normalized_firm = normalize_firm_name(firm)
             results[normalized_firm].add(normalize_lawyer_name(name))
-
-    # Flexible firm pattern for "legal matters" sections that allows commas and locations
-    # Matches: "Gibson, Dunn & Crutcher LLP" or "Davis Polk & Wardwell LLP"
-    # Pattern captures firm name up to location markers (city names, or double comma)
-    firm_pattern_with_commas = r'[A-Z][a-z]+(?:[,\s]+(?:&[,\s]+)?[A-Z][a-z]+)*[,\s]+(?:LLP|LLC|P\.C\.|P\.A\.)'
 
     # Pattern 6: "represented by" or "passed upon by" patterns (common in legal matters sections)
     # Matches: "represented by [Name], [Firm]" or "passed upon by [Name] of [Firm]"
