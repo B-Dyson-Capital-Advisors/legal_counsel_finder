@@ -5,6 +5,7 @@ Quick test script to verify FMP API key is working
 
 import os
 import requests
+from pathlib import Path
 
 # Load .env file if exists
 try:
@@ -13,14 +14,41 @@ try:
 except ImportError:
     pass
 
+def load_from_streamlit_secrets():
+    """Try to load API key from Streamlit secrets.toml"""
+    secrets_file = Path(__file__).parent.parent / '.streamlit' / 'secrets.toml'
+    if secrets_file.exists():
+        try:
+            # Simple TOML parsing for API key
+            with open(secrets_file, 'r') as f:
+                for line in f:
+                    if line.strip().startswith('FMP_API_KEY'):
+                        # Extract value between quotes
+                        if '=' in line:
+                            value = line.split('=', 1)[1].strip()
+                            # Remove quotes and comments
+                            value = value.split('#')[0].strip().strip('"').strip("'")
+                            if value and value != "PUT_YOUR_FMP_API_KEY_HERE":
+                                return value
+        except Exception as e:
+            pass
+    return None
+
 def test_fmp_connection():
     """Test FMP API connection"""
     print("=" * 80)
     print("FMP API CONNECTION TEST")
     print("=" * 80)
 
-    # Check API key
+    # Check API key - try environment variable first, then Streamlit secrets
     api_key = os.getenv('FMP_API_KEY')
+    source = "environment variable"
+
+    # Try Streamlit secrets if not in environment
+    if not api_key:
+        api_key = load_from_streamlit_secrets()
+        if api_key:
+            source = ".streamlit/secrets.toml"
 
     if not api_key:
         print("\n❌ ERROR: FMP_API_KEY not found!")
@@ -31,6 +59,7 @@ def test_fmp_connection():
         return False
 
     print(f"\n✅ API key found: {api_key[:10]}...{api_key[-4:]}")
+    print(f"   Source: {source}")
 
     # Test API call (get Apple stock profile - simple test)
     print(f"\n🔍 Testing API connection...")
