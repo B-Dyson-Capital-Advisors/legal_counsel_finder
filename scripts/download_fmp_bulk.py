@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 """
-Download bulk data from Financial Modeling Prep API
-Supports: EOD prices, company profiles, financials, ratios, key metrics
+Download company profiles from Financial Modeling Prep bulk API
+This provides market cap data for stock screening/sorting
 """
 
 import os
 import sys
 import requests
 import pandas as pd
-from datetime import datetime, timedelta
 from pathlib import Path
+from io import StringIO
 import time
 
 # Load .env file if exists (for local development)
@@ -17,16 +17,15 @@ try:
     from dotenv import load_dotenv
     load_dotenv()
 except ImportError:
-    pass  # dotenv not installed, will use environment variables directly
+    pass
 
 class FMPBulkDownloader:
-    """Download bulk data from Financial Modeling Prep API"""
+    """Download bulk company profile data from FMP API"""
 
-    BASE_URL = "https://financialmodelingprep.com/api"
+    BASE_URL = "https://financialmodelingprep.com/stable"
 
     def __init__(self, api_key=None):
-        """Initialize with API key from environment, Streamlit secrets, or parameter"""
-        # Priority: 1) Parameter 2) Environment variable 3) Streamlit secrets
+        """Initialize with API key from environment or Streamlit secrets"""
         self.api_key = api_key or os.getenv('FMP_API_KEY')
 
         # Try Streamlit secrets if available
@@ -44,212 +43,125 @@ class FMPBulkDownloader:
         self.data_dir = Path(__file__).parent.parent / 'data' / 'fmp'
         self.data_dir.mkdir(parents=True, exist_ok=True)
 
-        print(f"📁 Data directory: {self.data_dir}")
-
-    def download_eod_bulk(self, date=None):
-        """
-        Download bulk EOD prices for all stocks
-        Rate limit: Once every 10 seconds
-
-        Returns CSV with: symbol, date, open, high, low, close, adjClose, volume,
-                         change, changePercent, vwap
-        """
-        if date is None:
-            # Default to yesterday (market data available after close)
-            date = (datetime.now() - timedelta(days=1)).strftime('%Y-%m-%d')
-
-        print(f"\n📊 Downloading EOD bulk data for {date}...")
-
-        url = f"{self.BASE_URL}/v4/batch-request-end-of-day-prices"
-        params = {
-            'date': date,
-            'apikey': self.api_key
-        }
-
-        response = requests.get(url, params=params, timeout=120)
-        response.raise_for_status()
-
-        # Save raw CSV
-        output_file = self.data_dir / f'eod_bulk_{date}.csv'
-        output_file.write_text(response.text)
-
-        # Load and display summary
-        df = pd.read_csv(output_file)
-        print(f"   ✅ Downloaded {len(df):,} stocks")
-        print(f"   💾 Saved to: {output_file}")
-
-        return df
+        print(f"Data directory: {self.data_dir}")
 
     def download_profile_bulk(self):
         """
-        Download bulk company profiles
-        Rate limit: Once every 60 seconds
+        Download bulk company profiles (all parts)
+        URL: https://financialmodelingprep.com/stable/profile-bulk?part=N&apikey=...
 
-        Returns: symbol, companyName, sector, industry, marketCap, ceo,
-                description, employees, etc.
+        Returns: symbol, companyName, sector, industry, marketCap, etc.
         """
-        print(f"\n🏢 Downloading company profiles bulk...")
+        print("\nDownloading company profiles bulk...")
 
-        url = f"{self.BASE_URL}/v4/profile/all"
-        params = {'apikey': self.api_key}
+        all_profiles = []
+        part = 0
+        max_retries = 3
 
-        response = requests.get(url, params=params, timeout=120)
-        response.raise_for_status()
+        while True:
+            url = f"{self.BASE_URL}/profile-bulk"
+            params = {
+                'part': part,
+                'apikey': self.api_key
+            }
 
-        data = response.json()
-        df = pd.DataFrame(data)
+            print(f"  Fetching part {part}...")
 
-        # Save as CSV
+            retry_count = 0
+            success = False
+
+            while retry_count < max_retries and not success:
+                try:
+                    response = requests.get(url, params=params, timeout=120)
+
+                    # 400 Bad Request means no more parts available
+                    if response.status_code == 400:
+                        print(f"    Part {part} returned 400 - no more data")
+                        return all_profiles
+
+                    # 429 means rate limit - wait and retry
+                    if response.status_code == 429:
+                        wait_time = 60 * (retry_count + 1)
+                        print(f"    Rate limit hit. Waiting {wait_time}s...")
+                        time.sleep(wait_time)
+                        retry_count += 1
+                        continue
+
+                    response.raise_for_status()
+
+                    # Parse CSV
+                    df = pd.read_csv(StringIO(response.text))
+
+                    if len(df) == 0:
+                        print(f"    Part {part} returned 0 rows - stopping")
+                        return all_profiles
+
+                    all_profiles.append(df)
+                    print(f"    SUCCESS: Got {len(df):,} profiles")
+
+                    success = True
+
+                except requests.exceptions.RequestException as e:
+                    retry_count += 1
+                    if retry_count < max_retries:
+                        wait_time = 5 * retry_count
+                        print(f"    Error: {e}. Retrying in {wait_time}s...")
+                        time.sleep(wait_time)
+                    else:
+                        print(f"    ERROR after {max_retries} retries: {e}")
+                        return all_profiles
+
+            if success:
+                part += 1
+                # Be nice to API - wait between requests
+                if part < 10:
+                    time.sleep(2)
+
+        return all_profiles
+
+    def save_profiles(self, profiles):
+        """Save combined profiles to CSV"""
+        if not profiles:
+            print("\nNo profiles to save")
+            return None
+
+        combined_df = pd.concat(profiles, ignore_index=True)
         output_file = self.data_dir / 'profiles_bulk.csv'
-        df.to_csv(output_file, index=False)
+        combined_df.to_csv(output_file, index=False)
 
-        print(f"   ✅ Downloaded {len(df):,} company profiles")
-        print(f"   💾 Saved to: {output_file}")
+        print(f"\nSUCCESS: Downloaded {len(combined_df):,} company profiles from {len(profiles)} parts")
+        print(f"Saved to: {output_file}")
 
-        return df
-
-    def download_financial_ratios_bulk(self, year=None, period='annual'):
-        """
-        Download bulk financial ratios
-        Rate limit: Once every 10 seconds
-
-        Args:
-            year: Year (default: current year)
-            period: 'annual' or 'quarter'
-        """
-        if year is None:
-            year = datetime.now().year
-
-        print(f"\n📈 Downloading financial ratios bulk ({period} {year})...")
-
-        url = f"{self.BASE_URL}/v4/ratios"
-        params = {
-            'year': year,
-            'period': period,
-            'apikey': self.api_key
-        }
-
-        response = requests.get(url, params=params, timeout=120)
-        response.raise_for_status()
-
-        data = response.json()
-        df = pd.DataFrame(data)
-
-        # Save as CSV
-        output_file = self.data_dir / f'ratios_{period}_{year}.csv'
-        df.to_csv(output_file, index=False)
-
-        print(f"   ✅ Downloaded {len(df):,} company ratios")
-        print(f"   💾 Saved to: {output_file}")
-
-        return df
-
-    def download_key_metrics_bulk(self, year=None, period='annual'):
-        """
-        Download bulk key metrics
-        Rate limit: Once every 10 seconds
-
-        Returns: marketCap, enterpriseValue, peRatio, pbRatio, dividendYield, etc.
-        """
-        if year is None:
-            year = datetime.now().year
-
-        print(f"\n📊 Downloading key metrics bulk ({period} {year})...")
-
-        url = f"{self.BASE_URL}/v4/key-metrics"
-        params = {
-            'year': year,
-            'period': period,
-            'apikey': self.api_key
-        }
-
-        response = requests.get(url, params=params, timeout=120)
-        response.raise_for_status()
-
-        data = response.json()
-        df = pd.DataFrame(data)
-
-        # Save as CSV
-        output_file = self.data_dir / f'key_metrics_{period}_{year}.csv'
-        df.to_csv(output_file, index=False)
-
-        print(f"   ✅ Downloaded {len(df):,} company metrics")
-        print(f"   💾 Saved to: {output_file}")
-
-        return df
-
-    def download_income_statement_bulk(self, year=None, period='annual'):
-        """
-        Download bulk income statements
-        Rate limit: Once every 10 seconds
-        """
-        if year is None:
-            year = datetime.now().year
-
-        print(f"\n💰 Downloading income statements bulk ({period} {year})...")
-
-        url = f"{self.BASE_URL}/v4/income-statement"
-        params = {
-            'year': year,
-            'period': period,
-            'apikey': self.api_key
-        }
-
-        response = requests.get(url, params=params, timeout=120)
-        response.raise_for_status()
-
-        data = response.json()
-        df = pd.DataFrame(data)
-
-        # Save as CSV
-        output_file = self.data_dir / f'income_statement_{period}_{year}.csv'
-        df.to_csv(output_file, index=False)
-
-        print(f"   ✅ Downloaded {len(df):,} income statements")
-        print(f"   💾 Saved to: {output_file}")
-
-        return df
+        return combined_df
 
 
 def main():
-    """Download all bulk data with proper rate limiting"""
+    """Download company profile bulk data"""
     print("=" * 80)
-    print("FINANCIAL MODELING PREP - BULK DATA DOWNLOADER")
+    print("FINANCIAL MODELING PREP - BULK COMPANY PROFILES DOWNLOAD")
     print("=" * 80)
 
     try:
         downloader = FMPBulkDownloader()
+        profiles = downloader.download_profile_bulk()
+        df = downloader.save_profiles(profiles)
 
-        # 1. Download EOD data (most important for market cap)
-        downloader.download_eod_bulk()
-        print("\n⏳ Waiting 10 seconds (rate limit)...")
-        time.sleep(10)
-
-        # 2. Download company profiles (fundamentals)
-        downloader.download_profile_bulk()
-        print("\n⏳ Waiting 60 seconds (rate limit for profiles)...")
-        time.sleep(60)
-
-        # 3. Download key metrics (includes market cap, P/E, etc.)
-        downloader.download_key_metrics_bulk()
-        print("\n⏳ Waiting 10 seconds (rate limit)...")
-        time.sleep(10)
-
-        # 4. Download financial ratios
-        downloader.download_financial_ratios_bulk()
-        print("\n⏳ Waiting 10 seconds (rate limit)...")
-        time.sleep(10)
-
-        # 5. Download income statements
-        downloader.download_income_statement_bulk()
-
-        print("\n" + "=" * 80)
-        print("✅ ALL BULK DATA DOWNLOADED SUCCESSFULLY!")
-        print("=" * 80)
+        if df is not None:
+            print("\n" + "=" * 80)
+            print("DOWNLOAD COMPLETE")
+            print("=" * 80)
+            print(f"\nTotal profiles: {len(df):,}")
+            print(f"Profiles with marketCap > 0: {(df['marketCap'] > 0).sum():,}")
+            print("\nThe Streamlit app will now use this data for market cap sorting.")
+        else:
+            print("\nERROR: No data downloaded")
+            sys.exit(1)
 
     except Exception as e:
-        print(f"\n❌ Error: {e}")
-        raise
+        print(f"\nERROR: {e}")
+        import traceback
+        traceback.print_exc()
+        sys.exit(1)
 
 
 if __name__ == "__main__":

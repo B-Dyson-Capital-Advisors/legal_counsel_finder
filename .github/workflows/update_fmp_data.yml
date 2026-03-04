@@ -74,6 +74,42 @@ jobs:
           data/screening_*.csv
         retention-days: 30
 
+    - name: Setup Node.js for Streamlit ping
+      uses: actions/setup-node@v4
+      with:
+        node-version: "20"
+
+    - name: Install Playwright
+      run: |
+        npm install playwright
+        npx playwright install chromium --with-deps
+
+    - name: Ping Streamlit app to wake it up
+      run: |
+        node << 'EOF'
+        const { chromium } = require('playwright');
+        (async () => {
+          const browser = await chromium.launch();
+          const context = await browser.newContext({
+            userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+          });
+          const page = await context.newPage();
+          try {
+            console.log('Pinging https://equityintel.streamlit.app to load new data...');
+            await page.goto('https://equityintel.streamlit.app', {
+              timeout: 60000,
+              waitUntil: 'domcontentloaded'
+            });
+            await page.waitForTimeout(15000);
+            console.log('App refreshed successfully with new data.');
+          } catch (e) {
+            console.error('Failed to ping app:', e.message);
+          } finally {
+            await browser.close();
+          }
+        })();
+        EOF
+
     - name: Summary
       if: always()
       run: |
@@ -83,11 +119,11 @@ jobs:
         echo "- **Status**: ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
 
-        if [ -f data/screening_data_full.csv ]; then
-          STOCK_COUNT=$(wc -l < data/screening_data_full.csv)
-          echo "- **Stocks processed**: $((STOCK_COUNT - 1))" >> $GITHUB_STEP_SUMMARY
+        if [ -f data/fmp/profiles_bulk.csv ]; then
+          PROFILE_COUNT=$(wc -l < data/fmp/profiles_bulk.csv)
+          echo "- **Company profiles**: $((PROFILE_COUNT - 1))" >> $GITHUB_STEP_SUMMARY
         fi
 
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "### Files Generated" >> $GITHUB_STEP_SUMMARY
-        ls -lh data/screening_*.csv 2>/dev/null | awk '{print "- " $9 " (" $5 ")"}' >> $GITHUB_STEP_SUMMARY || echo "- No screening files generated" >> $GITHUB_STEP_SUMMARY
+        ls -lh data/fmp/*.csv 2>/dev/null | awk '{print "- " $9 " (" $5 ")"}' >> $GITHUB_STEP_SUMMARY || echo "- No files generated" >> $GITHUB_STEP_SUMMARY

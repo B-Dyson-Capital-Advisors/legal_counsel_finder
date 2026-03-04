@@ -4,9 +4,34 @@ from pathlib import Path
 
 @st.cache_data(ttl=3600, show_spinner=False)
 def load_stock_reference():
-    """Load stock reference file with market cap and 52-week high/low data"""
+    """Load stock reference file with market cap from FMP bulk data"""
     try:
-        # Look for the most recent reference file in data folder
+        # First try to load from FMP bulk data
+        fmp_file = Path(__file__).parent.parent / "data" / "fmp" / "profiles_bulk.csv"
+
+        if fmp_file.exists():
+            # Load FMP bulk profiles
+            df = pd.read_csv(fmp_file)
+
+            # Select and rename columns: symbol -> Symbol, marketCap -> Market Cap
+            df = df[['symbol', 'marketCap']].copy()
+            df.columns = ['Symbol', 'Market Cap']
+
+            # Clean up Symbol column
+            df['Symbol'] = df['Symbol'].astype(str).str.strip().str.upper()
+
+            # Convert Market Cap to numeric
+            df['Market Cap'] = pd.to_numeric(df['Market Cap'], errors='coerce')
+
+            # Remove rows with missing or zero market cap
+            df = df[df['Market Cap'] > 0]
+
+            # Remove duplicates (keep first occurrence)
+            df = df.drop_duplicates(subset=['Symbol'], keep='first')
+
+            return df
+
+        # Fallback to old Excel file format if FMP data not available
         data_dir = Path(__file__).parent.parent / "data"
 
         if not data_dir.exists():

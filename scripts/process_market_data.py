@@ -29,7 +29,7 @@ class MarketDataProcessor:
         print(f"\n📊 Loading EOD data: {latest_file.name}")
 
         df = pd.read_csv(latest_file)
-        print(f"   ✅ Loaded {len(df):,} stocks")
+        print(f"    Loaded {len(df):,} stocks")
 
         return df
 
@@ -41,7 +41,7 @@ class MarketDataProcessor:
 
         print(f"\n🏢 Loading company profiles...")
         df = pd.read_csv(profiles_file)
-        print(f"   ✅ Loaded {len(df):,} profiles")
+        print(f"    Loaded {len(df):,} profiles")
 
         return df
 
@@ -56,7 +56,7 @@ class MarketDataProcessor:
         print(f"\n📈 Loading key metrics: {latest_file.name}")
 
         df = pd.read_csv(latest_file)
-        print(f"   ✅ Loaded {len(df):,} metrics")
+        print(f"    Loaded {len(df):,} metrics")
 
         return df
 
@@ -125,7 +125,7 @@ class MarketDataProcessor:
                 metrics_subset, on='symbol', how='left'
             )
 
-        print(f"   ✅ Combined {len(screening_df):,} stocks")
+        print(f"    Combined {len(screening_df):,} stocks")
 
         # Calculate market cap from price * shares if not available
         if 'marketCap' not in screening_df.columns:
@@ -144,7 +144,7 @@ class MarketDataProcessor:
         # Sort by market cap (largest first)
         if 'marketCap' in screening_df.columns:
             screening_df = screening_df.sort_values('marketCap', ascending=False)
-            print(f"   ✅ Sorted by market cap")
+            print(f"    Sorted by market cap")
 
         # Save full dataset
         output_file = self.output_dir / 'screening_data_full.csv'
@@ -169,7 +169,7 @@ class MarketDataProcessor:
         large_cap = df[df['marketCap'] > 10_000_000_000].copy()
         output_file = self.output_dir / 'screening_data_large_cap.csv'
         large_cap.to_csv(output_file, index=False)
-        print(f"   ✅ Large cap (>$10B): {len(large_cap):,} stocks → {output_file.name}")
+        print(f"    Large cap (>$10B): {len(large_cap):,} stocks → {output_file.name}")
 
         # Filter 2: Mid cap ($2B-$10B)
         mid_cap = df[
@@ -178,7 +178,7 @@ class MarketDataProcessor:
         ].copy()
         output_file = self.output_dir / 'screening_data_mid_cap.csv'
         mid_cap.to_csv(output_file, index=False)
-        print(f"   ✅ Mid cap ($2B-$10B): {len(mid_cap):,} stocks → {output_file.name}")
+        print(f"    Mid cap ($2B-$10B): {len(mid_cap):,} stocks → {output_file.name}")
 
         # Filter 3: Small cap ($300M-$2B)
         small_cap = df[
@@ -187,14 +187,14 @@ class MarketDataProcessor:
         ].copy()
         output_file = self.output_dir / 'screening_data_small_cap.csv'
         small_cap.to_csv(output_file, index=False)
-        print(f"   ✅ Small cap ($300M-$2B): {len(small_cap):,} stocks → {output_file.name}")
+        print(f"    Small cap ($300M-$2B): {len(small_cap):,} stocks → {output_file.name}")
 
         # Filter 4: US stocks only (if country available)
         if 'country' in df.columns:
             us_stocks = df[df['country'] == 'US'].copy()
             output_file = self.output_dir / 'screening_data_us_only.csv'
             us_stocks.to_csv(output_file, index=False)
-            print(f"   ✅ US stocks only: {len(us_stocks):,} stocks → {output_file.name}")
+            print(f"    US stocks only: {len(us_stocks):,} stocks → {output_file.name}")
 
     def generate_summary_report(self, df):
         """Generate summary statistics"""
@@ -236,7 +236,7 @@ def main():
         processor.generate_summary_report(df)
 
         print("\n" + "=" * 80)
-        print("✅ PROCESSING COMPLETE!")
+        print(" PROCESSING COMPLETE!")
         print("=" * 80)
         print("\n📂 Output files in data/ directory:")
         print("   - screening_data_full.csv (all stocks)")
@@ -246,7 +246,7 @@ def main():
         print("   - screening_data_us_only.csv (US only)")
 
     except Exception as e:
-        print(f"\n❌ Error: {e}")
+        print(f"\n Error: {e}")
         raise
 
 

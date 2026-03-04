@@ -51,14 +51,14 @@ def test_fmp_connection():
             source = ".streamlit/secrets.toml"
 
     if not api_key:
-        print("\n❌ ERROR: FMP_API_KEY not found!")
+        print("\n ERROR: FMP_API_KEY not found!")
         print("\nPlease set up your API key:")
         print("  1. Copy .env.example to .env")
         print("  2. Edit .env and add: FMP_API_KEY=your_actual_key")
         print("  3. Run this test again")
         return False
 
-    print(f"\n✅ API key found: {api_key[:10]}...{api_key[-4:]}")
+    print(f"\n API key found: {api_key[:10]}...{api_key[-4:]}")
     print(f"   Source: {source}")
 
     # Test API call (get Apple stock profile - simple test)
@@ -75,49 +75,49 @@ def test_fmp_connection():
             data = response.json()
             if data and len(data) > 0:
                 company = data[0]
-                print(f"\n✅ SUCCESS! API is working!")
+                print(f"\n SUCCESS! API is working!")
                 print(f"\n📊 Test Response (Apple Inc.):")
                 print(f"   Symbol: {company.get('symbol')}")
                 print(f"   Company: {company.get('companyName')}")
                 print(f"   Sector: {company.get('sector')}")
                 print(f"   Price: ${company.get('price')}")
                 print(f"   Market Cap: ${company.get('mktCap'):,}")
-                print(f"\n✅ Your FMP API key is valid and working!")
-                print(f"✅ You can now run: python scripts/download_fmp_bulk.py")
+                print(f"\n Your FMP API key is valid and working!")
+                print(f" You can now run: python scripts/download_fmp_bulk.py")
                 return True
             else:
-                print(f"\n❌ API returned empty response")
+                print(f"\n API returned empty response")
                 return False
 
         elif response.status_code == 401:
-            print(f"\n❌ AUTHENTICATION ERROR (401)")
+            print(f"\n AUTHENTICATION ERROR (401)")
             print(f"   Your API key is invalid or expired")
             print(f"   Check your key at: https://site.financialmodelingprep.com/developer/dashboard")
             return False
 
         elif response.status_code == 403:
-            print(f"\n❌ FORBIDDEN ERROR (403)")
+            print(f"\n FORBIDDEN ERROR (403)")
             print(f"   Your API key may not have access to this endpoint")
             print(f"   Make sure you have Professional or Enterprise plan for bulk endpoints")
             return False
 
         else:
-            print(f"\n❌ ERROR: HTTP {response.status_code}")
+            print(f"\n ERROR: HTTP {response.status_code}")
             print(f"   Response: {response.text[:200]}")
             return False
 
     except requests.exceptions.Timeout:
-        print(f"\n❌ TIMEOUT ERROR")
+        print(f"\n TIMEOUT ERROR")
         print(f"   Request timed out - check your internet connection")
         return False
 
     except requests.exceptions.RequestException as e:
-        print(f"\n❌ CONNECTION ERROR")
+        print(f"\n CONNECTION ERROR")
         print(f"   {str(e)}")
         return False
 
     except Exception as e:
-        print(f"\n❌ UNEXPECTED ERROR")
+        print(f"\n UNEXPECTED ERROR")
         print(f"   {str(e)}")
         return False
 
@@ -128,12 +128,12 @@ if __name__ == "__main__":
     print("\n" + "=" * 80)
 
     if success:
-        print("✅ ALL TESTS PASSED!")
+        print(" ALL TESTS PASSED!")
         print("\nNext steps:")
         print("  1. Run: python scripts/download_fmp_bulk.py")
         print("  2. Run: python scripts/process_market_data.py")
         print("  3. Add FMP_API_KEY to GitHub Secrets for automation")
     else:
-        print("❌ TEST FAILED - Please fix the errors above")
+        print(" TEST FAILED - Please fix the errors above")
 
     print("=" * 80 + "\n")
