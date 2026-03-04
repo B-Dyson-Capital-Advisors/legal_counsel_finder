@@ -39,6 +39,10 @@ secrets.toml
 *_tickers.csv
 *_lawyers.csv
 
+# FMP bulk data (large files - don't commit)
+data/fmp/
+data/screening_*.csv
+
 # IDEs
 .vscode/
 .idea/

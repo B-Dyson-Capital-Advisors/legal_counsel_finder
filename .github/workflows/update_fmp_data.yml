@@ -1,0 +1,93 @@
+name: Update FMP Market Data
+
+on:
+  schedule:
+    # Run daily at 7:00 AM UTC (after US market close + FMP data processing)
+    # US market closes 4PM ET = 9PM UTC, data ready by ~6-7AM UTC next day
+    - cron: '0 7 * * *'
+
+  workflow_dispatch:  # Allow manual trigger
+    inputs:
+      download_date:
+        description: 'EOD date (YYYY-MM-DD, leave empty for yesterday)'
+        required: false
+        type: string
+
+jobs:
+  update-market-data:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+        cache: 'pip'
+
+    - name: Install dependencies
+      run: |
+        pip install requests pandas numpy openpyxl
+
+    - name: Download FMP bulk data
+      env:
+        FMP_API_KEY: ${{ secrets.FMP_API_KEY }}
+      run: |
+        python scripts/download_fmp_bulk.py
+
+    - name: Process market data
+      run: |
+        python scripts/process_market_data.py
+
+    - name: Check for changes
+      id: check_changes
+      run: |
+        git add data/
+        if git diff --staged --quiet; then
+          echo "changes=false" >> $GITHUB_OUTPUT
+          echo "No changes to commit"
+        else
+          echo "changes=true" >> $GITHUB_OUTPUT
+          echo "Changes detected"
+        fi
+
+    - name: Commit and push if changed
+      if: steps.check_changes.outputs.changes == 'true'
+      run: |
+        git config user.name "GitHub Actions Bot"
+        git config user.email "actions@github.com"
+        git commit -m "Update FMP market data $(date +'%Y-%m-%d %H:%M UTC')"
+        git push
+
+    - name: Upload data as artifact
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: fmp-market-data-${{ github.run_number }}
+        path: |
+          data/fmp/
+          data/screening_*.csv
+        retention-days: 30
+
+    - name: Summary
+      if: always()
+      run: |
+        echo "## FMP Data Update Summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "- **Date**: $(date +'%Y-%m-%d %H:%M UTC')" >> $GITHUB_STEP_SUMMARY
+        echo "- **Status**: ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+
+        if [ -f data/screening_data_full.csv ]; then
+          STOCK_COUNT=$(wc -l < data/screening_data_full.csv)
+          echo "- **Stocks processed**: $((STOCK_COUNT - 1))" >> $GITHUB_STEP_SUMMARY
+        fi
+
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### Files Generated" >> $GITHUB_STEP_SUMMARY
+        ls -lh data/screening_*.csv 2>/dev/null | awk '{print "- " $9 " (" $5 ")"}' >> $GITHUB_STEP_SUMMARY || echo "- No screening files generated" >> $GITHUB_STEP_SUMMARY
