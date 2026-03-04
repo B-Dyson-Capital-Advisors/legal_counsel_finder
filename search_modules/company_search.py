@@ -544,14 +544,14 @@ def extract_lawyers_by_regex(text, company_name):
     # Pattern 9: "Name, Firm" format (comma-separated, same line)
     # Common in Cc: lists and contact information
     # Matches: "Stewart McDowell, Gibson, Dunn & Crutcher LLP"
-    # Uses ^ to match start of line (with MULTILINE flag)
-    pattern9 = r'^(' + name_with_optional_middle + r'),\s*(' + firm_pattern_with_commas + r')'
+    # Uses ^\s* to allow optional indentation before name
+    pattern9 = r'^\s*(' + name_with_optional_middle + r'),\s*(' + firm_pattern_with_commas + r')'
 
     matches9 = re.finditer(pattern9, text, re.MULTILINE)
 
     for match in matches9:
         name = match.group(1).strip()
-        firm = match.group(2).strip()
+        firm = clean_firm_name(match.group(2))
         context = text[max(0, match.start()-100):match.end()+100]
 
         if is_not_law_firm(firm, company_name):
