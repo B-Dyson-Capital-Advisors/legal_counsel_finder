@@ -305,10 +305,21 @@ def search_entity_for_companies(entity_name, entity_type, start_date, end_date, 
     # Format Filing Date
     result_df['Filing Date'] = pd.to_datetime(result_df['Filing Date']).dt.strftime('%Y-%m-%d')
 
-    # Reorder columns: Company, Ticker, Market Cap, 52wk High/Low, Stock Loan columns, Filing Date
-    final_columns = ['Company', 'Ticker', 'Market Cap']
+    # Reorder columns: Company, Ticker, Exchange, Market Cap, Sector, Industry, Stock Loan, Filing Date
+    final_columns = ['Company', 'Ticker']
 
-    # Add 52wk High/Low if available
+    # Add FMP enrichment columns
+    if 'Exchange' in result_df.columns:
+        final_columns.append('Exchange')
+
+    final_columns.append('Market Cap')
+
+    if 'Sector' in result_df.columns:
+        final_columns.append('Sector')
+    if 'Industry' in result_df.columns:
+        final_columns.append('Industry')
+
+    # Add 52wk High/Low if available (legacy)
     if '52wk High' in result_df.columns:
         final_columns.append('52wk High')
     if '52wk Low' in result_df.columns:
@@ -320,6 +331,8 @@ def search_entity_for_companies(entity_name, entity_type, start_date, end_date, 
 
     final_columns.append('Filing Date')
 
+    # Only include columns that exist
+    final_columns = [col for col in final_columns if col in result_df.columns]
     result_df = result_df[final_columns]
 
     if progress_callback:

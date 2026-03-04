@@ -579,10 +579,10 @@ if page == "Legal Counsel Finder":
 
 elif page == "Stock Loan Availability":
     st.title("Stock Loan Availability")
-    st.markdown("Real-time stock loan availability data from Interactive Brokers - Filtered by legitimate stocks in reference file")
+    st.markdown("Real-time stock loan availability data from Interactive Brokers - Filtered to US stocks (NYSE/NASDAQ only, no ETFs/ADRs/funds)")
 
     if st.button("Fetch Latest Data", type="primary"):
-        with st.spinner("Fetching data from Interactive Brokers FTP and merging with market cap data..."):
+        with st.spinner("Filtering US stocks from FMP, then joining with Interactive Brokers short interest..."):
             try:
                 # Use new function that filters by reference file and adds market cap
                 df = fetch_shortstock_with_market_cap()
@@ -603,7 +603,7 @@ elif page == "Stock Loan Availability":
         data_date = st.session_state.stock_loan_results['date']
         data_time = st.session_state.stock_loan_results['time']
 
-        st.success(f"Successfully loaded {len(result_df):,} records (filtered by reference stocks)")
+        st.success(f"Successfully loaded {len(result_df):,} US stocks (NYSE/NASDAQ, actively trading)")
         st.info(f"Data as of: {data_date} {data_time}")
 
         # Configure column formatting while keeping numeric sorting
@@ -643,6 +643,6 @@ elif page == "Stock Loan Availability":
     st.markdown("---")
     st.markdown("""
     <div style='text-align: center; color: #666; font-size: 0.9rem; padding: 1rem;'>
-    EquityIntel | Data sourced from Interactive Brokers & Stock Reference File
+    EquityIntel | Short interest from Interactive Brokers | Company data from FMP (US NYSE/NASDAQ stocks)
     </div>
     """, unsafe_allow_html=True)

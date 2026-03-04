@@ -4,7 +4,14 @@ from pathlib import Path
 
 @st.cache_data(ttl=3600, show_spinner=False)
 def load_stock_reference():
-    """Load stock reference file with market cap from FMP bulk data"""
+    """
+    Load US stock reference (NYSE/NASDAQ only) with market cap from FMP bulk data
+
+    Filters applied:
+    - Exchange: NYSE or NASDAQ only
+    - No ETFs, ADRs, or funds
+    - Actively trading only
+    """
     try:
         # First try to load from FMP bulk data
         fmp_file = Path(__file__).parent.parent / "data" / "fmp" / "profiles_bulk.csv"
@@ -13,9 +20,18 @@ def load_stock_reference():
             # Load FMP bulk profiles
             df = pd.read_csv(fmp_file)
 
-            # Select and rename columns: symbol -> Symbol, marketCap -> Market Cap
-            df = df[['symbol', 'marketCap']].copy()
-            df.columns = ['Symbol', 'Market Cap']
+            # Filter to US stocks only (same as stock_loan.py)
+            df = df[
+                (df['exchange'].isin(['NYSE', 'NASDAQ'])) &
+                (df['isEtf'] == False) &
+                (df['isAdr'] == False) &
+                (df['isFund'] == False) &
+                (df['isActivelyTrading'] == True)
+            ].copy()
+
+            # Select and rename columns
+            df = df[['symbol', 'companyName', 'exchange', 'marketCap', 'sector', 'industry']].copy()
+            df.columns = ['Symbol', 'Company Name', 'Exchange', 'Market Cap', 'Sector', 'Industry']
 
             # Clean up Symbol column
             df['Symbol'] = df['Symbol'].astype(str).str.strip().str.upper()
@@ -85,14 +101,19 @@ def load_stock_reference():
 
 def filter_and_enrich_tickers(df, ticker_column='Ticker'):
     """
-    Filter DataFrame to only include tickers in reference file and add market cap, 52wk high/low
+    Filter DataFrame to only US tickers (NYSE/NASDAQ) and add company info
 
     Args:
         df: DataFrame with ticker column
         ticker_column: Name of the ticker column (default 'Ticker')
 
     Returns:
-        DataFrame filtered and enriched with market cap, 52wk high, 52wk low
+        DataFrame filtered and enriched with:
+        - Market Cap
+        - Company Name
+        - Exchange
+        - Sector
+        - Industry
     """
     reference_df = load_stock_reference()
 
@@ -103,19 +124,31 @@ def filter_and_enrich_tickers(df, ticker_column='Ticker'):
     # Clean up ticker column
     df[ticker_column] = df[ticker_column].astype(str).str.strip().str.upper()
 
-    # Determine which columns to merge (adapt to available columns in reference)
+    # Determine which columns to merge (all available FMP columns)
     merge_columns = ['Symbol', 'Market Cap']
+
+    # Add all available FMP columns
+    if 'Company Name' in reference_df.columns:
+        merge_columns.append('Company Name')
+    if 'Exchange' in reference_df.columns:
+        merge_columns.append('Exchange')
+    if 'Sector' in reference_df.columns:
+        merge_columns.append('Sector')
+    if 'Industry' in reference_df.columns:
+        merge_columns.append('Industry')
+
+    # Legacy 52wk columns (if available)
     if '52wk High' in reference_df.columns:
         merge_columns.append('52wk High')
     if '52wk Low' in reference_df.columns:
         merge_columns.append('52wk Low')
 
-    # Merge with reference to filter and add market cap + 52wk data
+    # Merge with reference to filter and add FMP data
     enriched_df = df.merge(
         reference_df[merge_columns],
         left_on=ticker_column,
         right_on='Symbol',
-        how='inner'  # Only keep tickers in reference file
+        how='inner'  # Only keep US tickers (NYSE/NASDAQ)
     )
 
     # Drop the extra Symbol column
