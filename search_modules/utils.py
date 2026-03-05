@@ -296,8 +296,8 @@ def search_entity_for_companies(entity_name, entity_type, start_date, end_date, 
         if progress_callback:
             progress_callback(f"Note: Could not fetch stock loan data ({str(e)})")
 
-    # Add back " US Equity" suffix for Bloomberg format
-    result_df['Ticker'] = result_df['Ticker_Clean'] + ' US Equity'
+    # Use clean ticker (just symbol, no suffix)
+    result_df['Ticker'] = result_df['Ticker_Clean']
 
     # Drop temporary column
     result_df = result_df.drop('Ticker_Clean', axis=1)
