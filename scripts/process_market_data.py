@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
 """
 Process FMP bulk data and create screening-ready datasets
-Combines EOD, profiles, and metrics for equity screening
+Uses company profiles which already contain price, marketCap, and volume data
 """
 
 import pandas as pd
 from pathlib import Path
-from datetime import datetime, timedelta
+from datetime import datetime
 import numpy as np
+import sys
 
 class MarketDataProcessor:
-    """Process and combine FMP bulk data for screening"""
+    """Process FMP bulk data for screening"""
 
     def __init__(self):
         self.fmp_dir = Path(__file__).parent.parent / 'data' / 'fmp'
@@ -19,213 +20,140 @@ class MarketDataProcessor:
         print(f"Input directory: {self.fmp_dir}")
         print(f"Output directory: {self.output_dir}")
 
-    def load_latest_eod(self):
-        """Load the most recent EOD bulk file"""
-        eod_files = sorted(self.fmp_dir.glob('eod_bulk_*.csv'))
-        if not eod_files:
-            raise FileNotFoundError("No EOD bulk files found")
-
-        latest_file = eod_files[-1]
-        print(f"\nLoading EOD data: {latest_file.name}")
-
-        df = pd.read_csv(latest_file)
-        print(f"    Loaded {len(df):,} stocks")
-
-        return df
-
     def load_profiles(self):
-        """Load company profiles"""
+        """Load company profiles with market data"""
         profiles_file = self.fmp_dir / 'profiles_bulk.csv'
         if not profiles_file.exists():
-            raise FileNotFoundError("profiles_bulk.csv not found")
+            raise FileNotFoundError(f"profiles_bulk.csv not found at {profiles_file}")
 
         print(f"\nLoading company profiles...")
         df = pd.read_csv(profiles_file)
-        print(f"    Loaded {len(df):,} profiles")
-
-        return df
-
-    def load_key_metrics(self):
-        """Load the most recent key metrics"""
-        metrics_files = sorted(self.fmp_dir.glob('key_metrics_*.csv'))
-        if not metrics_files:
-            print("   WARNING: No key metrics files found (optional)")
-            return None
-
-        latest_file = metrics_files[-1]
-        print(f"\nLoading key metrics: {latest_file.name}")
-
-        df = pd.read_csv(latest_file)
-        print(f"    Loaded {len(df):,} metrics")
+        print(f"  Loaded {len(df):,} profiles")
 
         return df
 
     def create_screening_dataset(self):
         """
-        Combine all data sources into a single screening dataset
+        Create screening dataset from profiles
 
-        Output columns:
-        - symbol
-        - companyName
-        - sector
-        - industry
-        - price (latest close)
-        - marketCap
-        - volume
-        - change
-        - changePercent
-        - ceo
-        - employees
-        - description
-        - peRatio, pbRatio, dividendYield (if available)
+        Profiles already contain:
+        - symbol, price, marketCap
+        - change, changePercentage, volume
+        - companyName, industry, sector, description
+        - ceo, employees, website
         """
         print("\n" + "=" * 80)
         print("CREATING SCREENING DATASET")
         print("=" * 80)
 
-        # Load data
-        eod_df = self.load_latest_eod()
+        # Load profiles (has everything we need)
         profiles_df = self.load_profiles()
-        metrics_df = self.load_key_metrics()
 
-        # Merge EOD with Profiles
-        print(f"\nMerging datasets...")
+        # Select and rename columns for screening
+        print(f"\nPreparing screening dataset...")
 
-        # Start with EOD data (has latest prices)
-        screening_df = eod_df[[
-            'symbol', 'close', 'volume', 'change', 'changePercent'
-        ]].copy()
+        # Map profile columns to screening columns
+        column_mapping = {
+            'symbol': 'symbol',
+            'companyName': 'companyName',
+            'sector': 'sector',
+            'industry': 'industry',
+            'price': 'price',
+            'marketCap': 'marketCap',
+            'volume': 'volume',
+            'change': 'change',
+            'changePercentage': 'changePercent',  # Rename to match expected format
+            'ceo': 'ceo',
+            'employees': 'employees',
+            'description': 'description',
+            'website': 'website',
+            'exchange': 'exchange',
+            'country': 'country',
+            'city': 'city',
+            'state': 'state',
+            'zip': 'zip',
+            'dcfDiff': 'dcfDiff',
+            'dcf': 'dcf',
+            'image': 'image',
+            'ipoDate': 'ipoDate',
+            'defaultImage': 'defaultImage',
+            'isEtf': 'isEtf',
+            'isActivelyTrading': 'isActivelyTrading',
+            'isAdr': 'isAdr',
+            'isFund': 'isFund'
+        }
 
-        screening_df.rename(columns={'close': 'price'}, inplace=True)
+        # Select only columns that exist in the dataframe
+        available_columns = {k: v for k, v in column_mapping.items() if k in profiles_df.columns}
+        screening_df = profiles_df[list(available_columns.keys())].copy()
+        screening_df.rename(columns=available_columns, inplace=True)
 
-        # Merge profiles
-        if profiles_df is not None:
-            profiles_subset = profiles_df[[
-                'symbol', 'companyName', 'sector', 'industry', 'mktCap',
-                'ceo', 'fullTimeEmployees', 'description', 'exchange', 'country'
-            ]].copy()
-
-            profiles_subset.rename(columns={
-                'mktCap': 'marketCap',
-                'fullTimeEmployees': 'employees'
-            }, inplace=True)
-
-            screening_df = screening_df.merge(
-                profiles_subset, on='symbol', how='left'
-            )
-
-        # Merge key metrics
-        if metrics_df is not None:
-            metrics_subset = metrics_df[[
-                'symbol', 'peRatio', 'pbRatio', 'dividendYield',
-                'enterpriseValue', 'revenuePerShare'
-            ]].copy()
-
-            screening_df = screening_df.merge(
-                metrics_subset, on='symbol', how='left'
-            )
-
-        print(f"    Combined {len(screening_df):,} stocks")
-
-        # Calculate market cap from price * shares if not available
-        if 'marketCap' not in screening_df.columns:
-            print("   WARNING: marketCap not found, will need to calculate from price")
-
-        # Clean and format
+        # Basic data cleaning
         print(f"\nCleaning data...")
 
-        # Remove stocks with missing critical data
+        # Convert numeric columns
+        numeric_columns = ['price', 'marketCap', 'volume', 'change', 'changePercent']
+        for col in numeric_columns:
+            if col in screening_df.columns:
+                screening_df[col] = pd.to_numeric(screening_df[col], errors='coerce')
+
+        # Filter out invalid stocks
         initial_count = len(screening_df)
-        screening_df = screening_df.dropna(subset=['symbol', 'price'])
-        removed = initial_count - len(screening_df)
-        if removed > 0:
-            print(f"   INFO: Removed {removed:,} stocks with missing critical data")
 
-        # Sort by market cap (largest first)
-        if 'marketCap' in screening_df.columns:
-            screening_df = screening_df.sort_values('marketCap', ascending=False)
-            print(f"    Sorted by market cap")
+        # Remove rows with missing critical data
+        screening_df = screening_df[screening_df['symbol'].notna()]
+        screening_df = screening_df[screening_df['companyName'].notna()]
 
-        # Save full dataset
-        output_file = self.output_dir / 'screening_data_full.csv'
+        # Remove rows with zero or negative market cap
+        screening_df = screening_df[screening_df['marketCap'] > 0]
+
+        # Remove rows with zero or negative price
+        screening_df = screening_df[screening_df['price'] > 0]
+
+        removed_count = initial_count - len(screening_df)
+        print(f"  Removed {removed_count:,} invalid entries")
+        print(f"  Kept {len(screening_df):,} valid stocks")
+
+        # Sort by market cap descending
+        screening_df = screening_df.sort_values('marketCap', ascending=False)
+
+        # Generate timestamp for output file
+        timestamp = datetime.now().strftime('%Y%m%d_%H%M')
+        output_file = self.output_dir / f'screening_dataset_{timestamp}.csv'
+
+        print(f"\nSaving screening dataset...")
         screening_df.to_csv(output_file, index=False)
-        print(f"\nSaved full dataset: {output_file}")
-        print(f"   {len(screening_df):,} stocks")
 
-        # Create filtered datasets
-        self.create_filtered_datasets(screening_df)
+        print(f"\n  SUCCESS: {output_file}")
+        print(f"  Stocks: {len(screening_df):,}")
+        print(f"  Columns: {len(screening_df.columns)}")
+
+        # Also create a "latest" symlink/copy for easy access
+        latest_file = self.output_dir / 'screening_dataset_latest.csv'
+        screening_df.to_csv(latest_file, index=False)
+        print(f"  Latest: {latest_file}")
+
+        # Show summary stats
+        print(f"\n" + "=" * 80)
+        print("DATASET SUMMARY")
+        print("=" * 80)
+        print(f"Total stocks: {len(screening_df):,}")
+        print(f"Avg market cap: ${screening_df['marketCap'].mean():,.0f}")
+        print(f"Median market cap: ${screening_df['marketCap'].median():,.0f}")
+        print(f"Largest market cap: ${screening_df['marketCap'].max():,.0f} ({screening_df.iloc[0]['symbol']})")
+        print(f"Smallest market cap: ${screening_df['marketCap'].min():,.0f}")
+
+        if 'sector' in screening_df.columns:
+            print(f"\nTop sectors:")
+            sector_counts = screening_df['sector'].value_counts().head(5)
+            for sector, count in sector_counts.items():
+                print(f"  {sector}: {count:,}")
 
         return screening_df
 
-    def create_filtered_datasets(self, df):
-        """Create pre-filtered datasets for common screening criteria"""
-        print(f"\nCreating filtered datasets...")
-
-        if 'marketCap' not in df.columns:
-            print("   WARNING: Skipping market cap filters (marketCap column not available)")
-            return
-
-        # Filter 1: Large cap (>$10B)
-        large_cap = df[df['marketCap'] > 10_000_000_000].copy()
-        output_file = self.output_dir / 'screening_data_large_cap.csv'
-        large_cap.to_csv(output_file, index=False)
-        print(f"    Large cap (>$10B): {len(large_cap):,} stocks -> {output_file.name}")
-
-        # Filter 2: Mid cap ($2B-$10B)
-        mid_cap = df[
-            (df['marketCap'] >= 2_000_000_000) &
-            (df['marketCap'] <= 10_000_000_000)
-        ].copy()
-        output_file = self.output_dir / 'screening_data_mid_cap.csv'
-        mid_cap.to_csv(output_file, index=False)
-        print(f"    Mid cap ($2B-$10B): {len(mid_cap):,} stocks -> {output_file.name}")
-
-        # Filter 3: Small cap ($300M-$2B)
-        small_cap = df[
-            (df['marketCap'] >= 300_000_000) &
-            (df['marketCap'] < 2_000_000_000)
-        ].copy()
-        output_file = self.output_dir / 'screening_data_small_cap.csv'
-        small_cap.to_csv(output_file, index=False)
-        print(f"    Small cap ($300M-$2B): {len(small_cap):,} stocks -> {output_file.name}")
-
-        # Filter 4: US stocks only (if country available)
-        if 'country' in df.columns:
-            us_stocks = df[df['country'] == 'US'].copy()
-            output_file = self.output_dir / 'screening_data_us_only.csv'
-            us_stocks.to_csv(output_file, index=False)
-            print(f"    US stocks only: {len(us_stocks):,} stocks -> {output_file.name}")
-
-    def generate_summary_report(self, df):
-        """Generate summary statistics"""
-        print("\n" + "=" * 80)
-        print("SUMMARY STATISTICS")
-        print("=" * 80)
-
-        print(f"\nTotal stocks: {len(df):,}")
-
-        if 'marketCap' in df.columns:
-            print(f"\nMarket Cap Distribution:")
-            print(f"  Average: ${df['marketCap'].mean()/1e9:.2f}B")
-            print(f"  Median:  ${df['marketCap'].median()/1e9:.2f}B")
-            print(f"  Min:     ${df['marketCap'].min()/1e9:.2f}B")
-            print(f"  Max:     ${df['marketCap'].max()/1e9:.2f}B")
-
-        if 'sector' in df.columns:
-            print(f"\nTop 5 Sectors:")
-            top_sectors = df['sector'].value_counts().head(5)
-            for sector, count in top_sectors.items():
-                print(f"  {sector}: {count:,} stocks")
-
-        if 'exchange' in df.columns:
-            print(f"\nExchanges:")
-            exchanges = df['exchange'].value_counts()
-            for exchange, count in exchanges.items():
-                print(f"  {exchange}: {count:,} stocks")
-
 
 def main():
-    """Main processing pipeline"""
+    """Process FMP bulk data into screening datasets"""
     print("=" * 80)
     print("FMP BULK DATA PROCESSOR")
     print("=" * 80)
@@ -233,32 +161,22 @@ def main():
     try:
         processor = MarketDataProcessor()
         df = processor.create_screening_dataset()
-        processor.generate_summary_report(df)
 
         print("\n" + "=" * 80)
-        print(" PROCESSING COMPLETE!")
+        print("PROCESSING COMPLETE")
         print("=" * 80)
-        print("\nOutput files in data/ directory:")
-        print("   - screening_data_full.csv (all stocks)")
-        print("   - screening_data_large_cap.csv (>$10B)")
-        print("   - screening_data_mid_cap.csv ($2B-$10B)")
-        print("   - screening_data_small_cap.csv ($300M-$2B)")
-        print("   - screening_data_us_only.csv (US only)")
 
     except FileNotFoundError as e:
-        error_msg = str(e)
-        if "EOD bulk files" in error_msg:
-            print(f"\nWARNING: {e}")
-            print("\nINFO: EOD files are optional for screening datasets.")
-            print("   The app only needs profiles_bulk.csv (already downloaded).")
-            print("\nSkipping screening dataset creation - not required for app.")
-            return  # Exit gracefully
-        else:
-            print(f"\n Error: {e}")
-            raise
+        print(f"\nWARNING: {e}")
+        print("The profiles bulk data needs to be downloaded first.")
+        print("Run: python scripts/download_fmp_bulk.py")
+        sys.exit(1)
+
     except Exception as e:
-        print(f"\n Error: {e}")
-        raise
+        print(f"\nERROR: {e}")
+        import traceback
+        traceback.print_exc()
+        sys.exit(1)
 
 
 if __name__ == "__main__":
