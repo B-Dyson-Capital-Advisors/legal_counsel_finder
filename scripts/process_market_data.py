@@ -32,25 +32,74 @@ class MarketDataProcessor:
 
         return df
 
-    def create_screening_dataset(self):
+    def create_stock_reference(self, profiles_df):
         """
-        Create screening dataset from profiles
+        Create compact stock reference file for the app
 
-        Profiles already contain:
-        - symbol, price, marketCap
-        - change, changePercentage, volume
-        - companyName, industry, sector, description
-        - ceo, employees, website
+        Filters to US stocks only (NYSE/NASDAQ) and keeps only essential columns
+        This file is small enough to commit to git (~0.5 MB vs 91 MB profiles)
         """
         print("\n" + "=" * 80)
-        print("CREATING SCREENING DATASET")
+        print("CREATING STOCK REFERENCE (US STOCKS)")
+        print("=" * 80)
+
+        # Filter to US stocks only (same logic as app)
+        us_stocks = profiles_df[
+            (profiles_df['exchange'].isin(['NYSE', 'NASDAQ'])) &
+            (profiles_df['isEtf'] == False) &
+            (profiles_df['isAdr'] == False) &
+            (profiles_df['isFund'] == False) &
+            (profiles_df['isActivelyTrading'] == True)
+        ].copy()
+
+        print(f"\nFiltered to {len(us_stocks):,} US stocks (NYSE/NASDAQ)")
+
+        # Keep only essential columns
+        essential_columns = ['symbol', 'companyName', 'exchange', 'marketCap', 'sector', 'industry']
+        reference_df = us_stocks[essential_columns].copy()
+
+        # Clean data
+        reference_df['marketCap'] = pd.to_numeric(reference_df['marketCap'], errors='coerce')
+        reference_df = reference_df[reference_df['marketCap'] > 0]
+        reference_df = reference_df.dropna(subset=['symbol', 'companyName'])
+        reference_df = reference_df.drop_duplicates(subset=['symbol'], keep='first')
+
+        # Sort by market cap descending
+        reference_df = reference_df.sort_values('marketCap', ascending=False)
+
+        # Save compact reference file (small enough to commit to git)
+        output_file = self.output_dir / 'stock_reference_fmp.csv'
+        reference_df.to_csv(output_file, index=False)
+
+        file_size_mb = output_file.stat().st_size / 1e6
+        print(f"\n  SUCCESS: {output_file}")
+        print(f"  Stocks: {len(reference_df):,}")
+        print(f"  Size: {file_size_mb:.1f} MB")
+        print(f"  Columns: {', '.join(essential_columns)}")
+
+        return reference_df
+
+    def create_screening_dataset(self):
+        """
+        Create full screening dataset from profiles
+
+        This is the complete dataset with all columns and all exchanges.
+        Note: This file is large (79 MB) and gitignored - only for local/workflow use.
+        """
+        print("\n" + "=" * 80)
+        print("CREATING FULL SCREENING DATASET")
         print("=" * 80)
 
         # Load profiles (has everything we need)
         profiles_df = self.load_profiles()
 
-        # Select and rename columns for screening
-        print(f"\nPreparing screening dataset...")
+        # First create the compact US stock reference (committable to git)
+        reference_df = self.create_stock_reference(profiles_df)
+
+        # Now create full screening dataset (all stocks, all columns)
+        print("\n" + "=" * 80)
+        print("CREATING FULL SCREENING DATASET (ALL EXCHANGES)")
+        print("=" * 80)
 
         # Map profile columns to screening columns
         column_mapping = {
@@ -62,7 +111,7 @@ class MarketDataProcessor:
             'marketCap': 'marketCap',
             'volume': 'volume',
             'change': 'change',
-            'changePercentage': 'changePercent',  # Rename to match expected format
+            'changePercentage': 'changePercent',
             'ceo': 'ceo',
             'employees': 'employees',
             'description': 'description',
@@ -83,13 +132,10 @@ class MarketDataProcessor:
             'isFund': 'isFund'
         }
 
-        # Select only columns that exist in the dataframe
+        # Select only columns that exist
         available_columns = {k: v for k, v in column_mapping.items() if k in profiles_df.columns}
         screening_df = profiles_df[list(available_columns.keys())].copy()
         screening_df.rename(columns=available_columns, inplace=True)
-
-        # Basic data cleaning
-        print(f"\nCleaning data...")
 
         # Convert numeric columns
         numeric_columns = ['price', 'marketCap', 'volume', 'change', 'changePercent']
@@ -99,38 +145,30 @@ class MarketDataProcessor:
 
         # Filter out invalid stocks
         initial_count = len(screening_df)
-
-        # Remove rows with missing critical data
         screening_df = screening_df[screening_df['symbol'].notna()]
         screening_df = screening_df[screening_df['companyName'].notna()]
-
-        # Remove rows with zero or negative market cap
         screening_df = screening_df[screening_df['marketCap'] > 0]
-
-        # Remove rows with zero or negative price
         screening_df = screening_df[screening_df['price'] > 0]
 
         removed_count = initial_count - len(screening_df)
-        print(f"  Removed {removed_count:,} invalid entries")
+        print(f"\n  Removed {removed_count:,} invalid entries")
         print(f"  Kept {len(screening_df):,} valid stocks")
 
         # Sort by market cap descending
         screening_df = screening_df.sort_values('marketCap', ascending=False)
 
-        # Generate timestamp for output file
+        # Save full dataset (gitignored - too large)
         timestamp = datetime.now().strftime('%Y%m%d_%H%M')
         output_file = self.output_dir / f'screening_dataset_{timestamp}.csv'
-
-        print(f"\nSaving screening dataset...")
         screening_df.to_csv(output_file, index=False)
 
-        print(f"\n  SUCCESS: {output_file}")
-        print(f"  Stocks: {len(screening_df):,}")
-        print(f"  Columns: {len(screening_df.columns)}")
-
-        # Also create a "latest" symlink/copy for easy access
         latest_file = self.output_dir / 'screening_dataset_latest.csv'
         screening_df.to_csv(latest_file, index=False)
+
+        file_size_mb = output_file.stat().st_size / 1e6
+        print(f"\n  SUCCESS: {output_file}")
+        print(f"  Stocks: {len(screening_df):,}")
+        print(f"  Size: {file_size_mb:.1f} MB (gitignored)")
         print(f"  Latest: {latest_file}")
 
         # Show summary stats
@@ -138,10 +176,10 @@ class MarketDataProcessor:
         print("DATASET SUMMARY")
         print("=" * 80)
         print(f"Total stocks: {len(screening_df):,}")
+        print(f"US stocks (committable): {len(reference_df):,} (0.5 MB)")
         print(f"Avg market cap: ${screening_df['marketCap'].mean():,.0f}")
         print(f"Median market cap: ${screening_df['marketCap'].median():,.0f}")
         print(f"Largest market cap: ${screening_df['marketCap'].max():,.0f} ({screening_df.iloc[0]['symbol']})")
-        print(f"Smallest market cap: ${screening_df['marketCap'].min():,.0f}")
 
         if 'sector' in screening_df.columns:
             print(f"\nTop sectors:")
@@ -165,6 +203,9 @@ def main():
         print("\n" + "=" * 80)
         print("PROCESSING COMPLETE")
         print("=" * 80)
+        print("\nGenerated files:")
+        print("  - data/stock_reference_fmp.csv (committable, 0.5 MB)")
+        print("  - data/screening_dataset_*.csv (gitignored, large)")
 
     except FileNotFoundError as e:
         print(f"\nWARNING: {e}")

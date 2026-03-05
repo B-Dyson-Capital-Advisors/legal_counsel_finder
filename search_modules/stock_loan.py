@@ -59,58 +59,21 @@ def fetch_shortstock_with_market_cap():
     """
     NEW FLOW: Start with FMP data, filter US stocks, then join with IB short interest
 
-    1. Load FMP bulk profiles
-    2. Filter: US exchanges (NYSE/NASDAQ), no ETF/ADR/fund, actively trading only
-    3. Join with Interactive Brokers FTP short interest data
+    1. Load US stock reference (NYSE/NASDAQ only, pre-filtered)
+    2. Join with Interactive Brokers FTP short interest data
 
     Returns: Filtered US stocks with market cap + short interest data
     """
     try:
-        # Step 1: Load FMP bulk profiles
-        reference_df = load_stock_reference()
+        # Step 1: Load pre-filtered US stock reference
+        us_stocks = load_stock_reference()
 
-        if reference_df is None:
+        if us_stocks is None:
             # Fallback to old flow if FMP data not available
             stock_loan_df = fetch_shortstock_data()
             return stock_loan_df
 
-        # Step 2: Filter for US stocks only (NYSE/NASDAQ)
-        from pathlib import Path
-        import pandas as pd
-
-        fmp_file = Path(__file__).parent.parent / "data" / "fmp" / "profiles_bulk.csv"
-
-        if not fmp_file.exists():
-            # Fallback to old flow
-            stock_loan_df = fetch_shortstock_data()
-            return stock_loan_df
-
-        # Load full FMP data for filtering
-        fmp_df = pd.read_csv(fmp_file)
-
-        # Filter criteria:
-        # - US exchanges: NYSE or NASDAQ only
-        # - Not ETF, ADR, or fund
-        # - Actively trading only
-        us_stocks = fmp_df[
-            (fmp_df['exchange'].isin(['NYSE', 'NASDAQ'])) &
-            (fmp_df['isEtf'] == False) &
-            (fmp_df['isAdr'] == False) &
-            (fmp_df['isFund'] == False) &
-            (fmp_df['isActivelyTrading'] == True)
-        ].copy()
-
-        # Select relevant columns
-        us_stocks = us_stocks[['symbol', 'companyName', 'exchange', 'marketCap', 'sector', 'industry']].copy()
-        us_stocks.columns = ['Symbol', 'Company Name', 'Exchange', 'Market Cap', 'Sector', 'Industry']
-
-        # Clean symbols
-        us_stocks['Symbol'] = us_stocks['Symbol'].str.strip().str.upper()
-
-        # Remove duplicates
-        us_stocks = us_stocks.drop_duplicates(subset=['Symbol'], keep='first')
-
-        # Step 3: Fetch IB short interest data
+        # Step 2: Fetch IB short interest data
         stock_loan_df = fetch_shortstock_data()
 
         # Clean IB symbols for matching

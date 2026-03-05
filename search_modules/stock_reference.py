@@ -5,32 +5,23 @@ from pathlib import Path
 @st.cache_data(ttl=3600, show_spinner=False)
 def load_stock_reference():
     """
-    Load US stock reference (NYSE/NASDAQ only) with market cap from FMP bulk data
+    Load US stock reference (NYSE/NASDAQ only) with market cap from FMP data
 
-    Filters applied:
+    Loads from compact stock_reference_fmp.csv (0.5 MB, committed to git)
+    Pre-filtered to US stocks only:
     - Exchange: NYSE or NASDAQ only
     - No ETFs, ADRs, or funds
     - Actively trading only
     """
     try:
-        # First try to load from FMP bulk data
-        fmp_file = Path(__file__).parent.parent / "data" / "fmp" / "profiles_bulk.csv"
+        # First try to load from compact FMP reference file (committed to git)
+        fmp_reference = Path(__file__).parent.parent / "data" / "stock_reference_fmp.csv"
 
-        if fmp_file.exists():
-            # Load FMP bulk profiles
-            df = pd.read_csv(fmp_file)
+        if fmp_reference.exists():
+            # Load pre-filtered, compact reference (6K US stocks, 0.5 MB)
+            df = pd.read_csv(fmp_reference)
 
-            # Filter to US stocks only (same as stock_loan.py)
-            df = df[
-                (df['exchange'].isin(['NYSE', 'NASDAQ'])) &
-                (df['isEtf'] == False) &
-                (df['isAdr'] == False) &
-                (df['isFund'] == False) &
-                (df['isActivelyTrading'] == True)
-            ].copy()
-
-            # Select and rename columns
-            df = df[['symbol', 'companyName', 'exchange', 'marketCap', 'sector', 'industry']].copy()
+            # Rename columns to standard format
             df.columns = ['Symbol', 'Company Name', 'Exchange', 'Market Cap', 'Sector', 'Industry']
 
             # Clean up Symbol column

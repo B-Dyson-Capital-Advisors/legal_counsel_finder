@@ -43,6 +43,9 @@ secrets.toml
 data/fmp/
 data/screening_*.csv
 
+# EXCEPT: Allow compact stock reference (small, committable)
+!data/stock_reference_fmp.csv
+
 # IDEs
 .vscode/
 .idea/
