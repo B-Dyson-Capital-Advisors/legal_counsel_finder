@@ -22,17 +22,17 @@ def load_stock_reference():
             df = pd.read_csv(fmp_reference)
 
             # Standardize column names (handle both old and new formats)
-            # New format: symbol, companyName, exchange, marketCap, ceo, ipoDate, enterpriseValueTTM
+            # New format: symbol, companyName, exchange, marketCap, price, ceo, enterpriseValueTTM
             # Old format: symbol, companyName, exchange, marketCap, sector, industry
             column_renames = {
                 'symbol': 'Symbol',
                 'companyName': 'Company Name',
                 'exchange': 'Exchange',
                 'marketCap': 'Market Cap',
+                'price': 'Price',
                 'sector': 'Sector',
                 'industry': 'Industry',
                 'ceo': 'CEO',
-                'ipoDate': 'IPO Date',
                 'enterpriseValueTTM': 'Enterprise Value TTM'
             }
 
@@ -142,14 +142,14 @@ def filter_and_enrich_tickers(df, ticker_column='Ticker'):
         merge_columns.append('Company Name')
     if 'Exchange' in reference_df.columns:
         merge_columns.append('Exchange')
+    if 'Price' in reference_df.columns:
+        merge_columns.append('Price')
     if 'Sector' in reference_df.columns:
         merge_columns.append('Sector')
     if 'Industry' in reference_df.columns:
         merge_columns.append('Industry')
     if 'CEO' in reference_df.columns:
         merge_columns.append('CEO')
-    if 'IPO Date' in reference_df.columns:
-        merge_columns.append('IPO Date')
     if 'Enterprise Value TTM' in reference_df.columns:
         merge_columns.append('Enterprise Value TTM')
 

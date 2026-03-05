@@ -111,7 +111,7 @@ class MarketDataProcessor:
         print(f"Filtered to {len(us_stocks):,} US stocks (NYSE/NASDAQ, no ETF/ADR/fund)")
 
         # Keep only required columns
-        required_columns = ['symbol', 'companyName', 'exchange', 'marketCap', 'ceo', 'ipoDate']
+        required_columns = ['symbol', 'companyName', 'exchange', 'marketCap', 'price', 'ceo']
         if 'enterpriseValueTTM' in us_stocks.columns:
             required_columns.append('enterpriseValueTTM')
 
@@ -189,7 +189,6 @@ class MarketDataProcessor:
             'dcfDiff': 'dcfDiff',
             'dcf': 'dcf',
             'image': 'image',
-            'ipoDate': 'ipoDate',
             'defaultImage': 'defaultImage',
             'isEtf': 'isEtf',
             'isActivelyTrading': 'isActivelyTrading',

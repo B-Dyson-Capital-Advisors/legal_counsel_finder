@@ -296,8 +296,8 @@ def search_entity_for_companies(entity_name, entity_type, start_date, end_date, 
         if progress_callback:
             progress_callback(f"Note: Could not fetch stock loan data ({str(e)})")
 
-    # Add back " US Equity" suffix for Bloomberg format
-    result_df['Ticker'] = result_df['Ticker_Clean'] + ' US Equity'
+    # Use clean ticker (just symbol, no suffix)
+    result_df['Ticker'] = result_df['Ticker_Clean']
 
     # Drop temporary column
     result_df = result_df.drop('Ticker_Clean', axis=1)
@@ -305,20 +305,21 @@ def search_entity_for_companies(entity_name, entity_type, start_date, end_date, 
     # Format Filing Date
     result_df['Filing Date'] = pd.to_datetime(result_df['Filing Date']).dt.strftime('%Y-%m-%d')
 
-    # Reorder columns: Company, Ticker, Exchange, Market Cap, CEO, IPO Date, Enterprise Value, Sector, Industry, Stock Loan, Filing Date
+    # Reorder columns: Company, Ticker, Exchange, Price, Market Cap, CEO, Enterprise Value, Sector, Industry, Stock Loan, Filing Date
     final_columns = ['Company', 'Ticker']
 
     # Add FMP enrichment columns
     if 'Exchange' in result_df.columns:
         final_columns.append('Exchange')
 
+    if 'Price' in result_df.columns:
+        final_columns.append('Price')
+
     final_columns.append('Market Cap')
 
     # Add new FMP columns
     if 'CEO' in result_df.columns:
         final_columns.append('CEO')
-    if 'IPO Date' in result_df.columns:
-        final_columns.append('IPO Date')
     if 'Enterprise Value TTM' in result_df.columns:
         final_columns.append('Enterprise Value TTM')
 
