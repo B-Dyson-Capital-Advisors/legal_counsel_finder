@@ -17,9 +17,9 @@ JPM,JPMorgan Chase & Co.,NYSE,807464522751.0,Financial Services,Banks - Diversif
 JPM-PD,JPMorgan Chase & Co.,NYSE,805001493199.0,Financial Services,Banks - Diversified
 JPM-PC,JPMorgan Chase & Co.,NYSE,798254647217.0,Financial Services,Banks - Diversified
 XOM,Exxon Mobil Corporation,NYSE,624389503432.0,Energy,Oil & Gas Integrated
-V,Visa Inc.,NYSE,617878861508.0,Financial Services,Financial - Credit Services
+V,Visa Inc.,NYSE,617878847407.0,Financial Services,Financial - Credit Services
 JNJ,Johnson & Johnson,NYSE,591148209001.0,Healthcare,Drug Manufacturers - General
-MA,Mastercard Incorporated,NYSE,466673508488.0,Financial Services,Financial - Credit Services
+MA,Mastercard Incorporated,NYSE,466673500121.0,Financial Services,Financial - Credit Services
 BAC-PL,Bank of America Corporation,NYSE,465989275290.0,Financial Services,Banks - Diversified
 MU,"Micron Technology, Inc.",NASDAQ,451070346531.0,Technology,Semiconductors
 COST,Costco Wholesale Corporation,NASDAQ,446861090830.0,Consumer Defensive,Discount Stores
@@ -29,12 +29,12 @@ ABBV,AbbVie Inc.,NYSE,417623812963.0,Healthcare,Drug Manufacturers - General
 CVX,Chevron Corporation,NYSE,371879780388.0,Energy,Oil & Gas Integrated
 PG,The Procter & Gamble Company,NYSE,369904920807.0,Consumer Defensive,Household & Personal Products
 HD,"The Home Depot, Inc.",NYSE,367453244228.0,Consumer Cyclical,Home Improvement
-BAC,Bank of America Corporation,NYSE,367315540299.0,Financial Services,Banks - Diversified
+BAC,Bank of America Corporation,NYSE,367315517413.0,Financial Services,Banks - Diversified
 GE,GE Aerospace,NYSE,358436307621.0,Industrials,Aerospace & Defense
 BAC-PK,Bank of America Corporation,NYSE,355707628541.0,Financial Services,Banks - Diversified
 BAC-PB,Bank of America Corporation,NYSE,352837529888.0,Financial Services,Banks - Diversified
 PLTR,Palantir Technologies Inc.,NASDAQ,351030289300.0,Technology,Software - Infrastructure
-CAT,Caterpillar Inc.,NYSE,342547016832.0,Industrials,Agricultural - Machinery
+CAT,Caterpillar Inc.,NYSE,342547005121.0,Industrials,Agricultural - Machinery
 KO,The Coca-Cola Company,NYSE,335955636971.0,Consumer Defensive,Beverages - Non-Alcoholic
 BML-PL,Bank of America Corporation,NYSE,333468023279.0,Financial Services,Banks - Diversified
 BAC-PE,Bank of America Corporation,NYSE,331604281567.0,Financial Services,Banks - Diversified
@@ -52,7 +52,7 @@ PM,Philip Morris International Inc.,NYSE,278707911824.0,Consumer Defensive,Tobac
 LRCX,Lam Research Corporation,NASDAQ,278463445290.0,Technology,Semiconductors
 MS,Morgan Stanley,NYSE,266093613321.0,Financial Services,Financial - Capital Markets
 UNH,UnitedHealth Group Incorporated,NYSE,264468643495.0,Healthcare,Medical - Healthcare Plans
-WFC,Wells Fargo & Company,NYSE,263463364099.0,Financial Services,Banks - Diversified
+WFC,Wells Fargo & Company,NYSE,263463370730.0,Financial Services,Banks - Diversified
 GS,"The Goldman Sachs Group, Inc.",NYSE,262534870506.0,Financial Services,Financial - Capital Markets
 WFC-PL,Wells Fargo & Company,NYSE,248903123324.0,Financial Services,Banks - Diversified
 TMUS,"T-Mobile US, Inc.",NASDAQ,245747082889.0,Communication Services,Telecommunications Services
@@ -72,7 +72,7 @@ AMGN,Amgen Inc.,NASDAQ,204452197097.0,Healthcare,Drug Manufacturers - General
 WFC-PY,Wells Fargo & Company,NYSE,201031175707.0,Financial Services,Banks - Diversified
 C,Citigroup Inc.,NYSE,199127428164.0,Financial Services,Banks - Diversified
 ABT,Abbott Laboratories,NYSE,196531938478.0,Healthcare,Medical - Devices
-KLAC,KLA Corporation,NASDAQ,193923262626.0,Technology,Semiconductors
+KLAC,KLA Corporation,NASDAQ,193923268529.0,Technology,Semiconductors
 NEE,"NextEra Energy, Inc.",NYSE,192933952000.0,Utilities,Regulated Electric
 TMO,Thermo Fisher Scientific Inc.,NYSE,192621764769.0,Healthcare,Medical - Diagnostics & Research
 GILD,"Gilead Sciences, Inc.",NASDAQ,184003272400.0,Healthcare,Drug Manufacturers - General
@@ -85,9 +85,9 @@ ISRG,"Intuitive Surgical, Inc.",NASDAQ,177984172180.0,Healthcare,Medical - Instr
 SCHW,The Charles Schwab Corporation,NYSE,174333652160.0,Financial Services,Financial - Capital Markets
 C-PN,Citigroup Capital XIII TR PFD SECS,NYSE,174123357220.0,Financial Services,Asset Management
 TTE,TotalEnergies SE,NYSE,171301066760.0,Energy,Oil & Gas Integrated
-SCCO,Southern Copper Corporation,NYSE,170713972920.0,Basic Materials,Copper
+SCCO,Southern Copper Corporation,NYSE,170714045251.0,Basic Materials,Copper
 ANET,"Arista Networks, Inc.",NYSE,169789417179.0,Technology,Computer Hardware
-SHOP,Shopify Inc.,NASDAQ,169204087573.0,Technology,Software - Application
+SHOP,Shopify Inc.,NASDAQ,169204088740.0,Technology,Software - Application
 ADI,"Analog Devices, Inc.",NASDAQ,166726601657.0,Technology,Semiconductors
 DE,Deere & Company,NYSE,166450560190.0,Industrials,Agricultural - Machinery
 TD,The Toronto-Dominion Bank,NYSE,166302845641.0,Financial Services,Banks - Diversified
@@ -98,7 +98,7 @@ BAC-PM,Bank of America Corporation,NYSE,162623568800.0,Financial Services,Banks 
 UBER,"Uber Technologies, Inc.",NYSE,159265701923.0,Technology,Software - Application
 UNP,Union Pacific Corporation,NYSE,158257379700.0,Industrials,Railroads
 HON,Honeywell International Inc.,NASDAQ,156163206552.0,Industrials,Conglomerates
-LMT,Lockheed Martin Corporation,NYSE,153759203499.0,Industrials,Aerospace & Defense
+LMT,Lockheed Martin Corporation,NYSE,153759202835.0,Industrials,Aerospace & Defense
 BAC-PN,Bank of America Corporation,NYSE,152145616000.0,Financial Services,Banks - Diversified
 PFE,Pfizer Inc.,NYSE,151353535034.0,Healthcare,Drug Manufacturers - General
 T-PA,AT&T Inc.,NYSE,149183256907.0,Communication Services,Telecommunications Services
@@ -115,10 +115,10 @@ ETN,Eaton Corporation plc,NYSE,137672264000.0,Industrials,Industrial - Machinery
 BKNG,Booking Holdings Inc.,NASDAQ,137109106554.0,Consumer Cyclical,Travel Services
 BX,Blackstone Inc.,NYSE,137092018475.0,Financial Services,Asset Management
 SPGI,S&P Global Inc.,NYSE,134897393318.0,Financial Services,Financial - Data & Stock Exchanges
-CB,Chubb Limited,NYSE,131501131140.0,Financial Services,Insurance - Property & Casualty
+CB,Chubb Limited,NYSE,131501088704.0,Financial Services,Insurance - Property & Casualty
 BAC-PO,Bank of America Corporation,NYSE,131117943600.0,Financial Services,Banks - Diversified
 NEM,Newmont Corporation,NYSE,130264068249.0,Basic Materials,Gold
-ACN,Accenture plc,NYSE,130229159550.0,Technology,Information Technology Services
+ACN,Accenture plc,NYSE,130229166060.0,Technology,Information Technology Services
 PLD,"Prologis, Inc.",NYSE,129599115780.0,Real Estate,REIT - Industrial
 BAC-PQ,Bank of America Corporation,NYSE,127314303200.0,Financial Services,Banks - Diversified
 BMY,Bristol-Myers Squibb Company,NYSE,126933406033.0,Healthcare,Drug Manufacturers - General
@@ -139,7 +139,7 @@ ENB,Enbridge Inc.,NYSE,118189740038.0,Energy,Oil & Gas Midstream
 CMCSA,Comcast Corporation,NASDAQ,116932570141.0,Communication Services,Telecommunications Services
 AEM,Agnico Eagle Mines Limited,NYSE,116604618808.0,Basic Materials,Gold
 CME,CME Group Inc.,NASDAQ,115043974080.0,Financial Services,Financial - Data & Stock Exchanges
-MO,"Altria Group, Inc.",NYSE,114351111299.0,Consumer Defensive,Tobacco
+MO,"Altria Group, Inc.",NYSE,114351112185.0,Consumer Defensive,Tobacco
 ADBE,Adobe Inc.,NASDAQ,114328037736.0,Technology,Software - Infrastructure
 SBUX,Starbucks Corporation,NASDAQ,110682995000.0,Consumer Cyclical,Restaurants
 SPOT,Spotify Technology S.A.,NYSE,109965926460.0,Communication Services,Internet Content & Information
@@ -157,7 +157,7 @@ CVS,CVS Health Corporation,NYSE,102501959700.0,Healthcare,Medical - Healthcare P
 CEG,Constellation Energy Corporation,NASDAQ,100822849100.0,Utilities,Renewable Utilities
 PBR-A,Petróleo Brasileiro S.A. - Petrobras,NYSE,99822956886.0,Energy,Oil & Gas Integrated
 GD,General Dynamics Corporation,NYSE,98995098565.0,Industrials,Aerospace & Defense
-TT,Trane Technologies plc,NYSE,98684945065.0,Industrials,Construction
+TT,Trane Technologies plc,NYSE,98684944175.0,Industrials,Construction
 DELL,Dell Technologies Inc.,NYSE,98586447949.0,Technology,Computer Hardware
 WM,"Waste Management, Inc.",NYSE,98393763775.0,Industrials,Waste Management
 DUK-PA,Duke Energy Corporation,NYSE,97911078331.0,Utilities,Regulated Electric
@@ -171,14 +171,14 @@ UPS,"United Parcel Service, Inc.",NYSE,93825740060.0,Industrials,Integrated Frei
 BNS,The Bank of Nova Scotia,NYSE,92682314477.0,Financial Services,Banks - Diversified
 WMB,"The Williams Companies, Inc.",NYSE,92557601200.0,Energy,Oil & Gas Midstream
 CNQ,Canadian Natural Resources Limited,NYSE,92031667260.0,Energy,Oil & Gas Exploration & Production
-FDX,FedEx Corporation,NYSE,90628131479.0,Industrials,Integrated Freight & Logistics
-MRSH,"Marsh & McLennan Companies, Inc.",NYSE,90554904882.0,Financial Services,Insurance - Brokers
+FDX,FedEx Corporation,NYSE,90628128406.0,Industrials,Integrated Freight & Logistics
+MRSH,"Marsh & McLennan Companies, Inc.",NYSE,90554908578.0,Financial Services,Insurance - Brokers
 MELI,"MercadoLibre, Inc.",NASDAQ,89684835873.0,Consumer Cyclical,Specialty Retail
 F-PD,Ford Motor Company 6.500% Notes,NYSE,89422908400.0,Consumer Cyclical,Auto - Manufacturers
 AMT,American Tower Corporation,NYSE,89322375668.0,Real Estate,REIT - Specialty
 MAR,"Marriott International, Inc.",NASDAQ,89019060900.0,Consumer Cyclical,Travel Lodging
 WDC,Western Digital Corporation,NASDAQ,88590629400.0,Technology,Computer Hardware
-SNDK,Sandisk Corporation,NASDAQ,88401636186.0,Technology,"Hardware, Equipment & Parts"
+SNDK,Sandisk Corporation,NASDAQ,88421837088.0,Technology,"Hardware, Equipment & Parts"
 ADP,"Automatic Data Processing, Inc.",NASDAQ,87830088378.0,Industrials,Staffing & Employment Services
 NKE,"NIKE, Inc.",NYSE,86659539489.0,Consumer Cyclical,Apparel - Footwear & Accessories
 PNC,"The PNC Financial Services Group, Inc.",NYSE,86264922060.0,Financial Services,Banks - Regional
@@ -196,23 +196,23 @@ SNPS,"Synopsys, Inc.",NASDAQ,82559390760.0,Technology,Software - Infrastructure
 BK,The Bank of New York Mellon Corporation,NYSE,82559158410.0,Financial Services,Asset Management
 REGN,"Regeneron Pharmaceuticals, Inc.",NASDAQ,81823344750.0,Healthcare,Biotechnology
 STX,Seagate Technology Holdings plc,NASDAQ,81779555730.0,Technology,Computer Hardware
-EMR,Emerson Electric Co.,NYSE,81651888086.0,Industrials,Industrial - Machinery
+EMR,Emerson Electric Co.,NYSE,81651892152.0,Industrials,Industrial - Machinery
 ABNB,"Airbnb, Inc.",NASDAQ,81258120241.0,Consumer Cyclical,Travel Services
-EPD,Enterprise Products Partners L.P.,NYSE,80482250616.0,Energy,Oil & Gas Midstream
-CTAS,Cintas Corporation,NASDAQ,80421565205.0,Industrials,Specialty Business Services
+EPD,Enterprise Products Partners L.P.,NYSE,80482246639.0,Energy,Oil & Gas Midstream
+CTAS,Cintas Corporation,NASDAQ,80421560202.0,Industrials,Specialty Business Services
 MSI,"Motorola Solutions, Inc.",NYSE,79648257942.0,Technology,Communication Equipment
 ORLY,"O'Reilly Automotive, Inc.",NASDAQ,79573688416.0,Consumer Cyclical,Auto - Parts
 CSX,CSX Corporation,NASDAQ,79551976800.0,Industrials,Railroads
 CMI,Cummins Inc.,NYSE,79314999900.0,Industrials,Industrial - Machinery
 B,Barrick Mining Corporation,NYSE,78356605674.0,Basic Materials,Gold
-RCL,Royal Caribbean Cruises Ltd.,NYSE,78325884359.0,Consumer Cyclical,Travel Services
+RCL,Royal Caribbean Cruises Ltd.,NYSE,78325882636.0,Consumer Cyclical,Travel Services
 CP,Canadian Pacific Kansas City Ltd.,NYSE,77929697609.0,Industrials,Railroads
 DASH,"DoorDash, Inc.",NASDAQ,77219290645.0,Communication Services,Internet Content & Information
 MNST,Monster Beverage Corporation,NASDAQ,76803637790.0,Consumer Defensive,Beverages - Non-Alcoholic
 CL,Colgate-Palmolive Company,NYSE,76371496108.0,Consumer Defensive,Household & Personal Products
 CI,Cigna Corporation,NYSE,76061411682.0,Healthcare,Medical - Healthcare Plans
 CRH,CRH plc,NYSE,75791700558.0,Basic Materials,Construction Materials
-MDLZ,"Mondelez International, Inc.",NASDAQ,75731138076.0,Consumer Defensive,Food Confectioners
+MDLZ,"Mondelez International, Inc.",NASDAQ,75731140600.0,Consumer Defensive,Food Confectioners
 KMI,"Kinder Morgan, Inc.",NYSE,75465432986.0,Energy,Oil & Gas Midstream
 BAM,Brookfield Asset Management Ltd.,NYSE,75155332982.0,Financial Services,Asset Management
 TDG,TransDigm Group Incorporated,NYSE,74269512173.0,Industrials,Aerospace & Defense
@@ -228,15 +228,15 @@ SLB,SLB N.V.,NYSE,71611353700.0,Energy,Oil & Gas Equipment & Services
 NSC,Norfolk Southern Corporation,NYSE,71375726706.0,Industrials,Railroads
 HLT,Hilton Worldwide Holdings Inc.,NYSE,70871804636.0,Consumer Cyclical,Travel Lodging
 USB-PS,"U.S. Bancorp Depositary Shares,",NYSE,70796275822.0,Financial Services,Banks - Regional
-VLO,Valero Energy Corporation,NYSE,70083033221.0,Energy,Oil & Gas Refining & Marketing
+VLO,Valero Energy Corporation,NYSE,70083035026.0,Energy,Oil & Gas Refining & Marketing
 MS-PA,Morgan Stanley,NYSE,70001853978.0,Financial Services,Financial - Capital Markets
 WPM,Wheaton Precious Metals Corp.,NYSE,69896053550.0,Basic Materials,Gold
 TRV,"The Travelers Companies, Inc.",NYSE,69602484247.0,Financial Services,Insurance - Property & Casualty
-ROST,"Ross Stores, Inc.",NASDAQ,69442317441.0,Consumer Cyclical,Apparel - Retail
+ROST,"Ross Stores, Inc.",NASDAQ,69442314238.0,Consumer Cyclical,Apparel - Retail
 EOG,"EOG Resources, Inc.",NYSE,69354928638.0,Energy,Oil & Gas Exploration & Production
 SU,Suncor Energy Inc.,NYSE,69353999794.0,Energy,Oil & Gas Integrated
 WBD,"Warner Bros. Discovery, Inc.",NASDAQ,69312851181.0,Communication Services,Entertainment
-LHX,"L3Harris Technologies, Inc.",NYSE,68975739175.0,Industrials,Aerospace & Defense
+LHX,"L3Harris Technologies, Inc.",NYSE,68975738806.0,Industrials,Aerospace & Defense
 CVNA,Carvana Co.,NYSE,68566258464.0,Consumer Cyclical,Auto - Dealerships
 MRVL,"Marvell Technology, Inc.",NASDAQ,68207695194.0,Technology,Semiconductors
 USB-PH,U.S. Bancorp,NYSE,67984945971.0,Financial Services,Banks - Regional
@@ -262,15 +262,15 @@ WFC-PZ,Wells Fargo & Company,NYSE,62914743342.0,Financial Services,Banks - Diver
 TFC,Truist Financial Corporation,NYSE,62823788347.0,Financial Services,Banks - Regional
 DLR,"Digital Realty Trust, Inc.",NYSE,62750971300.0,Real Estate,REIT - Office
 SRE,Sempra,NYSE,62259290288.0,Utilities,Diversified Utilities
-BDX,"Becton, Dickinson and Company",NYSE,62129986185.0,Healthcare,Medical - Instruments & Supplies
-AZO,"AutoZone, Inc.",NYSE,61823612088.0,Consumer Cyclical,Auto - Parts
+BDX,"Becton, Dickinson and Company",NYSE,62129987556.0,Healthcare,Medical - Instruments & Supplies
+AZO,"AutoZone, Inc.",NYSE,61823608371.0,Consumer Cyclical,Auto - Parts
 WFC-PA,Wells Fargo & Company,NYSE,61794124504.0,Financial Services,Banks - Diversified
 O,Realty Income Corporation,NYSE,61541040000.0,Real Estate,REIT - Retail
 TEL,TE Connectivity Ltd.,NYSE,61354785612.0,Technology,"Hardware, Equipment & Parts"
 APD,"Air Products and Chemicals, Inc.",NYSE,61052275200.0,Basic Materials,Chemicals - Specialty
 RCB,Ready Capital Corporation,NYSE,60343241058.0,Real Estate,REIT - Mortgage
 BKR,Baker Hughes Company,NASDAQ,60163807680.0,Energy,Oil & Gas Equipment & Services
-MPLX,MPLX Lp,NYSE,59905135980.0,Energy,Oil & Gas Midstream
+MPLX,MPLX Lp,NYSE,59905138631.0,Energy,Oil & Gas Midstream
 CTA-PB,E. I. du Pont de Nemours and Company,NYSE,59566204938.0,Basic Materials,Agricultural Inputs
 SOMN,The Southern Company,NYSE,59474406878.0,Utilities,Regulated Electric
 AFL,Aflac Incorporated,NYSE,58952334846.0,Financial Services,Insurance - Life
@@ -290,12 +290,12 @@ D,"Dominion Energy, Inc.",NYSE,54985616556.0,Utilities,Regulated Electric
 ADSK,"Autodesk, Inc.",NASDAQ,54930568453.0,Technology,Software - Application
 LNG,"Cheniere Energy, Inc.",NYSE,54717857803.0,Energy,Oil & Gas Midstream
 NXPI,NXP Semiconductors N.V.,NASDAQ,54675150873.0,Technology,Semiconductors
-GWW,"W.W. Grainger, Inc.",NYSE,54608510423.0,Industrials,Industrial - Distribution
+GWW,"W.W. Grainger, Inc.",NYSE,54608505829.0,Industrials,Industrial - Distribution
 ALL-PB,The Allstate Corporation,NYSE,54605746743.0,Financial Services,Insurance - Property & Casualty
-TGT,Target Corporation,NYSE,54564248731.0,Consumer Defensive,Discount Stores
+TGT,Target Corporation,NYSE,54564249572.0,Consumer Defensive,Discount Stores
 PSA,Public Storage,NYSE,54540244560.0,Real Estate,REIT - Industrial
 URI,"United Rentals, Inc.",NYSE,54205246219.0,Industrials,Rental & Leasing Services
-AME,"AMETEK, Inc.",NYSE,54040362004.0,Industrials,Industrial - Machinery
+AME,"AMETEK, Inc.",NYSE,54040358717.0,Industrials,Industrial - Machinery
 ALL-PH,The Allstate Corporation,NYSE,53537006684.0,Financial Services,Insurance - Property & Casualty
 JPM-PL,JPMorgan Chase & Co.,NYSE,53428259170.0,Financial Services,Banks - Diversified
 OKE,"ONEOK, Inc.",NYSE,53380460818.0,Energy,Oil & Gas Midstream
@@ -311,7 +311,7 @@ IDXX,"IDEXX Laboratories, Inc.",NASDAQ,51799553879.0,Healthcare,Medical - Diagno
 KEYS,"Keysight Technologies, Inc.",NYSE,51698056000.0,Technology,"Hardware, Equipment & Parts"
 CARR,Carrier Global Corporation,NYSE,51053351520.0,Industrials,Construction
 MET-PE,"MetLife, Inc.",NYSE,50919301634.0,Financial Services,Insurance - Life
-NDAQ,"Nasdaq, Inc.",NASDAQ,50892821695.0,Financial Services,Financial - Data & Stock Exchanges
+NDAQ,"Nasdaq, Inc.",NASDAQ,50892824548.0,Financial Services,Financial - Data & Stock Exchanges
 SCHW-PD,The Charles Schwab Corporation,NYSE,50764134026.0,Financial Services,Financial - Capital Markets
 FANG,"Diamondback Energy, Inc.",NASDAQ,50631937716.0,Energy,Oil & Gas Exploration & Production
 FNV,Franco-Nevada Corporation,NYSE,50501790690.0,Basic Materials,Gold
@@ -342,8 +342,8 @@ TRI,Thomson Reuters Corporation,NASDAQ,46644900000.0,Industrials,Specialty Busin
 BRKRP,"Bruker Corporation 6.375% Mandatory Convertible Preferred Stock, Series A",NASDAQ,46638213563.0,Healthcare,Medical - Devices
 AXON,"Axon Enterprise, Inc.",NASDAQ,45811399192.0,Industrials,Aerospace & Defense
 ODFL,"Old Dominion Freight Line, Inc.",NASDAQ,45204991527.0,Industrials,Trucking
-KR,The Kroger Co.,NYSE,45055492042.0,Consumer Defensive,Grocery Stores
-WAB,Westinghouse Air Brake Technologies Corporation,NYSE,44583926623.0,Industrials,Railroads
+KR,The Kroger Co.,NYSE,45055487962.0,Consumer Defensive,Grocery Stores
+WAB,Westinghouse Air Brake Technologies Corporation,NYSE,44583923494.0,Industrials,Railroads
 HEI,HEICO Corporation,NYSE,44544198624.0,Industrials,Aerospace & Defense
 DHI,"D.R. Horton, Inc.",NYSE,44450902812.0,Consumer Cyclical,Residential Construction
 YUM,"Yum! Brands, Inc.",NYSE,44144022965.0,Consumer Cyclical,Restaurants
@@ -359,7 +359,7 @@ F-PB,Ford Motor Company 6.20% Notes,NYSE,42807862834.0,Consumer Cyclical,Auto - 
 F-PC,Ford Motor Company 6% Notes due,NYSE,42272679162.0,Consumer Cyclical,Auto - Manufacturers
 AIG,"American International Group, Inc.",NYSE,42248803697.0,Financial Services,Insurance - Diversified
 CBRE,"CBRE Group, Inc.",NYSE,42180830970.0,Real Estate,Real Estate - Services
-MET-PA,"MetLife, Inc.",NYSE,42150945353.0,Financial Services,Insurance - Life
+MET-PA,"MetLife, Inc.",NYSE,42150948846.0,Financial Services,Insurance - Life
 SYY,Sysco Corporation,NYSE,41968692772.0,Consumer Defensive,Food Distribution
 PEG,Public Service Enterprise Group Incorporated,NYSE,41884010126.0,Utilities,Regulated Electric
 MS-PQ,Morgan Stanley,NYSE,41814741186.0,Financial Services,Financial - Capital Markets
@@ -394,11 +394,11 @@ EQT,EQT Corporation,NYSE,38274238940.0,Energy,Oil & Gas Exploration & Production
 WEC,"WEC Energy Group, Inc.",NYSE,38266169050.0,Utilities,Regulated Electric
 WDAY,"Workday, Inc.",NASDAQ,38191679285.0,Technology,Software - Application
 ARES,Ares Management Corporation,NYSE,38165102037.0,Financial Services,Asset Management
-HEI-A,HEICO Corporation,NYSE,37916508765.0,Industrials,Aerospace & Defense
+HEI-A,HEICO Corporation,NYSE,37916512177.0,Industrials,Aerospace & Defense
 LVS,Las Vegas Sands Corp.,NYSE,37910858107.0,Consumer Cyclical,"Gambling, Resorts & Casinos"
 MCHP,Microchip Technology Incorporated,NASDAQ,37825336500.0,Technology,Semiconductors
 HBANL,Huntington Bancshares Incorporated,NASDAQ,37816659576.0,Financial Services,Banks - Regional
-RMD,ResMed Inc.,NYSE,37812568979.0,Healthcare,Medical - Instruments & Supplies
+RMD,ResMed Inc.,NYSE,37812563798.0,Healthcare,Medical - Instruments & Supplies
 CTA-PA,"EIDP, Inc.",NYSE,37334193000.0,Basic Materials,Agricultural Inputs
 TPL,Texas Pacific Land Corporation,NYSE,36960256515.0,Energy,Oil & Gas Exploration & Production
 LYV,"Live Nation Entertainment, Inc.",NYSE,36862859520.0,Communication Services,Entertainment
@@ -410,12 +410,12 @@ JBS,JBS N.V.,NYSE,36221678982.0,Consumer Defensive,Packaged Foods
 GEHC,GE HealthCare Technologies Inc.,NASDAQ,36013346588.0,Healthcare,Medical - Healthcare Information Services
 NTR,Nutrien Ltd.,NYSE,35841244238.0,Basic Materials,Agricultural Inputs
 EL,The Estée Lauder Companies Inc.,NYSE,35819999576.0,Consumer Defensive,Household & Personal Products
-ACGL,Arch Capital Group Ltd.,NASDAQ,35689645015.0,Financial Services,Insurance - Diversified
+ACGL,Arch Capital Group Ltd.,NASDAQ,35689644031.0,Financial Services,Insurance - Diversified
 OTIS,Otis Worldwide Corporation,NYSE,35522597905.0,Industrials,Industrial - Machinery
 STT,State Street Corporation,NYSE,35344198688.0,Financial Services,Asset Management
 NRG,"NRG Energy, Inc.",NYSE,35108365382.0,Utilities,Independent Power Producers
 CPNG,"Coupang, Inc.",NYSE,34888966295.0,Consumer Cyclical,Specialty Retail
-KVUE,Kenvue Inc.,NYSE,34851756945.0,Consumer Defensive,Household & Personal Products
+KVUE,Kenvue Inc.,NYSE,34865355080.0,Consumer Defensive,Household & Personal Products
 MDLN,Medline Inc.,NASDAQ,34793611516.0,Healthcare,Medical - Instruments & Supplies
 KMB,Kimberly-Clark Corporation,NASDAQ,34762191060.0,Consumer Defensive,Household & Personal Products
 FICO,Fair Isaac Corporation,NYSE,34729441397.0,Technology,Software - Application
@@ -428,12 +428,12 @@ APO-PA,"Apollo Global Management, Inc.",NYSE,33821766989.0,Financial Services,As
 SCHW-PJ,The Charles Schwab Corporation,NYSE,33788864128.0,Financial Services,Financial - Capital Markets
 MTB,M&T Bank Corporation,NYSE,33695167265.0,Financial Services,Banks - Regional
 FISV,"Fiserv, Inc.",NASDAQ,33669528189.0,Technology,Information Technology Services
-VIK,Viking Holdings Ltd,NYSE,33394981803.0,Consumer Cyclical,Travel Services
+VIK,Viking Holdings Ltd,NYSE,33394982857.0,Consumer Cyclical,Travel Services
 DG,Dollar General Corporation,NYSE,33370020844.0,Consumer Defensive,Discount Stores
 SYM,Symbotic Inc.,NASDAQ,33338336967.0,Industrials,Industrial - Machinery
 EME,"EMCOR Group, Inc.",NYSE,33165685662.0,Industrials,Engineering & Construction
 MS-PL,Morgan Stanley,NYSE,33122788074.0,Financial Services,Financial - Capital Markets
-SATS,EchoStar Corporation,NASDAQ,32826535743.0,Technology,Communication Equipment
+SATS,EchoStar Corporation,NASDAQ,32826535857.0,Technology,Communication Equipment
 FITB,Fifth Third Bancorp,NASDAQ,32748417000.0,Financial Services,Banks - Regional
 UAL,"United Airlines Holdings, Inc.",NASDAQ,32529193135.0,Industrials,"Airlines, Airports & Air Services"
 SUNB,Sunbelt Rentals Holdings Inc,NYSE,32388400496.0,Financial Services,Financial - Credit Services
@@ -448,7 +448,7 @@ EXR,Extra Space Storage Inc.,NYSE,31746709680.0,Real Estate,REIT - Industrial
 XYL,Xylem Inc.,NYSE,31521840000.0,Industrials,Industrial - Machinery
 CTSH,Cognizant Technology Solutions Corporation,NASDAQ,31429935912.0,Technology,Information Technology Services
 ASTS,"AST SpaceMobile, Inc.",NASDAQ,31328228747.0,Technology,Communication Equipment
-AEE,Ameren Corporation,NYSE,31324412000.0,Utilities,Regulated Electric
+AEE,Ameren Corporation,NYSE,31327190285.0,Utilities,Regulated Electric
 OXY-WT,Occidental Petroleum Corporation,NYSE,31205487880.0,Energy,Oil & Gas Exploration & Production
 DTE,DTE Energy Company,NYSE,31193423014.0,Utilities,Regulated Electric
 CLS,Celestica Inc.,NYSE,31114939520.0,Technology,"Hardware, Equipment & Parts"
@@ -463,7 +463,7 @@ CHTR,"Charter Communications, Inc.",NASDAQ,30022974072.0,Communication Services,
 ULTA,"Ulta Beauty, Inc.",NASDAQ,29653404970.0,Consumer Cyclical,Specialty Retail
 FE,FirstEnergy Corp.,NYSE,29358988424.0,Utilities,Regulated Electric
 FTS,Fortis Inc.,NYSE,29287128000.0,Utilities,Regulated Electric
-WTW,Willis Towers Watson Public Limited Company,NASDAQ,29154494868.0,Financial Services,Insurance - Brokers
+WTW,Willis Towers Watson Public Limited Company,NASDAQ,29154494259.0,Financial Services,Insurance - Brokers
 FTAI,FTAI Aviation Ltd.,NASDAQ,29018906212.0,Industrials,Rental & Leasing Services
 PPL,PPL Corporation,NYSE,28992929103.0,Utilities,Regulated Electric
 HAL,Halliburton Company,NYSE,28977205663.0,Energy,Oil & Gas Equipment & Services
@@ -485,7 +485,7 @@ BIIB,Biogen Inc.,NASDAQ,27875314808.0,Healthcare,Drug Manufacturers - General
 STRC,MicroStrategy Incorporated Variable Rate Series A Perpetual Stretch Preferred Stock,NASDAQ,27776126123.0,Technology,Software - Application
 KEY-PL,KeyCorp,NYSE,27741956000.0,Financial Services,Banks - Regional
 LEN,Lennar Corporation,NYSE,27457697679.0,Consumer Cyclical,Residential Construction
-VG,"Venture Global, Inc.",NYSE,27320915211.0,Energy,Oil & Gas Midstream
+VG,"Venture Global, Inc.",NYSE,27320913917.0,Energy,Oil & Gas Midstream
 JBL,Jabil Inc.,NYSE,27259081402.0,Technology,"Hardware, Equipment & Parts"
 BTSGU,"BrightSpring Health Services, Inc. Tangible Equity Unit",NASDAQ,27189992057.0,Healthcare,Medical - Healthcare Information Services
 OMC,Omnicom Group Inc.,NYSE,26992995916.0,Communication Services,Advertising Agencies
@@ -494,19 +494,19 @@ NTRS,Northern Trust Corporation,NASDAQ,26958067960.0,Financial Services,Asset Ma
 BAP,Credicorp Ltd.,NYSE,26923435716.0,Financial Services,Banks - Regional
 CRCL,Circle Internet Group,NYSE,26784647836.0,Financial Services,Financial - Capital Markets
 WRB,W. R. Berkley Corporation,NYSE,26749689734.0,Financial Services,Insurance - Property & Casualty
-TSCO,Tractor Supply Company,NASDAQ,26731937871.0,Consumer Cyclical,Specialty Retail
 TECK,Teck Resources Limited,NYSE,26723250000.0,Basic Materials,Industrial Materials
 AWK,"American Water Works Company, Inc.",NYSE,26628414129.0,Utilities,Regulated Water
+TSCO,Tractor Supply Company,NASDAQ,26628112368.0,Consumer Cyclical,Specialty Retail
 AXIA,AXIA Energia S.A.,NYSE,26531904936.0,Utilities,Renewable Utilities
 TW,Tradeweb Markets Inc.,NASDAQ,26483446001.0,Financial Services,Financial - Capital Markets
-GFS,GLOBALFOUNDRIES Inc.,NASDAQ,26433778707.0,Technology,Semiconductors
+GFS,GLOBALFOUNDRIES Inc.,NASDAQ,26433778469.0,Technology,Semiconductors
 FTI,TechnipFMC plc,NYSE,26403027123.0,Energy,Oil & Gas Equipment & Services
-STZ,"Constellation Brands, Inc.",NYSE,26329957957.0,Consumer Defensive,Beverages - Wineries & Distilleries
+STZ,"Constellation Brands, Inc.",NYSE,26329958260.0,Consumer Defensive,Beverages - Wineries & Distilleries
 PPG,"PPG Industries, Inc.",NYSE,26305361500.0,Basic Materials,Chemicals - Specialty
 MTD,Mettler-Toledo International Inc.,NYSE,26284460470.0,Healthcare,Medical - Diagnostics & Research
 CW,Curtiss-Wright Corporation,NYSE,26272858383.0,Industrials,Aerospace & Defense
 HBANP,Huntington Bancshares Incorporated,NASDAQ,26251298689.0,Financial Services,Banks - Regional
-CINF,Cincinnati Financial Corporation,NASDAQ,26206427781.0,Financial Services,Insurance - Property & Casualty
+CINF,Cincinnati Financial Corporation,NASDAQ,26206429125.0,Financial Services,Insurance - Property & Casualty
 HUBB,Hubbell Incorporated,NYSE,26090651030.0,Industrials,Electrical Equipment & Parts
 FOXA,Fox Corporation,NASDAQ,26026194534.0,Communication Services,Entertainment
 EXPE,"Expedia Group, Inc.",NASDAQ,25944849030.0,Consumer Cyclical,Travel Services
@@ -518,15 +518,15 @@ LEN-B,Lennar Corporation,NYSE,25833896915.0,Consumer Cyclical,Residential Constr
 MKL,Markel Corporation,NYSE,25728062563.0,Financial Services,Insurance - Property & Casualty
 AER,AerCap Holdings N.V.,NYSE,25496041100.0,Industrials,Rental & Leasing Services
 EXE,Expand Energy Corporation,NASDAQ,25453340240.0,Energy,Oil & Gas Exploration & Production
-PHM,"PulteGroup, Inc.",NYSE,25421900632.0,Consumer Cyclical,Residential Construction
+PHM,"PulteGroup, Inc.",NYSE,25421899707.0,Consumer Cyclical,Residential Construction
 CASY,"Casey's General Stores, Inc.",NASDAQ,25349704809.0,Consumer Cyclical,Specialty Retail
 EFX,Equifax Inc.,NYSE,25282936223.0,Industrials,Consulting Services
 AVB,"AvalonBay Communities, Inc.",NYSE,25218059705.0,Real Estate,REIT - Residential
 XPO,"XPO Logistics, Inc.",NYSE,25174229043.0,Industrials,Integrated Freight & Logistics
-ON,ON Semiconductor Corporation,NASDAQ,25160723040.0,Technology,Semiconductors
+ON,ON Semiconductor Corporation,NASDAQ,25160720352.0,Technology,Semiconductors
 Q,"Qnity Electronics, Inc.",NYSE,25141867176.0,Technology,Semiconductors
 TCPA,TransCanada PipeLines Limited 6,NYSE,25122900000.0,Industrials,Oil & Gas Midstream
-LPLA,LPL Financial Holdings Inc.,NASDAQ,24969384759.0,Financial Services,Financial - Capital Markets
+LPLA,LPL Financial Holdings Inc.,NASDAQ,24975406850.0,Financial Services,Financial - Capital Markets
 SYF,Synchrony Financial,NYSE,24949053552.0,Financial Services,Financial - Credit Services
 ZS,"Zscaler, Inc.",NASDAQ,24910997402.0,Technology,Software - Infrastructure
 TFC-PI,Truist Financial Corporation,NYSE,24898648549.0,Financial Services,Banks - Regional
@@ -539,16 +539,16 @@ RF,Regions Financial Corporation,NYSE,24403471576.0,Financial Services,Banks - R
 LUV,Southwest Airlines Co.,NYSE,24383862211.0,Industrials,"Airlines, Airports & Air Services"
 FCNCA,"First Citizens BancShares, Inc.",NASDAQ,24176890532.0,Financial Services,Banks - Regional
 USB-PQ,U.S. Bancorp,NYSE,24082350000.0,Financial Services,Banks - Regional
-DLTR,"Dollar Tree, Inc.",NASDAQ,24037609119.0,Consumer Defensive,Discount Stores
+DLTR,"Dollar Tree, Inc.",NASDAQ,24037609355.0,Consumer Defensive,Discount Stores
 MTZ,"MasTec, Inc.",NYSE,23975625599.0,Industrials,Engineering & Construction
 CMS,CMS Energy Corporation,NYSE,23937600786.0,Utilities,Regulated Electric
 STE,STERIS plc,NYSE,23856593721.0,Healthcare,Medical - Devices
 SOFI,"SoFi Technologies, Inc.",NASDAQ,23847362000.0,Financial Services,Financial - Credit Services
 FOX,Fox Corporation,NASDAQ,23718497038.0,Communication Services,Entertainment
 EQR,Equity Residential,NYSE,23702407440.0,Real Estate,REIT - Residential
-DRI,"Darden Restaurants, Inc.",NYSE,23659383142.0,Consumer Cyclical,Restaurants
+DRI,"Darden Restaurants, Inc.",NYSE,23659382735.0,Consumer Cyclical,Restaurants
 FLEX,Flex Ltd.,NASDAQ,23644395618.0,Technology,"Hardware, Equipment & Parts"
-SW,Smurfit Westrock Plc,NYSE,23597600705.0,Consumer Cyclical,Packaging & Containers
+SW,Smurfit Westrock Plc,NYSE,23607281623.0,Consumer Cyclical,Packaging & Containers
 SOJD,Southern Company (The) Series 2,NYSE,23540771700.0,Utilities,Regulated Electric
 VLTO,Veralto Corporation,NYSE,23513759424.0,Industrials,Industrial - Pollution & Treatment Controls
 QSR,Restaurant Brands International Inc.,NYSE,23477254250.0,Consumer Cyclical,Restaurants
@@ -562,7 +562,7 @@ DOW,Dow Inc.,NYSE,23205049560.0,Basic Materials,Chemicals
 DGX,Quest Diagnostics Incorporated,NYSE,23188470776.0,Healthcare,Medical - Diagnostics & Research
 TPGXL,"TPG Operating Group II, L.P. 6.950% Fixed-Rate Junior Subordinated Notes due 2064",NASDAQ,23187910124.0,Financial Services,Financial - Conglomerates
 WWD,"Woodward, Inc.",NASDAQ,23098162257.0,Industrials,Aerospace & Defense
-L,Loews Corporation,NYSE,23040475905.0,Financial Services,Insurance - Property & Casualty
+L,Loews Corporation,NYSE,23040475125.0,Financial Services,Insurance - Property & Casualty
 CPAY,"Corpay, Inc.",NYSE,22996612168.0,Technology,Software - Infrastructure
 MRNA,"Moderna, Inc.",NASDAQ,22827474200.0,Healthcare,Biotechnology
 NI,NiSource Inc.,NYSE,22759029480.0,Utilities,Regulated Gas
@@ -602,8 +602,8 @@ PKG,Packaging Corporation of America,NYSE,20924166931.0,Consumer Cyclical,Packag
 USFD,US Foods Holding Corp.,NYSE,20764762369.0,Consumer Defensive,Food Distribution
 NVR,"NVR, Inc.",NYSE,20577747433.0,Consumer Cyclical,Residential Construction
 SOJE,Southern Company (The) Series 2,NYSE,20574388200.0,Utilities,Regulated Electric
-PFG,"Principal Financial Group, Inc.",NASDAQ,20541375069.0,Financial Services,Insurance - Diversified
-CRS,Carpenter Technology Corporation,NYSE,20531832347.0,Industrials,Manufacturing - Metal Fabrication
+PFG,"Principal Financial Group, Inc.",NASDAQ,20541374414.0,Financial Services,Insurance - Diversified
+CRS,Carpenter Technology Corporation,NYSE,20531832759.0,Industrials,Manufacturing - Metal Fabrication
 AS,"Amer Sports, Inc.",NYSE,20502506359.0,Consumer Cyclical,Leisure
 RPRX,Royalty Pharma plc,NASDAQ,20320184991.0,Healthcare,Biotechnology
 PSTG,"Everpure, Inc",NYSE,20259332383.0,Technology,Computer Hardware
@@ -659,14 +659,14 @@ BIP,Brookfield Infrastructure Partners L.P.,NYSE,17960699034.0,Utilities,Diversi
 MTSI,"MACOM Technology Solutions Holdings, Inc.",NASDAQ,17927860830.0,Technology,Semiconductors
 HPQ,HP Inc.,NYSE,17927581157.0,Technology,Computer Hardware
 WST,"West Pharmaceutical Services, Inc.",NYSE,17921830060.0,Healthcare,Medical - Instruments & Supplies
-WY,Weyerhaeuser Company,NYSE,17891769499.0,Real Estate,REIT - Specialty
+WY,Weyerhaeuser Company,NYSE,17891770367.0,Real Estate,REIT - Specialty
 TKO,"TKO Group Holdings, Inc.",NYSE,17760458860.0,Communication Services,Entertainment
 KEY-PK,KeyCorp,NYSE,17738543912.0,Financial Services,Banks - Regional
 MKC,"McCormick & Company, Incorporated",NYSE,17636391777.0,Consumer Defensive,Packaged Foods
 MKC-V,"McCormick & Company, Incorporated",NYSE,17538404650.0,Consumer Defensive,Packaged Foods
 TPG,TPG Inc.,NASDAQ,17468586750.0,Financial Services,Asset Management
 MGA,Magna International Inc.,NYSE,17464013580.0,Consumer Cyclical,Auto - Parts
-BALL,Ball Corporation,NYSE,17360211593.0,Consumer Cyclical,Packaging & Containers
+BALL,Ball Corporation,NYSE,17360211917.0,Consumer Cyclical,Packaging & Containers
 TOST,"Toast, Inc.",NYSE,17357830442.0,Technology,Software - Infrastructure
 COKE,"Coca-Cola Consolidated, Inc.",NASDAQ,17356137613.0,Consumer Defensive,Beverages - Non-Alcoholic
 TXT,Textron Inc.,NYSE,17296071618.0,Industrials,Aerospace & Defense
@@ -689,8 +689,8 @@ INVH,Invitation Homes Inc.,NYSE,16447342564.0,Real Estate,REIT - Residential
 RS,Reliance Steel & Aluminum Co.,NYSE,16372094481.0,Basic Materials,Steel
 IOT,Samsara Inc.,NYSE,16345764600.0,Technology,Software - Infrastructure
 CF,"CF Industries Holdings, Inc.",NYSE,16332105497.0,Basic Materials,Agricultural Inputs
-J,Jacobs Solutions Inc.,NYSE,16313899750.0,Technology,Software - Services
-COO,"The Cooper Companies, Inc.",NASDAQ,16298357065.0,Healthcare,Medical - Instruments & Supplies
+J,Jacobs Solutions Inc.,NYSE,16313900027.0,Technology,Software - Services
+COO,"The Cooper Companies, Inc.",NASDAQ,16298356655.0,Healthcare,Medical - Instruments & Supplies
 ULS,UL Solutions Inc.,NYSE,16297138297.0,Industrials,Specialty Business Services
 CCZ,Comcast Holdings Corp.,NYSE,16295114584.0,Communication Services,Broadcasting
 GRAB,Grab Holdings Limited,NASDAQ,16272900000.0,Technology,Software - Application
@@ -710,11 +710,11 @@ NLY-PI,"Annaly Capital Management, Inc.",NYSE,16052824200.0,Real Estate,REIT - M
 WPC,W. P. Carey Inc.,NYSE,15999410000.0,Real Estate,REIT - Diversified
 KIM,Kimco Realty Corporation,NYSE,15954691747.0,Real Estate,REIT - Retail
 AA,Alcoa Corporation,NYSE,15939236170.0,Basic Materials,Aluminum
-PNR,Pentair plc,NYSE,15861808301.0,Industrials,Industrial - Machinery
+PNR,Pentair plc,NYSE,15861808107.0,Industrials,Industrial - Machinery
 MAA-PI,"Mid-America Apartment Communities, Inc.",NYSE,15860645446.0,Real Estate,REIT - Residential
 APTV,Aptiv PLC,NYSE,15858068414.0,Consumer Cyclical,Auto - Parts
-DECK,Deckers Outdoor Corporation,NYSE,15848293358.0,Consumer Cyclical,Apparel - Footwear & Accessories
-TYL,"Tyler Technologies, Inc.",NYSE,15841088340.0,Technology,Software - Application
+DECK,Deckers Outdoor Corporation,NYSE,15848292271.0,Consumer Cyclical,Apparel - Footwear & Accessories
+TYL,"Tyler Technologies, Inc.",NYSE,15825482774.0,Technology,Software - Application
 MKSI,MKS Inc.,NASDAQ,15818831017.0,Technology,"Hardware, Equipment & Parts"
 EMA,Emera Incorporated,NYSE,15712344214.0,Utilities,Regulated Electric
 CLH,"Clean Harbors, Inc.",NYSE,15655527655.0,Industrials,Waste Management
@@ -729,7 +729,7 @@ NXT,Nextpower Inc.,NASDAQ,15423670571.0,Technology,Consumer Electronics
 GGG,Graco Inc.,NYSE,15407246735.0,Industrials,Industrial - Machinery
 PAA,"Plains All American Pipeline, L.P.",NASDAQ,15401016319.0,Energy,Oil & Gas Midstream
 TLN,Talen Energy Corporation,NASDAQ,15377152270.0,Utilities,Independent Power Producers
-EWBC,"East West Bancorp, Inc.",NASDAQ,15353177327.0,Financial Services,Banks - Diversified
+EWBC,"East West Bancorp, Inc.",NASDAQ,15353176992.0,Financial Services,Banks - Diversified
 SR-PA,Spire Inc.,NYSE,15326366724.0,Utilities,Regulated Gas
 CDE,"Coeur Mining, Inc.",NYSE,15256237907.0,Basic Materials,Gold
 KTOS,"Kratos Defense & Security Solutions, Inc.",NASDAQ,15181423770.0,Industrials,Aerospace & Defense
@@ -753,10 +753,10 @@ DTM,"DT Midstream, Inc.",NYSE,14486087610.0,Energy,Oil & Gas Midstream
 AVY,Avery Dennison Corporation,NYSE,14469697757.0,Industrials,Business Equipment & Supplies
 FIG,"Figma, Inc.",NYSE,14448341165.0,Technology,Software - Application
 ROKU,"Roku, Inc.",NASDAQ,14375682145.0,Communication Services,Entertainment
-CLX,The Clorox Company,NYSE,14324155084.0,Consumer Defensive,Household & Personal Products
-ONON,On Holding AG,NYSE,14273120837.0,Consumer Cyclical,Apparel - Retail
+CLX,The Clorox Company,NYSE,14324155319.0,Consumer Defensive,Household & Personal Products
+ONON,On Holding AG,NYSE,14273121269.0,Consumer Cyclical,Apparel - Retail
 PFGC,Performance Food Group Company,NYSE,14267728546.0,Consumer Defensive,Food Distribution
-BBY,"Best Buy Co., Inc.",NYSE,14158723642.0,Consumer Cyclical,Specialty Retail
+BBY,"Best Buy Co., Inc.",NYSE,14158724046.0,Consumer Cyclical,Specialty Retail
 LAMR,Lamar Advertising Company,NASDAQ,14128437749.0,Real Estate,REIT - Specialty
 GLPI,"Gaming and Leisure Properties, Inc.",NASDAQ,14095951027.0,Real Estate,REIT - Specialty
 AG,First Majestic Silver Corp.,NYSE,14073710850.0,Basic Materials,Silver
@@ -802,17 +802,17 @@ MEDP,"Medpace Holdings, Inc.",NASDAQ,13221704498.0,Healthcare,Medical - Diagnost
 RITM-PC,Rithm Capital Corp.,NYSE,13211162216.0,Real Estate,REIT - Mortgage
 NYT,The New York Times Company,NYSE,13207862435.0,Communication Services,Publishing
 MLI,"Mueller Industries, Inc.",NYSE,13178428136.0,Industrials,Manufacturing - Metal Fabrication
-BJ,"BJ's Wholesale Club Holdings, Inc.",NYSE,13172702433.0,Consumer Defensive,Discount Stores
+BJ,"BJ's Wholesale Club Holdings, Inc.",NYSE,13172703132.0,Consumer Defensive,Discount Stores
 ELS,"Equity LifeStyle Properties, Inc.",NYSE,13167682071.0,Real Estate,REIT - Residential
 PINS,"Pinterest, Inc.",NYSE,13092310881.0,Communication Services,Internet Content & Information
 AMH-PH,American Homes 4 Rent,NYSE,13090089798.0,Real Estate,REIT - Residential
-RNR,RenaissanceRe Holdings Ltd.,NYSE,13085194266.0,Financial Services,Insurance - Reinsurance
+RNR,RenaissanceRe Holdings Ltd.,NYSE,13085195168.0,Financial Services,Insurance - Reinsurance
 KRMN,Karman Holdings Inc.,NYSE,13084042373.0,Industrials,Aerospace & Defense
 GWRE,"Guidewire Software, Inc.",NYSE,13075099077.0,Technology,Software - Application
 ALGN,"Align Technology, Inc.",NASDAQ,13069979089.0,Healthcare,Medical - Devices
 FITBO,Fifth Third Bancorp,NASDAQ,13035906000.0,Financial Services,Banks - Regional
 EMBJ,Embraer S.A.,NYSE,12976357812.0,Industrials,Aerospace & Defense
-GNRC,Generac Holdings Inc.,NYSE,12962723560.0,Industrials,Industrial - Machinery
+GNRC,Generac Holdings Inc.,NYSE,12962723781.0,Industrials,Industrial - Machinery
 SNX,TD SYNNEX Corporation,NYSE,12938461031.0,Technology,Technology Distributors
 PSKY,Paramount Skydance Corporation Class B Common Stock,NASDAQ,12913587073.0,Communication Services,Entertainment
 STRL,"Sterling Infrastructure, Inc.",NASDAQ,12908894922.0,Industrials,Engineering & Construction
@@ -851,7 +851,7 @@ SJM,The J. M. Smucker Company,NYSE,12241040137.0,Consumer Defensive,Packaged Foo
 GMED,"Globus Medical, Inc.",NYSE,12217278654.0,Healthcare,Medical - Devices
 SOLV,Solventum Corporation,NYSE,12210708013.0,Healthcare,Medical - Care Facilities
 GH,"Guardant Health, Inc.",NASDAQ,12201433307.0,Healthcare,Medical - Diagnostics & Research
-JKHY,"Jack Henry & Associates, Inc.",NASDAQ,12190481016.0,Technology,Information Technology Services
+JKHY,"Jack Henry & Associates, Inc.",NASDAQ,12190480343.0,Technology,Information Technology Services
 COF-PI,Capital One Financial Corporation,NYSE,12189867200.0,Financial Services,Financial - Credit Services
 FIVE,"Five Below, Inc.",NASDAQ,12163240384.0,Consumer Cyclical,Discount Stores
 AGNC,AGNC Investment Corp.,NASDAQ,12163206900.0,Real Estate,REIT - Mortgage
@@ -859,7 +859,7 @@ OKTA,"Okta, Inc.",NASDAQ,12157006595.0,Technology,Software - Infrastructure
 ACGLO,Arch Capital Group Ltd.,NASDAQ,12151574760.0,Financial Services,Insurance - Diversified
 ELAN,Elanco Animal Health Incorporated,NYSE,12143343280.0,Healthcare,Drug Manufacturers - Specialty & Generic
 TIGO,Millicom International Cellular S.A.,NASDAQ,12113662500.0,Communication Services,Telecommunications Services
-IT,"Gartner, Inc.",NYSE,12029675667.0,Technology,Information Technology Services
+IT,"Gartner, Inc.",NYSE,12029674332.0,Technology,Information Technology Services
 SOLS,Solstice Advanced Materials Inc.,NASDAQ,11923527729.0,Basic Materials,Chemicals - Specialty
 OXLCP,Oxford Lane Capital Corp.,NASDAQ,11881072000.0,Financial Services,Asset Management
 TXRH,"Texas Roadhouse, Inc.",NASDAQ,11874724543.0,Consumer Cyclical,Restaurants
@@ -890,8 +890,8 @@ AMKR,"Amkor Technology, Inc.",NASDAQ,11319332930.0,Technology,Semiconductors
 HLI,"Houlihan Lokey, Inc.",NYSE,11316096988.0,Financial Services,Financial - Capital Markets
 AVAV,"AeroVironment, Inc.",NASDAQ,11308646468.0,Industrials,Aerospace & Defense
 WBS,Webster Financial Corporation,NYSE,11302649909.0,Financial Services,Banks - Regional
-BWA,BorgWarner Inc.,NYSE,11295403944.0,Consumer Cyclical,Auto - Parts
-DT,"Dynatrace, Inc.",NYSE,11233452195.0,Technology,Software - Application
+BWA,BorgWarner Inc.,NYSE,11295403997.0,Consumer Cyclical,Auto - Parts
+DT,"Dynatrace, Inc.",NYSE,11233452009.0,Technology,Software - Application
 DY,"Dycom Industries, Inc.",NYSE,11207998920.0,Industrials,Engineering & Construction
 IVZ,Invesco Ltd.,NYSE,11207205240.0,Financial Services,Asset Management
 COF-PK,Capital One Financial Corporation,NYSE,11204104980.0,Financial Services,Financial - Credit Services
@@ -899,7 +899,7 @@ EXEL,"Exelixis, Inc.",NASDAQ,11177596784.0,Healthcare,Biotechnology
 RVTY,"Revvity, Inc.",NYSE,11166364321.0,Healthcare,Medical - Diagnostics & Research
 ZG,"Zillow Group, Inc. Class A",NASDAQ,11152599313.0,Communication Services,Internet Content & Information
 Z,"Zillow Group, Inc. Class C",NASDAQ,11096191003.0,Communication Services,Internet Content & Information
-AFG,"American Financial Group, Inc.",NYSE,11077607114.0,Financial Services,Insurance - Property & Casualty
+AFG,"American Financial Group, Inc.",NYSE,11077607380.0,Financial Services,Insurance - Property & Casualty
 MOD,Modine Manufacturing Company,NYSE,11069860186.0,Consumer Cyclical,Auto - Parts
 SPXC,"SPX Technologies, Inc.",NYSE,11066985696.0,Industrials,Industrial - Machinery
 SAIA,"Saia, Inc.",NASDAQ,11052640885.0,Industrials,Trucking
@@ -923,7 +923,6 @@ COF-PL,Capital One Financial Corporation,NYSE,10678572440.0,Financial Services,F
 WTS,"Watts Water Technologies, Inc.",NYSE,10655773429.0,Industrials,Industrial - Machinery
 RNAM,Avidity Biosciences Inc,NASDAQ,10628816800.0,Healthcare,Biotechnology
 BLDR,"Builders FirstSource, Inc.",NYSE,10616973950.0,Industrials,Construction
-DINO,HF Sinclair Corporation,NYSE,10601855109.0,Energy,Oil & Gas Refining & Marketing
 CHWY,"Chewy, Inc.",NYSE,10586613368.0,Consumer Cyclical,Specialty Retail
 STN,Stantec Inc.,NYSE,10578573116.0,Industrials,Engineering & Construction
 ALSN,"Allison Transmission Holdings, Inc.",NYSE,10565053336.0,Consumer Cyclical,Auto - Parts
@@ -932,6 +931,7 @@ AIT,"Applied Industrial Technologies, Inc.",NYSE,10557620188.0,Industrials,Indus
 FLS,Flowserve Corporation,NYSE,10551126600.0,Industrials,Industrial - Machinery
 ORI,Old Republic International Corporation,NYSE,10506727085.0,Financial Services,Insurance - Diversified
 PAG,"Penske Automotive Group, Inc.",NYSE,10460313814.0,Consumer Cyclical,Auto - Dealerships
+DINO,HF Sinclair Corporation,NYSE,10424346591.0,Energy,Oil & Gas Refining & Marketing
 EGP,"EastGroup Properties, Inc.",NYSE,10393413606.0,Real Estate,REIT - Industrial
 ONTO,Onto Innovation Inc.,NYSE,10389780916.0,Technology,Semiconductors
 COF-PN,Capital One Financial Corporation,NYSE,10355167800.0,Financial Services,Financial - Credit Services
@@ -949,7 +949,7 @@ SITM,SiTime Corporation,NASDAQ,10085222653.0,Technology,Semiconductors
 OGE,OGE Energy Corp.,NYSE,10084002510.0,Utilities,Regulated Electric
 MGM,MGM Resorts International,NYSE,10032216329.0,Consumer Cyclical,"Gambling, Resorts & Casinos"
 AGCO,AGCO Corporation,NYSE,10030899742.0,Industrials,Agricultural - Machinery
-SARO,"StandardAero, Inc.",NYSE,10028193691.0,Industrials,Aerospace & Defense
+SARO,"StandardAero, Inc.",NYSE,10028192998.0,Industrials,Aerospace & Defense
 SEIC,SEI Investments Company,NASDAQ,10016767968.0,Financial Services,Asset Management
 CAE,CAE Inc.,NYSE,9946992550.0,Industrials,Aerospace & Defense
 SSB,SouthState Corporation,NYSE,9944989521.0,Financial Services,Banks - Regional
@@ -985,7 +985,7 @@ MICC,The Magnum Ice Cream Company N.V.,NYSE,9483903357.0,Consumer Defensive,Pack
 FHN-PF,First Horizon Corporation,NYSE,9435650230.0,Financial Services,Banks - Regional
 TTEK,"Tetra Tech, Inc.",NASDAQ,9430817280.0,Industrials,Engineering & Construction
 MASI,Masimo Corporation,NASDAQ,9419814184.0,Healthcare,Medical - Instruments & Supplies
-ACI,"Albertsons Companies, Inc.",NYSE,9393159259.0,Consumer Defensive,Grocery Stores
+ACI,"Albertsons Companies, Inc.",NYSE,9393159156.0,Consumer Defensive,Grocery Stores
 BRX,Brixmor Property Group Inc.,NYSE,9378580697.0,Real Estate,REIT - Retail
 CUBE,CubeSmart,NYSE,9376837483.0,Real Estate,REIT - Industrial
 TAP,Molson Coors Beverage Company,NYSE,9344262270.0,Consumer Defensive,Beverages - Alcoholic
@@ -1049,12 +1049,12 @@ OXLCG,Oxford Lane Capital Corp. 7.95% Notes due 2032,NASDAQ,8448595484.0,Financi
 CHYM,"Chime Financial, Inc. Class A Common Stock",NASDAQ,8435496245.0,Financial Services,Banks - Regional
 DAR,Darling Ingredients Inc.,NYSE,8434481892.0,Consumer Defensive,Packaged Foods
 FDS,FactSet Research Systems Inc.,NYSE,8434453124.0,Financial Services,Financial - Data & Stock Exchanges
-ZWS,Zurn Elkay Water Solutions Corporation,NYSE,8422766569.0,Industrials,Industrial - Pollution & Treatment Controls
+ZWS,Zurn Elkay Water Solutions Corporation,NYSE,8422767073.0,Industrials,Industrial - Pollution & Treatment Controls
 ICLR,ICON Public Limited Company,NASDAQ,8414864506.0,Healthcare,Medical - Diagnostics & Research
 AXSM,"Axsome Therapeutics, Inc.",NASDAQ,8393231659.0,Healthcare,Biotechnology
 PRS,"Prudential Financial, Inc. 5.62",NYSE,8390280000.0,Financial Services,Insurance - Life
 PRMB,Primo Brands Corporation,NYSE,8386973891.0,Consumer Defensive,Beverages - Non-Alcoholic
-EMN,Eastman Chemical Company,NYSE,8378426663.0,Basic Materials,Chemicals - Specialty
+EMN,Eastman Chemical Company,NYSE,8378426296.0,Basic Materials,Chemicals - Specialty
 PRI,"Primerica, Inc.",NYSE,8376050262.0,Financial Services,Insurance - Life
 CIG-C,Companhia Energética de Minas Gerais,NYSE,8367099519.0,Utilities,Diversified Utilities
 NXE,NexGen Energy Ltd.,NYSE,8358744966.0,Energy,Uranium
@@ -1072,7 +1072,6 @@ AAL,American Airlines Group Inc.,NASDAQ,8227394980.0,Industrials,"Airlines, Airp
 POOL,Pool Corporation,NASDAQ,8221530122.0,Industrials,Industrial - Distribution
 HESM,Hess Midstream LP,NYSE,8211393160.0,Energy,Oil & Gas Midstream
 LKQ,LKQ Corporation,NASDAQ,8208829973.0,Consumer Cyclical,Auto - Parts
-BOKF,BOK Financial Corporation,NASDAQ,8182984062.0,Financial Services,Banks - Regional
 FRT-PC,Federal Realty Investment Trust,NYSE,8143808790.0,Real Estate,REIT - Retail
 JXN,Jackson Financial Inc.,NYSE,8116400855.0,Financial Services,Insurance - Life
 TFPM,Triple Flag Precious Metals Corp.,NYSE,8112028090.0,Basic Materials,Other Precious Metals
@@ -1090,13 +1089,14 @@ JHG,Janus Henderson Group plc,NYSE,7919506400.0,Financial Services,Asset Managem
 CMC,Commercial Metals Company,NYSE,7898826310.0,Basic Materials,Steel
 UGI,UGI Corporation,NYSE,7876951055.0,Utilities,Regulated Gas
 BIP-PA,Brookfield Infrastructure Partners L.P.,NYSE,7872854880.0,Utilities,Diversified Utilities
+BOKF,BOK Financial Corporation,NASDAQ,7852939046.0,Financial Services,Banks - Regional
 AAON,"AAON, Inc.",NASDAQ,7834420546.0,Industrials,Construction
 SAIL,"SailPoint, Inc.",NASDAQ,7817830579.0,Technology,Software - Infrastructure
 PRIM,Primoris Services Corporation,NYSE,7817110465.0,Industrials,Engineering & Construction
 IDA,"IDACORP, Inc.",NYSE,7805751702.0,Utilities,Regulated Electric
 IONQ-WT,"IonQ, Inc. WT",NYSE,7794600762.0,Technology,Computer Hardware
 EPAM,"EPAM Systems, Inc.",NYSE,7783685017.0,Technology,Information Technology Services
-GS-PC,"The Goldman Sachs Group, Inc. PFD 1/1000 C",NYSE,7779788280.0,Financial Services,Financial - Capital Markets
+GS-PC,"The Goldman Sachs Group, Inc. PFD 1/1000 C",NYSE,7779788781.0,Financial Services,Financial - Capital Markets
 GSAT,"Globalstar, Inc.",NASDAQ,7775194778.0,Communication Services,Telecommunications Services
 LBRDK,Liberty Broadband Corporation,NASDAQ,7757486905.0,Communication Services,Telecommunications Services
 LBRDA,Liberty Broadband Corporation,NASDAQ,7747405531.0,Communication Services,Telecommunications Services
@@ -1120,7 +1120,7 @@ CAMT,Camtek Ltd.,NASDAQ,7610214286.0,Technology,Semiconductors
 AMTM,"Amentum Holdings, Inc.",NYSE,7603204234.0,Industrials,Aerospace & Defense
 CTRE,"CareTrust REIT, Inc.",NYSE,7596977081.0,Real Estate,REIT - Healthcare Facilities
 BTSG,"BrightSpring Health Services, Inc. Common Stock",NASDAQ,7567582382.0,Healthcare,Medical - Healthcare Information Services
-MSA,MSA Safety Incorporated,NYSE,7545776909.0,Industrials,Security & Protection Services
+MSA,MSA Safety Incorporated,NYSE,7545777102.0,Industrials,Security & Protection Services
 VIAV,Viavi Solutions Inc.,NASDAQ,7540967510.0,Technology,Communication Equipment
 STAG,"STAG Industrial, Inc.",NYSE,7540190920.0,Real Estate,REIT - Industrial
 CPB,Campbell Soup Company,NASDAQ,7480188207.0,Consumer Defensive,Packaged Foods
@@ -1145,7 +1145,7 @@ MTCH,"Match Group, Inc.",NASDAQ,7270961821.0,Technology,Software - Application
 ESE,ESCO Technologies Inc.,NYSE,7265314987.0,Technology,"Hardware, Equipment & Parts"
 EPRT,"Essential Properties Realty Trust, Inc.",NYSE,7255545308.0,Real Estate,REIT - Diversified
 AL,Air Lease Corporation,NYSE,7250905200.0,Industrials,Rental & Leasing Services
-KEX,Kirby Corporation,NYSE,7236783866.0,Industrials,Marine Shipping
+KEX,Kirby Corporation,NYSE,7236784000.0,Industrials,Marine Shipping
 SYF-PA,Synchrony Financial,NYSE,7231461795.0,Financial Services,Financial - Credit Services
 TTAN,"ServiceTitan, Inc.",NASDAQ,7229519836.0,Technology,Software - Application
 INGR,Ingredion Incorporated,NYSE,7222105633.0,Consumer Defensive,Packaged Foods
@@ -1154,7 +1154,7 @@ AUGO,Aura Minerals,NASDAQ,7199839072.0,Basic Materials,Other Precious Metals
 CMSC,CMS Energy Corporation 5.875% J,NYSE,7179444030.0,Utilities,Regulated Electric
 ESAB,ESAB Corporation,NYSE,7148376454.0,Industrials,Manufacturing - Metal Fabrication
 CMSD,CMS Energy Corporation 5.875% Junior Subordinated Notes due 2079,NYSE,7139609300.0,Utilities,Regulated Electric
-LUMN,"Lumen Technologies, Inc.",NYSE,7138480430.0,Communication Services,Telecommunications Services
+LUMN,"Lumen Technologies, Inc.",NYSE,7138480124.0,Communication Services,Telecommunications Services
 NOV,NOV Inc.,NYSE,7116328728.0,Energy,Oil & Gas Equipment & Services
 MHK,"Mohawk Industries, Inc.",NYSE,7115020668.0,Consumer Cyclical,"Furnishings, Fixtures & Appliances"
 DLR-PL,"Digital Realty Trust, Inc.",NYSE,7112652542.0,Real Estate,REIT - Office
@@ -1162,17 +1162,17 @@ FSS,Federal Signal Corporation,NYSE,7103049879.0,Industrials,Industrial - Pollut
 FAF,First American Financial Corporation,NYSE,7089183000.0,Financial Services,Insurance - Specialty
 RGEN,Repligen Corporation,NASDAQ,7087991860.0,Healthcare,Medical - Instruments & Supplies
 LOAR,Loar Holdings Inc.,NYSE,7066624111.0,Industrials,Aerospace & Defense
+PSN,Parsons Corporation,NYSE,7065969081.0,Industrials,Industrial - Machinery
 FLR,Fluor Corporation,NYSE,7057104750.0,Industrials,Engineering & Construction
 VNO-PM,Vornado Realty Trust,NYSE,7046535044.0,Real Estate,REIT - Office
 MKTX,MarketAxess Holdings Inc.,NASDAQ,7042514095.0,Financial Services,Financial - Capital Markets
 VNO-PL,Vornado Realty Trust,NYSE,7039026646.0,Real Estate,REIT - Office
 ALL-PJ,The Allstate Corporation,NYSE,7035473591.0,Financial Services,Insurance - Property & Casualty
 PNFP,"Pinnacle Financial Partners, Inc.",NASDAQ,7033640888.0,Financial Services,Banks - Regional
-CRUS,"Cirrus Logic, Inc.",NASDAQ,7032497770.0,Technology,Semiconductors
-PSN,Parsons Corporation,NYSE,7031468670.0,Industrials,Industrial - Machinery
+CRUS,"Cirrus Logic, Inc.",NASDAQ,7032497632.0,Technology,Semiconductors
 G,Genpact Limited,NYSE,7031060333.0,Technology,Information Technology Services
 DBX,"Dropbox, Inc.",NASDAQ,7021558991.0,Technology,Software - Infrastructure
-HQY,"HealthEquity, Inc.",NASDAQ,7017474977.0,Healthcare,Medical - Healthcare Information Services
+HQY,"HealthEquity, Inc.",NASDAQ,7017475058.0,Healthcare,Medical - Healthcare Information Services
 VLY,Valley National Bancorp,NASDAQ,7015060880.0,Financial Services,Banks - Regional
 RNR-PF,RenaissanceRe Holdings Ltd.,NYSE,6951561262.0,Financial Services,Insurance - Reinsurance
 SOBO,South Bow Corporation,NYSE,6940989565.0,Energy,Oil & Gas Midstream
@@ -1195,13 +1195,13 @@ EMAT,Evolution Metals & Technologies Corp. Common Stock,NASDAQ,6787364995.0,Basi
 EXP,Eagle Materials Inc.,NYSE,6779906157.0,Basic Materials,Construction Materials
 PLNT,"Planet Fitness, Inc.",NYSE,6779729213.0,Consumer Cyclical,Leisure
 GTES,Gates Industrial Corporation plc,NYSE,6777277434.0,Industrials,Industrial - Machinery
-APPF,"AppFolio, Inc.",NASDAQ,6775463845.0,Technology,Software - Application
+APPF,"AppFolio, Inc.",NASDAQ,6775463281.0,Technology,Software - Application
 SLMBP,SLM Corporation,NASDAQ,6771115957.0,Financial Services,Financial - Credit Services
 SSRM,SSR Mining Inc.,NASDAQ,6762622760.0,Basic Materials,Gold
 TRNO,Terreno Realty Corporation,NYSE,6748895447.0,Real Estate,REIT - Industrial
 MBLY,Mobileye Global Inc.,NASDAQ,6730609438.0,Consumer Cyclical,Auto - Parts
 SLAB,Silicon Laboratories Inc.,NASDAQ,6709162122.0,Technology,Semiconductors
-VOYA,"Voya Financial, Inc.",NYSE,6704228066.0,Financial Services,Financial - Conglomerates
+VOYA,"Voya Financial, Inc.",NYSE,6704227784.0,Financial Services,Financial - Conglomerates
 STWD,"Starwood Property Trust, Inc.",NYSE,6702997055.0,Real Estate,REIT - Mortgage
 GKOS,Glaukos Corporation,NYSE,6700551156.0,Healthcare,Medical - Devices
 AXTA,Axalta Coating Systems Ltd.,NYSE,6699941779.0,Basic Materials,Chemicals - Specialty
@@ -1257,15 +1257,15 @@ DLB,"Dolby Laboratories, Inc.",NYSE,6207849132.0,Technology,Information Technolo
 BYD,Boyd Gaming Corporation,NYSE,6205459251.0,Consumer Cyclical,"Gambling, Resorts & Casinos"
 SEE,Sealed Air Corporation,NYSE,6189806308.0,Consumer Cyclical,Packaging & Containers
 SITE,"SiteOne Landscape Supply, Inc.",NYSE,6189623746.0,Industrials,Industrial - Distribution
-KMX,"CarMax, Inc.",NYSE,6185113127.0,Consumer Cyclical,Auto - Dealerships
+KMX,"CarMax, Inc.",NYSE,6185113085.0,Consumer Cyclical,Auto - Dealerships
 INGM,Ingram Micro Holding Corporation,NYSE,6180060100.0,Technology,Information Technology Services
 CLF,Cleveland-Cliffs Inc.,NYSE,6177329104.0,Basic Materials,Steel
 ENS,EnerSys,NYSE,6169731508.0,Industrials,Electrical Equipment & Parts
 RIOT,"Riot Platforms, Inc.",NASDAQ,6145972785.0,Financial Services,Financial - Capital Markets
 VIRT,"Virtu Financial, Inc.",NYSE,6127693926.0,Financial Services,Financial - Capital Markets
-EQH-PA,"Equitable Holdings, Inc.",NYSE,6125980914.0,Financial Services,Insurance - Diversified
+EQH-PA,"Equitable Holdings, Inc.",NYSE,6125944910.0,Financial Services,Insurance - Diversified
 TMHC,Taylor Morrison Home Corporation,NYSE,6120079961.0,Consumer Cyclical,Residential Construction
-ACT,"Enact Holdings, Inc.",NASDAQ,6112282680.0,Financial Services,Insurance - Specialty
+ACT,"Enact Holdings, Inc.",NASDAQ,6112272817.0,Financial Services,Insurance - Specialty
 FBIN,"Fortune Brands Innovations, Inc.",NYSE,6107834273.0,Industrials,Construction
 FNB,F.N.B. Corporation,NYSE,6097056630.0,Financial Services,Banks - Regional
 BIPH,Brookfield Infrastructure Corpo,NYSE,6091150680.0,Financial Services,Financial - Conglomerates
@@ -1274,14 +1274,14 @@ GLBE,Global-e Online Ltd.,NASDAQ,6069404335.0,Consumer Cyclical,Specialty Retail
 ECG,"Everus Construction Group, Inc.",NYSE,6069289375.0,Industrials,Engineering & Construction
 PTGX,"Protagonist Therapeutics, Inc.",NASDAQ,6050979021.0,Healthcare,Biotechnology
 WH,"Wyndham Hotels & Resorts, Inc.",NYSE,6044973253.0,Consumer Cyclical,Travel Lodging
-CNX,CNX Resources Corporation,NYSE,6035024265.0,Energy,Oil & Gas Exploration & Production
+CNX,CNX Resources Corporation,NYSE,6035024858.0,Energy,Oil & Gas Exploration & Production
 BPYPO,Brookfield Property Partners L.P.,NASDAQ,6027862782.0,Real Estate,Real Estate - Services
 HUT,Hut 8 Corp.,NASDAQ,6011184270.0,Financial Services,Financial - Capital Markets
 COGT,"Cogent Biosciences, Inc.",NASDAQ,6008672516.0,Healthcare,Biotechnology
 EAT,"Brinker International, Inc.",NYSE,6007332244.0,Consumer Cyclical,Restaurants
 NEU,NewMarket Corporation,NYSE,6002187806.0,Basic Materials,Chemicals - Specialty
 URBN,"Urban Outfitters, Inc.",NASDAQ,6000790915.0,Consumer Cyclical,Apparel - Retail
-HLNE,Hamilton Lane Incorporated,NASDAQ,5993321569.0,Financial Services,Asset Management
+HLNE,Hamilton Lane Incorporated,NASDAQ,5993321461.0,Financial Services,Asset Management
 KVYO,"Klaviyo, Inc.",NYSE,5952206320.0,Technology,Software - Infrastructure
 LB,LandBridge Company LLC,NYSE,5929388770.0,Energy,Oil & Gas Equipment & Services
 BEPC,Brookfield Renewable Corporation,NYSE,5922903297.0,Utilities,Renewable Utilities
@@ -1291,10 +1291,10 @@ OBDC,Blue Owl Capital Corporation,NYSE,5902606745.0,Financial Services,Financial
 AVTR,"Avantor, Inc.",NYSE,5899783812.0,Healthcare,Medical - Instruments & Supplies
 VNT,Vontier Corporation,NYSE,5880903000.0,Technology,"Hardware, Equipment & Parts"
 GBCI,"Glacier Bancorp, Inc.",NYSE,5875948480.0,Financial Services,Banks - Regional
+CIGI,Colliers International Group Inc.,NASDAQ,5875309143.0,Real Estate,Real Estate - Services
 STEP,StepStone Group Inc.,NASDAQ,5869843435.0,Financial Services,Asset Management
 DSGX,The Descartes Systems Group Inc.,NASDAQ,5862581592.0,Technology,Software - Application
 RGTI,"Rigetti Computing, Inc.",NASDAQ,5861263145.0,Technology,Computer Hardware
-CIGI,Colliers International Group Inc.,NASDAQ,5856132455.0,Real Estate,Real Estate - Services
 SGHC,Super Group (SGHC) Limited,NYSE,5850226951.0,Consumer Cyclical,"Gambling, Resorts & Casinos"
 BRKR,Bruker Corporation,NASDAQ,5849728500.0,Healthcare,Medical - Devices
 CWST,"Casella Waste Systems, Inc.",NASDAQ,5849360343.0,Industrials,Waste Management
@@ -1333,7 +1333,7 @@ POST,"Post Holdings, Inc.",NYSE,5559180239.0,Consumer Defensive,Packaged Foods
 BLSH,Bullish,NYSE,5554202620.0,Technology,Software - Infrastructure
 FRMI,Fermi Inc. Common Stock,NASDAQ,5550789616.0,Utilities,Regulated Electric
 ALK,"Alaska Air Group, Inc.",NYSE,5542914108.0,Industrials,"Airlines, Airports & Air Services"
-CRC,California Resources Corporation,NYSE,5541805257.0,Energy,Oil & Gas Exploration & Production
+CRC,California Resources Corporation,NYSE,5541805319.0,Energy,Oil & Gas Exploration & Production
 HWC,Hancock Whitney Corporation,NASDAQ,5534352479.0,Financial Services,Banks - Regional
 LYFT,"Lyft, Inc.",NASDAQ,5527051208.0,Technology,Software - Application
 BPYPN,Brookfield Property Partners L.P.,NASDAQ,5522532968.0,Real Estate,Real Estate - Services
@@ -1358,12 +1358,12 @@ SON,Sonoco Products Company,NYSE,5422843055.0,Consumer Cyclical,Packaging & Cont
 FIGR,"Figure Technology Solutions, Inc. Class A Common Stock",NASDAQ,5419103562.0,Financial Services,Financial - Capital Markets
 FLG,"Flagstar Financial, Inc.",NYSE,5407766416.0,Financial Services,Banks - Regional
 BDC,Belden Inc.,NYSE,5407315206.0,Technology,Communication Equipment
-CACC,Credit Acceptance Corporation,NASDAQ,5405787506.0,Financial Services,Financial - Credit Services
+CACC,Credit Acceptance Corporation,NASDAQ,5405787996.0,Financial Services,Financial - Credit Services
 PIPR,Piper Sandler Companies,NYSE,5392880016.0,Financial Services,Financial - Capital Markets
 CMS-PC,CMS Energy Corporation,NYSE,5392261960.0,Utilities,Regulated Electric
 AQN,Algonquin Power & Utilities Corp.,NYSE,5354032321.0,Utilities,Renewable Utilities
 MRCY,"Mercury Systems, Inc.",NASDAQ,5352104882.0,Industrials,Aerospace & Defense
-JSM,Navient Corporation SR NT 6% 121543,NASDAQ,5347769099.0,Financial Services,Financial - Credit Services
+JSM,Navient Corporation SR NT 6% 121543,NASDAQ,5347769333.0,Financial Services,Financial - Credit Services
 FCN,"FTI Consulting, Inc.",NYSE,5339421962.0,Industrials,Consulting Services
 COMP,"Compass, Inc.",NYSE,5334753222.0,Technology,Software - Application
 AUB,Atlantic Union Bankshares Corporation,NYSE,5321627982.0,Financial Services,Banks - Regional
@@ -1384,7 +1384,7 @@ MATX,"Matson, Inc.",NYSE,5218914258.0,Industrials,Marine Shipping
 CZR,"Caesars Entertainment, Inc.",NASDAQ,5216998946.0,Consumer Cyclical,"Gambling, Resorts & Casinos"
 ALL-PI,The Allstate Corporation,NYSE,5216636282.0,Financial Services,Insurance - Property & Casualty
 MAC,The Macerich Company,NYSE,5210416164.0,Real Estate,REIT - Retail
-VSNT,"Versant Media Group, Inc. Class A",NASDAQ,5205890780.0,Industrials,Advertising Agencies
+VSNT,"Versant Media Group, Inc. Class A",NASDAQ,5205891068.0,Industrials,Advertising Agencies
 EXLS,"ExlService Holdings, Inc.",NASDAQ,5205568728.0,Technology,Information Technology Services
 ATMU,Atmus Filtration Technologies Inc.,NYSE,5194542504.0,Industrials,Industrial - Pollution & Treatment Controls
 CELC,Celcuity Inc.,NASDAQ,5190709835.0,Healthcare,Biotechnology
@@ -1404,7 +1404,7 @@ MSM,"MSC Industrial Direct Co., Inc.",NYSE,5108234723.0,Industrials,Industrial -
 M,"Macy's, Inc.",NYSE,5107612411.0,Consumer Cyclical,Department Stores
 SBRA,"Sabra Health Care REIT, Inc.",NASDAQ,5105950769.0,Real Estate,REIT - Healthcare Facilities
 ST,Sensata Technologies Holding plc,NYSE,5091471788.0,Technology,"Hardware, Equipment & Parts"
-BC,Brunswick Corporation,NYSE,5087812436.0,Consumer Cyclical,Auto - Recreational Vehicles
+BC,Brunswick Corporation,NYSE,5087812592.0,Consumer Cyclical,Auto - Recreational Vehicles
 ATHS,Athene Holding Ltd. 7.250% Fixe,NYSE,5070544000.0,Financial Services,Asset Management
 LNC-PD,Lincoln National Corporation,NYSE,5054493100.0,Financial Services,Insurance - Life
 TMDX,"TransMedics Group, Inc.",NASDAQ,5046180830.0,Healthcare,Medical - Devices
@@ -1423,12 +1423,12 @@ DOCS,"Doximity, Inc.",NYSE,4966974060.0,Healthcare,Medical - Healthcare Informat
 CGON,"CG Oncology, Inc. Common stock",NASDAQ,4966616456.0,Healthcare,Biotechnology
 KNF,Knife River Corporation,NYSE,4966614062.0,Basic Materials,Construction Materials
 ACHR,Archer Aviation Inc.,NYSE,4962577928.0,Industrials,Aerospace & Defense
-SIGI,"Selective Insurance Group, Inc.",NASDAQ,4962004706.0,Financial Services,Insurance - Property & Casualty
+SIGI,"Selective Insurance Group, Inc.",NASDAQ,4962004953.0,Financial Services,Insurance - Property & Casualty
 PECO,"Phillips Edison & Company, Inc.",NASDAQ,4956520000.0,Real Estate,REIT - Retail
 SNDR,"Schneider National, Inc.",NYSE,4951891198.0,Industrials,Trucking
 REXR-PC,"Rexford Industrial Realty, Inc.",NYSE,4933136052.0,Real Estate,REIT - Industrial
 CORZZ,"Core Scientific, Inc. Tranche 2 Warrants",NASDAQ,4926874057.0,Technology,Software - Infrastructure
-EQH-PC,"Equitable Holdings, Inc.",NYSE,4924632832.0,Financial Services,Insurance - Diversified
+EQH-PC,"Equitable Holdings, Inc.",NYSE,4924603889.0,Financial Services,Insurance - Diversified
 MAT,"Mattel, Inc.",NASDAQ,4923071810.0,Consumer Cyclical,Leisure
 IEP,Icahn Enterprises L.P.,NASDAQ,4915707754.0,Industrials,Conglomerates
 REYN,Reynolds Consumer Products Inc.,NASDAQ,4913625515.0,Consumer Cyclical,Packaging & Containers
@@ -1455,7 +1455,7 @@ GLNG,Golar LNG Limited,NASDAQ,4776400293.0,Energy,Oil & Gas Midstream
 LAUR,"Laureate Education, Inc.",NASDAQ,4760023933.0,Consumer Defensive,Education & Training Services
 PONY,Pony AI Inc. American Depositary Shares,NASDAQ,4758112800.0,Industrials,Rental & Leasing Services
 OSIS,"OSI Systems, Inc.",NASDAQ,4753648190.0,Technology,"Hardware, Equipment & Parts"
-BBWI,"Bath & Body Works, Inc.",NYSE,4744376538.0,Consumer Cyclical,Specialty Retail
+BBWI,"Bath & Body Works, Inc.",NYSE,4744376308.0,Consumer Cyclical,Specialty Retail
 HASI,"HA Sustainable Infrastructure Capital, Inc.",NYSE,4734617470.0,Financial Services,Financial - Diversified
 PFSI,"PennyMac Financial Services, Inc.",NYSE,4730051706.0,Financial Services,Financial - Mortgages
 VSEC,VSE Corporation,NASDAQ,4729778979.0,Industrials,Aerospace & Defense
@@ -1471,27 +1471,27 @@ TNL,Travel + Leisure Co.,NYSE,4676710163.0,Consumer Cyclical,Travel Services
 NVST,Envista Holdings Corp,NYSE,4674638088.0,Healthcare,Medical - Equipment & Services
 MIRM,"Mirum Pharmaceuticals, Inc.",NASDAQ,4670473557.0,Healthcare,Biotechnology
 MMYT,MakeMyTrip Limited,NASDAQ,4666979480.0,Consumer Cyclical,Travel Services
-WIX,Wix.com Ltd.,NASDAQ,4665392182.0,Technology,Software - Infrastructure
+WIX,Wix.com Ltd.,NASDAQ,4665392098.0,Technology,Software - Infrastructure
 BRBI,BRBI BR Partners S.A. ADSs,NASDAQ,4647854629.0,Financial Services,Asset Management
-CSW,"CSW Industrials, Inc.",NYSE,4646747298.0,Industrials,Industrial - Machinery
+CSW,"CSW Industrials, Inc.",NYSE,4646747577.0,Industrials,Industrial - Machinery
 YOU,"Clear Secure, Inc.",NYSE,4644971619.0,Technology,Software - Application
 PAGP,"Plains GP Holdings, L.P.",NASDAQ,4640476508.0,Energy,Oil & Gas Midstream
 TGTX,"TG Therapeutics, Inc.",NASDAQ,4634188375.0,Healthcare,Biotechnology
-MZTI,The Marzetti Company,NASDAQ,4626443183.0,Consumer Defensive,Packaged Foods
+MZTI,The Marzetti Company,NASDAQ,4626443688.0,Consumer Defensive,Packaged Foods
 ZETA,Zeta Global Holdings Corp.,NYSE,4621433363.0,Technology,Software - Application
 MWA,"Mueller Water Products, Inc.",NYSE,4619612900.0,Industrials,Industrial - Machinery
 HRI,Herc Holdings Inc.,NYSE,4602759686.0,Industrials,Rental & Leasing Services
 PL-WT,Planet Labs PBC,NYSE,4595614120.0,Industrials,Aerospace & Defense
-LAZ,Lazard Ltd,NYSE,4591137323.0,Financial Services,Financial - Capital Markets
+LAZ,Lazard Ltd,NYSE,4591137274.0,Financial Services,Financial - Capital Markets
 BGC,"BGC Group, Inc",NASDAQ,4587186769.0,Financial Services,Financial - Capital Markets
 DAN,Dana Incorporated,NYSE,4573855687.0,Consumer Cyclical,Auto - Parts
 LOPE,"Grand Canyon Education, Inc.",NASDAQ,4548792611.0,Consumer Defensive,Education & Training Services
 EPR,EPR Properties,NYSE,4547101165.0,Real Estate,REIT - Specialty
-CVCO,"Cavco Industries, Inc.",NASDAQ,4524579949.0,Consumer Cyclical,Residential Construction
+CVCO,"Cavco Industries, Inc.",NASDAQ,4524580529.0,Consumer Cyclical,Residential Construction
 FGN,"F&G Annuities & Life, Inc.",NYSE,4520602446.0,Financial Services,Insurance - Life
 FELE,"Franklin Electric Co., Inc.",NASDAQ,4516913261.0,Industrials,Industrial - Machinery
 DHCNL,Diversified Healthcare Trust,NASDAQ,4503450600.0,Real Estate,REIT - Healthcare Facilities
-ANF,Abercrombie & Fitch Co.,NYSE,4502227900.0,Consumer Cyclical,Apparel - Retail
+ANF,Abercrombie & Fitch Co.,NYSE,4502228474.0,Consumer Cyclical,Apparel - Retail
 FOLD,"Amicus Therapeutics, Inc.",NASDAQ,4499629945.0,Healthcare,Biotechnology
 S,"SentinelOne, Inc.",NYSE,4496252991.0,Technology,Software - Infrastructure
 TDS-PV,"Telephone and Data Systems, Inc.",NYSE,4488935925.0,Communication Services,Telecommunications Services
@@ -1509,7 +1509,7 @@ TEX,Terex Corporation,NYSE,4417813074.0,Industrials,Agricultural - Machinery
 MC,Moelis & Company,NYSE,4409441841.0,Financial Services,Financial - Capital Markets
 MMSI,"Merit Medical Systems, Inc.",NASDAQ,4407469704.0,Healthcare,Medical - Instruments & Supplies
 NWE,Northwestern Energy Group Inc,NASDAQ,4403662812.0,Utilities,Diversified Utilities
-EBC,"Eastern Bankshares, Inc.",NASDAQ,4397768414.0,Financial Services,Banks - Regional
+EBC,"Eastern Bankshares, Inc.",NASDAQ,4397768688.0,Financial Services,Banks - Regional
 BMI,"Badger Meter, Inc.",NYSE,4394239045.0,Technology,"Hardware, Equipment & Parts"
 TCBI,"Texas Capital Bancshares, Inc.",NASDAQ,4385435262.0,Financial Services,Banks - Regional
 ACIW,"ACI Worldwide, Inc.",NASDAQ,4375054975.0,Technology,Software - Infrastructure
@@ -1544,7 +1544,7 @@ MMS,"Maximus, Inc.",NYSE,4248788585.0,Industrials,Specialty Business Services
 AKO-B,Embotelladora Andina S.A.,NYSE,4246946525.0,Consumer Defensive,Beverages - Non-Alcoholic
 SKE,Skeena Resources Limited,NYSE,4222524591.0,Basic Materials,Industrial Materials
 FOUR,"Shift4 Payments, Inc.",NYSE,4220870857.0,Technology,Software - Infrastructure
-GTLB,GitLab Inc.,NASDAQ,4218419925.0,Technology,Software - Application
+GTLB,GitLab Inc.,NASDAQ,4218419950.0,Technology,Software - Application
 CALM,"Cal-Maine Foods, Inc.",NASDAQ,4217383071.0,Consumer Defensive,Agricultural Farm Products
 QS,QuantumScape Corporation,NASDAQ,4209171316.0,Consumer Cyclical,Auto - Parts
 FRPT,"Freshpet, Inc.",NASDAQ,4194388463.0,Consumer Defensive,Packaged Foods
@@ -1597,7 +1597,7 @@ CTBB,Qwest Corp. NT,NYSE,3949891091.0,Communication Services,Telecommunications 
 HAFN,Hafnia Limited,NYSE,3940507963.0,Industrials,Marine Shipping
 ADMA,"ADMA Biologics, Inc.",NASDAQ,3936483033.0,Healthcare,Biotechnology
 ELVR,Elevra Lithium Limited,NASDAQ,3933780816.0,Basic Materials,Other Precious Metals
-INDB,Independent Bank Corp.,NASDAQ,3931972491.0,Financial Services,Banks - Regional
+INDB,Independent Bank Corp.,NASDAQ,3931972570.0,Financial Services,Banks - Regional
 TAC,TransAlta Corporation,NYSE,3931275000.0,Utilities,Independent Power Producers
 MIAX,"MIAMI INTERNATIONAL HOLDINGS, INC.",NYSE,3924917340.0,Financial Services,Financial - Capital Markets
 SHO-PH,"Sunstone Hotel Investors, Inc.",NYSE,3923043300.0,Real Estate,REIT - Hotel & Motel
@@ -1624,7 +1624,7 @@ TERN,"Terns Pharmaceuticals, Inc.",NASDAQ,3831004496.0,Healthcare,Biotechnology
 GEF-B,"Greif, Inc.",NYSE,3826843853.0,Consumer Cyclical,Packaging & Containers
 NIQ,NIQ Global Intelligence Plc,NYSE,3826149948.0,Technology,Information Technology Services
 CCC,CCC Intelligent Solutions Holdings Inc.,NASDAQ,3825442099.0,Technology,Software - Infrastructure
-STNE,StoneCo Ltd.,NASDAQ,3822923976.0,Technology,Software - Infrastructure
+STNE,StoneCo Ltd.,NASDAQ,3822923762.0,Technology,Software - Infrastructure
 HGV,Hilton Grand Vacations Inc.,NYSE,3818643672.0,Consumer Cyclical,"Gambling, Resorts & Casinos"
 GFF,Griffon Corporation,NYSE,3808778976.0,Industrials,Conglomerates
 FSM,Fortuna Mining Corp.,NYSE,3806792346.0,Basic Materials,Other Precious Metals
@@ -1650,7 +1650,7 @@ INSW,"International Seaways, Inc.",NYSE,3726323419.0,Energy,Oil & Gas Midstream
 HGTY,"Hagerty, Inc.",NYSE,3714514429.0,Financial Services,Insurance - Property & Casualty
 VKTX,"Viking Therapeutics, Inc.",NASDAQ,3713905560.0,Healthcare,Biotechnology
 CNO-PA,"CNO Financial Group, Inc. 5.125",NYSE,3713462666.0,Financial Services,Insurance - Diversified
-BLLN,"BillionToOne, Inc.",NASDAQ,3699488790.0,Healthcare,Medical - Diagnostics & Research
+BLLN,"BillionToOne, Inc.",NASDAQ,3699488952.0,Healthcare,Medical - Diagnostics & Research
 INTR,"Inter & Co, Inc.",NASDAQ,3697992917.0,Financial Services,Banks - Regional
 KRC,Kilroy Realty Corporation,NYSE,3694923540.0,Real Estate,REIT - Office
 CDP,COPT Defense Properties,NYSE,3692844960.0,Real Estate,REIT - Office
@@ -1716,7 +1716,7 @@ LBRDP,Liberty Broadband Corporation,NASDAQ,3448715361.0,Communication Services,T
 AHL,ASPEN INSURANCE HOLDINGS LTD,NYSE,3443938725.0,Financial Services,Insurance - Property & Casualty
 WHD,"Cactus, Inc.",NYSE,3443383153.0,Energy,Oil & Gas Equipment & Services
 SOUN,"SoundHound AI, Inc.",NASDAQ,3427982389.0,Technology,Software - Application
-BFH,"Bread Financial Holdings, Inc.",NYSE,3424559775.0,Financial Services,Financial - Credit Services
+BFH,"Bread Financial Holdings, Inc.",NYSE,3424559850.0,Financial Services,Financial - Credit Services
 GNW,"Genworth Financial, Inc.",NYSE,3418697885.0,Financial Services,Insurance - Life
 CNS,"Cohen & Steers, Inc.",NYSE,3413424644.0,Financial Services,Asset Management
 HP,"Helmerich & Payne, Inc.",NYSE,3412774966.0,Energy,Oil & Gas Drilling
@@ -1746,13 +1746,13 @@ LCID,"Lucid Group, Inc.",NASDAQ,3329210053.0,Consumer Cyclical,Auto - Manufactur
 ASB-PF,Associated Banc-Corp,NYSE,3327019721.0,Financial Services,Banks - Regional
 XENE,Xenon Pharmaceuticals Inc.,NASDAQ,3326688965.0,Healthcare,Biotechnology
 PBH,Prestige Consumer Healthcare Inc.,NYSE,3321162502.0,Healthcare,Medical - Distribution
+PLMR,"Palomar Holdings, Inc.",NASDAQ,3320465577.0,Financial Services,Insurance - Property & Casualty
 MTRN,Materion Corporation,NYSE,3320072982.0,Basic Materials,Industrial Materials
 AVA,Avista Corporation,NYSE,3318013408.0,Utilities,Diversified Utilities
 CARG,"CarGurus, Inc.",NASDAQ,3314193350.0,Consumer Cyclical,Auto - Dealerships
 PSA-PL,Public Storage,NYSE,3307160173.0,Real Estate,REIT - Industrial
 WDFC,WD-40 Company,NASDAQ,3305391448.0,Basic Materials,Chemicals - Specialty
-GPK,Graphic Packaging Holding Company,NYSE,3302426370.0,Consumer Cyclical,Packaging & Containers
-PLMR,"Palomar Holdings, Inc.",NASDAQ,3299404830.0,Financial Services,Insurance - Property & Casualty
+GPK,Graphic Packaging Holding Company,NYSE,3302482868.0,Consumer Cyclical,Packaging & Containers
 KFY,Korn Ferry,NYSE,3298720461.0,Industrials,Staffing & Employment Services
 ERO,Ero Copper Corp.,NYSE,3293321052.0,Basic Materials,Copper
 LCII,LCI Industries,NYSE,3281250156.0,Consumer Cyclical,Auto - Recreational Vehicles
@@ -1777,7 +1777,7 @@ PII,Polaris Inc.,NYSE,3176945091.0,Consumer Cyclical,Auto - Recreational Vehicle
 PAY,"Paymentus Holdings, Inc.",NYSE,3173818428.0,Technology,Information Technology Services
 HOVNP,"Hovnanian Enterprises, Inc. PFD DEP1/1000A",NASDAQ,3169842703.0,Consumer Cyclical,Residential Construction
 TTAM,Titan America S.A.,NYSE,3169190773.0,Basic Materials,Construction Materials
-DBRG-PH,"DigitalBridge Group, Inc.",NYSE,3162017700.0,Real Estate,REIT - Diversified
+DBRG-PH,"DigitalBridge Group, Inc.",NYSE,3167989650.0,Real Estate,REIT - Diversified
 RWTN,"Redwood Trust, Inc. 9.125% Seni",NYSE,3160234508.0,Real Estate,REIT - Mortgage
 HWKN,"Hawkins, Inc.",NASDAQ,3157679190.0,Basic Materials,Chemicals - Specialty
 COCO,"The Vita Coco Company, Inc.",NASDAQ,3149508840.0,Consumer Defensive,Beverages - Non-Alcoholic
@@ -1785,9 +1785,9 @@ FG,"F&G Annuities & Life, Inc.",NYSE,3148866986.0,Financial Services,Insurance -
 HG,"Hamilton Insurance Group, Ltd.",NYSE,3135424874.0,Financial Services,Insurance - Reinsurance
 NGL-PC,NGL Energy Partners LP,NYSE,3133387679.0,Energy,Oil & Gas Midstream
 DBRG-PJ,"DigitalBridge Group, Inc.",NYSE,3130963800.0,Real Estate,REIT - Diversified
+DBRG-PI,"DigitalBridge Group, Inc.",NYSE,3129556500.0,Real Estate,REIT - Diversified
 GRBK,"Green Brick Partners, Inc.",NYSE,3127102734.0,Consumer Cyclical,Residential Construction
 EEFT,"Euronet Worldwide, Inc.",NASDAQ,3125181139.0,Technology,Software - Infrastructure
-DBRG-PI,"DigitalBridge Group, Inc.",NYSE,3123657000.0,Real Estate,REIT - Diversified
 QTWO,"Q2 Holdings, Inc.",NYSE,3119595956.0,Technology,Software - Application
 RWT-PA,"Redwood Trust, Inc.",NYSE,3118561628.0,Real Estate,REIT - Mortgage
 TRMD,TORM plc,NASDAQ,3116994067.0,Energy,Oil & Gas Midstream
@@ -1795,8 +1795,8 @@ BOH,Bank of Hawaii Corporation,NYSE,3115570633.0,Financial Services,Banks - Regi
 FHB,"First Hawaiian, Inc.",NASDAQ,3111547663.0,Financial Services,Banks - Regional
 CWK,Cushman & Wakefield plc,NYSE,3111047066.0,Real Estate,Real Estate - Services
 FSK,FS KKR Capital Corp.,NYSE,3083531427.0,Financial Services,Asset Management
+SBCF,Seacoast Banking Corporation of Florida,NASDAQ,3082768372.0,Financial Services,Banks - Regional
 NGL-PB,NGL Energy Partners LP,NYSE,3080458833.0,Energy,Oil & Gas Midstream
-SBCF,Seacoast Banking Corporation of Florida,NASDAQ,3079628588.0,Financial Services,Banks - Regional
 AAP,"Advance Auto Parts, Inc.",NYSE,3077721000.0,Consumer Cyclical,Specialty Retail
 DIOD,Diodes Incorporated,NASDAQ,3068389778.0,Technology,Semiconductors
 DJT,Trump Media & Technology Group Corp.,NASDAQ,3065974016.0,Communication Services,Internet Content & Information
@@ -1806,7 +1806,7 @@ BBU,Brookfield Business Partners L.P.,NYSE,3059319620.0,Industrials,Conglomerate
 BTE,Baytex Energy Corp.,NYSE,3057901684.0,Energy,Oil & Gas Exploration & Production
 EWTX,"Edgewise Therapeutics, Inc.",NASDAQ,3057480374.0,Healthcare,Biotechnology
 OPLN,"OPENLANE, Inc.",NYSE,3050730472.0,Consumer Cyclical,Auto - Dealerships
-BULL,Webull Corporation Class A Ordinary Shares,NASDAQ,3046028316.0,Technology,Software - Application
+BULL,Webull Corporation Class A Ordinary Shares,NASDAQ,3046028286.0,Technology,Software - Application
 IDYA,"IDEAYA Biosciences, Inc.",NASDAQ,3045389520.0,Healthcare,Biotechnology
 WU,The Western Union Company,NYSE,3044954056.0,Financial Services,Financial - Credit Services
 FSLY,"Fastly, Inc.",NASDAQ,3042071880.0,Technology,Software - Application
@@ -1821,14 +1821,14 @@ IPAR,"Inter Parfums, Inc.",NASDAQ,3017288270.0,Consumer Defensive,Household & Pe
 NMIH,"NMI Holdings, Inc.",NASDAQ,3015528815.0,Financial Services,Insurance - Specialty
 AWR,American States Water Company,NYSE,3015212561.0,Utilities,Regulated Water
 ITGR,Integer Holdings Corporation,NYSE,3014355445.0,Healthcare,Medical - Devices
-KD,"Kyndryl Holdings, Inc.",NYSE,3014316013.0,Technology,Information Technology Services
+KD,"Kyndryl Holdings, Inc.",NYSE,3014316026.0,Technology,Information Technology Services
 ALMS,Alumis Inc. Common Stock,NASDAQ,3014066282.0,Healthcare,Biotechnology
 SYNA,Synaptics Incorporated,NASDAQ,3003405169.0,Technology,Semiconductors
 DHT,"DHT Holdings, Inc.",NYSE,2994084958.0,Energy,Oil & Gas Midstream
 CMRE-PC,Costamare Inc.,NYSE,2993816677.0,Industrials,Marine Shipping
 LQDA,Liquidia Corporation,NASDAQ,2990904706.0,Healthcare,Biotechnology
 GBTG,"Global Business Travel Group, Inc.",NYSE,2989334219.0,Technology,Software - Application
-CURB,Curbline Properties Corp.,NYSE,2989293593.0,Real Estate,REIT - Retail
+CURB,Curbline Properties Corp.,NYSE,2989293564.0,Real Estate,REIT - Retail
 PRVA,"Privia Health Group, Inc.",NASDAQ,2988937155.0,Healthcare,Medical - Healthcare Information Services
 MGEE,"MGE Energy, Inc.",NASDAQ,2965697848.0,Utilities,Diversified Utilities
 IAC,IAC InterActive Corp.,NASDAQ,2957168218.0,Technology,Internet Content & Information
@@ -1839,7 +1839,7 @@ YSS,"York Space Systems, Inc.",NYSE,2942570891.0,Technology,Communication Equipm
 APLE,"Apple Hospitality REIT, Inc.",NYSE,2940635889.0,Real Estate,REIT - Hotel & Motel
 FFBC,First Financial Bancorp.,NASDAQ,2932591440.0,Financial Services,Banks - Regional
 SBLK,Star Bulk Carriers Corp.,NASDAQ,2929828965.0,Industrials,Marine Shipping
-SFNC,Simmons First National Corporation,NASDAQ,2925656532.0,Financial Services,Banks - Regional
+SFNC,Simmons First National Corporation,NASDAQ,2927778804.0,Financial Services,Banks - Regional
 KNTK,Kinetik Holdings Inc.,NYSE,2919649440.0,Energy,Oil & Gas Midstream
 UAA,"Under Armour, Inc.",NYSE,2914868777.0,Consumer Cyclical,Apparel - Manufacturers
 LXP,LXP Industrial Trust,NYSE,2912389989.0,Real Estate,REIT - Industrial
@@ -1861,7 +1861,7 @@ PSA-PR,Public Storage,NYSE,2852754610.0,Real Estate,REIT - Industrial
 DKL,"Delek Logistics Partners, LP",NYSE,2845157280.0,Energy,Oil & Gas Midstream
 DAVE,Dave Inc.,NASDAQ,2844904955.0,Technology,Software - Application
 PLUG,Plug Power Inc.,NASDAQ,2844263424.0,Industrials,Electrical Equipment & Parts
-BANC,"Banc of California, Inc.",NYSE,2841727874.0,Financial Services,Banks - Regional
+BANC,"Banc of California, Inc.",NYSE,2841727984.0,Financial Services,Banks - Regional
 RH,Rh,NYSE,2835244772.0,Consumer Cyclical,Specialty Retail
 KYIV,Kyivstar Group Ltd. Common Shares,NASDAQ,2835005303.0,Communication Services,Telecommunications Services
 ATRO,Astronics Corporation,NASDAQ,2825032925.0,Industrials,Aerospace & Defense
@@ -1904,7 +1904,7 @@ ETOR,eToro Group Ltd.,NASDAQ,2732098299.0,Financial Services,Financial - Capital
 LXP-PC,LXP Industrial Trust,NYSE,2727563263.0,Real Estate,REIT - Industrial
 CLSK,"CleanSpark, Inc.",NASDAQ,2726326053.0,Technology,Software - Application
 ANDG,Andersen,NYSE,2720555300.0,Consumer Cyclical,Specialty Business Services
-CRVL,CorVel Corporation,NASDAQ,2720188159.0,Financial Services,Insurance - Brokers
+CRVL,CorVel Corporation,NASDAQ,2720188371.0,Financial Services,Insurance - Brokers
 SB-PD,"Safe Bulkers, Inc.",NYSE,2718233120.0,Industrials,Marine Shipping
 RXO,"RXO, Inc.",NYSE,2714125994.0,Industrials,Trucking
 TDC,Teradata Corporation,NYSE,2714040144.0,Technology,Software - Infrastructure
@@ -1950,7 +1950,7 @@ OAK-PA,"Oaktree Capital Group, LLC 6.625% PFD UT A",NYSE,2571531405.0,Financial 
 SEAL-PA,Seapeak LLC,NYSE,2567406485.0,Energy,Oil & Gas Midstream
 RNA,"Avidity Biosciences, Inc.",NASDAQ,2566175145.0,Healthcare,Biotechnology
 MFAN,"MFA Financial, Inc. 8.875% Senior Notes",NYSE,2565622220.0,Real Estate,REIT - Mortgage
-OAK-PB,"Oaktree Capital Group, LLC",NYSE,2565589807.0,Financial Services,Asset Management
+OAK-PB,"Oaktree Capital Group, LLC",NYSE,2565589789.0,Financial Services,Asset Management
 WAL-PA,Western Alliance Bancorporation,NYSE,2562205994.0,Financial Services,Banks - Regional
 TWO-PA,Two Harbors Investment Corp.,NYSE,2561141006.0,Real Estate,REIT - Mortgage
 SEZL,Sezzle Inc.,NASDAQ,2560458057.0,Financial Services,Financial - Credit Services
@@ -1960,7 +1960,7 @@ TWO-PB,Two Harbors Investment Corp.,NYSE,2551770978.0,Real Estate,REIT - Mortgag
 ABXL,"Abacus Global Management, Inc. - 9.875% Fixed Rate Senior Notes due 2028",NYSE,2551350690.0,Financial Services,Investment - Banking & Investment Services
 HIW,"Highwoods Properties, Inc.",NYSE,2549299890.0,Real Estate,REIT - Office
 NGVT,Ingevity Corporation,NYSE,2548264136.0,Basic Materials,Chemicals - Specialty
-TBBK,"The Bancorp, Inc.",NASDAQ,2547415846.0,Financial Services,Banks - Regional
+TBBK,"The Bancorp, Inc.",NASDAQ,2547415791.0,Financial Services,Banks - Regional
 WVE,Wave Life Sciences Ltd.,NASDAQ,2546768339.0,Healthcare,Biotechnology
 CHEF,"The Chefs' Warehouse, Inc.",NASDAQ,2544201384.0,Consumer Defensive,Food Distribution
 CLMT,"Calumet, Inc.",NASDAQ,2543636692.0,Energy,Oil & Gas Exploration & Production
@@ -1989,8 +1989,8 @@ VRDN,"Viridian Therapeutics, Inc.",NASDAQ,2467061568.0,Healthcare,Biotechnology
 WT,"WisdomTree, Inc.",NYSE,2462513603.0,Financial Services,Asset Management
 RHI,Robert Half International Inc.,NYSE,2460237198.0,Industrials,Staffing & Employment Services
 BHFAL,"Brighthouse Financial, Inc.",NASDAQ,2459261097.0,Financial Services,Insurance - Life
+EFC-PD,Ellington Financial Inc.,NYSE,2457473721.0,Real Estate,REIT - Mortgage
 FRME,First Merchants Corporation,NASDAQ,2457134063.0,Financial Services,Banks - Regional
-EFC-PD,Ellington Financial Inc.,NYSE,2456758441.0,Real Estate,REIT - Mortgage
 ECC-PD,Eagle Point Credit Company Inc.,NYSE,2452542048.0,Financial Services,Asset Management
 KWR,Quaker Chemical Corporation,NYSE,2451356491.0,Basic Materials,Chemicals - Specialty
 BBUC,Brookfield Business Corporation,NYSE,2437286243.0,Financial Services,Asset Management
@@ -2027,6 +2027,7 @@ WGS,GeneDx Holdings Corp.,NASDAQ,2327572989.0,Healthcare,Medical - Healthcare In
 TLX,Telix Pharmaceuticals Limited,NASDAQ,2327397990.0,Healthcare,Biotechnology
 HLIO,"Helios Technologies, Inc.",NYSE,2318994580.0,Industrials,Industrial - Machinery
 MCW,"Mister Car Wash, Inc.",NASDAQ,2315777408.0,Consumer Cyclical,Personal Products & Services
+NIC,"Nicolet Bankshares, Inc.",NYSE,2313737740.0,Financial Services,Banks - Regional
 MFICL,MidCap Financial Investment Corporation 8.00% Notes due 2028,NASDAQ,2310830214.0,Financial Services,Asset Management
 IRON,"Disc Medicine, Inc.",NASDAQ,2306534898.0,Healthcare,Biotechnology
 VVX,"V2X, Inc.",NYSE,2304649462.0,Industrials,Aerospace & Defense
@@ -2039,7 +2040,6 @@ GLOB,Globant S.A.,NYSE,2290792816.0,Technology,Information Technology Services
 ADAMG,"Adamas Trust, Inc. - 9.125% Senior Notes Due 2030",NASDAQ,2290416414.0,Financial Services,Financial - Mortgages
 SEDG,"SolarEdge Technologies, Inc.",NASDAQ,2290064243.0,Energy,Solar
 GT,The Goodyear Tire & Rubber Company,NASDAQ,2289976360.0,Consumer Cyclical,Auto - Parts
-NIC,"Nicolet Bankshares, Inc.",NYSE,2287775795.0,Financial Services,Banks - Regional
 RCUS,"Arcus Biosciences, Inc.",NYSE,2283221455.0,Healthcare,Biotechnology
 CSGS,"CSG Systems International, Inc.",NASDAQ,2276792074.0,Technology,Software - Infrastructure
 NESR,National Energy Services Reunited Corp.,NASDAQ,2276575020.0,Energy,Oil & Gas Equipment & Services
@@ -2054,7 +2054,7 @@ CMPO,"CompoSecure, Inc.",NASDAQ,2252822635.0,Industrials,Manufacturing - Metal F
 NBTB,NBT Bancorp Inc.,NASDAQ,2250076451.0,Financial Services,Banks - Regional
 AGYS,"Agilysys, Inc.",NASDAQ,2248937082.0,Technology,Software - Application
 DNTH,"Dianthus Therapeutics, Inc.",NASDAQ,2246215721.0,Healthcare,Biotechnology
-DXPE,"DXP Enterprises, Inc.",NASDAQ,2245195657.0,Industrials,Industrial - Distribution
+DXPE,"DXP Enterprises, Inc.",NASDAQ,2245195514.0,Industrials,Industrial - Distribution
 PLAB,"Photronics, Inc.",NASDAQ,2243865598.0,Technology,Semiconductors
 PMTU,PennyMac Mortgage Investment Trust,NYSE,2240677450.0,Real Estate,REIT - Industrial
 HUN,Huntsman Corporation,NYSE,2239650725.0,Basic Materials,Chemicals
@@ -2086,7 +2086,6 @@ FLOC,Flowco Holdings Inc.,NYSE,2143787899.0,Energy,Oil & Gas Equipment & Service
 COTY,Coty Inc.,NYSE,2138414580.0,Consumer Defensive,Household & Personal Products
 ADAML,"Adamas Trust, Inc. - 6.875% Series F Fixed-to-Floating Rate Cumulative Redeemable Preferred Stock, $0.01 par value per share",NASDAQ,2131271807.0,Financial Services,Asset Management
 PLUS,ePlus inc.,NASDAQ,2130180320.0,Technology,Software - Application
-NTB,The Bank of N.T. Butterfield & Son Limited,NYSE,2129597043.0,Financial Services,Banks - Diversified
 ATKR,Atkore Inc.,NYSE,2128987848.0,Industrials,Electrical Equipment & Parts
 MFA-PB,"MFA Financial, Inc.",NYSE,2128025563.0,Real Estate,REIT - Mortgage
 FA,First Advantage Corporation,NASDAQ,2127684787.0,Industrials,Specialty Business Services
@@ -2101,7 +2100,8 @@ STC,Stewart Information Services Corporation,NYSE,2115912230.0,Financial Service
 GRAL,"GRAIL, Inc.",NASDAQ,2106599385.0,Healthcare,Medical - Diagnostics & Research
 RARE,Ultragenyx Pharmaceutical Inc.,NASDAQ,2106529378.0,Healthcare,Biotechnology
 PAHC,Phibro Animal Health Corporation,NASDAQ,2103346361.0,Healthcare,Drug Manufacturers - Specialty & Generic
-NSA-PA,National Storage Affiliates Trust,NYSE,2101746979.0,Real Estate,REIT - Industrial
+NTB,The Bank of N.T. Butterfield & Son Limited,NYSE,2102908023.0,Financial Services,Banks - Diversified
+NSA-PA,National Storage Affiliates Trust,NYSE,2101746938.0,Real Estate,REIT - Industrial
 CMRE,Costamare Inc.,NYSE,2100253751.0,Industrials,Marine Shipping
 EFSC,Enterprise Financial Services Corp,NASDAQ,2099998466.0,Financial Services,Banks - Regional
 CIMN,Chimera Investment Corporation,NYSE,2098215074.0,Financial Services,REIT - Industrial
@@ -2124,11 +2124,11 @@ TRTN-PE,Triton International Limited,NYSE,2066707360.0,Industrials,Rental & Leas
 WERN,"Werner Enterprises, Inc.",NASDAQ,2066691861.0,Industrials,Trucking
 IMNM,"Immunome, Inc.",NASDAQ,2065196915.0,Healthcare,Biotechnology
 ADAMN,"Adamas Trust, Inc.",NASDAQ,2061646042.0,Financial Services,Financial - Mortgages
-BHE,"Benchmark Electronics, Inc.",NYSE,2059119653.0,Technology,"Hardware, Equipment & Parts"
 BB,BlackBerry Limited,NYSE,2053713474.0,Technology,Software - Infrastructure
 CNXC,Concentrix Corporation,NASDAQ,2052005189.0,Technology,Information Technology Services
 SLNO,"Soleno Therapeutics, Inc.",NASDAQ,2047963253.0,Healthcare,Biotechnology
 INFQ,"Infleqtion, Inc.",NYSE,2047592192.0,Technology,Computer Hardware
+BHE,"Benchmark Electronics, Inc.",NYSE,2045830133.0,Technology,"Hardware, Equipment & Parts"
 NYAX,Nayax Ltd.,NASDAQ,2045621512.0,Technology,Information Technology Services
 FIHL,Fidelis Insurance Holdings Limited,NYSE,2044805490.0,Financial Services,Insurance - Diversified
 DRH,DiamondRock Hospitality Company,NYSE,2044220679.0,Real Estate,REIT - Hotel & Motel
@@ -2146,7 +2146,7 @@ MLCIL,Mount Logan Capital Inc. 8.00% Notes Due 2031,NASDAQ,2001074369.0,Financia
 GTY,Getty Realty Corp.,NYSE,2000861925.0,Real Estate,REIT - Retail
 BW-PA,"Babcock & Wilcox Enterprises, Inc.",NYSE,1992739300.0,Industrials,Industrial - Machinery
 PICS,PicS N.V.,NASDAQ,1990010523.0,Technology,Software - Infrastructure
-PAX,Patria Investments Limited,NASDAQ,1986978021.0,Financial Services,Asset Management
+PAX,Patria Investments Limited,NASDAQ,1986978046.0,Financial Services,Asset Management
 MGNI,"Magnite, Inc.",NASDAQ,1986650028.0,Communication Services,Advertising Agencies
 WS,"Worthington Steel, Inc.",NYSE,1986555828.0,Basic Materials,Steel
 APPN,Appian Corporation,NASDAQ,1985988682.0,Technology,Software - Infrastructure
@@ -2193,7 +2193,7 @@ CCS,"Century Communities, Inc.",NYSE,1904983586.0,Consumer Cyclical,Residential 
 NWL,Newell Brands Inc.,NASDAQ,1903168000.0,Consumer Defensive,Household & Personal Products
 DGII,Digi International Inc.,NASDAQ,1900115803.0,Technology,Communication Equipment
 KMPR,Kemper Corporation,NYSE,1895306933.0,Financial Services,Insurance - Property & Casualty
-NCNO,"nCino, Inc.",NASDAQ,1894728770.0,Technology,Software - Application
+NCNO,"nCino, Inc.",NASDAQ,1894728819.0,Technology,Software - Application
 ZYME,Zymeworks Inc.,NASDAQ,1888125753.0,Healthcare,Biotechnology
 PBI-PB,Pitney Bowes Inc. NT 43,NYSE,1883903074.0,Industrials,"Airlines, Airports & Air Services"
 TYRA,"Tyra Biosciences, Inc.",NASDAQ,1882433896.0,Healthcare,Biotechnology
@@ -2204,7 +2204,7 @@ EVTC,"EVERTEC, Inc.",NYSE,1878565542.0,Technology,Software - Infrastructure
 OZKAP,Bank OZK,NASDAQ,1877643594.0,Financial Services,Banks - Regional
 XPRO,Expro Group Holdings N.V.,NYSE,1870313040.0,Energy,Oil & Gas Equipment & Services
 JBLU,JetBlue Airways Corporation,NASDAQ,1869104323.0,Industrials,"Airlines, Airports & Air Services"
-INSP,"Inspire Medical Systems, Inc.",NYSE,1868909706.0,Healthcare,Medical - Devices
+INSP,"Inspire Medical Systems, Inc.",NYSE,1868909771.0,Healthcare,Medical - Devices
 TPB,"Turning Point Brands, Inc.",NYSE,1860924468.0,Consumer Defensive,Tobacco
 HBNB,Hotel101 Global Holdings Corp. Class A Ordinary Shares,NASDAQ,1859170040.0,Real Estate,Real Estate - Services
 SONO,"Sonos, Inc.",NASDAQ,1853094600.0,Technology,Consumer Electronics
@@ -2219,7 +2219,7 @@ USAR,USA Rare Earth Inc,NASDAQ,1842454248.0,Basic Materials,Industrial Materials
 SLVM,Sylvamo Corporation,NYSE,1841086128.0,Basic Materials,"Paper, Lumber & Forest Products"
 BLBD,Blue Bird Corporation,NASDAQ,1840741915.0,Consumer Cyclical,Auto - Manufacturers
 LTC,"LTC Properties, Inc.",NYSE,1838383953.0,Real Estate,REIT - Healthcare Facilities
-ASAN,"Asana, Inc.",NYSE,1837524977.0,Technology,Software - Application
+ASAN,"Asana, Inc.",NYSE,1837524985.0,Technology,Software - Application
 JXN-PA,Jackson Financial Inc.,NYSE,1834185859.0,Financial Services,Insurance - Life
 AFGB,"American Financial Group, Inc.",NYSE,1832573600.0,Financial Services,Insurance - Property & Casualty
 BUR,Burford Capital Limited,NYSE,1832167890.0,Financial Services,Asset Management
@@ -2238,7 +2238,7 @@ ASGN,ASGN Incorporated,NYSE,1791264916.0,Technology,Information Technology Servi
 OGN,Organon & Co.,NYSE,1788368516.0,Healthcare,Drug Manufacturers - General
 HLF,Herbalife Nutrition Ltd.,NYSE,1779955029.0,Consumer Defensive,Packaged Foods
 ELVN,"Enliven Therapeutics, Inc.",NASDAQ,1779232564.0,Healthcare,Biotechnology
-VET,Vermilion Energy Inc.,NYSE,1776710975.0,Energy,Oil & Gas Exploration & Production
+VET,Vermilion Energy Inc.,NYSE,1776711032.0,Energy,Oil & Gas Exploration & Production
 PTRN,Pattern Group Inc. Series A Common Stock,NASDAQ,1773917301.0,Technology,Software - Application
 HMN,Horace Mann Educators Corporation,NYSE,1773457755.0,Financial Services,Insurance - Property & Casualty
 TNET,"TriNet Group, Inc.",NYSE,1773280891.0,Industrials,Staffing & Employment Services
@@ -2251,7 +2251,7 @@ MCRI,"Monarch Casino & Resort, Inc.",NASDAQ,1763213710.0,Consumer Cyclical,"Gamb
 RVLV,"Revolve Group, Inc.",NYSE,1761955456.0,Consumer Cyclical,Specialty Retail
 EOSE,"Eos Energy Enterprises, Inc.",NASDAQ,1759977734.0,Industrials,Electrical Equipment & Parts
 RLAY,"Relay Therapeutics, Inc.",NASDAQ,1759222208.0,Healthcare,Biotechnology
-UPWK,Upwork Inc.,NASDAQ,1754695012.0,Industrials,Staffing & Employment Services
+UPWK,Upwork Inc.,NASDAQ,1754695038.0,Industrials,Staffing & Employment Services
 ADNT,Adient plc,NYSE,1753997151.0,Consumer Cyclical,Auto - Parts
 NTST,NETSTREIT Corp.,NYSE,1753234594.0,Real Estate,REIT - Retail
 GBX,"The Greenbrier Companies, Inc.",NYSE,1752172027.0,Industrials,Railroads
@@ -2288,7 +2288,7 @@ TILE,"Interface, Inc.",NASDAQ,1693327893.0,Consumer Cyclical,"Furnishings, Fixtu
 DV,"DoubleVerify Holdings, Inc.",NYSE,1691917366.0,Technology,Software - Application
 ALGT,Allegiant Travel Company,NASDAQ,1686497214.0,Industrials,"Airlines, Airports & Air Services"
 SRPT,"Sarepta Therapeutics, Inc.",NASDAQ,1686025710.0,Healthcare,Biotechnology
-SRCE,1st Source Corporation,NASDAQ,1677442361.0,Financial Services,Banks - Regional
+SRCE,1st Source Corporation,NASDAQ,1677442430.0,Financial Services,Banks - Regional
 ANAB,"AnaptysBio, Inc.",NASDAQ,1676536859.0,Healthcare,Biotechnology
 GNL-PA,"Global Net Lease, Inc.",NYSE,1676017096.0,Real Estate,REIT - Diversified
 GCT,GigaCloud Technology Inc.,NASDAQ,1672373197.0,Technology,Software - Infrastructure
@@ -2320,17 +2320,17 @@ STBA,"S&T Bancorp, Inc.",NASDAQ,1628278415.0,Financial Services,Banks - Regional
 WMK,"Weis Markets, Inc.",NYSE,1624730239.0,Consumer Defensive,Grocery Stores
 NUVB,Nuvation Bio Inc.,NYSE,1620290472.0,Healthcare,Biotechnology
 BTDR,Bitdeer Technologies Group,NASDAQ,1619208300.0,Technology,Software - Application
+ICHR,"Ichor Holdings, Ltd.",NASDAQ,1616156595.0,Technology,Semiconductors
 PRGO,Perrigo Company plc,NYSE,1608824665.0,Healthcare,Drug Manufacturers - Specialty & Generic
 BC-PC,Brunswick Corporation,NYSE,1608298315.0,Consumer Cyclical,Auto - Recreational Vehicles
 NVAX,"Novavax, Inc.",NASDAQ,1607115061.0,Healthcare,Biotechnology
-ICHR,"Ichor Holdings, Ltd.",NASDAQ,1606335650.0,Technology,Semiconductors
 TRS,TriMas Corporation,NASDAQ,1606316918.0,Consumer Cyclical,Packaging & Containers
 PVLA,"Palvella Therapeutics, Inc.",NASDAQ,1603726030.0,Healthcare,Biotechnology
 NTLA,"Intellia Therapeutics, Inc.",NASDAQ,1600769577.0,Healthcare,Biotechnology
 CTOS,"Custom Truck One Source, Inc.",NYSE,1599510677.0,Industrials,Rental & Leasing Services
 TNDM,"Tandem Diabetes Care, Inc.",NASDAQ,1599509319.0,Healthcare,Medical - Devices
 CYD,China Yuchai International Limited,NYSE,1598280517.0,Industrials,Industrial - Machinery
-TCBK,TriCo Bancshares,NASDAQ,1595671684.0,Financial Services,Banks - Regional
+TCBK,TriCo Bancshares,NASDAQ,1595671635.0,Financial Services,Banks - Regional
 IIPR,"Innovative Industrial Properties, Inc.",NYSE,1594178111.0,Real Estate,REIT - Industrial
 ARLO,"Arlo Technologies, Inc.",NYSE,1594123711.0,Industrials,Security & Protection Services
 FLNG,FLEX LNG Ltd.,NYSE,1593966582.0,Energy,Oil & Gas Midstream
@@ -2375,7 +2375,7 @@ CTS,CTS Corporation,NYSE,1508692378.0,Technology,"Hardware, Equipment & Parts"
 MXL,"MaxLinear, Inc.",NASDAQ,1505979033.0,Technology,Semiconductors
 KW,"Kennedy-Wilson Holdings, Inc.",NYSE,1505415383.0,Real Estate,Real Estate - Services
 NVCR,NovoCure Limited,NASDAQ,1502798185.0,Healthcare,Medical - Instruments & Supplies
-HCSG,"Healthcare Services Group, Inc.",NASDAQ,1501406875.0,Healthcare,Medical - Care Facilities
+HCSG,"Healthcare Services Group, Inc.",NASDAQ,1501406961.0,Healthcare,Medical - Care Facilities
 PRLB,"Proto Labs, Inc.",NYSE,1500925851.0,Industrials,Manufacturing - Metal Fabrication
 CXM,"Sprinklr, Inc.",NYSE,1500913343.0,Technology,Software - Application
 LKFN,Lakeland Financial Corporation,NASDAQ,1500834037.0,Financial Services,Banks - Regional
@@ -2386,7 +2386,7 @@ CRVS,"Corvus Pharmaceuticals, Inc.",NASDAQ,1494414876.0,Healthcare,Biotechnology
 FRMEP,First Merchants Corporation,NASDAQ,1493387780.0,Financial Services,Banks - Regional
 ARI,"Apollo Commercial Real Estate Finance, Inc.",NYSE,1490917138.0,Real Estate,REIT - Mortgage
 EYPT,"EyePoint Pharmaceuticals, Inc.",NASDAQ,1490169960.0,Healthcare,Biotechnology
-AMRC,"Ameresco, Inc.",NYSE,1486248330.0,Industrials,Engineering & Construction
+AMRC,"Ameresco, Inc.",NYSE,1486248302.0,Industrials,Engineering & Construction
 QCRH,"QCR Holdings, Inc.",NASDAQ,1485842829.0,Financial Services,Banks - Regional
 VIA,"Via Transportation, Inc.",NYSE,1484262816.0,Technology,Software - Application
 PRCT,PROCEPT BioRobotics Corporation,NASDAQ,1484135324.0,Healthcare,Medical - Devices
@@ -2406,7 +2406,7 @@ ELE,Elemental Royalty Corporation Common Stock,NASDAQ,1464588000.0,Basic Materia
 MHNC,"Maiden Holdings North America, Ltd.",NYSE,1464017170.0,Financial Services,Insurance - Life
 TFIN,"Triumph Financial, Inc.",NASDAQ,1463804727.0,Financial Services,Banks - Regional
 HOPE,"Hope Bancorp, Inc.",NASDAQ,1462780884.0,Financial Services,Banks - Regional
-BY,"Byline Bancorp, Inc.",NYSE,1462549694.0,Financial Services,Banks - Regional
+BY,"Byline Bancorp, Inc.",NYSE,1462549758.0,Financial Services,Banks - Regional
 INVA,"Innoviva, Inc.",NASDAQ,1462341801.0,Healthcare,Biotechnology
 RXRX,"Recursion Pharmaceuticals, Inc.",NASDAQ,1458972107.0,Healthcare,Biotechnology
 SFL,SFL Corporation Ltd.,NYSE,1456791701.0,Industrials,Marine Shipping
@@ -2429,7 +2429,7 @@ KOD,Kodiak Sciences Inc.,NASDAQ,1420646514.0,Healthcare,Biotechnology
 ARR-PC,"ARMOUR Residential REIT, Inc.",NYSE,1419182893.0,Real Estate,REIT - Mortgage
 NVGS,Navigator Holdings Ltd.,NYSE,1417378988.0,Energy,Oil & Gas Midstream
 GOLD,"Gold.com, Inc.",NYSE,1416884970.0,Financial Services,Financial - Capital Markets
-XZO,"Exzeo Group, Inc.",NYSE,1416102402.0,Financial Services,Insurance - Diversified
+XZO,"Exzeo Group, Inc.",NYSE,1416102386.0,Financial Services,Insurance - Diversified
 INOD,Innodata Inc.,NASDAQ,1415582053.0,Technology,Information Technology Services
 IOVA,"Iovance Biotherapeutics, Inc.",NASDAQ,1412993994.0,Healthcare,Biotechnology
 CMRE-PD,Costamare Inc.,NYSE,1411060756.0,Industrials,Marine Shipping
@@ -2455,7 +2455,7 @@ CSWC,Capital Southwest Corporation,NASDAQ,1365677400.0,Financial Services,Asset 
 IMTX,Immatics N.V.,NASDAQ,1364769779.0,Healthcare,Biotechnology
 TNGX,"Tango Therapeutics, Inc.",NASDAQ,1364264696.0,Healthcare,Biotechnology
 WKC,World Kinect Corporation,NYSE,1363967877.0,Energy,Oil & Gas Refining & Marketing
-WEN,The Wendy's Company,NASDAQ,1360816600.0,Consumer Cyclical,Restaurants
+WEN,The Wendy's Company,NASDAQ,1361077983.0,Consumer Cyclical,Restaurants
 RES,"RPC, Inc.",NYSE,1356533021.0,Energy,Oil & Gas Equipment & Services
 CMRE-PB,Costamare Inc.,NYSE,1355902232.0,Industrials,Marine Shipping
 ORIC,"ORIC Pharmaceuticals, Inc.",NASDAQ,1355836580.0,Healthcare,Biotechnology
@@ -2500,7 +2500,7 @@ ASTH,"Astrana Health, Inc.",NASDAQ,1283482137.0,Healthcare,Medical - Care Facili
 CRI,"Carter's, Inc.",NYSE,1282964954.0,Consumer Cyclical,Apparel - Retail
 DMLP,"Dorchester Minerals, L.P.",NASDAQ,1281664752.0,Energy,Oil & Gas Exploration & Production
 GIC,Global Industrial Company,NYSE,1280694648.0,Industrials,Industrial - Distribution
-WABC,Westamerica Bancorporation,NASDAQ,1280561551.0,Financial Services,Banks - Regional
+WABC,Westamerica Bancorporation,NASDAQ,1280561499.0,Financial Services,Banks - Regional
 USPH,"U.S. Physical Therapy, Inc.",NYSE,1278514367.0,Healthcare,Medical - Care Facilities
 IRS-WT,IRSA Inversiones y Representaciones Sociedad Anónima WT,NYSE,1275545700.0,Financial Services,Real Estate - Development
 PSNY,Polestar Automotive Holding UK PLC,NASDAQ,1275323586.0,Consumer Cyclical,Auto - Manufacturers
@@ -2531,7 +2531,7 @@ XPEL,"XPEL, Inc.",NASDAQ,1218412016.0,Consumer Cyclical,Auto - Parts
 TRUP,"Trupanion, Inc.",NASDAQ,1216479034.0,Financial Services,Insurance - Specialty
 AFYA,Afya Limited,NASDAQ,1215676237.0,Consumer Defensive,Education & Training Services
 KOS,Kosmos Energy Ltd.,NYSE,1214950463.0,Energy,Oil & Gas Exploration & Production
-EFC,Ellington Financial Inc.,NYSE,1212968554.0,Real Estate,REIT - Mortgage
+EFC,Ellington Financial Inc.,NYSE,1213321708.0,Real Estate,REIT - Mortgage
 ALVO,Alvotech,NASDAQ,1212128489.0,Healthcare,Drug Manufacturers - Specialty & Generic
 GLUE,"Monte Rosa Therapeutics, Inc.",NASDAQ,1211935922.0,Healthcare,Biotechnology
 SBET,SharpLink Gaming Ltd.,NASDAQ,1211828532.0,Consumer Cyclical,"Gambling, Resorts & Casinos"
@@ -2552,7 +2552,7 @@ LUCK,Lucky Strike Entertainment Corporation,NYSE,1186911007.0,Consumer Cyclical,
 UAN,"CVR Partners, LP",NYSE,1183799344.0,Basic Materials,Agricultural Inputs
 MBINM,Merchants Bancorp,NASDAQ,1178718375.0,Financial Services,Banks - Regional
 LZ,"LegalZoom.com, Inc.",NASDAQ,1177074447.0,Industrials,Specialty Business Services
-CBL,"CBL & Associates Properties, Inc.",NYSE,1172382796.0,Real Estate,REIT - Retail
+CBL,"CBL & Associates Properties, Inc.",NYSE,1172382834.0,Real Estate,REIT - Retail
 AMAL,Amalgamated Financial Corp.,NASDAQ,1172006811.0,Financial Services,Banks - Regional
 CERT,"Certara, Inc.",NASDAQ,1170659247.0,Healthcare,Medical - Healthcare Information Services
 PEBO,Peoples Bancorp Inc.,NASDAQ,1169986196.0,Financial Services,Banks - Regional
@@ -2628,8 +2628,8 @@ LFT-PA,"Lument Finance Trust, Inc.",NYSE,1075345845.0,Real Estate,REIT - Mortgag
 MHLA,"Maiden Holdings, Ltd. 6.625 NT 2046",NYSE,1074960343.0,Financial Services,Insurance - Property & Casualty
 LAC,Lithium Americas Corp.,NYSE,1073970210.0,Basic Materials,Industrial Materials
 DEA,"Easterly Government Properties, Inc.",NYSE,1072741092.0,Real Estate,REIT - Office
+CRMLW,Critical Metals Corp.,NASDAQ,1072046510.0,Basic Materials,Industrial Materials
 RAPP,"Rapport Therapeutics, Inc. Common Stock",NASDAQ,1070840112.0,Healthcare,Biotechnology
-CRMLW,Critical Metals Corp.,NASDAQ,1069755812.0,Basic Materials,Industrial Materials
 SBGI,"Sinclair, Inc.",NASDAQ,1066855686.0,Communication Services,Entertainment
 ABTC,American Bitcoin Corp,NASDAQ,1066745699.0,Financial Services,Financial - Capital Markets
 PGEN,"Precigen, Inc.",NASDAQ,1066521427.0,Healthcare,Biotechnology
@@ -2650,7 +2650,7 @@ PRSU,"Pursuit Attractions and Hospitality, Inc.",NYSE,1054400082.0,Industrials,S
 WBI,WaterBridge Infrastructure LLC,NYSE,1053066449.0,Energy,Oil & Gas Energy
 CSR,Centerspace,NYSE,1052755068.0,Real Estate,REIT - Residential
 MBX,"MBX Biosciences, Inc. Common Stock",NASDAQ,1051800869.0,Healthcare,Biotechnology
-CIM-PD,Chimera Investment Corporation,NYSE,1048849722.0,Real Estate,REIT - Mortgage
+CIM-PD,Chimera Investment Corporation,NYSE,1048849701.0,Real Estate,REIT - Mortgage
 PMT-PA,PennyMac Mortgage Investment Trust,NYSE,1048418758.0,Real Estate,REIT - Mortgage
 GILT,Gilat Satellite Networks Ltd.,NASDAQ,1046536783.0,Technology,Communication Equipment
 GNK,Genco Shipping & Trading Limited,NYSE,1046124870.0,Industrials,Marine Shipping
@@ -2695,7 +2695,7 @@ SOC,Sable Offshore Corp.,NYSE,1004028153.0,Energy,Oil & Gas Drilling
 CRON,Cronos Group Inc.,NASDAQ,1003226443.0,Healthcare,Drug Manufacturers - Specialty & Generic
 EPC,Edgewell Personal Care Company,NYSE,1000669615.0,Consumer Defensive,Household & Personal Products
 UFCS,"United Fire Group, Inc.",NASDAQ,996634100.0,Financial Services,Insurance - Property & Casualty
-FMBH,"First Mid Bancshares, Inc.",NASDAQ,995721950.0,Financial Services,Banks - Regional
+FMBH,"First Mid Bancshares, Inc.",NASDAQ,995720871.0,Financial Services,Banks - Regional
 BLFS,"BioLife Solutions, Inc.",NASDAQ,995220111.0,Healthcare,Medical - Instruments & Supplies
 MFIC,MidCap Financial Investment Corporation,NASDAQ,994616611.0,Financial Services,Asset Management
 EAI,"Entergy Arkansas, Inc. 1M BD 4.875%66",NYSE,993631272.0,Utilities,Regulated Electric
@@ -2716,7 +2716,7 @@ SNCY,"Sun Country Airlines Holdings, Inc.",NASDAQ,971857495.0,Industrials,"Airli
 ABX,"Abacus Global Management, Inc.",NYSE,971663379.0,Financial Services,Insurance - Life
 SDGR,"Schrödinger, Inc.",NASDAQ,966480943.0,Healthcare,Medical - Healthcare Information Services
 GSL-PB,"Global Ship Lease, Inc.",NYSE,965774880.0,Industrials,Marine Shipping
-RJET,Republic Airways Holdings Inc.,NASDAQ,964264021.0,Industrials,"Airlines, Airports & Air Services"
+RJET,Republic Airways Holdings Inc.,NASDAQ,964264000.0,Industrials,"Airlines, Airports & Air Services"
 GRBK-PA,"Green Brick Partners, Inc.",NYSE,963842793.0,Consumer Cyclical,Residential Construction
 MEG,"Montrose Environmental Group, Inc.",NYSE,963304802.0,Industrials,Waste Management
 XIFR,"XPLR Infrastructure, LP",NYSE,963155047.0,Utilities,Independent Power Producers
@@ -2759,7 +2759,6 @@ EVLV,"Evolv Technologies Holdings, Inc.",NASDAQ,921980870.0,Industrials,Security
 OPK,"OPKO Health, Inc.",NASDAQ,921241536.0,Healthcare,Medical - Diagnostics & Research
 AMPH,"Amphastar Pharmaceuticals, Inc.",NASDAQ,917205393.0,Healthcare,Drug Manufacturers - Specialty & Generic
 TBLA,Taboola.com Ltd.,NASDAQ,916550304.0,Communication Services,Internet Content & Information
-SSII,"SS Innovations International, Inc.",NASDAQ,915827330.0,Healthcare,Medical - Devices
 AMTB,Amerant Bancorp Inc.,NYSE,913727410.0,Financial Services,Banks - Regional
 LUXE,Emles Luxury Goods ETF,NYSE,913724033.0,Consumer Cyclical,Luxury Goods
 ABUS,Arbutus Biopharma Corporation,NASDAQ,913539000.0,Healthcare,Biotechnology
@@ -2784,6 +2783,7 @@ VITL,"Vital Farms, Inc.",NASDAQ,895938145.0,Consumer Defensive,Agricultural Farm
 ULCC,"Frontier Group Holdings, Inc.",NASDAQ,895477900.0,Industrials,"Airlines, Airports & Air Services"
 HFWA,Heritage Financial Corporation,NASDAQ,894938225.0,Financial Services,Banks - Regional
 SPRY,"ARS Pharmaceuticals, Inc.",NASDAQ,893591344.0,Healthcare,Biotechnology
+SSII,"SS Innovations International, Inc.",NASDAQ,892592810.0,Healthcare,Medical - Devices
 IMPPP,Imperial Petroleum Inc.,NASDAQ,889240138.0,Energy,Oil & Gas Exploration & Production
 SGP,"SpyGlass Pharma, Inc. Common Stock",NASDAQ,888908579.0,Healthcare,Biotechnology
 PX,"P10, Inc.",NYSE,886897430.0,Financial Services,Asset Management
@@ -2793,19 +2793,18 @@ ESQ,"Esquire Financial Holdings, Inc.",NASDAQ,880061270.0,Financial Services,Ban
 BBDC,"Barings BDC, Inc.",NYSE,877025543.0,Financial Services,Financial - Credit Services
 BKSY,BlackSky Technology Inc.,NYSE,874620083.0,Technology,"Hardware, Equipment & Parts"
 METC,"Ramaco Resources, Inc.",NASDAQ,873734162.0,Energy,Coal
-HTLD,"Heartland Express, Inc.",NASDAQ,872059233.0,Industrials,Trucking
+HTLD,"Heartland Express, Inc.",NASDAQ,872059255.0,Industrials,Trucking
 PRCH,"Porch Group, Inc.",NASDAQ,871488906.0,Technology,Software - Application
 HRTG,"Heritage Insurance Holdings, Inc.",NYSE,871393353.0,Financial Services,Insurance - Property & Casualty
 HBT,"HBT Financial, Inc.",NASDAQ,870349976.0,Financial Services,Banks - Regional
 EQBK,"Equity Bancshares, Inc.",NYSE,867976200.0,Financial Services,Banks - Regional
-EEX,"Emerald Holding, Inc.",NYSE,867121306.0,Communication Services,Advertising Agencies
+EEX,"Emerald Holding, Inc.",NYSE,867121276.0,Communication Services,Advertising Agencies
 ATLC,Atlanticus Holdings Corporation,NASDAQ,866549762.0,Financial Services,Financial - Credit Services
 HBNC,"Horizon Bancorp, Inc.",NASDAQ,865574618.0,Financial Services,Banks - Regional
 SHEN,Shenandoah Telecommunications Company,NASDAQ,863810992.0,Communication Services,Telecommunications Services
 JANX,"Janux Therapeutics, Inc.",NASDAQ,863121030.0,Healthcare,Biotechnology
 PHAT,"Phathom Pharmaceuticals, Inc.",NASDAQ,862828646.0,Healthcare,Biotechnology
 GO,Grocery Outlet Holding Corp.,NASDAQ,862626252.0,Consumer Defensive,Grocery Stores
-MCB,Metropolitan Bank Holding Corp.,NYSE,862354687.0,Financial Services,Banks - Regional
 CPF,Central Pacific Financial Corp.,NYSE,862110676.0,Financial Services,Banks - Regional
 GLP-PB,Global Partners LP,NYSE,861060786.0,Energy,Oil & Gas Midstream
 TYG,Tortoise Energy Infrastructure Corporation,NYSE,860080666.0,Financial Services,Asset Management
@@ -2816,7 +2815,8 @@ SCHL,Scholastic Corporation,NASDAQ,856306900.0,Communication Services,Publishing
 BFS,"Saul Centers, Inc.",NYSE,855895729.0,Real Estate,REIT - Retail
 MGIC,Magic Software Enterprises Ltd.,NASDAQ,853345921.0,Technology,Information Technology Services
 SMP,"Standard Motor Products, Inc.",NYSE,849168734.0,Consumer Cyclical,Auto - Parts
-LIFE,Ethos Technologies Inc.,NASDAQ,848579393.0,Financial Services,Insurance - Life
+LIFE,Ethos Technologies Inc.,NASDAQ,848579380.0,Financial Services,Insurance - Life
+MCB,Metropolitan Bank Holding Corp.,NYSE,847122214.0,Financial Services,Banks - Regional
 NAVI,Navient Corporation,NASDAQ,846358225.0,Financial Services,Financial - Credit Services
 DCOMP,"Dime Community Bancshares, Inc.",NASDAQ,845188575.0,Financial Services,Banks - Regional
 AMN,"AMN Healthcare Services, Inc.",NYSE,841602701.0,Healthcare,Medical - Care Facilities
@@ -2843,7 +2843,7 @@ CGBD,"Carlyle Secured Lending, Inc.",NASDAQ,817971480.0,Financial Services,Asset
 BFST,"Business First Bancshares, Inc.",NASDAQ,816496578.0,Financial Services,Banks - Regional
 BOW,Bowhead Specialty Holdings Inc.,NYSE,816307930.0,Financial Services,Insurance - Property & Casualty
 BULLW,Webull Corporation Warrants,NASDAQ,814975953.0,Financial Services,Investment - Banking & Investment Services
-KRUS,"Kura Sushi USA, Inc.",NASDAQ,814739125.0,Consumer Cyclical,Restaurants
+KRUS,"Kura Sushi USA, Inc.",NASDAQ,814739058.0,Consumer Cyclical,Restaurants
 LWLG,"Lightwave Logic, Inc.",NASDAQ,814411500.0,Basic Materials,Chemicals - Specialty
 MYE,"Myers Industries, Inc.",NYSE,814370310.0,Consumer Cyclical,Packaging & Containers
 MATW,Matthews International Corporation,NASDAQ,813635757.0,Industrials,Conglomerates
@@ -2881,7 +2881,7 @@ WSR,Whitestone REIT,NYSE,776016086.0,Real Estate,REIT - Retail
 BHFAN,"Brighthouse Financial, Inc.",NASDAQ,775416396.0,Financial Services,Insurance - Life
 RWT,"Redwood Trust, Inc.",NYSE,775295119.0,Real Estate,REIT - Mortgage
 HTBK,Heritage Commerce Corp,NASDAQ,775034860.0,Financial Services,Banks - Regional
-EVGO,"EVgo, Inc.",NASDAQ,774576594.0,Consumer Cyclical,Specialty Retail
+EVGO,"EVgo, Inc.",NASDAQ,774576573.0,Consumer Cyclical,Specialty Retail
 FBRT,"Franklin BSP Realty Trust, Inc.",NYSE,774446719.0,Real Estate,REIT - Mortgage
 CCCXU,Churchill Capital Corp X,NASDAQ,774246810.0,Financial Services,Shell Companies
 BRSP,"BrightSpire Capital, Inc.",NYSE,770613610.0,Real Estate,REIT - Diversified
@@ -2974,7 +2974,7 @@ TBPH,"Theravance Biopharma, Inc.",NASDAQ,692438770.0,Healthcare,Biotechnology
 PROK,ProKidney Corp.,NASDAQ,692266927.0,Healthcare,Biotechnology
 CTO-PA,"CTO Realty Growth, Inc.",NYSE,691072808.0,Real Estate,REIT - Diversified
 GRNT,"Granite Ridge Resources, Inc",NYSE,690381722.0,Energy,Oil & Gas Exploration & Production
-EHAB,"Enhabit, Inc.",NYSE,689896099.0,Healthcare,Medical - Care Facilities
+EHAB,"Enhabit, Inc.",NYSE,690343351.0,Healthcare,Medical - Care Facilities
 PSTL,"Postal Realty Trust, Inc.",NYSE,689021749.0,Real Estate,REIT - Office
 ADSE,ADS-TEC Energy PLC,NASDAQ,689004263.0,Industrials,Electrical Equipment & Parts
 MITK,"Mitek Systems, Inc.",NASDAQ,688354430.0,Technology,Software - Application
@@ -3086,7 +3086,7 @@ TWI,"Titan International, Inc.",NYSE,604981133.0,Industrials,Agricultural - Mach
 CODI-PB,Compass Diversified,NYSE,604839120.0,Industrials,Conglomerates
 GOOD,Gladstone Commercial Corporation,NASDAQ,604603343.0,Real Estate,REIT - Diversified
 HOV,"Hovnanian Enterprises, Inc.",NYSE,604433489.0,Consumer Cyclical,Residential Construction
-VLGEA,"Village Super Market, Inc.",NASDAQ,603490731.0,Consumer Defensive,Grocery Stores
+VLGEA,"Village Super Market, Inc.",NASDAQ,603490649.0,Consumer Defensive,Grocery Stores
 BTBT,"Bit Digital, Inc.",NASDAQ,602035186.0,Financial Services,Financial - Capital Markets
 BBW,"Build-A-Bear Workshop, Inc.",NYSE,599865329.0,Consumer Cyclical,Specialty Retail
 REPL,"Replimune Group, Inc.",NASDAQ,598651350.0,Healthcare,Biotechnology
@@ -3157,7 +3157,7 @@ SERV,Serve Robotics Inc.,NASDAQ,546677505.0,Industrials,Industrial - Machinery
 EGY,"VAALCO Energy, Inc.",NYSE,546313246.0,Energy,Oil & Gas Exploration & Production
 PFIS,Peoples Financial Services Corp.,NASDAQ,546104671.0,Financial Services,Banks - Regional
 VREX,Varex Imaging Corporation,NASDAQ,545371810.0,Healthcare,Medical - Devices
-CTNM,"Contineum Therapeutics, Inc. Class A Common Stock",NASDAQ,542827612.0,Healthcare,Biotechnology
+CTNM,"Contineum Therapeutics, Inc. Class A Common Stock",NASDAQ,542827582.0,Healthcare,Biotechnology
 SXC,"SunCoke Energy, Inc.",NYSE,541012603.0,Energy,Coal
 ZEUS,"Olympic Steel, Inc.",NASDAQ,538983909.0,Basic Materials,Steel
 RIGL,"Rigel Pharmaceuticals, Inc.",NASDAQ,537823019.0,Healthcare,Biotechnology
@@ -3171,10 +3171,10 @@ SWBI,"Smith & Wesson Brands, Inc.",NASDAQ,534369337.0,Industrials,Aerospace & De
 CODI,Compass Diversified,NYSE,534175359.0,Industrials,Conglomerates
 FFIC,Flushing Financial Corporation,NASDAQ,533699320.0,Financial Services,Banks - Regional
 NHPBP,"National Healthcare Properties, Inc.",NASDAQ,532113226.0,Real Estate,REIT - Healthcare Facilities
-UNTY,"Unity Bancorp, Inc.",NASDAQ,532090532.0,Financial Services,Banks - Regional
+UNTY,"Unity Bancorp, Inc.",NASDAQ,532090585.0,Financial Services,Banks - Regional
 CMCO,Columbus McKinnon Corporation,NASDAQ,531678271.0,Industrials,Agricultural - Machinery
 ASIX,AdvanSix Inc.,NYSE,531545962.0,Basic Materials,Chemicals
-CRD-A,Crawford & Company,NYSE,531471089.0,Financial Services,Insurance - Brokers
+CRD-A,Crawford & Company,NYSE,531471100.0,Financial Services,Insurance - Brokers
 PRTA,Prothena Corporation plc,NASDAQ,530763623.0,Healthcare,Biotechnology
 KMDA,Kamada Ltd.,NASDAQ,530093904.0,Healthcare,Drug Manufacturers - Specialty & Generic
 GNL-PD,"Global Net Lease, Inc.",NYSE,529992000.0,Real Estate,REIT - Diversified
@@ -3219,7 +3219,7 @@ BAND,Bandwidth Inc.,NASDAQ,502079958.0,Technology,Software - Infrastructure
 NWAX,New America Acquisition I Corp.,NYSE,501486000.0,Financial Services,Financial - Conglomerates
 CBNK,"Capital Bancorp, Inc.",NASDAQ,501242983.0,Financial Services,Banks - Regional
 FFWM,First Foundation Inc.,NYSE,500621776.0,Financial Services,Banks - Regional
-TDUP,ThredUp Inc.,NASDAQ,500567616.0,Consumer Cyclical,Specialty Retail
+TDUP,ThredUp Inc.,NASDAQ,500567584.0,Consumer Cyclical,Specialty Retail
 VBNK,VersaBank,NASDAQ,499947623.0,Financial Services,Banks - Regional
 CARS,Cars.com Inc.,NYSE,498842655.0,Consumer Cyclical,Auto - Dealerships
 ENGN,enGene Holdings Inc.,NASDAQ,498639076.0,Healthcare,Biotechnology
@@ -3245,7 +3245,7 @@ LE,"Lands' End, Inc.",NASDAQ,488511577.0,Consumer Cyclical,Specialty Retail
 MSBI,"Midland States Bancorp, Inc.",NASDAQ,487499952.0,Financial Services,Banks - Regional
 TRC,Tejon Ranch Co.,NYSE,486242706.0,Industrials,Conglomerates
 XRN,Chiron Real Estate Inc.,NYSE,485543507.0,Financial Services,REIT - Industrial
-KREF,KKR Real Estate Finance Trust Inc.,NYSE,485271111.0,Real Estate,REIT - Mortgage
+KREF,KKR Real Estate Finance Trust Inc.,NYSE,485271104.0,Real Estate,REIT - Mortgage
 SSP,The E.W. Scripps Company,NASDAQ,485089753.0,Communication Services,Broadcasting
 VNDA,Vanda Pharmaceuticals Inc.,NASDAQ,484685600.0,Healthcare,Biotechnology
 KRT,Karat Packaging Inc.,NASDAQ,484297453.0,Consumer Cyclical,Packaging & Containers
@@ -3284,14 +3284,14 @@ IMXI,"International Money Express, Inc.",NASDAQ,467178451.0,Technology,Software 
 CMDB,Costamare Bulkers Holdings Ltd,NYSE,467074638.0,Industrials,Marine Shipping
 LRMR,"Larimar Therapeutics, Inc.",NASDAQ,466467631.0,Healthcare,Biotechnology
 ANSC,Agriculture & Natural Solutions Acquisition Corporation Class A Ordinary Shares,NASDAQ,466367747.0,Financial Services,Shell Companies
-CRAN,Crane Harbor Acquisition Corp. II Class A Ordinary Shares,NASDAQ,466185970.0,Financial Services,Financial - Conglomerates
+CRAN,Crane Harbor Acquisition Corp. II Class A Ordinary Shares,NASDAQ,466185980.0,Financial Services,Financial - Conglomerates
 PEPG,PepGen Inc.,NASDAQ,464737994.0,Healthcare,Biotechnology
 RR,Richtech Robotics Inc. Class B Common Stock,NASDAQ,464662651.0,Industrials,Industrial - Machinery
 NPCE,"NeuroPace, Inc.",NASDAQ,464642889.0,Healthcare,Medical - Devices
 DHIL,"Diamond Hill Investment Group, Inc.",NASDAQ,464629253.0,Financial Services,Asset Management
 GTEN,"Gores Holdings X, Inc.",NASDAQ,463821760.0,Financial Services,Shell Companies
 KIDS,OrthoPediatrics Corp.,NASDAQ,463429058.0,Healthcare,Medical - Devices
-CARE,"Carter Bankshares, Inc.",NASDAQ,463386183.0,Financial Services,Banks - Regional
+CARE,"Carter Bankshares, Inc.",NASDAQ,463386162.0,Financial Services,Banks - Regional
 AVXL,Anavex Life Sciences Corp.,NASDAQ,463358790.0,Healthcare,Biotechnology
 GMRE,Global Medical REIT Inc.,NYSE,463276158.0,Real Estate,REIT - Healthcare Facilities
 GEVO,"Gevo, Inc.",NASDAQ,462809819.0,Basic Materials,Chemicals - Specialty
@@ -3331,7 +3331,7 @@ BLND,"Blend Labs, Inc.",NYSE,437964405.0,Technology,Software - Application
 CYRX,"Cryoport, Inc.",NASDAQ,437602221.0,Industrials,Integrated Freight & Logistics
 FUBO,fuboTV Inc.,NYSE,437366600.0,Communication Services,Broadcasting
 MAGN,Magnera Corp.,NYSE,436100000.0,Industrials,Manufacturing - Textiles
-PSFE,Paysafe Limited,NYSE,436054277.0,Technology,Information Technology Services
+PSFE,Paysafe Limited,NYSE,436054269.0,Technology,Information Technology Services
 WTI,"W&T Offshore, Inc.",NYSE,435916610.0,Energy,Oil & Gas Exploration & Production
 GPRK,GeoPark Limited,NYSE,435010779.0,Energy,Oil & Gas Exploration & Production
 NC,"NACCO Industries, Inc.",NYSE,434220697.0,Energy,Coal
@@ -3374,7 +3374,7 @@ EVH,"Evolent Health, Inc.",NYSE,411697536.0,Healthcare,Medical - Healthcare Info
 GLOP-PC,GasLog Partners LP,NYSE,411585779.0,Energy,Oil & Gas Midstream
 EVTL,Vertical Aerospace Ltd.,NYSE,411123672.0,Industrials,Aerospace & Defense
 KOPN,Kopin Corporation,NASDAQ,409154474.0,Technology,"Hardware, Equipment & Parts"
-FCEL,"FuelCell Energy, Inc.",NASDAQ,409103810.0,Industrials,Electrical Equipment & Parts
+FCEL,"FuelCell Energy, Inc.",NASDAQ,409103519.0,Industrials,Electrical Equipment & Parts
 SAV,Saratoga Investment Corp 7.50%,NYSE,408648525.0,Financial Services,Asset Management
 SAZ,Saratoga Investment Corp 8.50%,NYSE,408324843.0,Financial Services,Investment - Banking & Investment Services
 ALFUU,Centurion Acquisition Corp. Unit,NASDAQ,408050825.0,Financial Services,Shell Companies
@@ -3383,8 +3383,8 @@ SAJ,Saratoga Investment Corp 8.00%,NYSE,407852267.0,Financial Services,Investmen
 LAB,Standard BioTools Inc.,NASDAQ,407639339.0,Healthcare,Medical - Devices
 SAY,Saratoga Investment Corp 8.125%,NYSE,407030115.0,Financial Services,Investment - Banking & Investment Services
 FRBA,First Bank,NASDAQ,406925936.0,Financial Services,Banks - Regional
-AACI,Armada Acquisition Corp. II,NASDAQ,406146300.0,Financial Services,Financial - Conglomerates
 XRPN,Armada Acquisition Corp. II,NASDAQ,406146300.0,Financial Services,Asset Management
+AACI,Armada Acquisition Corp. II,NASDAQ,406146300.0,Financial Services,Financial - Conglomerates
 LENZ,"LENZ Therapeutics, Inc.",NASDAQ,405517998.0,Healthcare,Biotechnology
 BMRC,Bank of Marin Bancorp,NASDAQ,405425493.0,Financial Services,Banks - Regional
 DNA,"Ginkgo Bioworks Holdings, Inc.",NYSE,405348572.0,Healthcare,Biotechnology
@@ -3458,7 +3458,7 @@ WENN,Wen Acquisition Corp Class A Ordinary Shares,NASDAQ,381190500.0,Financial S
 BBCQ,Bleichroeder Acquisition Corp. II,NASDAQ,380266644.0,Financial Services,Financial - Conglomerates
 SOHOB,Sotherly Hotels Inc.,NASDAQ,379877740.0,Real Estate,REIT - Hotel & Motel
 BWFG,"Bankwell Financial Group, Inc.",NASDAQ,379377510.0,Financial Services,Banks - Regional
-HVT,"Haverty Furniture Companies, Inc.",NYSE,379179714.0,Consumer Cyclical,Home Improvement
+HVT,"Haverty Furniture Companies, Inc.",NYSE,379179737.0,Consumer Cyclical,Home Improvement
 ATLCL,Atlanticus Holdings Corporation 6.125% Senior Notes due 2026,NASDAQ,379141646.0,Financial Services,Financial - Credit Services
 BACQU,Inflection Point Acquisition Corp. IV,NASDAQ,379139141.0,Financial Services,Shell Companies
 RBB,RBB Bancorp,NASDAQ,378441180.0,Financial Services,Banks - Regional
@@ -3481,11 +3481,11 @@ PBFS,"Pioneer Bancorp, Inc.",NASDAQ,368934846.0,Financial Services,Banks - Regio
 ABAT,American Battery Technology Company Common Stock,NASDAQ,368676514.0,Basic Materials,Industrial Materials
 ATLCP,Atlanticus Holdings Corporation,NASDAQ,368387587.0,Financial Services,Financial - Credit Services
 IPCXU,Inflection Point Acquisition Corp. III Units,NASDAQ,367399245.0,Financial Services,Asset Management
-NEWT,"NewtekOne, Inc.",NASDAQ,366868672.0,Financial Services,Asset Management
+NEWT,"NewtekOne, Inc.",NASDAQ,366868634.0,Financial Services,Asset Management
 NUS,"Nu Skin Enterprises, Inc.",NYSE,366726407.0,Consumer Defensive,Household & Personal Products
 PERI,Perion Network Ltd.,NASDAQ,366155081.0,Communication Services,Internet Content & Information
 KRSP-UN,Rice Acquisition Corporation 3,NYSE,365700000.0,Financial Services,Asset Management
-CVEO,Civeo Corporation,NYSE,365381996.0,Industrials,Specialty Business Services
+CVEO,Civeo Corporation,NYSE,365382025.0,Industrials,Specialty Business Services
 GASS,StealthGas Inc.,NASDAQ,365296297.0,Industrials,Marine Shipping
 CDRO,"Codere Online Luxembourg, S.A.",NASDAQ,364670112.0,Consumer Cyclical,"Gambling, Resorts & Casinos"
 CCIIU,Cohen Circle Acquisition Corp. II Unit,NASDAQ,364335504.0,Financial Services,Shell Companies
@@ -3499,7 +3499,7 @@ BBCP,"Concrete Pumping Holdings, Inc.",NASDAQ,361350646.0,Industrials,Engineerin
 QUAD,"Quad/Graphics, Inc.",NYSE,361142678.0,Industrials,Specialty Business Services
 SHMD,SCHMID Group N.V. Class A Ordinary Shares,NASDAQ,360863147.0,Industrials,Industrial - Machinery
 FCRS,FutureCrest Acquisition Corp.,NYSE,360812510.0,Financial Services,Asset Management
-ALUB,Alussa Energy Acquisition Corp. II,NYSE,360812490.0,Financial Services,Shell Companies
+ALUB,Alussa Energy Acquisition Corp. II,NYSE,360812510.0,Financial Services,Shell Companies
 FCRS-UN,FutureCrest Acquisition Corp.,NYSE,360210121.0,Financial Services,Asset Management
 NMG,Nouveau Monde Graphite Inc.,NYSE,360105847.0,Basic Materials,Industrial Materials
 LVWR,"LiveWire Group, Inc.",NYSE,359640160.0,Consumer Cyclical,Auto - Manufacturers
@@ -3520,7 +3520,7 @@ PLBC,Plumas Bancorp,NASDAQ,356469888.0,Financial Services,Banks - Regional
 KNOP,KNOT Offshore Partners LP,NYSE,356451998.0,Industrials,Marine Shipping
 LPAAU,Launch One Acquisition Corp. Unit,NASDAQ,356104286.0,Financial Services,Shell Companies
 AMCX,AMC Networks Inc.,NASDAQ,356048970.0,Communication Services,Entertainment
-TACH,Titan Acquisition Corp.,NASDAQ,356040010.0,Financial Services,Shell Companies
+TACH,Titan Acquisition Corp.,NASDAQ,356040000.0,Financial Services,Shell Companies
 AXINU,Axiom Intelligence Acquisition Corp 1 Units,NASDAQ,355919996.0,Financial Services,Asset Management
 CBAN,"Colony Bankcorp, Inc.",NASDAQ,355806040.0,Financial Services,Banks - Regional
 GECCI,Great Elm Capital Corp. 8.50% Notes DUE 2029,NASDAQ,355554280.0,Financial Services,Asset Management
@@ -3529,7 +3529,7 @@ BACQ,Inflection Point Acquisition Corp. IV,NASDAQ,354765910.0,Financial Services
 ARTNA,Artesian Resources Corporation,NASDAQ,354583590.0,Utilities,Regulated Water
 USNA,"USANA Health Sciences, Inc.",NYSE,353368966.0,Consumer Defensive,Packaged Foods
 GECCO,Great Elm Capital Corp. 5.875% Notes due 2026,NASDAQ,352614658.0,Financial Services,Asset Management
-VMD,"Viemed Healthcare, Inc.",NASDAQ,352174692.0,Healthcare,Medical - Devices
+VMD,"Viemed Healthcare, Inc.",NASDAQ,352174683.0,Healthcare,Medical - Devices
 VSTM,"Verastem, Inc.",NASDAQ,351728458.0,Healthcare,Biotechnology
 PSBD,Palmer Square Capital BDC Inc.,NYSE,351305060.0,Financial Services,Asset Management
 BBBY,Bed Bath & Beyond Inc.,NYSE,351256828.0,Consumer Cyclical,Specialty Retail
@@ -3565,7 +3565,7 @@ TLNC,Talon Capital Corp. Class A Ordinary Shares,NASDAQ,345393903.0,Financial Se
 AVNW,"Aviat Networks, Inc.",NASDAQ,345007502.0,Technology,Communication Equipment
 SBXE,SilverBox Corp V,NYSE,344174400.0,Financial Services,Financial - Conglomerates
 MESHU,Meshflow Acquisition Corp.,NASDAQ,343965000.0,Financial Services,Asset Management
-AXIN,Axiom Intelligence Acquisition Corp 1,NASDAQ,343405370.0,Financial Services,Shell Companies
+AXIN,Axiom Intelligence Acquisition Corp 1,NASDAQ,343405340.0,Financial Services,Shell Companies
 CEPT,"Cantor Equity Partners II, Inc. Class A Ordinary Share",NASDAQ,342801789.0,Financial Services,Shell Companies
 MVBF,MVB Financial Corp.,NASDAQ,342603298.0,Financial Services,Banks - Regional
 DSAC,Daedalus Special Acquisition Corp.,NASDAQ,341727620.0,Financial Services,Financial - Conglomerates
@@ -3679,12 +3679,12 @@ ALDX,"Aldeyra Therapeutics, Inc.",NASDAQ,312545606.0,Healthcare,Biotechnology
 PDYN,Palladyne AI Corp.,NASDAQ,312337882.0,Technology,Software - Infrastructure
 CHSCN,CHS Inc.,NASDAQ,312322400.0,Consumer Defensive,Agricultural Farm Products
 SHIP,Seanergy Maritime Holdings Corp.,NASDAQ,312277509.0,Industrials,Marine Shipping
-SAC,Safeguard Acquisition Corp.,NYSE,311470983.0,Financial Services,Financial - Conglomerates
+SAC,Safeguard Acquisition Corp.,NYSE,311471003.0,Financial Services,Financial - Conglomerates
 JACS,Jackson Acquisition Company II,NYSE,310695011.0,Financial Services,Shell Companies
 VACI,Viking Acquisition Corp. I,NYSE,310447270.0,Financial Services,Shell Companies
 NKLR,Terra Innovatum Global N.V. Ordinary shares,NASDAQ,310027181.0,Energy,Regulated Electric
 CHSCM,CHS Inc.,NASDAQ,309816458.0,Consumer Defensive,Agricultural Farm Products
-HDSN,"Hudson Technologies, Inc.",NASDAQ,309547220.0,Basic Materials,Chemicals - Specialty
+HDSN,"Hudson Technologies, Inc.",NASDAQ,309547199.0,Basic Materials,Chemicals - Specialty
 NL,"NL Industries, Inc.",NYSE,309301106.0,Industrials,Security & Protection Services
 IEAGU,Infinite Eagle Acquisition Corp. Unit,NASDAQ,309266500.0,Financial Services,Shell Companies
 XOMAP,XOMA Corporation,NASDAQ,309121870.0,Healthcare,Biotechnology
@@ -3728,9 +3728,9 @@ LOKV,Live Oak Acquisition Corp. V Class A Ordinary Shares,NASDAQ,296095928.0,Fin
 HVMC,Highview Merger Corp. Class A Ordinary Share,NASDAQ,295864600.0,Financial Services,Banks
 CCXIW,Churchill Capital Corp XI Warrants,NASDAQ,295714286.0,Financial Services,Shell Companies
 FCNCO,"First Citizens BancShares, Inc.",NASDAQ,295415641.0,Financial Services,Banks - Regional
+CTEV,Claritev Corporation,NYSE,294969114.0,Healthcare,Medical - Healthcare Information Services
 OEC,Orion Engineered Carbons S.A.,NYSE,294874188.0,Basic Materials,Chemicals - Specialty
 PINE,"Alpine Income Property Trust, Inc.",NYSE,294570209.0,Real Estate,REIT - Retail
-CTEV,Claritev Corporation,NYSE,294486976.0,Healthcare,Medical - Healthcare Information Services
 OIMAU,Oneim Acquisition Corp.,NASDAQ,293118750.0,Financial Services,Shell Companies
 PLMKU,Plum Acquisition Corp. IV,NASDAQ,293100669.0,Financial Services,Financial - Conglomerates
 TACHU,Titan Acquisition Corp. Units,NASDAQ,292560000.0,Financial Services,Shell Companies
@@ -3754,7 +3754,7 @@ CUBWU,Lionheart Holdings Unit,NASDAQ,286933692.0,Financial Services,Shell Compan
 DBCA,D. Boral Acquisition I Corp. Class A Ordinary Shares,NASDAQ,286916241.0,Financial Services,Financial - Conglomerates
 SOPH,SOPHiA GENETICS S.A.,NASDAQ,286653820.0,Healthcare,Medical - Healthcare Information Services
 BNTC,Benitec Biopharma Inc.,NASDAQ,286355272.0,Healthcare,Biotechnology
-NHIC,NewHold Investment Corp III,NASDAQ,286344352.0,Financial Services,Asset Management
+NHIC,NewHold Investment Corp III,NASDAQ,286344342.0,Financial Services,Asset Management
 AACB,Artius II Acquisition Inc. Class A Ordinary Shares,NASDAQ,286159490.0,Financial Services,Shell Companies
 SGHT,"Sight Sciences, Inc.",NASDAQ,286036065.0,Healthcare,Medical - Devices
 ACIU,AC Immune S.A.,NASDAQ,285704000.0,Healthcare,Biotechnology
@@ -3790,6 +3790,7 @@ HVIIU,Hennessy Capital Investment Corp. VII,NASDAQ,277446276.0,Financial Service
 ASPN,"Aspen Aerogels, Inc.",NYSE,276867721.0,Industrials,Construction
 TVAI,Thayer Ventures Acquisition Corporation II Class A Ordinary Shares,NASDAQ,276853560.0,Financial Services,Shell Companies
 NPB,"Northpointe Bancshares, Inc.",NYSE,275664328.0,Financial Services,Banks - Regional
+ESOA,Energy Services of America Corporation,NASDAQ,275065050.0,Industrials,Engineering & Construction
 CIA,"Citizens, Inc.",NYSE,274620790.0,Financial Services,Insurance - Life
 QTRX,Quanterix Corporation,NASDAQ,273725270.0,Healthcare,Medical - Devices
 MBCN,Middlefield Banc Corp.,NASDAQ,273465373.0,Financial Services,Banks - Regional
@@ -3857,7 +3858,7 @@ PPIH,"Perma-Pipe International Holdings, Inc.",NASDAQ,255367120.0,Industrials,Co
 CANG,Cango Inc.,NYSE,255225581.0,Consumer Cyclical,Auto - Dealerships
 FACT,FACT II Acquisition Corp,NASDAQ,255132105.0,Financial Services,Shell Companies
 ATGL,Alpha Technology Group Limited,NASDAQ,254883750.0,Technology,Software - Infrastructure
-PLMK,Plum Acquisition Corp. IV,NASDAQ,254792616.0,Financial Services,Financial - Conglomerates
+PLMK,Plum Acquisition Corp. IV,NASDAQ,254792637.0,Financial Services,Financial - Conglomerates
 MITT,TPG Mortgage Investment Trust Inc,NYSE,254590481.0,Real Estate,REIT - Mortgage
 FNKO,"Funko, Inc.",NASDAQ,254554927.0,Consumer Cyclical,Leisure
 FGIIU,FG Imperii Acquisition Corp.,NASDAQ,254240500.0,Financial Services,Shell Companies
@@ -3878,7 +3879,6 @@ DYNXU,Dynamix Corporation,NASDAQ,252000000.0,Financial Services,Shell Companies
 HACQU,HCM IV Acquisition Corp. Unit,NASDAQ,251875000.0,Financial Services,Asset Management
 FGBIP,"First Guaranty Bancshares, Inc.",NASDAQ,251547604.0,Financial Services,Banks - Regional
 GDEV,GDEV Inc.,NASDAQ,249107437.0,Technology,Electronic Gaming & Multimedia
-ESOA,Energy Services of America Corporation,NASDAQ,249052035.0,Industrials,Engineering & Construction
 SLP,"Simulations Plus, Inc.",NASDAQ,248810325.0,Healthcare,Medical - Healthcare Information Services
 ZKPU,Lafayette Digital Acquisition Corp. I Unit,NASDAQ,248530000.0,Financial Services,Shell Companies
 LCNB,LCNB Corp.,NASDAQ,248407366.0,Financial Services,Banks - Regional
@@ -3932,14 +3932,14 @@ MACIU,Melar Acquisition Corp. I Unit,NASDAQ,238034535.0,Financial Services,Shell
 MITT-PB,"AG Mortgage Investment Trust, Inc.",NYSE,237773694.0,Real Estate,REIT - Mortgage
 GSRF,GSR IV Acquisition Corp. Class A ordinary share,NASDAQ,237028110.0,Financial Services,Asset Management
 SSSS,SuRo Capital Corp.,NASDAQ,236873028.0,Financial Services,Asset Management
-KLTR,"Kaltura, Inc.",NASDAQ,236371969.0,Technology,Software - Infrastructure
+KLTR,"Kaltura, Inc.",NASDAQ,236371967.0,Technology,Software - Infrastructure
 IRHOU,Iron Horse Acquisitions Corp. II Units,NASDAQ,236171400.0,Financial Services,Shell Companies
 BRR,"ProCap Financial, Inc.",NASDAQ,236086453.0,Financial Services,Financial - Capital Markets
 RNGT,Range Capital Acquisition Corp II Class A Ordinary Shares,NASDAQ,235653600.0,Financial Services,Asset Management
 RGCO,"RGC Resources, Inc.",NASDAQ,235643020.0,Utilities,Regulated Gas
 CBNA,"Chain Bridge Bancorp, Inc.",NYSE,235436774.0,Financial Services,Banks - Regional
 MFIN,Medallion Financial Corp.,NASDAQ,235354734.0,Financial Services,Financial - Credit Services
-DAAQ,Digital Asset Acquisition Corp.,NASDAQ,235290000.0,Financial Services,Shell Companies
+DAAQ,Digital Asset Acquisition Corp.,NASDAQ,235289980.0,Financial Services,Shell Companies
 FRAF,Franklin Financial Services Corporation,NASDAQ,234746486.0,Financial Services,Banks - Regional
 ALEC,"Alector, Inc.",NASDAQ,234675665.0,Healthcare,Biotechnology
 JAKK,"JAKKS Pacific, Inc.",NASDAQ,234630990.0,Consumer Cyclical,Leisure
@@ -3976,8 +3976,8 @@ ADAC,American Drive Acquisition Company Class A Ordinary Shares,NASDAQ,228160000
 SKYX,SKYX Platforms Corp.,NASDAQ,228083701.0,Industrials,Electrical Equipment & Parts
 HCMAU,HCM III ACQUISITION CORP.,NASDAQ,227700000.0,Financial Services,Shell Companies
 FINW,FinWise Bancorp,NASDAQ,227444706.0,Financial Services,Banks - Regional
-BLRK,Bluerock Acquisition Corp. Class A Ordinary Shares,NASDAQ,227240000.0,Financial Services,Financial - Conglomerates
 BIII,Black Spade Acquisition III Co,NYSE,227240000.0,Financial Services,Financial - Conglomerates
+BLRK,Bluerock Acquisition Corp. Class A Ordinary Shares,NASDAQ,227240000.0,Financial Services,Financial - Conglomerates
 IVVD,"Invivyd, Inc.",NASDAQ,226967346.0,Healthcare,Biotechnology
 INSE,"Inspired Entertainment, Inc.",NASDAQ,226724229.0,Consumer Cyclical,"Gambling, Resorts & Casinos"
 STTK,"Shattuck Labs, Inc.",NASDAQ,226582207.0,Healthcare,Biotechnology
@@ -4054,7 +4054,7 @@ AVTX,"Avalo Therapeutics, Inc.",NASDAQ,207359988.0,Healthcare,Biotechnology
 ANIK,"Anika Therapeutics, Inc.",NASDAQ,207088705.0,Healthcare,Medical - Devices
 ACB,Aurora Cannabis Inc.,NASDAQ,206989310.0,Healthcare,Drug Manufacturers - Specialty & Generic
 ARCIU,Archimedes Tech SPAC Partners III Co. Units,NASDAQ,206924400.0,Financial Services,Asset Management
-SWKH,SWK Holdings Corporation,NASDAQ,206262699.0,Financial Services,Asset Management
+SWKH,SWK Holdings Corporation,NASDAQ,206262682.0,Financial Services,Asset Management
 SVAQU,Silicon Valley Acquisition Corp. Units,NASDAQ,205837500.0,Financial Services,Shell Companies
 SMHI,SEACOR Marine Holdings Inc.,NYSE,205828856.0,Industrials,Marine Shipping
 OSS,"One Stop Systems, Inc.",NASDAQ,205684969.0,Technology,Computer Hardware
@@ -4068,13 +4068,12 @@ OVBC,Ohio Valley Banc Corp.,NASDAQ,203303248.0,Financial Services,Banks - Region
 THAR,"Tharimmune, Inc.",NASDAQ,203183414.0,Healthcare,Biotechnology
 ASYS,"Amtech Systems, Inc.",NASDAQ,202987374.0,Technology,Semiconductors
 DNMXU,Dynamix Corporation III,NASDAQ,202860000.0,Financial Services,Shell Companies
-MPAA,"Motorcar Parts of America, Inc.",NASDAQ,202621046.0,Consumer Cyclical,Auto - Parts
+MPAA,"Motorcar Parts of America, Inc.",NASDAQ,202621035.0,Consumer Cyclical,Auto - Parts
 VNME,Vendome Acquisition Corporation I,NASDAQ,202400000.0,Financial Services,Shell Companies
 DYORU,Insight Digital Partners II Units,NASDAQ,202002000.0,Financial Services,Asset Management
-TRGSU,TRG Latin America Acquisitions Corp. Units,NASDAQ,201845500.0,Financial Services,Financial - Conglomerates
 AGM-PG,Federal Agricultural Mortgage Corporation,NYSE,201745536.0,Financial Services,Financial - Credit Services
 OPBK,OP Bancorp,NASDAQ,201699880.0,Financial Services,Banks - Regional
-ALTO,"Alto Ingredients, Inc.",NASDAQ,201234036.0,Basic Materials,Chemicals - Specialty
+ALTO,"Alto Ingredients, Inc.",NASDAQ,201234015.0,Basic Materials,Chemicals - Specialty
 JILL,"J.Jill, Inc.",NYSE,201227555.0,Consumer Cyclical,Apparel - Retail
 DOUG,Douglas Elliman Inc.,NYSE,200730872.0,Real Estate,Real Estate - Services
 CURI,CuriosityStream Inc.,NASDAQ,200546864.0,Communication Services,Broadcasting
@@ -4087,6 +4086,7 @@ CGEN,Compugen Ltd.,NASDAQ,200165664.0,Healthcare,Biotechnology
 DVLT,Datavault AI Inc.,NASDAQ,200164800.0,Technology,Information Technology Services
 SDA,SunCar Technology Group Inc.,NASDAQ,199730605.0,Consumer Cyclical,Auto - Dealerships
 SRJN,Spire Inc. 6.375% Junior Subord,NYSE,199680000.0,Utilities,Regulated Gas
+TRGSU,TRG Latin America Acquisitions Corp. Units,NASDAQ,199600000.0,Financial Services,Financial - Conglomerates
 SMID,Smith-Midland Corporation,NASDAQ,199453186.0,Basic Materials,Construction Materials
 CMIIU,Columbus Circle Capital Corp II,NASDAQ,199400000.0,Financial Services,Shell Companies
 SSACW,SPACSphere Acquisition Corp. Warrant,NASDAQ,199390688.0,Financial Services,Shell Companies
@@ -4158,7 +4158,7 @@ MCGAU,Yorkville Acquisition Corp. Unit,NASDAQ,181300568.0,Financial Services,Ass
 ONEW,OneWater Marine Inc.,NASDAQ,181252674.0,Consumer Cyclical,Auto - Recreational Vehicles
 SOCAU,Solarius Capital Acquisition Corp,NASDAQ,181248000.0,Financial Services,Asset Management
 WALD,Waldencast plc,NASDAQ,180607578.0,Technology,Software - Application
-EARN,Ellington Credit Company,NYSE,180338904.0,Financial Services,Asset Management
+EARN,Ellington Credit Company,NYSE,180338909.0,Financial Services,Asset Management
 TDWDU,Tailwind 2.0 Acquisition Corp. Unit,NASDAQ,179729500.0,Financial Services,Asset Management
 SMTI,Sanara MedTech Inc.,NASDAQ,179517349.0,Healthcare,Medical - Instruments & Supplies
 SOCA,Solarius Capital Acquisition Corp. Class A Ordinary Share,NASDAQ,179301000.0,Financial Services,Shell Companies
@@ -4194,7 +4194,7 @@ EAF,GrafTech International Ltd.,NYSE,174285743.0,Industrials,Electrical Equipmen
 ENGNW,enGene Holdings Inc. Warrants,NASDAQ,174062922.0,Healthcare,Biotechnology
 IPEXR,Inflection Point Acquisition Corp. V,NASDAQ,173638400.0,Financial Services,Financial - Conglomerates
 CHEC,Chenghe Acquisition III Co. Class A Ordinary Share,NASDAQ,173610413.0,Financial Services,Asset Management
-MENS,Jyong Biotech Ltd. Ordinary Shares,NASDAQ,173343076.0,Healthcare,Biotechnology
+MENS,Jyong Biotech Ltd. Ordinary Shares,NASDAQ,173343072.0,Healthcare,Biotechnology
 JELD,"JELD-WEN Holding, Inc.",NYSE,173072238.0,Industrials,Construction
 DPRO,Draganfly Inc.,NASDAQ,172932982.0,Industrials,Aerospace & Defense
 SRG-PA,Seritage Growth Properties,NYSE,172861911.0,Real Estate,REIT - Retail
@@ -4254,7 +4254,7 @@ LKSP,Lake Superior Acquisition Corp.,NASDAQ,157404120.0,Financial Services,Asset
 MDV,Modiv Inc.,NYSE,157207454.0,Real Estate,REIT - Diversified
 KORE,"KORE Group Holdings, Inc.",NYSE,156982436.0,Communication Services,Telecommunications Services
 IMDX,Insight Molecular Diagnostics Inc.,NASDAQ,156794268.0,Healthcare,Biotechnology
-PDEX,"Pro-Dex, Inc.",NASDAQ,156739292.0,Healthcare,Medical - Instruments & Supplies
+PDEX,"Pro-Dex, Inc.",NASDAQ,156739340.0,Healthcare,Medical - Instruments & Supplies
 LAFA,LaFayette Acquisition Corp. Ordinary Share,NASDAQ,156347663.0,Financial Services,Shell Companies
 SANG,Sangoma Technologies Corporation,NASDAQ,155787641.0,Technology,Software - Infrastructure
 IRHOR,Iron Horse Acquisitions Corp. II Rights,NASDAQ,155294118.0,Financial Services,Shell Companies
@@ -4270,6 +4270,7 @@ CHPT,"ChargePoint Holdings, Inc.",NYSE,153745079.0,Consumer Cyclical,Specialty R
 FC,Franklin Covey Co.,NYSE,153351486.0,Industrials,Consulting Services
 WHWK,Whitehawk Therapeutics Inc,NASDAQ,153167177.0,Healthcare,Biotechnology
 CTAAU,ClearThink 1 Acquisition Corp.,NASDAQ,153116250.0,Financial Services,Financial - Conglomerates
+TTSH,"Tile Shop Holdings, Inc.",NASDAQ,152925303.0,Consumer Cyclical,Home Improvement
 BSII,Black Spade Acquisition II Co,NASDAQ,152847000.0,Financial Services,Shell Companies
 ECBK,"ECB Bancorp, Inc.",NASDAQ,152714010.0,Financial Services,Banks - Regional
 UNCY,"Unicycive Therapeutics, Inc.",NASDAQ,151944170.0,Healthcare,Biotechnology
@@ -4278,10 +4279,9 @@ GAMB,Gambling.com Group Limited,NASDAQ,151920991.0,Consumer Cyclical,"Gambling, 
 ATOM,Atomera Incorporated,NASDAQ,151751990.0,Technology,Semiconductors
 DLNG,Dynagas LNG Partners LP,NYSE,151712986.0,Energy,Oil & Gas Midstream
 AMCI,AMC Robotics Corporation,NASDAQ,151615027.0,Technology,Computer Hardware
-TTSH,"Tile Shop Holdings, Inc.",NASDAQ,151583853.0,Consumer Cyclical,Home Improvement
 WLACU,Willow Lane Acquisition Corp.,NASDAQ,151547000.0,Financial Services,Shell Companies
 IPODU,Dune Acquisition Corporation II Units,NASDAQ,151200568.0,Financial Services,Shell Companies
-BANX,ArrowMark Financial Corp.,NASDAQ,150974259.0,Financial Services,Asset Management
+BANX,ArrowMark Financial Corp.,NASDAQ,150974297.0,Financial Services,Asset Management
 PERF,Perfect Corp.,NYSE,150736040.0,Technology,Software - Application
 ELDN,"Eledon Pharmaceuticals, Inc.",NASDAQ,150472725.0,Healthcare,Biotechnology
 QUIK,QuickLogic Corporation,NASDAQ,150394226.0,Technology,Semiconductors
@@ -4391,7 +4391,7 @@ IPEX,Inflection Point Acquisition Corp V,NASDAQ,123202474.0,Financial Services,A
 NMP,NMP Acquisition Corp.,NASDAQ,122952875.0,Financial Services,Shell Companies
 SCAG,Scage Future American Depositary Shares,NASDAQ,122855553.0,Industrials,Manufacturing - Tools & Accessories
 AARD,"Aardvark Therapeutics, Inc. Common Stock",NASDAQ,122801254.0,Healthcare,Biotechnology
-TSQ,"Townsquare Media, Inc.",NYSE,122631589.0,Communication Services,Advertising Agencies
+TSQ,"Townsquare Media, Inc.",NYSE,122631582.0,Communication Services,Advertising Agencies
 AFBI,"Affinity Bancshares, Inc.",NASDAQ,122488576.0,Financial Services,Banks - Regional
 CLAR,Clarus Corporation,NASDAQ,121733782.0,Consumer Cyclical,Leisure
 BDSX,"Biodesix, Inc.",NASDAQ,121721981.0,Healthcare,Medical - Diagnostics & Research
@@ -4473,7 +4473,7 @@ AGEN,Agenus Inc.,NASDAQ,108826560.0,Healthcare,Biotechnology
 ZJK,"ZJK Industrial Co., Ltd.",NASDAQ,108497823.0,Industrials,
 RFAIU,RF Acquisition Corp II Unit,NASDAQ,108400000.0,Financial Services,Shell Companies
 FSHPU,Flag Ship Acquisition Corp. Unit,NASDAQ,108235275.0,Financial Services,Shell Companies
-BSBK,Bogota Financial Corp.,NASDAQ,107640193.0,Financial Services,Banks - Regional
+BSBK,Bogota Financial Corp.,NASDAQ,107640185.0,Financial Services,Banks - Regional
 KVACU,Keen Vision Acquisition Corporation,NASDAQ,107495560.0,Financial Services,Shell Companies
 SPWR,SunPower Inc.,NASDAQ,107124230.0,Energy,Solar
 MGRT,Mega Fortune Company Limited,NASDAQ,106975000.0,Technology,Electronic Gaming & Multimedia
@@ -4562,7 +4562,6 @@ LSE,"Leishen Energy Holding Co., Ltd.",NASDAQ,92445750.0,Energy,Oil & Gas Equipm
 ULBI,Ultralife Corporation,NASDAQ,92372058.0,Industrials,Electrical Equipment & Parts
 CBAT,"CBAK Energy Technology, Inc.",NASDAQ,92191669.0,Industrials,Electrical Equipment & Parts
 HIT,"Health In Tech, Inc.",NASDAQ,92186191.0,Technology,Software - Application
-BOTJ,"Bank of the James Financial Group, Inc.",NASDAQ,92184328.0,Financial Services,Banks - Regional
 AMTX,"Aemetis, Inc.",NASDAQ,92018000.0,Energy,Oil & Gas Refining & Marketing
 LCCC,Lakeshore Acquisition III Corp.,NASDAQ,91543400.0,Financial Services,Shell Companies
 DFDV,DeFi Development Corp.,NASDAQ,91530134.0,Technology,Software - Infrastructure
@@ -4570,6 +4569,7 @@ STIM,"Neuronetics, Inc.",NASDAQ,91086276.0,Healthcare,Medical - Diagnostics & Re
 BWNB,"Babcock & Wilcox Enterprises, I",NYSE,91036400.0,Technology,Consumer Electronics
 ARBE,Arbe Robotics Ltd.,NASDAQ,90919872.0,Technology,Software - Infrastructure
 AMWL,American Well Corporation,NYSE,90372872.0,Healthcare,Medical - Healthcare Information Services
+BOTJ,"Bank of the James Financial Group, Inc.",NASDAQ,90366993.0,Financial Services,Banks - Regional
 BMHL,Bluemount Holdings Limited,NASDAQ,90344556.0,Financial Services,Asset Management
 ATLX,Atlas Lithium Corporation,NASDAQ,90046546.0,Basic Materials,Other Precious Metals
 BTCS,BTCS Inc.,NASDAQ,89583362.0,Financial Services,Financial - Capital Markets
@@ -4603,6 +4603,7 @@ GPMT,Granite Point Mortgage Trust Inc.,NYSE,85614557.0,Real Estate,REIT - Mortga
 DLTH,Duluth Holdings Inc.,NASDAQ,85572025.0,Consumer Cyclical,Apparel - Retail
 SSBI,Summit State Bank,NASDAQ,85526734.0,Financial Services,Banks - Regional
 NVFY,"Nova LifeStyle, Inc.",NASDAQ,85353724.0,Consumer Cyclical,"Furnishings, Fixtures & Appliances"
+DLHC,DLH Holdings Corp.,NASDAQ,85073910.0,Industrials,Specialty Business Services
 COLAU,Columbus Acquisition Corp,NASDAQ,85003903.0,Financial Services,Shell Companies
 PEW-WT,GrabAGun Digital Holdings Inc. WT,NYSE,84882928.0,Industrials,Industrial - Infrastructure Operations
 KNDI,"Kandi Technologies Group, Inc.",NASDAQ,84850652.0,Consumer Cyclical,Auto - Parts
@@ -4614,7 +4615,6 @@ SMX,SMX (Security Matters) Public Limited Company,NASDAQ,84223157.0,Industrials,
 PDCC,Pearl Diver Credit Company Inc.,NYSE,84164973.0,Financial Services,Asset Management
 YHNA,YHN Acquisition I Limited,NASDAQ,84048750.0,Financial Services,Financial - Conglomerates
 STEX,Streamex Corp.,NASDAQ,83926164.0,Financial Services,Asset Management
-DLHC,DLH Holdings Corp.,NASDAQ,83914470.0,Industrials,Specialty Business Services
 TEAD,Teads Holding Co.,NASDAQ,83842479.0,Technology,Software - Application
 HYPR,"Hyperfine, Inc.",NASDAQ,83813668.0,Healthcare,Medical - Devices
 COLA,Columbus Acquisition Corp,NASDAQ,83573931.0,Financial Services,Shell Companies
@@ -4687,9 +4687,9 @@ FNGR,"FingerMotion, Inc.",NASDAQ,73537570.0,Communication Services,Telecommunica
 ONMDW,OneMedNet Corporation,NASDAQ,73056472.0,Technology,Software - Application
 SNT,Senstar Technologies Ltd.,NASDAQ,73012571.0,Industrials,Security & Protection Services
 MIND,"MIND Technology, Inc.",NASDAQ,72801751.0,Technology,"Hardware, Equipment & Parts"
+ACET,"Adicet Bio, Inc.",NASDAQ,72672000.0,Healthcare,Biotechnology
 EURKU,Eureka Acquisition Corp Unit,NASDAQ,72600908.0,Financial Services,Shell Companies
 BYFC,Broadway Financial Corporation,NASDAQ,72533684.0,Financial Services,Banks - Regional
-ACET,"Adicet Bio, Inc.",NASDAQ,72509018.0,Healthcare,Biotechnology
 LCUT,"Lifetime Brands, Inc.",NASDAQ,72499168.0,Consumer Cyclical,"Furnishings, Fixtures & Appliances"
 SRTS,"Sensus Healthcare, Inc.",NASDAQ,72434250.0,Healthcare,Medical - Devices
 TETE,Technology & Telecommunication Acquisition Corporation,NASDAQ,72380350.0,Financial Services,Shell Companies
@@ -4751,7 +4751,7 @@ SRFM,Surf Air Mobility Inc.,NYSE,64389939.0,Industrials,"Airlines, Airports & Ai
 PODC,"PodcastOne, Inc.",NASDAQ,64369470.0,Communication Services,Internet Content & Information
 THCH,TH International Limited,NASDAQ,64341169.0,Consumer Cyclical,Restaurants
 CVGI,"Commercial Vehicle Group, Inc.",NASDAQ,64279917.0,Consumer Cyclical,Auto - Parts
-HAIN,"The Hain Celestial Group, Inc.",NASDAQ,64277270.0,Consumer Defensive,Packaged Foods
+HAIN,"The Hain Celestial Group, Inc.",NASDAQ,64277272.0,Consumer Defensive,Packaged Foods
 MCHX,"Marchex, Inc.",NASDAQ,64103147.0,Communication Services,Advertising Agencies
 IZEA,"IZEA Worldwide, Inc.",NASDAQ,63879055.0,Communication Services,Internet Content & Information
 TISI,"Team, Inc.",NYSE,63834084.0,Industrials,Specialty Business Services
@@ -4772,7 +4772,7 @@ HAIAU,Healthcare AI Acquisition Corp.,NASDAQ,62877113.0,Financial Services,Shell
 OPHC,"OptimumBank Holdings, Inc.",NASDAQ,62859989.0,Financial Services,Banks - Regional
 RMCO,Royalty Management Holding Corporation,NASDAQ,62834046.0,Financial Services,Asset Management
 LFVN,LifeVantage Corporation,NASDAQ,62815393.0,Consumer Defensive,Packaged Foods
-GENK,"GEN Restaurant Group, Inc.",NASDAQ,62590342.0,Consumer Cyclical,Restaurants
+GENK,"GEN Restaurant Group, Inc.",NASDAQ,62590340.0,Consumer Cyclical,Restaurants
 FRMM,ETHZilla Corporation,NASDAQ,62550138.0,Healthcare,Medical - Pharmaceuticals
 VHC,VirnetX Holding Corp,NASDAQ,62400493.0,Technology,Software - Infrastructure
 BAYAU,Bayview Acquisition Corp Unit,NASDAQ,62332185.0,Financial Services,Financial - Conglomerates
@@ -4784,11 +4784,11 @@ WFCF,"Where Food Comes From, Inc.",NASDAQ,61914737.0,Technology,Software - Appli
 NRXS,"NeurAxis, Inc.",NASDAQ,61892838.0,Healthcare,Biotechnology
 BSAA,BEST SPAC I Acquisition Corp.,NASDAQ,61449900.0,Financial Services,Shell Companies
 LVO,"LiveOne, Inc.",NASDAQ,61371242.0,Communication Services,Entertainment
-TCRX,"TScan Therapeutics, Inc.",NASDAQ,61287827.0,Healthcare,Biotechnology
+TCRX,"TScan Therapeutics, Inc.",NASDAQ,61287831.0,Healthcare,Biotechnology
 CPSH,CPS Technologies Corporation,NASDAQ,61166147.0,Technology,"Hardware, Equipment & Parts"
 GCTS,"GCT Semiconductor Holding, Inc.",NYSE,61096527.0,Technology,Semiconductors
 QTTB,Q32 Bio Inc.,NASDAQ,60818340.0,Healthcare,Biotechnology
-FSEA,First Seacoast Bancorp,NASDAQ,60709430.0,Financial Services,Banks - Regional
+FSEA,First Seacoast Bancorp,NASDAQ,60709443.0,Financial Services,Banks - Regional
 WSTN,Westin Acquisition Corp,NASDAQ,60425000.0,Financial Services,Shell Companies
 NOMA,Nomadar Corp.,NASDAQ,60198655.0,Consumer Cyclical,Leisure
 MGX,"Metagenomi, Inc. Common Stock",NASDAQ,60074802.0,Healthcare,Biotechnology
@@ -4828,13 +4828,13 @@ CATO,The Cato Corporation,NYSE,56113200.0,Consumer Cyclical,Apparel - Retail
 CLRC,ClimateRock,NASDAQ,55968120.0,Financial Services,Shell Companies
 LEE,"Lee Enterprises, Incorporated",NASDAQ,55925785.0,Communication Services,Publishing
 SKLZ,Skillz Inc.,NYSE,55780438.0,Technology,Electronic Gaming & Multimedia
-DSWL,"Deswell Industries, Inc.",NASDAQ,55773337.0,Technology,"Hardware, Equipment & Parts"
 YIBO,Planet Image International Limited Class A Ordinary Shares,NASDAQ,55733686.0,Technology,Computer Hardware
 RGS,Regis Corporation,NASDAQ,55622798.0,Consumer Cyclical,Personal Products & Services
 RLYB,Rallybio Corporation,NASDAQ,55471348.0,Healthcare,Biotechnology
 SPWH,"Sportsman's Warehouse Holdings, Inc.",NASDAQ,55412777.0,Consumer Cyclical,Specialty Retail
 HYFT,MindWalk Holdings Corp.,NASDAQ,55095712.0,Healthcare,Biotechnology
 CPIX,Cumberland Pharmaceuticals Inc.,NASDAQ,54890821.0,Healthcare,Drug Manufacturers - Specialty & Generic
+DSWL,"Deswell Industries, Inc.",NASDAQ,54817222.0,Technology,"Hardware, Equipment & Parts"
 SES-WT,SES AI Corporation WT,NYSE,54795185.0,Industrials,Electrical Equipment & Parts
 MOBX,"Mobix Labs, Inc.",NASDAQ,54765973.0,Technology,Semiconductors
 GRCE,"Grace Therapeutics, Inc.",NASDAQ,54677535.0,Healthcare,Biotechnology
@@ -4842,6 +4842,7 @@ GROV,"Grove Collaborative Holdings, Inc.",NYSE,54631705.0,Consumer Defensive,Hou
 MEVO,M Evo Global Acquisition Corp II Class A Ordinary Shares,NASDAQ,54553733.0,Financial Services,Financial - Conglomerates
 TENX,"Tenax Therapeutics, Inc.",NASDAQ,54521875.0,Healthcare,Biotechnology
 AFCG,Advanced Flower Capital Inc.,NASDAQ,54452844.0,Real Estate,REIT - Specialty
+ACFN,"Acorn Energy, Inc.",NASDAQ,54400477.0,Technology,"Hardware, Equipment & Parts"
 PRTS,"CarParts.com, Inc.",NASDAQ,54371179.0,Consumer Cyclical,Specialty Retail
 STSS,"Sharps Technology, Inc.",NASDAQ,54221402.0,Healthcare,Medical - Instruments & Supplies
 HMR,Heidmar Maritime Holdings Corp.,NASDAQ,54034034.0,Industrials,Marine Shipping
@@ -4855,7 +4856,6 @@ ACRV,"Acrivon Therapeutics, Inc. Common Stock",NASDAQ,53328163.0,Healthcare,Biot
 RFL,"Rafael Holdings, Inc.",NYSE,53287500.0,Real Estate,Real Estate - Services
 ANVS,"Annovis Bio, Inc.",NYSE,53118761.0,Healthcare,Biotechnology
 APACU,StoneBridge Acquisition II Corporation,NASDAQ,52850000.0,Financial Services,Shell Companies
-ACFN,"Acorn Energy, Inc.",NASDAQ,52759947.0,Technology,"Hardware, Equipment & Parts"
 BEAT,"HeartBeam, Inc.",NASDAQ,52698647.0,Healthcare,Medical - Healthcare Information Services
 MRNO,Murano Global Investments PLC Ordinary Shares,NASDAQ,52395926.0,Real Estate,Real Estate - Development
 UEIC,Universal Electronics Inc.,NASDAQ,52127813.0,Technology,"Hardware, Equipment & Parts"
@@ -4871,7 +4871,7 @@ WSTNU,Westin Acquisition Corp Units,NASDAQ,51249500.0,Financial Services,Asset M
 INKT,"MiNK Therapeutics, Inc.",NASDAQ,51213231.0,Healthcare,Biotechnology
 NTRB,Nutriband Inc.,NASDAQ,51134509.0,Healthcare,Biotechnology
 MIRA,"MIRA Pharmaceuticals, Inc.",NASDAQ,51088826.0,Healthcare,Drug Manufacturers - General
-ELUT,Elutia Inc.,NASDAQ,50814407.0,Healthcare,Biotechnology
+ELUT,Elutia Inc.,NASDAQ,50814411.0,Healthcare,Biotechnology
 BBLGW,Bone Biologics Corporation,NASDAQ,50813018.0,Healthcare,Medical - Devices
 VRCA,Verrica Pharmaceuticals Inc.,NASDAQ,50583448.0,Healthcare,Biotechnology
 EHTH,"eHealth, Inc.",NASDAQ,50454247.0,Financial Services,Insurance - Brokers
@@ -4879,7 +4879,7 @@ OMEX,"Odyssey Marine Exploration, Inc.",NASDAQ,50137760.0,Industrials,Specialty 
 DOMH,Dominari Holdings Inc.,NASDAQ,49802768.0,Financial Services,Financial - Capital Markets
 ALCY,Alchemy Investments Acquisition Corp 1,NASDAQ,49739056.0,Financial Services,Shell Companies
 EMCG,Embrace Change Acquisition Corp.,NASDAQ,49720264.0,Financial Services,Shell Companies
-CNTY,"Century Casinos, Inc.",NASDAQ,49705820.0,Consumer Cyclical,"Gambling, Resorts & Casinos"
+CNTY,"Century Casinos, Inc.",NASDAQ,49705818.0,Consumer Cyclical,"Gambling, Resorts & Casinos"
 GGR,Gogoro Inc.,NASDAQ,49638920.0,Consumer Cyclical,Auto - Parts
 CTSO,Cytosorbents Corporation,NASDAQ,49615397.0,Healthcare,Medical - Devices
 LINK,"Interlink Electronics, Inc.",NASDAQ,49612500.0,Technology,"Hardware, Equipment & Parts"
@@ -4896,7 +4896,7 @@ SJ,Scienjoy Holding Corporation,NASDAQ,49111813.0,Communication Services,Broadca
 VTSI,"VirTra, Inc.",NASDAQ,48705586.0,Industrials,Aerospace & Defense
 CDLX,"Cardlytics, Inc.",NASDAQ,48650893.0,Communication Services,Advertising Agencies
 TCBS,"Texas Community Bancshares, Inc.",NASDAQ,48530421.0,Financial Services,Banks - Regional
-GOCO,"GoHealth, Inc.",NASDAQ,48239518.0,Financial Services,Insurance - Brokers
+GOCO,"GoHealth, Inc.",NASDAQ,48239520.0,Financial Services,Insurance - Brokers
 AHT-PF,"Ashford Hospitality Trust, Inc.",NYSE,48084298.0,Real Estate,REIT - Hotel & Motel
 FORL,Four Leaf Acquisition Corporation,NASDAQ,47918298.0,Financial Services,Shell Companies
 PFXNZ,PhenixFIN Corporation 5.25% Notes due 2028,NASDAQ,47858127.0,Financial Services,Asset Management
@@ -4945,8 +4945,8 @@ XTIA,"XTI Aerospace, Inc.",NASDAQ,43930112.0,Industrials,Aerospace & Defense
 OPTXW,"Syntec Optics Holdings, Inc.",NASDAQ,43490709.0,Technology,"Hardware, Equipment & Parts"
 PYPD,PolyPid Ltd.,NASDAQ,43311325.0,Healthcare,Biotechnology
 TLGY,TLGY Acquisition Corporation,NASDAQ,43268324.0,Financial Services,Shell Companies
-MSSAR,Metal Sky Star Acquisition Corporation,NASDAQ,43210675.0,Financial Services,Shell Companies
 MSSAW,Metal Sky Star Acquisition Corporation,NASDAQ,43210675.0,Financial Services,Shell Companies
+MSSAR,Metal Sky Star Acquisition Corporation,NASDAQ,43210675.0,Financial Services,Shell Companies
 GROW,"U.S. Global Investors, Inc.",NASDAQ,42956985.0,Financial Services,Asset Management - Global
 OKUR,"OnKure Therapeutics, Inc.",NASDAQ,42947791.0,Healthcare,Biotechnology
 LIVE,Live Ventures Incorporated,NASDAQ,42941751.0,Consumer Cyclical,Home Improvement
@@ -4985,7 +4985,7 @@ RITR,Reitar Logtech Holdings Limited Ordinary shares,NASDAQ,39882041.0,Industria
 USEG,U.S. Energy Corp.,NASDAQ,39775518.0,Energy,Oil & Gas Exploration & Production
 KOSS,Koss Corporation,NASDAQ,39759040.0,Technology,Consumer Electronics
 CREX,"Creative Realities, Inc.",NASDAQ,39656374.0,Technology,Software - Application
-SNSE,"Sensei Biotherapeutics, Inc.",NASDAQ,39654728.0,Healthcare,Biotechnology
+SNSE,"Sensei Biotherapeutics, Inc.",NASDAQ,39654760.0,Healthcare,Biotechnology
 LVLU,"Lulu's Fashion Lounge Holdings, Inc.",NASDAQ,39471087.0,Consumer Cyclical,Apparel - Retail
 RAVE,"RAVE Restaurant Group, Inc.",NASDAQ,39366038.0,Consumer Cyclical,Restaurants
 KWM,K Wave Media Ltd.,NASDAQ,39212700.0,Financial Services,Shell Companies
@@ -5013,8 +5013,6 @@ CING,Cingulate Inc.,NASDAQ,37672575.0,Healthcare,Biotechnology
 SABS,"SAB Biotherapeutics, Inc.",NASDAQ,37563592.0,Healthcare,Biotechnology
 TVGN,Tevogen Bio Holdings Inc.,NASDAQ,37523449.0,Healthcare,Biotechnology
 RYM,"RYTHM, Inc.",NASDAQ,37502284.0,Industrials,Agricultural - Machinery
-ILLR,Triller Group Inc.,NASDAQ,37500455.0,Communication Services,Internet Content & Information
-PARK,"Park Dental Partners, Inc. Common Stock",NASDAQ,37469956.0,Healthcare,Medical - Equipment & Services
 TELA,"TELA Bio, Inc.",NASDAQ,37378902.0,Healthcare,Medical - Devices
 KFFB,Kentucky First Federal Bancorp,NASDAQ,37360623.0,Financial Services,Banks - Regional
 CHAI,Core AI Holdings,NASDAQ,37254931.0,Financial Services,Internet Content & Information
@@ -5022,6 +5020,7 @@ CRVO,CervoMed Inc.,NASDAQ,37195930.0,Healthcare,Biotechnology
 TPCS,TechPrecision Corporation,NASDAQ,37148048.0,Industrials,Manufacturing - Metal Fabrication
 TOP,TOP Financial Group Limited,NASDAQ,37068205.0,Financial Services,Financial - Capital Markets
 NHTC,Natural Health Trends Corp.,NASDAQ,36841840.0,Consumer Cyclical,Specialty Retail
+PARK,"Park Dental Partners, Inc. Common Stock",NASDAQ,36789391.0,Healthcare,Medical - Equipment & Services
 ANTX,"AN2 Therapeutics, Inc.",NASDAQ,36718712.0,Healthcare,Biotechnology
 NEOVW,NeoVolta Inc.,NASDAQ,36669919.0,Industrials,Electrical Equipment & Parts
 BZAIW,"Blaize Holdings, Inc.",NASDAQ,36668194.0,Technology,Software - Application
@@ -5040,6 +5039,7 @@ GUTS,"Fractyl Health, Inc. Common Stock",NASDAQ,36024691.0,Healthcare,Biotechnol
 WPRT,Westport Fuel Systems Inc.,NASDAQ,35940375.0,Consumer Cyclical,Auto - Parts
 AWRE,"Aware, Inc.",NASDAQ,35907809.0,Technology,Software - Application
 EDSA,"Edesa Biotech, Inc.",NASDAQ,35646643.0,Healthcare,Biotechnology
+ILLR,Triller Group Inc.,NASDAQ,35508058.0,Communication Services,Internet Content & Information
 SCOR,"comScore, Inc.",NASDAQ,35410588.0,Communication Services,Internet Content & Information
 BRLS,Borealis Foods Inc.,NASDAQ,35199822.0,Consumer Defensive,Packaged Foods
 TACT,TransAct Technologies Incorporated,NASDAQ,35191796.0,Technology,Computer Hardware
@@ -5145,17 +5145,17 @@ BAERW,"Bridger Aerospace Group Holdings, Inc. Warrant",NASDAQ,27132173.0,Industr
 ASPC,ASPAC III Acquisition Corp.,NASDAQ,27127628.0,Financial Services,Shell Companies
 PSHG,Performance Shipping Inc.,NASDAQ,26977783.0,Industrials,Marine Shipping
 DAIO,Data I/O Corporation,NASDAQ,26954816.0,Technology,"Hardware, Equipment & Parts"
-FARM,Farmer Bros. Co.,NASDAQ,26941672.0,Consumer Defensive,Packaged Foods
+FARM,Farmer Bros. Co.,NASDAQ,26941673.0,Consumer Defensive,Packaged Foods
 GIFT,"Giftify, Inc.",NASDAQ,26938593.0,Technology,Software - Services
 PASG,"Passage Bio, Inc.",NASDAQ,26828312.0,Healthcare,Biotechnology
 PRZO,ParaZero Technologies Ltd.,NASDAQ,26679697.0,Industrials,Aerospace & Defense
 QVCGA,QVC Group Inc.,NASDAQ,26655474.0,Consumer Cyclical,Specialty Retail
 GDST,Goldenstone Acquisition Limited,NASDAQ,26349221.0,Financial Services,Shell Companies
 CCEL,"Cryo-Cell International, Inc.",NASDAQ,26259789.0,Healthcare,Medical - Care Facilities
-BAFN,BayFirst Financial Corp.,NASDAQ,26221819.0,Financial Services,Banks - Regional
+BAFN,BayFirst Financial Corp.,NASDAQ,26221826.0,Financial Services,Banks - Regional
 NSYS,Nortech Systems Incorporated,NASDAQ,26204147.0,Technology,"Hardware, Equipment & Parts"
-FNVTW,Finnovate Acquisition Corp.,NASDAQ,26127640.0,Financial Services,Shell Companies
 FNVT,Finnovate Acquisition Corp.,NASDAQ,26127640.0,Financial Services,Shell Companies
+FNVTW,Finnovate Acquisition Corp.,NASDAQ,26127640.0,Financial Services,Shell Companies
 POM,POMDOCTOR Ltd,NASDAQ,26072013.0,Healthcare,Medical - Pharmaceuticals
 PFAI,Pinnacle Food Group Limited Class A Common Shares,NASDAQ,25933050.0,Consumer Cyclical,Home Improvement
 EKSO,"Ekso Bionics Holdings, Inc.",NASDAQ,25859987.0,Healthcare,Medical - Instruments & Supplies
@@ -5163,7 +5163,6 @@ HBIO,"Harvard Bioscience, Inc.",NASDAQ,25651331.0,Healthcare,Medical - Instrumen
 LOCL,Local Bounti Corporation,NYSE,25611744.0,Consumer Defensive,Agricultural Farm Products
 PMEC,Primech Holdings Ltd. Ordinary Shares,NASDAQ,25586379.0,Industrials,Specialty Business Services
 FLUX,"Flux Power Holdings, Inc.",NASDAQ,25563670.0,Industrials,Electrical Equipment & Parts
-TXMD,"TherapeuticsMD, Inc.",NASDAQ,25521468.0,Healthcare,Drug Manufacturers - Specialty & Generic
 BOLD,"Boundless Bio, Inc.",NASDAQ,25519597.0,Healthcare,Biotechnology
 RYOJ,"rYojbaba Co., Ltd. Common Shares",NASDAQ,25312500.0,Industrials,Consulting Services
 GTENW,"Gores Holdings X, Inc. Warrants",NASDAQ,25280721.0,Financial Services,Shell Companies
@@ -5173,6 +5172,7 @@ ARKR,Ark Restaurants Corp.,NASDAQ,25207037.0,Consumer Cyclical,Restaurants
 CGCTW,Cartesian Growth Corporation III Warrant,NASDAQ,25173785.0,Financial Services,Shell Companies
 SNTI,"Senti Biosciences, Inc.",NASDAQ,25039394.0,Healthcare,Biotechnology
 VEEA,Veea Inc.,NASDAQ,25003401.0,Technology,Information Technology Services
+TXMD,"TherapeuticsMD, Inc.",NASDAQ,25000622.0,Healthcare,Drug Manufacturers - Specialty & Generic
 MNDO,MIND C.T.I. Ltd,NASDAQ,24948749.0,Technology,Software - Application
 BLRKW,Bluerock Acquisition Corp. Warrants,NASDAQ,24739244.0,Financial Services,Shell Companies
 SAGT,SAGTEC GLOBAL Ltd,NASDAQ,24735000.0,Technology,Software - Application
@@ -5202,13 +5202,14 @@ RAIN,Rain Enhancement Technologies Holdco Inc,NASDAQ,22848338.0,Utilities,Renewa
 ZJYL,Jin Medical International Ltd.,NASDAQ,22840222.0,Healthcare,Medical - Instruments & Supplies
 ZGM,Zenta Group Company Limited Ordinary Shares,NASDAQ,22791057.0,Industrials,Specialty Business Services
 XCUR,"Exicure, Inc.",NASDAQ,22754712.0,Healthcare,Biotechnology
+WYHG,Wing Yip Food Holdings Group Limited American Depositary Shares,NASDAQ,22643885.0,Consumer Defensive,Packaged Foods
 APLM,"Apollomics, Inc.",NASDAQ,22633195.0,Healthcare,Biotechnology
 ASTI,"Ascent Solar Technologies, Inc. Common Stock",NASDAQ,22609828.0,Energy,Solar
 UTSI,UTStarcom Holdings Corp.,NASDAQ,22444504.0,Technology,Communication Equipment
 NTRP,"NextTrip, Inc.",NASDAQ,22388251.0,Consumer Cyclical,Travel Services
 NCEW,New Century Logistics (BVI) Limited,NASDAQ,22386875.0,Industrials,Integrated Freight & Logistics
 ABVEW,Above Food Ingredients Inc. Warrants,NASDAQ,22331637.0,Consumer Defensive,Packaged Foods
-UPLD,"Upland Software, Inc.",NASDAQ,22246301.0,Technology,Software - Application
+UPLD,"Upland Software, Inc.",NASDAQ,22246338.0,Technology,Software - Application
 FOFO,"Hang Feng Technology Innovation Co., Ltd. Ordinary Shares",NASDAQ,22056713.0,Financial Services,Asset Management
 AIFF,"Firefly Neuroscience, Inc.",NASDAQ,22031827.0,Technology,Software - Application
 CCHH,CCH Holdings Ltd Ordinary Shares,NASDAQ,21945000.0,Consumer Defensive,Food Distribution
@@ -5222,7 +5223,6 @@ CTRM,Castor Maritime Inc.,NASDAQ,21353802.0,Industrials,Marine Shipping
 ECXWW,ECARX Holdings Inc.,NASDAQ,21332948.0,Consumer Cyclical,Auto - Parts
 INTZ,Intrusion Inc.,NASDAQ,21309115.0,Technology,Software - Infrastructure
 AMOD,"Alpha Modus Holdings, Inc.",NASDAQ,21201185.0,Technology,Software - Application
-WYHG,Wing Yip Food Holdings Group Limited American Depositary Shares,NASDAQ,21138990.0,Consumer Defensive,Packaged Foods
 AYTU,"Aytu BioPharma, Inc.",NASDAQ,21098679.0,Healthcare,Drug Manufacturers - Specialty & Generic
 YYAI,AiRWA Inc.,NASDAQ,21070151.0,Consumer Cyclical,Leisure
 AFRIW,Forafric Global PLC,NASDAQ,21060374.0,Consumer Defensive,Agricultural Farm Products
@@ -5368,10 +5368,10 @@ WENNW,Wen Acquisition Corp Warrant,NASDAQ,13881938.0,Financial Services,Asset Ma
 CAPT,Captivision Inc.,NASDAQ,13806583.0,Industrials,Industrial - Specialties
 SPPL,SIMPPLE Ltd. Ordinary Shares,NASDAQ,13790958.0,Technology,Software - Application
 VEEAW,Veea Inc.,NASDAQ,13770124.0,Technology,Information Technology Services
-GLBZ,Glen Burnie Bancorp,NASDAQ,13722567.0,Financial Services,Banks - Regional
 LEXX,Lexaria Bioscience Corp.,NASDAQ,13707333.0,Healthcare,Biotechnology
 HOTH,"Hoth Therapeutics, Inc.",NASDAQ,13656798.0,Healthcare,Biotechnology
 ALIS,Calisa Acquisition Corp,NASDAQ,13642797.0,Financial Services,Asset Management
+GLBZ,Glen Burnie Bancorp,NASDAQ,13605779.0,Financial Services,Banks - Regional
 CISO,CISO Global Inc.,NASDAQ,13542880.0,Technology,Software - Infrastructure
 SAIH,SAIHEAT Limited,NASDAQ,13538398.0,Technology,Information Technology Services
 GSIW,Garden Stage Limited Ordinary Shares,NASDAQ,13437978.0,Financial Services,Financial - Capital Markets
@@ -5397,6 +5397,7 @@ LIXT,"Lixte Biotechnology Holdings, Inc.",NASDAQ,12784952.0,Healthcare,Biotechno
 GTIM,Good Times Restaurants Inc.,NASDAQ,12775054.0,Consumer Cyclical,Restaurants
 TVC,Tennessee Valley Authority,NYSE,12757500.0,Financial Services,Banks - Regional
 GFAI,"Guardforce AI Co., Limited",NASDAQ,12728533.0,Industrials,Security & Protection Services
+APCX,AppTech Payments Corp.,NASDAQ,12669582.0,Technology,Software - Infrastructure
 CYN,Cyngn Inc.,NASDAQ,12519777.0,Technology,Software - Application
 GDTC,CytoMed Therapeutics Limited,NASDAQ,12437735.0,Healthcare,Biotechnology
 MBVIW,M3-Brigade Acquisition VI Corp. Warrant,NASDAQ,12420000.0,Financial Services,Asset Management
@@ -5411,6 +5412,7 @@ LEDS,SemiLEDs Corporation,NASDAQ,12159899.0,Technology,Semiconductors
 MKDW,MKDWELL Tech Inc.,NASDAQ,12159772.0,Consumer Cyclical,Auto - Parts
 BDCIW,BTC Development Corp. Warrant,NASDAQ,12151778.0,Financial Services,Asset Management
 FMSTW,Foremost Clean Energy Ltd.,NASDAQ,12076177.0,Basic Materials,Chemicals
+RAY,Raytech Holding Limited Ordinary Shares,NASDAQ,12071218.0,Consumer Defensive,Household & Personal Products
 TLNCW,Talon Capital Corp. Warrants,NASDAQ,12069130.0,Financial Services,Asset Management
 PETZ,"TDH Holdings, Inc.",NASDAQ,12067900.0,Consumer Defensive,Packaged Foods
 MODD,"Modular Medical, Inc.",NASDAQ,12017957.0,Healthcare,Medical - Devices
@@ -5422,9 +5424,7 @@ CURX,Curanex Pharmaceuticals Inc Common Stock,NASDAQ,11905975.0,Healthcare,Biote
 DSACW,Daedalus Special Acquisition Corp.,NASDAQ,11904998.0,Financial Services,Financial - Conglomerates
 ETHMW,Dynamix Corporation,NASDAQ,11869000.0,Financial Services,Financial - Conglomerates
 SNYR,Synergy CHC Corp.,NASDAQ,11827626.0,Healthcare,Medical - Distribution
-RAY,Raytech Holding Limited Ordinary Shares,NASDAQ,11812355.0,Consumer Defensive,Household & Personal Products
 SNGX,"Soligenix, Inc.",NASDAQ,11800772.0,Healthcare,Biotechnology
-APCX,AppTech Payments Corp.,NASDAQ,11694999.0,Technology,Software - Infrastructure
 SMSI,"Smith Micro Software, Inc.",NASDAQ,11580923.0,Technology,Software - Application
 TPST,"Tempest Therapeutics, Inc.",NASDAQ,11529557.0,Healthcare,Biotechnology
 BTTC,Black Titan Corporation,NASDAQ,11430958.0,Financial Services,Asset Management
@@ -5546,7 +5546,6 @@ XELB,"Xcel Brands, Inc.",NASDAQ,7734211.0,Consumer Cyclical,Apparel - Manufactur
 SINT,"Sintx Technologies, Inc.",NASDAQ,7696550.0,Healthcare,Medical - Devices
 OXBR,Oxbridge Re Holdings Limited,NASDAQ,7676120.0,Financial Services,Insurance - Reinsurance
 BCTX,BriaCell Therapeutics Corp.,NASDAQ,7666826.0,Healthcare,Biotechnology
-BCLI,Brainstorm Cell Therapeutics Inc.,NASDAQ,7613995.0,Healthcare,Biotechnology
 AMST,Amesite Inc.,NASDAQ,7590704.0,Technology,Software - Application
 RNGTW,Range Capital Acquisition Corp II Warrants,NASDAQ,7587762.0,Financial Services,Asset Management
 KALA,"KALA BIO, Inc.",NASDAQ,7572429.0,Healthcare,Biotechnology
@@ -5575,7 +5574,9 @@ BBGI,"Beasley Broadcast Group, Inc.",NASDAQ,7252205.0,Communication Services,Bro
 DAIC,"CID HoldCo, Inc. Common Stock",NASDAQ,7221064.0,Financial Services,Shell Companies
 CJMB,CALLAN JMB INC.,NASDAQ,7214521.0,Industrials,Integrated Freight & Logistics
 DMIIR,Drugs Made In America Acquisition II Corp. Right,NASDAQ,7213250.0,Financial Services,Asset Management
+SYBX,"Synlogic, Inc.",NASDAQ,7194835.0,Healthcare,Biotechnology
 YHGJ,Yunhong Green CTI Ltd.,NASDAQ,7185692.0,Consumer Cyclical,Packaging & Containers
+BCLI,Brainstorm Cell Therapeutics Inc.,NASDAQ,7172604.0,Healthcare,Biotechnology
 KOYNW,CSLM Digital Asset Acquisition Corp III Warrants,NASDAQ,7167375.0,Financial Services,Asset Management
 PELIR,Pelican Acquisition Corporation Right,NASDAQ,7157254.0,Financial Services,Asset Management
 TULP,Bloomia Holdings Inc.,NASDAQ,7146737.0,Industrials,Advertising Agencies
@@ -5583,9 +5584,9 @@ MLEC,Moolec Science S.A.,NASDAQ,7145001.0,Healthcare,Biotechnology
 HVMCW,Highview Merger Corp. Warrants,NASDAQ,7074340.0,Financial Services,Asset Management
 JYD,Jayud Global Logistics Limited,NASDAQ,7063068.0,Industrials,Integrated Freight & Logistics
 MKZR,"MacKenzie Realty Capital, Inc.",NASDAQ,7020048.0,Real Estate,REIT - Diversified
-SYBX,"Synlogic, Inc.",NASDAQ,7019351.0,Healthcare,Biotechnology
 ICU,SeaStar Medical Holding Corporation,NASDAQ,6999125.0,Healthcare,Biotechnology
 MSGY,Masonglory Limited Ordinary Shares,NASDAQ,6998700.0,Industrials,Specialty Business Services
+MBIO,"Mustang Bio, Inc.",NASDAQ,6996175.0,Healthcare,Biotechnology
 ARBEW,Arbe Robotics Ltd.,NASDAQ,6967426.0,Technology,Software - Infrastructure
 YMAT,"J-Star Holding Co., Ltd. Ordinary Shares",NASDAQ,6947236.0,Basic Materials,Chemicals - Specialty
 HKPD,"Cellyan Biotechnology Co., Ltd",NASDAQ,6930000.0,Healthcare,Medical - Pharmaceuticals
@@ -5593,7 +5594,6 @@ BCDA,"BioCardia, Inc.",NASDAQ,6900591.0,Healthcare,Biotechnology
 LATAW,Galata Acquisition Corp. II,NASDAQ,6900000.0,Financial Services,Asset Management
 OTGAW,OTG Acquisition Corp. I Warrants,NASDAQ,6894750.0,Financial Services,Asset Management
 LDWY,"Lendway, Inc.",NASDAQ,6861971.0,Communication Services,Advertising Agencies
-MBIO,"Mustang Bio, Inc.",NASDAQ,6839245.0,Healthcare,Biotechnology
 HCAI,"Hauchen AI Parking Management Technology Holding Co., Ltd.",NASDAQ,6817403.0,Industrials,Industrial - Machinery
 HXHX,Haoxin Holdings Limited Class A Ordinary Shares,NASDAQ,6800749.0,Industrials,Trucking
 LNAI,Lunai Bioworks Inc.,NASDAQ,6781108.0,Healthcare,Biotechnology
@@ -5777,8 +5777,8 @@ AQB,"AquaBounty Technologies, Inc.",NASDAQ,3606256.0,Consumer Defensive,Agricult
 FCUV,Focus Universal Inc.,NASDAQ,3555836.0,Technology,"Hardware, Equipment & Parts"
 CASI,"CASI Pharmaceuticals, Inc.",NASDAQ,3549396.0,Healthcare,Biotechnology
 MTVA,MetaVia Inc.,NASDAQ,3544331.0,Healthcare,Biotechnology
-IMSRW,Terrestrial Energy Inc.,NASDAQ,3529200.0,Energy,Regulated Electric
 FCHL,Fitness Champs Holdings Limited Common Stock,NASDAQ,3529200.0,Consumer Defensive,Education & Training Services
+IMSRW,Terrestrial Energy Inc.,NASDAQ,3529200.0,Energy,Regulated Electric
 INDP,"Indaptus Therapeutics, Inc.",NASDAQ,3519546.0,Healthcare,Biotechnology
 DFSC,DEFSEC Technologies Inc.,NASDAQ,3490513.0,Industrials,Aerospace & Defense
 DEVS,DevvStream Corp. Common Stock,NASDAQ,3476416.0,Industrials,Industrial - Pollution & Treatment Controls
@@ -5805,13 +5805,13 @@ ESLAW,"Estrella Immunopharma, Inc.",NASDAQ,3187473.0,Healthcare,Biotechnology
 TAVIR,Tavia Acquisition Corp.,NASDAQ,3175669.0,Financial Services,Investment - Banking & Investment Services
 ONFO,"Onfolio Holdings, Inc.",NASDAQ,3121575.0,Communication Services,Internet Content & Information
 KTWOR,K2 Capital Acquisition Corporation Rights,NASDAQ,3107913.0,Financial Services,Asset Management
+XHLD,"TEN Holdings, Inc. Common Stock",NASDAQ,3097619.0,Communication Services,Broadcasting
 PMAX,Powell Max Limited Class A Ordinary Shares,NASDAQ,3061046.0,Industrials,Specialty Business Services
 AIOS,AIOS Tech Inc.,NASDAQ,3057994.0,Financial Services,Financial - Credit Services
 YHC,LQR House Inc.,NASDAQ,3027536.0,Consumer Defensive,Beverages - Alcoholic
 AMPGR,"Amplitech Group, Inc. Series A Right",NASDAQ,2995426.0,Technology,"Hardware, Equipment & Parts"
 AFMD,Affimed N.V.,NASDAQ,2975612.0,Healthcare,Biotechnology
 QUMSR,Quantumsphere Acquisition Corp. Rights,NASDAQ,2966937.0,Financial Services,Shell Companies
-XHLD,"TEN Holdings, Inc. Common Stock",NASDAQ,2939779.0,Communication Services,Broadcasting
 CRACR,Crown Reserve Acquisition Corp. I Rights,NASDAQ,2934225.0,Financial Services,Asset Management
 LIDRW,"AEye, Inc.",NASDAQ,2933081.0,Consumer Cyclical,Auto - Parts
 TDWDR,Tailwind 2.0 Acquisition Corp. Rights,NASDAQ,2900585.0,Financial Services,Shell Companies
@@ -5929,8 +5929,9 @@ GOVX,"GeoVax Labs, Inc.",NASDAQ,1734592.0,Healthcare,Biotechnology
 JEM,707 Cayman Holdings Limited Ordinary Shares,NASDAQ,1709932.0,Consumer Cyclical,Apparel - Retail
 SXTC,"China SXT Pharmaceuticals, Inc.",NASDAQ,1707028.0,Healthcare,Drug Manufacturers - Specialty & Generic
 DFLI,Dragonfly Energy Holdings Corp.,NASDAQ,1695701.0,Industrials,Electrical Equipment & Parts
+CXAIW,CXApp Inc.,NASDAQ,1690524.0,Technology,Software - Application
 INM,InMed Pharmaceuticals Inc.,NASDAQ,1679430.0,Healthcare,Biotechnology
-CARM,"Carisma Therapeutics, Inc.",NASDAQ,1677988.0,Healthcare,Biotechnology
+CARM,"Carisma Therapeutics, Inc.",NASDAQ,1673803.0,Healthcare,Biotechnology
 MTEKW,Maris-Tech Ltd.,NASDAQ,1671935.0,Technology,"Hardware, Equipment & Parts"
 SBLX,"StableX Technologies, Inc. - Common Stock",NASDAQ,1654740.0,Industrials,Auto - Parts
 GSUN,Golden Sun Education Group Limited,NASDAQ,1643162.0,Consumer Defensive,Education & Training Services
@@ -5957,7 +5958,6 @@ FGL,Founder Group Limited Ordinary Shares,NASDAQ,1512941.0,Industrials,Engineeri
 UGRO,"urban-gro, Inc.",NASDAQ,1492426.0,Industrials,Agricultural - Machinery
 UPC,Universe Pharmaceuticals Inc.,NASDAQ,1487212.0,Healthcare,Drug Manufacturers - Specialty & Generic
 MKDWW,MKDWELL Tech Inc.,NASDAQ,1464917.0,Consumer Cyclical,Auto - Parts
-CXAIW,CXApp Inc.,NASDAQ,1456845.0,Technology,Software - Application
 JAGX,"Jaguar Health, Inc.",NASDAQ,1423787.0,Healthcare,Biotechnology
 BRLSW,Borealis Foods Inc.,NASDAQ,1421662.0,Consumer Defensive,Packaged Foods
 ISPC,iSpecimen Inc.,NASDAQ,1418059.0,Healthcare,Medical - Diagnostics & Research
@@ -5970,7 +5970,6 @@ IBG,Innovation Beverage Group Limited,NASDAQ,1398040.0,Consumer Defensive,Bevera
 AEMD,"Aethlon Medical, Inc.",NASDAQ,1393144.0,Healthcare,Medical - Devices
 STFS,Star Fashion Culture Holdings Limited,NASDAQ,1381378.0,Communication Services,Advertising Agencies
 RFAIR,RF Acquisition Corp II Right,NASDAQ,1378148.0,Financial Services,Financial - Conglomerates
-CMLS,Cumulus Media Inc.,NASDAQ,1370243.0,Communication Services,Broadcasting
 BAYAR,Bayview Acquisition Corp Right,NASDAQ,1367626.0,Financial Services,Shell Companies
 TAOP,Taoping Inc.,NASDAQ,1362942.0,Technology,Software - Infrastructure
 WSTNR,Westin Acquisition Corp,NASDAQ,1358725.0,Financial Services,Financial - Conglomerates
@@ -5978,6 +5977,7 @@ MEHA,"Functional Brands, Inc. Common Stock",NASDAQ,1348393.0,Healthcare,Medical 
 RFAMR,RF Acquisition Corp III Rights,NASDAQ,1345500.0,Financial Services,Shell Companies
 AEHL,Antelope Enterprise Holdings Limited,NASDAQ,1344951.0,Industrials,Construction
 MSAIW,"MultiSensor AI Holdings, Inc.",NASDAQ,1341665.0,Technology,Software - Infrastructure
+CMLS,Cumulus Media Inc.,NASDAQ,1335987.0,Communication Services,Broadcasting
 SDSTW,Stardust Power Inc.,NASDAQ,1329041.0,Industrials,Electrical Equipment & Parts
 MMTXW,Miluna Acquisition Corp Warrant,NASDAQ,1324215.0,Financial Services,Financial - Conglomerates
 HOLOW,MicroCloud Hologram Inc.,NASDAQ,1313974.0,Technology,"Hardware, Equipment & Parts"
@@ -6032,6 +6032,7 @@ WTGUR,Wintergreen Acquisition Corp. Rights,NASDAQ,886433.0,Financial Services,Sh
 BJDX,"Bluejay Diagnostics, Inc.",NASDAQ,884405.0,Healthcare,Medical - Devices
 IVDA,"Iveda Solutions, Inc.",NASDAQ,878873.0,Industrials,Security & Protection Services
 TRUG,"TruGolf Holdings, Inc.",NASDAQ,859101.0,Technology,Electronic Gaming & Multimedia
+ATXI,"Avenue Therapeutics, Inc.",NASDAQ,850965.0,Healthcare,Biotechnology
 EDBL,Edible Garden AG Incorporated,NASDAQ,845305.0,Consumer Defensive,Agricultural Farm Products
 ALCYW,Alchemy Investments Acquisition Corp 1,NASDAQ,841608.0,Financial Services,Shell Companies
 GCTK,"GlucoTrack, Inc.",NASDAQ,834160.0,Healthcare,Medical - Instruments & Supplies
@@ -6053,17 +6054,18 @@ VCIG,VCI Global Limited,NASDAQ,763420.0,Industrials,Consulting Services
 OXBRW,Oxbridge Re Holdings Limited,NASDAQ,752260.0,Financial Services,Insurance - Reinsurance
 FSHPR,Flag Ship Acquisition Corporation,NASDAQ,750040.0,Financial Services,Financial - Conglomerates
 NOTE-WT,"FiscalNote Holdings, Inc.",NYSE,749448.0,Technology,Information Technology Services
-VERO,Venus Concept Inc.,NASDAQ,725058.0,Healthcare,Medical - Devices
-LIPO,Lipella Pharmaceuticals Inc.,NASDAQ,716692.0,Healthcare,Biotechnology
+VERO,Venus Concept Inc.,NASDAQ,743649.0,Healthcare,Medical - Devices
+LIPO,Lipella Pharmaceuticals Inc.,NASDAQ,716230.0,Healthcare,Biotechnology
 RETO,"ReTo Eco-Solutions, Inc.",NASDAQ,716205.0,Basic Materials,Construction Materials
+MYPSW,PLAYSTUDIOS Inc,NASDAQ,714237.0,Technology,Electronic Gaming & Multimedia
 XTKG,"X3 Holdings Co., Ltd.",NASDAQ,713948.0,Technology,Software - Application
 ALISR,Calisa Acquisition Corp Right,NASDAQ,711934.0,Financial Services,Asset Management
+PRPH,"ProPhase Labs, Inc.",NASDAQ,710551.0,Healthcare,Drug Manufacturers - Specialty & Generic
 AIMDW,"Ainos, Inc.",NASDAQ,710198.0,Healthcare,Biotechnology
 BZFDW,"BuzzFeed, Inc.",NASDAQ,706668.0,Communication Services,Entertainment
-MYPSW,PLAYSTUDIOS Inc,NASDAQ,701707.0,Technology,Electronic Gaming & Multimedia
 RAYA,Erayak Power Solution Group Inc.,NASDAQ,696914.0,Industrials,Electrical Equipment & Parts
+WINT,"Windtree Therapeutics, Inc.",NASDAQ,674176.0,Healthcare,Biotechnology
 XXII,"22nd Century Group, Inc.",NASDAQ,665979.0,Consumer Defensive,Tobacco
-PRPH,"ProPhase Labs, Inc.",NASDAQ,663181.0,Healthcare,Drug Manufacturers - Specialty & Generic
 BIYA,Baiya International Group Inc. Ordinary Shares,NASDAQ,657634.0,Technology,Software - Application
 WLDS,Wearable Devices Ltd.,NASDAQ,657564.0,Technology,Consumer Electronics
 STSSW,"Sharps Technology, Inc.",NASDAQ,634687.0,Financial Services,Financial - Capital Markets
@@ -6072,41 +6074,41 @@ IGTAR,Inception Growth Acquisition Limited,NASDAQ,604200.0,Financial Services,Sh
 AZI,Autozi Internet Technology (Global) Ltd.,NASDAQ,602215.0,Consumer Cyclical,Auto - Dealerships
 CCTG,CCSC Technology International Holdings Limited Ordinary Shares,NASDAQ,594585.0,Industrials,Electrical Equipment & Parts
 DRCT,"Direct Digital Holdings, Inc.",NASDAQ,593428.0,Communication Services,Advertising Agencies
-ATXI,"Avenue Therapeutics, Inc.",NASDAQ,588958.0,Healthcare,Biotechnology
+VIVK,"Vivakor, Inc.",NASDAQ,558142.0,Energy,Oil & Gas Exploration & Production
 PFSA,"Profusa, Inc. Common Stock",NASDAQ,556290.0,Healthcare,Medical - Equipment & Services
 KVACW,Keen Vision Acquisition Corporation Warrant,NASDAQ,552458.0,Financial Services,Shell Companies
 WORX,SCWorx Corp.,NASDAQ,550744.0,Healthcare,Medical - Healthcare Information Services
 CJET,"Chijet Motor Company, Inc.",NASDAQ,549039.0,Consumer Cyclical,Auto - Manufacturers
 FRGT,"Freight Technologies, Inc.",NASDAQ,548705.0,Technology,Software - Application
-VIVK,"Vivakor, Inc.",NASDAQ,548350.0,Energy,Oil & Gas Exploration & Production
 ICON,Icon Energy Corp.,NASDAQ,544959.0,Industrials,Marine Shipping
 ZCAR,"Zoomcar Holdings, Inc.",NASDAQ,543502.0,Industrials,Rental & Leasing Services
 NINE,"Nine Energy Service, Inc.",NYSE,537247.0,Energy,Oil & Gas Equipment & Services
 IXAQW,IX Acquisition Corp.,NASDAQ,535850.0,Financial Services,Shell Companies
+LGMK,"LogicMark, Inc.",NASDAQ,518269.0,Industrials,Security & Protection Services
 COOTW,Australian Oilseeds Holdings Limited Warrant,NASDAQ,517506.0,Financial Services,Financial - Conglomerates
-WINT,"Windtree Therapeutics, Inc.",NASDAQ,505632.0,Healthcare,Biotechnology
 GCMGW,GCM Grosvenor Inc.,NASDAQ,499027.0,Financial Services,Asset Management
 LRHC,La Rosa Holdings Corp.,NASDAQ,497978.0,Real Estate,Real Estate - Services
 DTSTW,Data Storage Corporation,NASDAQ,496631.0,Technology,Information Technology Services
 ASNS,"Actelis Networks, Inc.",NASDAQ,495720.0,Technology,Communication Equipment
 AEVAW,"Aeva Technologies, Inc.",NASDAQ,490471.0,Technology,Semiconductors
 SBFMW,"Sunshine Biopharma, Inc.",NASDAQ,489614.0,Healthcare,Drug Manufacturers - Specialty & Generic
-HEPA,"Hepion Pharmaceuticals, Inc.",NASDAQ,488053.0,Healthcare,Biotechnology
 BNRG,Brenmiller Energy Ltd,NASDAQ,486950.0,Utilities,Renewable Utilities
 NMPAR,NMP Acquisition Corp. Right,NASDAQ,486801.0,Financial Services,Asset Management
 RUBI,Rubico Inc.,NASDAQ,486355.0,Industrials,Marine Shipping
 ORGNW,"Origin Materials, Inc.",NASDAQ,484811.0,Basic Materials,Chemicals
 EMCGR,Embrace Change Acquisition Corp.,NASDAQ,470082.0,Financial Services,Financial - Conglomerates
 YAAS,Youxin Technology Ltd,NASDAQ,467247.0,Technology,Software - Application
+HEPA,"Hepion Pharmaceuticals, Inc.",NASDAQ,464813.0,Healthcare,Biotechnology
 SEATW,Vivid Seats Inc.,NASDAQ,429980.0,Communication Services,Internet Content & Information
 MLECW,Moolec Science S.A.,NASDAQ,416067.0,Healthcare,Biotechnology
 WHLR,"Wheeler Real Estate Investment Trust, Inc.",NASDAQ,415452.0,Real Estate,REIT - Retail
 JDZG,JIADE Limited,NASDAQ,398684.0,Technology,Information Technology Services
 DFLIW,Dragonfly Energy Holdings Corp.,NASDAQ,394662.0,Industrials,Electrical Equipment & Parts
 ONCO,"Onconetix, Inc.",NASDAQ,385105.0,Healthcare,Biotechnology
+ZOOZW,ZOOZ Strategy Ltd.,NASDAQ,382366.0,Industrials,Electrical Equipment & Parts
 JF,J and Friends Holdings Limited Sponsored ADR Class A,NASDAQ,376268.0,Financial Services,Financial - Credit Services
-STAI,ScanTech AI Systems Inc.,NASDAQ,370107.0,Industrials,Construction Materials
 AGMB,AgomAb Therapeutics N.V. American Depositary Shares,NASDAQ,367000.0,Healthcare,Biotechnology
+STAI,ScanTech AI Systems Inc.,NASDAQ,365995.0,Industrials,Construction Materials
 EPWK,EPWK Holdings Ltd.,NASDAQ,360875.0,Industrials,Staffing & Employment Services
 ONFOW,"Onfolio Holdings, Inc.",NASDAQ,356346.0,Communication Services,Internet Content & Information
 MNTSW,Momentus Inc.,NASDAQ,354986.0,Industrials,Aerospace & Defense
@@ -6114,8 +6116,6 @@ EZGO,EZGO Technologies Ltd.,NASDAQ,354829.0,Consumer Cyclical,Auto - Recreationa
 ASPCR,A SPAC III Acquisition Corp.,NASDAQ,353121.0,Financial Services,Financial - Conglomerates
 SGD,Safe and Green Development Corporation,NASDAQ,340014.0,Real Estate,Real Estate - Development
 NVVE,Nuvve Holding Corp.,NASDAQ,336963.0,Consumer Cyclical,Specialty Retail
-ZOOZW,ZOOZ Strategy Ltd.,NASDAQ,336240.0,Industrials,Electrical Equipment & Parts
-BACK,"IMAC Holdings, Inc.",NASDAQ,335726.0,Healthcare,Medical - Care Facilities
 INHD,Inno Holdings Inc.,NASDAQ,329284.0,Basic Materials,Steel
 JSPRW,"Jasper Therapeutics, Inc.",NASDAQ,325051.0,Healthcare,Biotechnology
 CINGW,Cingulate Inc.,NASDAQ,322144.0,Healthcare,Biotechnology
@@ -6123,7 +6123,6 @@ FTFT,Future FinTech Group Inc.,NASDAQ,321408.0,Technology,Software - Application
 NIXXW,"Nixxy, Inc.",NASDAQ,309363.0,Industrials,Staffing & Employment Services
 SABSW,"SAB Biotherapeutics, Inc.",NASDAQ,303950.0,Healthcare,Biotechnology
 SPRC,SciSparc Ltd.,NASDAQ,299606.0,Healthcare,Biotechnology
-LGMK,"LogicMark, Inc.",NASDAQ,297008.0,Industrials,Security & Protection Services
 HSCSW,HeartSciences Inc.,NASDAQ,289660.0,Healthcare,Medical - Devices
 SLE,"Super League Enterprise, Inc.",NASDAQ,283647.0,Communication Services,Internet Content & Information
 WGSWW,GeneDx Holdings Corp.,NASDAQ,283556.0,Healthcare,Medical - Healthcare Information Services
@@ -6136,11 +6135,12 @@ HCTI,"Healthcare Triangle, Inc.",NASDAQ,261361.0,Healthcare,Medical - Healthcare
 JTAI,Jet.AI Inc.,NASDAQ,261277.0,Technology,Software - Application
 ELPW,Elong Power Holding Limited,NASDAQ,254858.0,Industrials,Electrical Equipment & Parts
 PTPI,"Petros Pharmaceuticals, Inc.",NASDAQ,249281.0,Healthcare,Drug Manufacturers - Specialty & Generic
+KAVL,"Kaival Brands Innovations Group, Inc.",NASDAQ,231315.0,Consumer Defensive,Tobacco
 PRFX,PRF Technologies Ltd.,NASDAQ,224684.0,Healthcare,Drug Manufacturers - Specialty & Generic
-KAVL,"Kaival Brands Innovations Group, Inc.",NASDAQ,224156.0,Consumer Defensive,Tobacco
 FTEL,Fitell Corporation,NASDAQ,221941.0,Consumer Cyclical,Specialty Retail
 INTJ,Intelligent Group Limited,NASDAQ,221852.0,Industrials,Consulting Services
 AIMAW,Aimfinity Investment Corp. I,NASDAQ,220275.0,Financial Services,Shell Companies
+BACK,"IMAC Holdings, Inc.",NASDAQ,215743.0,Healthcare,Medical - Care Facilities
 GRI,"GRI Bio, Inc.",NASDAQ,215597.0,Healthcare,Biotechnology
 BYNOW,byNordic Acquisition Corporation,NASDAQ,215303.0,Financial Services,Shell Companies
 BHAT,Fujian Blue Hat Interactive Entertainment Technology Ltd.,NASDAQ,211523.0,Technology,Electronic Gaming & Multimedia
@@ -6185,17 +6185,18 @@ OCG,Oriental Culture Holding Ltd.,NASDAQ,64667.0,Consumer Cyclical,Specialty Ret
 CYCUW,"Cycurion, Inc. Warrant",NASDAQ,61779.0,Technology,Information Technology Services
 AREB,"American Rebel Holdings, Inc.",NASDAQ,59209.0,Consumer Cyclical,Apparel - Footwear & Accessories
 COEPW,"Coeptis Therapeutics Holdings, Inc.",NASDAQ,58775.0,Healthcare,Biotechnology
+SANW,S&W Seed Company,NASDAQ,56032.0,Consumer Defensive,Agricultural Farm Products
 REVBW,"Revelation Biosciences, Inc.",NASDAQ,54502.0,Healthcare,Biotechnology
 MTEN,Mingteng International Corporation Inc.,NASDAQ,54031.0,Industrials,Manufacturing - Metal Fabrication
 CDIOW,"Cardio Diagnostics Holdings, Inc.",NASDAQ,50860.0,Healthcare,Biotechnology
 PBM,Psyence Biomedical Ltd.,NASDAQ,49259.0,Healthcare,Biotechnology
-SANW,S&W Seed Company,NASDAQ,43151.0,Consumer Defensive,Agricultural Farm Products
 LTRYW,Lottery.com Inc.,NASDAQ,36645.0,Consumer Cyclical,"Gambling, Resorts & Casinos"
 NIVFW,NewGenIvf Group Limited,NASDAQ,34445.0,Healthcare,Medical - Care Facilities
 HUBCW,HUB Cyber Security (Israel) Ltd.,NASDAQ,31069.0,Technology,Software - Infrastructure
 BNCWW,CEA Industries Inc. Warrant,NASDAQ,30626.0,Financial Services,Asset Management
 SQFTW,"Presidio Property Trust, Inc.",NASDAQ,27775.0,Real Estate,REIT - Diversified
 ACONW,"Aclarion, Inc.",NASDAQ,22107.0,Healthcare,Medical - Healthcare Information Services
+SYRS,"Syros Pharmaceuticals, Inc.",NASDAQ,21466.0,Healthcare,Biotechnology
 PIIIW,P3 Health Partners Inc.,NASDAQ,20882.0,Healthcare,Medical - Care Facilities
 KPLTW,"Katapult Holdings, Inc.",NASDAQ,18099.0,Technology,Software - Infrastructure
 NIVF,NewGenIvf Group Limited,NASDAQ,16079.0,Healthcare,Medical - Healthcare Plans
@@ -6209,7 +6210,6 @@ ADTX,"Aditxt, Inc.",NASDAQ,10211.0,Healthcare,Biotechnology
 IVP,"Inspire Veterinary Partners, Inc.",NASDAQ,7068.0,Consumer Cyclical,Personal Products & Services
 JFBRW,Jeffs' Brands Ltd,NASDAQ,6976.0,Consumer Cyclical,Specialty Retail
 WOK,WORK Medical Technology Group Ltd.,NASDAQ,6726.0,Healthcare,Medical - Instruments & Supplies
-SYRS,"Syros Pharmaceuticals, Inc.",NASDAQ,5366.0,Healthcare,Biotechnology
 KWMWW,K Wave Media Ltd.,NASDAQ,5050.0,Communication Services,Entertainment
 MSPRW,"MSP Recovery, Inc.",NASDAQ,4139.0,Healthcare,Medical - Healthcare Information Services
 DCX,Digital Currency X Technology Inc,NASDAQ,3948.0,Consumer Cyclical,Auto - Manufacturers
