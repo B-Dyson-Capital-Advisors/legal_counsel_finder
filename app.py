@@ -476,6 +476,13 @@ if page == "Legal Counsel Finder":
                 key="firm_to"
             )
 
+        # Add checkbox to include lawyer names
+        include_lawyers = st.checkbox(
+            "Include Lawyer Names (SLOWER - searches each company's filings)",
+            value=False,
+            help="This will find which lawyer from the firm represented each company. Warning: This takes much longer as it searches each company individually."
+        )
+
         # Search button with fixed width
         col_btn1, col_btn2 = st.columns([1, 6])
         with col_btn1:
@@ -485,6 +492,14 @@ if page == "Legal Counsel Finder":
             if not firm_name:
                 st.error("Please enter a law firm name")
             else:
+                # Get API key if including lawyers
+                api_key = None
+                if include_lawyers:
+                    api_key = st.secrets.get("OPENAI_API_KEY")
+                    if not api_key:
+                        st.error("OpenAI API key not configured. Cannot include lawyer names.")
+                        include_lawyers = False
+
                 # Use calculated dates when preset is not Custom, otherwise use widget values
                 if firm_preset != "Custom":
                     search_start = firm_start_date
@@ -496,21 +511,23 @@ if page == "Legal Counsel Finder":
                 if search_start >= search_end:
                     st.error("Start date must be before end date")
                 else:
-                    with st.spinner("Searching SEC filings..."):
+                    spinner_text = "Searching SEC filings and finding lawyers..." if include_lawyers else "Searching SEC filings..."
+                    with st.spinner(spinner_text):
                         # Show only important messages
                         progress_box = st.empty()
 
                         def progress_callback(message):
-                            # Only show search complete or error messages
-                            if "Search complete:" in message or "Note:" in message or "Error" in message:
-                                progress_box.info(message)
+                            # Show all progress messages
+                            progress_box.info(message)
 
                         try:
                             result_df = search_law_firm_for_companies(
                                 firm_name.strip(),
                                 search_start,
                                 search_end,
-                                progress_callback
+                                progress_callback,
+                                include_lawyers=include_lawyers,
+                                api_key=api_key
                             )
 
                             st.session_state.firm_results = {
