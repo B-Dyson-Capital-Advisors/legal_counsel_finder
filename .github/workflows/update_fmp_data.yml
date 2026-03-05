@@ -41,6 +41,7 @@ jobs:
         python scripts/download_fmp_bulk.py
 
     - name: Process market data
+      continue-on-error: true  # Optional step - only needed for screening datasets
       run: |
         python scripts/process_market_data.py
 
