@@ -10,7 +10,6 @@ from search_modules.stock_loan import fetch_shortstock_data, fetch_shortstock_wi
 
 st.set_page_config(
     page_title="EquityIntel",
-    # page_icon="📊",
     layout="wide"
 )
 

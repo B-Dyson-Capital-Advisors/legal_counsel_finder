@@ -2,7 +2,7 @@
 
 Complete guide to set up automated bulk market data downloads using FMP API.
 
-## 🔑 Where to Put Your API Key
+## Where to Put Your API Key
 
 You have **3 places** to configure your FMP API key depending on the environment:
 
@@ -21,7 +21,7 @@ Then edit `.env` and add your API key:
 FMP_API_KEY=your_actual_api_key_here
 ```
 
-✅ The `.env` file is already in `.gitignore` - it will NOT be committed to git.
+[OK] The `.env` file is already in `.gitignore` - it will NOT be committed to git.
 
 ---
 
@@ -36,7 +36,7 @@ Add your API key as a **GitHub Secret**:
 5. Value: `your_actual_api_key_here`
 6. Click **Add secret**
 
-✅ GitHub Actions will now have access to `${{ secrets.FMP_API_KEY }}`
+[OK] GitHub Actions will now have access to `${{ secrets.FMP_API_KEY }}`
 
 ---
 
@@ -53,7 +53,7 @@ Add to Streamlit secrets:
 
 ---
 
-## 📦 What Gets Downloaded
+## What Gets Downloaded
 
 The FMP integration downloads these bulk datasets daily:
 
@@ -67,7 +67,7 @@ The FMP integration downloads these bulk datasets daily:
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Step 1: Install Dependencies
 
@@ -103,7 +103,7 @@ python scripts/process_market_data.py
 
 ---
 
-## 📊 Output Files
+## Output Files
 
 After processing, you'll find these files in `data/`:
 
@@ -125,7 +125,7 @@ data/
 
 ---
 
-## 🔍 Using the Data in Your App
+## Using the Data in Your App
 
 Example: Load screening data in your Streamlit app
 
@@ -144,7 +144,7 @@ st.dataframe(tech_stocks[['symbol', 'companyName', 'price', 'marketCap', 'peRati
 
 ---
 
-## ⏰ GitHub Actions Schedule
+## GitHub Actions Schedule
 
 The workflow runs automatically:
 
@@ -157,7 +157,7 @@ The workflow runs automatically:
 
 ---
 
-## 🔧 Customization
+## Customization
 
 ### Change Data Update Frequency
 
@@ -189,7 +189,7 @@ value_stocks.to_csv(output_file, index=False)
 
 ---
 
-## 📈 Rate Limits & Best Practices
+## Rate Limits & Best Practices
 
 FMP bulk endpoints have rate limits:
 
@@ -205,7 +205,7 @@ Our scripts automatically handle rate limiting with `time.sleep()` between calls
 
 ---
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Error: `FMP_API_KEY not found in environment variables`
 
@@ -229,18 +229,18 @@ Our scripts automatically handle rate limiting with `time.sleep()` between calls
 
 ---
 
-## 💡 Next Steps
+## Next Steps
 
-1. ✅ Set up API key (see "Where to Put Your API Key" above)
-2. ✅ Run manual download to test: `python scripts/download_fmp_bulk.py`
-3. ✅ Process data: `python scripts/process_market_data.py`
-4. ✅ Add FMP_API_KEY to GitHub Secrets for automation
-5. ✅ Integrate screening data into your Streamlit app
-6. ✅ Replace manual Excel workflow with automated CSV files
+1. [OK] Set up API key (see "Where to Put Your API Key" above)
+2. [OK] Run manual download to test: `python scripts/download_fmp_bulk.py`
+3. [OK] Process data: `python scripts/process_market_data.py`
+4. [OK] Add FMP_API_KEY to GitHub Secrets for automation
+5. [OK] Integrate screening data into your Streamlit app
+6. [OK] Replace manual Excel workflow with automated CSV files
 
 ---
 
-## 📚 Resources
+## Resources
 
 - [FMP Bulk Endpoints Documentation](https://site.financialmodelingprep.com/developer/docs/bulk-endpoints)
 - [FMP API Pricing](https://site.financialmodelingprep.com/developer/docs/pricing)
@@ -248,16 +248,16 @@ Our scripts automatically handle rate limiting with `time.sleep()` between calls
 
 ---
 
-## ✅ Benefits vs Manual Excel Workflow
+## [OK] Benefits vs Manual Excel Workflow
 
 | Manual Excel | Automated FMP |
 |--------------|---------------|
-| ❌ Download manually | ✅ Auto-download daily |
-| ❌ Copy/paste data | ✅ Direct API access |
-| ❌ Update spreadsheet | ✅ Auto-process & filter |
-| ❌ Risk of errors | ✅ Validated data pipeline |
-| ❌ Time-consuming | ✅ Set and forget |
-| ❌ Outdated data | ✅ Always fresh |
+| [X] Download manually | [OK] Auto-download daily |
+| [X] Copy/paste data | [OK] Direct API access |
+| [X] Update spreadsheet | [OK] Auto-process & filter |
+| [X] Risk of errors | [OK] Validated data pipeline |
+| [X] Time-consuming | [OK] Set and forget |
+| [X] Outdated data | [OK] Always fresh |
 
 ---
 
