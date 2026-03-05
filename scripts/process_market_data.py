@@ -16,8 +16,8 @@ class MarketDataProcessor:
         self.fmp_dir = Path(__file__).parent.parent / 'data' / 'fmp'
         self.output_dir = Path(__file__).parent.parent / 'data'
 
-        print(f"📁 Input directory: {self.fmp_dir}")
-        print(f"📁 Output directory: {self.output_dir}")
+        print(f"Input directory: {self.fmp_dir}")
+        print(f"Output directory: {self.output_dir}")
 
     def load_latest_eod(self):
         """Load the most recent EOD bulk file"""
@@ -26,7 +26,7 @@ class MarketDataProcessor:
             raise FileNotFoundError("No EOD bulk files found")
 
         latest_file = eod_files[-1]
-        print(f"\n📊 Loading EOD data: {latest_file.name}")
+        print(f"\nLoading EOD data: {latest_file.name}")
 
         df = pd.read_csv(latest_file)
         print(f"    Loaded {len(df):,} stocks")
@@ -39,7 +39,7 @@ class MarketDataProcessor:
         if not profiles_file.exists():
             raise FileNotFoundError("profiles_bulk.csv not found")
 
-        print(f"\n🏢 Loading company profiles...")
+        print(f"\nLoading company profiles...")
         df = pd.read_csv(profiles_file)
         print(f"    Loaded {len(df):,} profiles")
 
@@ -49,11 +49,11 @@ class MarketDataProcessor:
         """Load the most recent key metrics"""
         metrics_files = sorted(self.fmp_dir.glob('key_metrics_*.csv'))
         if not metrics_files:
-            print("   ⚠️  No key metrics files found (optional)")
+            print("   WARNING: No key metrics files found (optional)")
             return None
 
         latest_file = metrics_files[-1]
-        print(f"\n📈 Loading key metrics: {latest_file.name}")
+        print(f"\nLoading key metrics: {latest_file.name}")
 
         df = pd.read_csv(latest_file)
         print(f"    Loaded {len(df):,} metrics")
@@ -89,7 +89,7 @@ class MarketDataProcessor:
         metrics_df = self.load_key_metrics()
 
         # Merge EOD with Profiles
-        print(f"\n🔗 Merging datasets...")
+        print(f"\nMerging datasets...")
 
         # Start with EOD data (has latest prices)
         screening_df = eod_df[[
@@ -129,17 +129,17 @@ class MarketDataProcessor:
 
         # Calculate market cap from price * shares if not available
         if 'marketCap' not in screening_df.columns:
-            print("   ⚠️  marketCap not found, will need to calculate from price")
+            print("   WARNING: marketCap not found, will need to calculate from price")
 
         # Clean and format
-        print(f"\n🧹 Cleaning data...")
+        print(f"\nCleaning data...")
 
         # Remove stocks with missing critical data
         initial_count = len(screening_df)
         screening_df = screening_df.dropna(subset=['symbol', 'price'])
         removed = initial_count - len(screening_df)
         if removed > 0:
-            print(f"   ℹ️  Removed {removed:,} stocks with missing critical data")
+            print(f"   INFO: Removed {removed:,} stocks with missing critical data")
 
         # Sort by market cap (largest first)
         if 'marketCap' in screening_df.columns:
@@ -149,8 +149,8 @@ class MarketDataProcessor:
         # Save full dataset
         output_file = self.output_dir / 'screening_data_full.csv'
         screening_df.to_csv(output_file, index=False)
-        print(f"\n💾 Saved full dataset: {output_file}")
-        print(f"   📊 {len(screening_df):,} stocks")
+        print(f"\nSaved full dataset: {output_file}")
+        print(f"   {len(screening_df):,} stocks")
 
         # Create filtered datasets
         self.create_filtered_datasets(screening_df)
@@ -159,17 +159,17 @@ class MarketDataProcessor:
 
     def create_filtered_datasets(self, df):
         """Create pre-filtered datasets for common screening criteria"""
-        print(f"\n🎯 Creating filtered datasets...")
+        print(f"\nCreating filtered datasets...")
 
         if 'marketCap' not in df.columns:
-            print("   ⚠️  Skipping market cap filters (marketCap column not available)")
+            print("   WARNING: Skipping market cap filters (marketCap column not available)")
             return
 
         # Filter 1: Large cap (>$10B)
         large_cap = df[df['marketCap'] > 10_000_000_000].copy()
         output_file = self.output_dir / 'screening_data_large_cap.csv'
         large_cap.to_csv(output_file, index=False)
-        print(f"    Large cap (>$10B): {len(large_cap):,} stocks → {output_file.name}")
+        print(f"    Large cap (>$10B): {len(large_cap):,} stocks -> {output_file.name}")
 
         # Filter 2: Mid cap ($2B-$10B)
         mid_cap = df[
@@ -178,7 +178,7 @@ class MarketDataProcessor:
         ].copy()
         output_file = self.output_dir / 'screening_data_mid_cap.csv'
         mid_cap.to_csv(output_file, index=False)
-        print(f"    Mid cap ($2B-$10B): {len(mid_cap):,} stocks → {output_file.name}")
+        print(f"    Mid cap ($2B-$10B): {len(mid_cap):,} stocks -> {output_file.name}")
 
         # Filter 3: Small cap ($300M-$2B)
         small_cap = df[
@@ -187,14 +187,14 @@ class MarketDataProcessor:
         ].copy()
         output_file = self.output_dir / 'screening_data_small_cap.csv'
         small_cap.to_csv(output_file, index=False)
-        print(f"    Small cap ($300M-$2B): {len(small_cap):,} stocks → {output_file.name}")
+        print(f"    Small cap ($300M-$2B): {len(small_cap):,} stocks -> {output_file.name}")
 
         # Filter 4: US stocks only (if country available)
         if 'country' in df.columns:
             us_stocks = df[df['country'] == 'US'].copy()
             output_file = self.output_dir / 'screening_data_us_only.csv'
             us_stocks.to_csv(output_file, index=False)
-            print(f"    US stocks only: {len(us_stocks):,} stocks → {output_file.name}")
+            print(f"    US stocks only: {len(us_stocks):,} stocks -> {output_file.name}")
 
     def generate_summary_report(self, df):
         """Generate summary statistics"""
@@ -238,7 +238,7 @@ def main():
         print("\n" + "=" * 80)
         print(" PROCESSING COMPLETE!")
         print("=" * 80)
-        print("\n📂 Output files in data/ directory:")
+        print("\nOutput files in data/ directory:")
         print("   - screening_data_full.csv (all stocks)")
         print("   - screening_data_large_cap.csv (>$10B)")
         print("   - screening_data_mid_cap.csv ($2B-$10B)")
@@ -248,10 +248,10 @@ def main():
     except FileNotFoundError as e:
         error_msg = str(e)
         if "EOD bulk files" in error_msg:
-            print(f"\n⚠️  {e}")
-            print("\nℹ️  EOD files are optional for screening datasets.")
+            print(f"\nWARNING: {e}")
+            print("\nINFO: EOD files are optional for screening datasets.")
             print("   The app only needs profiles_bulk.csv (already downloaded).")
-            print("\n✅ Skipping screening dataset creation - not required for app.")
+            print("\nSkipping screening dataset creation - not required for app.")
             return  # Exit gracefully
         else:
             print(f"\n Error: {e}")

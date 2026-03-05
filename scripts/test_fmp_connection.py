@@ -62,7 +62,7 @@ def test_fmp_connection():
     print(f"   Source: {source}")
 
     # Test API call (get Apple stock profile - simple test)
-    print(f"\n🔍 Testing API connection...")
+    print(f"\nTesting API connection...")
     print(f"   Endpoint: /v3/profile/AAPL")
 
     url = "https://financialmodelingprep.com/api/v3/profile/AAPL"
@@ -76,7 +76,7 @@ def test_fmp_connection():
             if data and len(data) > 0:
                 company = data[0]
                 print(f"\n SUCCESS! API is working!")
-                print(f"\n📊 Test Response (Apple Inc.):")
+                print(f"\nTest Response (Apple Inc.):")
                 print(f"   Symbol: {company.get('symbol')}")
                 print(f"   Company: {company.get('companyName')}")
                 print(f"   Sector: {company.get('sector')}")
