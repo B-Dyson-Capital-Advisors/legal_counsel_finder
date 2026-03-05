@@ -99,8 +99,13 @@ def fetch_shortstock_with_market_cap():
         if 'Symbol_fmp' in enriched_df.columns:
             enriched_df = enriched_df.rename(columns={'Symbol_fmp': 'Symbol'})
 
-        # Reorder columns: Date, Time, Symbol, Company, Exchange, Market Cap, Sector, Industry, Stock Loan Data
-        column_order = ['Date', 'Time', 'Symbol', 'Company Name', 'Exchange', 'Market Cap', 'Sector', 'Industry', 'Currency', 'Rebate Rate (%)', 'Fee Rate (%)', 'Available']
+        # Reorder columns: Date, Time, Symbol, Company, Exchange, Market Cap, CEO, IPO Date, Enterprise Value, Stock Loan Data
+        column_order = [
+            'Date', 'Time', 'Symbol', 'Company Name', 'Exchange', 'Market Cap',
+            'CEO', 'IPO Date', 'Enterprise Value TTM',
+            'Sector', 'Industry', 'Currency',
+            'Rebate Rate (%)', 'Fee Rate (%)', 'Available'
+        ]
 
         # Only include columns that exist
         column_order = [col for col in column_order if col in enriched_df.columns]
